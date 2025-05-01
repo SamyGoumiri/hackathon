@@ -63,10 +63,6 @@ $_SESSION['error'] = "";
                     <input type="password" name="confirm_password" placeholder="Confirm Password" required>
                     <i class='bx bxs-lock-alt'></i>
                 </div>
-
-                <div class="terms">
-                    <label><input type="checkbox" name="terms" required> I agree to the <a href="#">Terms of Service</a></label>
-                </div>
                 
                 <button class="btn" type="submit">Create Account</button>
                 
