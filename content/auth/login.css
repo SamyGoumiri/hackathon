@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Nunito", sans-serif;
+    font-family: "Quicksand", sans-serif;
 }
 
 body {
@@ -12,11 +12,8 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
-    background-image: url(../../resources/image/language_pattern_bg.jpg);
-    background-position: center;
-    background-repeat: repeat;
-    background-size: cover;
+    background-color: #f9f4ff;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%237f57f1' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 .container {
@@ -25,39 +22,43 @@ body {
     align-items: center;
     max-width: 450px;
     width: 100%;
+    padding: 0 20px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .logo img {
     width: 60px;
     height: 60px;
     margin-right: 10px;
+    filter: hue-rotate(240deg);
 }
 
 .logo h1 {
-    font-size: 28px;
-    color: #58cc02;
-    font-weight: 800;
+    font-size: 32px;
+    color: #7F57F1;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .wrapper {
     width: 100%;
     background: white;
-    border-radius: 16px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(127, 87, 241, 0.12);
+    padding: 35px;
 }
 
 .wrapper h2 {
-    font-size: 24px;
+    font-size: 26px;
     text-align: center;
-    color: #4b4b4b;
+    color: #333;
     margin-bottom: 5px;
+    font-weight: 700;
 }
 
 .subtitle {
@@ -70,29 +71,32 @@ body {
 .wrapper .input-box {
     position: relative;
     width: 100%;
-    height: 50px;
-    margin: 20px 0;
+    height: 52px;
+    margin: 22px 0;
 }
 
 .input-box input {
     width: 100%;
     height: 100%;
-    background-color: #f7f7f7;
-    border: 2px solid #e5e5e5;
-    border-radius: 12px;
+    background-color: #f8f5ff;
+    border: 2px solid #e6e0f3;
+    border-radius: 15px;
     font-size: 16px;
     color: #333;
-    padding: 10px 45px 10px 20px;
+    padding: 10px 20px 10px 20px;
     transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 .input-box input:focus {
-    border-color: #58cc02;
+    border-color: #7F57F1;
     background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(127, 87, 241, 0.1);
 }
 
 .input-box input::placeholder {
-    color: #999;
+    color: #aaa;
+    font-weight: 500;
 }
 
 .input-box i {
@@ -100,30 +104,34 @@ body {
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 20px;
-    color: #777;
+    font-size: 22px;
+    color: #7F57F1;
 }
 
 .wrapper .remember-forget {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: 15px;
     margin: 15px 0;
+    align-items: center;
 }
 
 .remember-forget label {
     display: flex;
     align-items: center;
     color: #555;
+    font-weight: 500;
 }
 
 .remember-forget label input {
-    margin-right: 5px;
-    accent-color: #58cc02;
+    margin-right: 6px;
+    accent-color: #7F57F1;
+    width: 16px;
+    height: 16px;
 }
 
 .remember-forget a {
-    color: #58cc02;
+    color: #7F57F1;
     text-decoration: none;
     font-weight: 600;
 }
@@ -134,22 +142,22 @@ body {
 
 .wrapper .btn {
     width: 100%;
-    height: 50px;
-    background: #58cc02;
+    height: 54px;
+    background: #7F57F1;
     border: none;
     outline: none;
-    border-radius: 12px;
+    border-radius: 15px;
     cursor: pointer;
     font-size: 18px;
     color: white;
     font-weight: 700;
-    box-shadow: 0 4px 0 #58a700;
+    box-shadow: 0 4px 0 #6642d1;
     transition: all 0.2s;
     margin-top: 10px;
 }
 
 .wrapper .btn:hover {
-    background: #69de03;
+    background: #8d68f8;
 }
 
 .wrapper .btn:active {
@@ -157,17 +165,67 @@ body {
     transform: translateY(4px);
 }
 
+.social-login {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.social-login p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.social-login p::before,
+.social-login p::after {
+    content: "";
+    display: inline-block;
+    height: 1px;
+    width: 100px;
+    background-color: #e6e0f3;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #f8f5ff;
+    color: #7F57F1;
+    font-size: 22px;
+    transition: all 0.2s;
+    border: 1px solid #e6e0f3;
+}
+
+.social-icon:hover {
+    background-color: #7F57F1;
+    color: white;
+    transform: translateY(-3px);
+}
+
 .wrapper .register-link {
     font-size: 15px;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
     color: #555;
+    font-weight: 500;
 }
 
 .register-link p a {
-    color: #58cc02;
+    color: #7F57F1;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .register-link p a:hover {
@@ -175,11 +233,13 @@ body {
 }
 
 .error-message {
-    background-color: #ffebee;
-    color: #c62828;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    background-color: #fff0f0;
+    color: #FF6B6B;
+    padding: 12px;
+    border-radius: 12px;
+    border-left: 4px solid #FF6B6B;
+    margin-bottom: 20px;
     font-size: 14px;
     text-align: center;
+    font-weight: 500;
 }

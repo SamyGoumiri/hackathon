@@ -1,12 +1,10 @@
 <?php
 session_start();
-// Redirect if already logged in
 if(isset($_SESSION['user_id'])) {
     header("Location: ../main/dashboard.php");
     exit;
 }
 
-// Display error message if exists
 $error_message = isset($_SESSION['error']) ? $_SESSION['error'] : "";
 $_SESSION['error'] = "";
 ?>
@@ -24,7 +22,6 @@ $_SESSION['error'] = "";
 <body>
     <div class="container">
         <div class="logo">
-            <img src="../../resources/image/owl_logo.png" alt="Language Owl">
             <h1>LanguageOwl</h1>
         </div>
         
@@ -65,6 +62,9 @@ $_SESSION['error'] = "";
                 <div class="input-box">
                     <input type="password" name="confirm_password" placeholder="Confirm Password" required>
                     <i class='bx bxs-lock-alt'></i>
+                </div>
+
+                <div class="terms">
                 </div>
 
                 <div class="terms">
