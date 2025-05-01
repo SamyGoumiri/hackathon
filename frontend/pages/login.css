@@ -13,11 +13,8 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-<<<<<<< HEAD:pages/login.css
     background-color: black;
-    background-image: url(../image/file-20210111-23-bqsfwl.png);
-=======
->>>>>>> a9b3b73048381df338eef056e1a7af2b42e20fb1:frontend/pages/login.css
+    background-image: url(../../image/file-20210111-23-bqsfwl.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
