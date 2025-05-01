@@ -16,19 +16,19 @@ $_SESSION['error'] = "";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="register.css">
-    <title>Sign Up - Language Learning</title>
+    <title>Join Lango - Learn Languages</title>
 </head>
 
 <body>
     <div class="container">
         <div class="logo">
-            <h1>LanguageOwl</h1>
+            <h1>Lango</h1>
         </div>
         
         <div class="wrapper">
             <form action="process_register.php" method="POST">
-                <h2>Create Account</h2>
-                <p class="subtitle">Start your language journey today!</p>
+                <h2>Join Lango</h2>
+                <p class="subtitle">Begin your language learning adventure</p>
                 
                 <?php if(!empty($error_message)): ?>
                     <div class="error-message"><?php echo $error_message; ?></div>
@@ -62,9 +62,6 @@ $_SESSION['error'] = "";
                 <div class="input-box">
                     <input type="password" name="confirm_password" placeholder="Confirm Password" required>
                     <i class='bx bxs-lock-alt'></i>
-                </div>
-
-                <div class="terms">
                 </div>
 
                 <div class="terms">
