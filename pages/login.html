@@ -11,7 +11,7 @@
 
 <body>
     <div class="wrapper">
-        <form action="">
+        <form action="../backend/db.php">
             <h1>Login</h1>
             <div class="input-box">
                 <input type="text" placeholder="Username" required>
