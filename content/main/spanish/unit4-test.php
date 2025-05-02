@@ -120,7 +120,7 @@ if (isset($_POST['submit_test'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
 
-    <title>Lango - Unit 4 Test: Los Viajes</title>
+    <title>Esperanto - Unit 4 Test: Los Viajes</title>
     <style>
         .test-container {
             background-color: white;
@@ -208,7 +208,7 @@ if (isset($_POST['submit_test'])) {
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </div>
             <nav>
                 <ul>

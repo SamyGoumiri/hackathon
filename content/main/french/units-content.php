@@ -38,9 +38,24 @@ if ($unit_result->num_rows == 0) {
 
 $unit = $unit_result->fetch_assoc();
 
-$lessons_query = "SELECT * FROM lessons 
-                 WHERE unit_id = ? 
-                 ORDER BY order_index ASC";
+$lessons_query = "SELECT l.*, 
+                 CASE 
+                    WHEN l.title LIKE '%(%' THEN l.title 
+                    WHEN l.title = 'Greetings and Introductions' THEN 'Les Salutations et Présentations (Greetings and Introductions)'
+                    WHEN l.title = 'Basic Pronunciation' THEN 'Prononciation de Base (Basic Pronunciation)'
+                    WHEN l.title = 'Numbers 1-20' THEN 'Les Nombres 1-20 (Numbers 1-20)'
+                    WHEN l.title = 'Simple Questions' THEN 'Questions Simples (Simple Questions)'
+                    WHEN l.title = 'Common Phrases' THEN 'Phrases Courantes (Common Phrases)'
+                    WHEN l.title = 'Daily Routines' THEN 'Routines Quotidiennes (Daily Routines)'
+                    WHEN l.title = 'Present Tense Verbs' THEN 'Verbes au Présent (Present Tense Verbs)'
+                    WHEN l.title = 'Telling Time' THEN 'Dire l\'Heure (Telling Time)'
+                    WHEN l.title = 'Days and Months' THEN 'Jours et Mois (Days and Months)'
+                    WHEN l.title = 'Weather Expressions' THEN 'Expressions de la Météo (Weather Expressions)'
+                    ELSE CONCAT(l.title, ' (', l.title, ')')
+                 END AS display_title
+                 FROM lessons l
+                 WHERE l.unit_id = ? 
+                 ORDER BY l.order_index ASC";
 $stmt = $conn->prepare($lessons_query);
 $stmt->bind_param("i", $unit_id);
 $stmt->execute();
@@ -63,7 +78,6 @@ while ($progress = $progress_result->fetch_assoc()) {
     ];
 }
 
-// Get the last completed lesson to determine what should be unlocked
 $last_completed_lesson_query = "SELECT MAX(l.order_index) as last_completed_index
                               FROM user_progress up
                               JOIN lessons l ON up.lesson_id = l.lesson_id
@@ -90,7 +104,7 @@ $stmt->execute();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
-    <title>Lango - <?php echo htmlspecialchars($unit['title']); ?></title>
+    <title>Esperanto - <?php echo htmlspecialchars($unit['title']); ?></title>
     <style>
         .progress-bar {
             width: 100%;
@@ -187,7 +201,7 @@ $stmt->execute();
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </div>
             <nav>
                 <ul>
@@ -245,26 +259,22 @@ $stmt->execute();
         <div class="lesson-list">
             <?php
             $lesson_number = 1;
-            $previous_completed = true; // First lesson is always unlocked
+            $previous_completed = true;
             
             if ($lessons_result->num_rows > 0) {
                 
                 while($lesson = $lessons_result->fetch_assoc()) {
                     $lesson_id = $lesson['lesson_id'];
                     $lesson_status = isset($user_progress[$lesson_id]) ? $user_progress[$lesson_id]['status'] : 'not_started';
-                    
-                    // A lesson is locked if it's not the first one and the previous lesson is not completed
-                    // OR if its order index is more than 1 position ahead of the last completed lesson
                     $is_locked = ($lesson_number > 1 && $lesson['order_index'] > $last_completed_index + 1);
                     
-                    // Update the previous_completed status for next iteration
                     $previous_completed = ($lesson_status == 'completed');
             ?>
             <div class="lesson-item <?php echo $lesson_status; ?><?php echo $is_locked ? ' locked' : ''; ?>">
                 <div class="lesson-header">
                     <div class="lesson-title">
                         <span class="lesson-number"><?php echo $lesson_number; ?></span>
-                        <h2><?php echo htmlspecialchars($lesson['title']); ?></h2>
+                        <h2><?php echo htmlspecialchars($lesson['display_title']); ?></h2>
                     </div>
                     <div class="lesson-status">
                         <?php if ($is_locked) { ?>
