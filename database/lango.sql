@@ -421,16 +421,13 @@ INSERT INTO `user_progress` (`progress_id`, `user_id`, `lesson_id`, `status`, `c
 -- Structure de la table `unit_tests`
 --
 
-CREATE TABLE IF NOT EXISTS `unit_tests` (
-  `test_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `unit_tests` (
+  `test_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
   `passing_score` int(11) NOT NULL DEFAULT 60,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`test_id`),
-  KEY `unit_id` (`unit_id`),
-  CONSTRAINT `unit_tests_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`) ON DELETE CASCADE
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -449,19 +446,16 @@ INSERT INTO `unit_tests` (`test_id`, `unit_id`, `title`, `description`, `passing
 -- Structure de la table `test_results`
 --
 
-CREATE TABLE IF NOT EXISTS `test_results` (
-  `result_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `test_results` (
+  `result_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `test_id` int(11) NOT NULL,
   `score` int(11) NOT NULL,
   `passed` tinyint(1) NOT NULL DEFAULT 0,
-  `completion_date` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`result_id`),
-  KEY `user_id` (`user_id`),
-  KEY `test_id` (`test_id`),
-  CONSTRAINT `test_results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  CONSTRAINT `test_results_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `unit_tests` (`test_id`) ON DELETE CASCADE
+  `completion_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Index pour les tables déchargées
@@ -534,6 +528,21 @@ ALTER TABLE `user_progress`
   ADD KEY `lesson_id` (`lesson_id`);
 
 --
+-- Index pour la table `unit_tests`
+--
+ALTER TABLE `unit_tests`
+  ADD PRIMARY KEY (`test_id`),
+  ADD KEY `unit_id` (`unit_id`);
+
+--
+-- Index pour la table `test_results`
+--
+ALTER TABLE `test_results`
+  ADD PRIMARY KEY (`result_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `test_id` (`test_id`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -595,7 +604,13 @@ ALTER TABLE `user_progress`
 -- AUTO_INCREMENT pour la table `unit_tests`
 --
 ALTER TABLE `unit_tests`
-  AUTO_INCREMENT = 5;
+  MODIFY `test_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `test_results`
+--
+ALTER TABLE `test_results`
+  MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
