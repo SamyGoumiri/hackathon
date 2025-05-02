@@ -463,7 +463,7 @@ nav ul li a.active::after {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-}
+
 
 .btn-primary:hover {
     background: #6642d1;
