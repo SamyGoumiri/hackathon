@@ -299,7 +299,7 @@ $stmt->execute();
                 <i class='bx bx-arrow-back'></i> Back to Courses
             </a>
             <?php if ($completion_percentage == 100) { ?>
-            <a href="unit-test.php?unit=<?php echo $unit_id; ?>" class="btn btn-primary">
+            <a href="unit<?php echo $unit_id; ?>-test.php?unit=<?php echo $unit_id; ?>" class="btn btn-primary">
                 Take Unit Test <i class='bx bx-right-arrow-alt'></i>
             </a>
             <?php } ?>

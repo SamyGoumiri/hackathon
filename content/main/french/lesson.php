@@ -348,26 +348,6 @@ if (isset($_POST['complete_lesson'])) {
             <a href="course-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
                 <i class='bx bx-arrow-back'></i> Back to Unit
             </a>
-            
-            <?php
-            $next_lesson_query = "SELECT lesson_id FROM lessons 
-                                WHERE unit_id = ? AND order_index > 
-                                (SELECT order_index FROM lessons WHERE lesson_id = ?) 
-                                ORDER BY order_index ASC LIMIT 1";
-            $stmt = $conn->prepare($next_lesson_query);
-            $stmt->bind_param("ii", $unit_id, $lesson_id);
-            $stmt->execute();
-            $next_result = $stmt->get_result();
-            
-            if ($next_result->num_rows > 0) {
-                $next_lesson = $next_result->fetch_assoc();
-                ?>
-                <a href="lesson.php?id=<?php echo $next_lesson['lesson_id']; ?>" class="btn btn-primary">
-                    Next Lesson <i class='bx bx-right-arrow-alt'></i>
-                </a>
-                <?php
-            }
-            ?>
         </div>
     </div>
     
