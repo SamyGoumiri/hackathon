@@ -89,14 +89,14 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="login.css">
-    <title>Welcome to Lango - Learn Languages</title>
+    <title>Welcome to Esperanto - Learn Languages</title>
 </head>
 
 <body>
     <div class="container">
         <div class="logo">
             <a href="../../index.php">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </a>
         </div>
         
@@ -122,7 +122,7 @@ $conn->close();
                 <button class="btn" type="submit">Start Learning</button>
                 
                 <div class="register-link">
-                    <p>New to Lango? <a href="register.php">Join the community</a></p>
+                    <p>New to Esperanto? <a href="register.php">Join the community</a></p>
                 </div>
             </form>
         </div>

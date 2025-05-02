@@ -122,7 +122,7 @@ if (isset($_POST['q10']) && $_POST['q10'] === 'ich_moechte_anprobieren') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
-    <title>Lango - Unit 3 Test: Einkaufen</title>
+    <title>Esperanto - Unit 3 Test: Einkaufen</title>
     <style>
 
         .test-container {
@@ -211,7 +211,7 @@ if (isset($_POST['q10']) && $_POST['q10'] === 'ich_moechte_anprobieren') {
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </div>
             <nav>
                 <ul>
