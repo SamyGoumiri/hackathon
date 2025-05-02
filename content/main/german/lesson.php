@@ -309,17 +309,29 @@ if (isset($_POST['complete_lesson'])) {
                 $lesson_file = "lesson" . intval($lesson['order_index']) . ".php";
                 $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 
-                if ($unit_id == 2) {
+                if ($unit_id >= 13 && $unit_id <= 16) {
+                    $base_lesson_number = 1;
+                    
+                    if ($unit_id == 14) {
+                        $base_lesson_number = 6;
+                    } else if ($unit_id == 15) {
+                        $base_lesson_number = 11;
+                    } else if ($unit_id == 16) {
+                        $base_lesson_number = 16;
+                    }
+                    $lesson_number = $base_lesson_number + intval($lesson['order_index']) - 1;
+                    $lesson_file = "lesson" . $lesson_number . "de.php";
+                    $mapped_unit = $unit_id - 12;
+                    $unit_folder = "unit" . $mapped_unit;
+                    
+                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
+                } else if ($unit_id == 2) {
                     $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . ".php";
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
-                
-                if ($unit_id == 3) {
+                } else if ($unit_id == 3) {
                     $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . ".php";
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
-                
-                if ($unit_id == 4) {
+                } else if ($unit_id == 4) {
                     $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . ".php";
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
