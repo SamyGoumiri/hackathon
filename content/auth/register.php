@@ -9,7 +9,6 @@ if(isset($_SESSION['user_id'])) {
 
 $error_message = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize inputs
     $username = sanitize_input($conn, $_POST['username']);
     $first_name = sanitize_input($conn, $_POST['first_name']);
     $last_name = sanitize_input($conn, $_POST['last_name']);
@@ -49,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error_message = "Username already exists. Please choose another one.";
             $valid = false;
         }
-        
         $stmt->close();
     }
     
