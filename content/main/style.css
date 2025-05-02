@@ -263,6 +263,12 @@ nav ul li a.active::after {
     color: #333;
 }
 
+.mt-6 .flex .justify-end {
+    color: #7F57F1;
+    border-radius: 12px;
+
+}
+
 .course-content {
     padding: 20px;
     display: none;
@@ -447,7 +453,16 @@ nav ul li a.active::after {
 .btn-primary {
     background: #7F57F1;
     color: white;
-    border: none;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 }
 
 .btn-primary:hover {
@@ -477,13 +492,12 @@ nav ul li a.active::after {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .exercise-list {
         grid-template-columns: 1fr;
     }
-    
+
     .exercise-filters {
         justify-content: center;
     }
 }
-
