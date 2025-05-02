@@ -42,14 +42,14 @@ while ($lang = $learning_result->fetch_assoc()) {
 <body>
     <header>
         <div class="header-container">
-            <div class="logo">
-                <h1>Lango</h1>
-            </div>
+        <div class="logo">
+    <img src="../../image/Esperanto.png" alt="Logo" style="height: 50px;">
+</div>
             <nav>
                 <ul>
                     <li><a href="dashboard.php" class="active">Dashboard</a></li>
                     <li><a href="achievements.php">Achievements</a></li>
-                    <li><a href="../chatbot/chatbot.php">ChatBot</a></li>
+                    <li><a href="../main/IA/choixIA.html">ChatBot</a></li>
                 </ul>
             </nav>
             <div class="user-menu">
