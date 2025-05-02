@@ -49,6 +49,21 @@ if(isset($_GET['unit'])) {
                     <li><a href="#" class="active">French</a></li>
                 </ul>
             </nav>
+            <div class="user-menu">
+                <div class="user-info">
+                    <span><?php echo htmlspecialchars(ucfirst($user['first_name']) . ' ' . ucfirst($user['last_name'])); ?></span>
+                    <div class="user-avatar">
+                        <span class="user-initials">
+                            <?php echo strtoupper(substr($user['first_name'], 0, 1) . substr($user['last_name'], 0, 1)); ?>
+                        </span>
+                    </div>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="../profile.php"><i class='bx bx-user'></i> Profile</a>
+                    <a href="../settings.php"><i class='bx bx-cog'></i> Settings</a>
+                    <a href="../../auth/logout.php"><i class='bx bx-log-out'></i> Log Out</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -158,6 +173,11 @@ if(isset($_GET['unit'])) {
                     courseItem.classList.toggle('expanded');
                 }
             });
+        });
+        
+        // Dropdown menu toggle
+        document.querySelector('.user-info').addEventListener('click', function() {
+            document.querySelector('.dropdown-menu').classList.toggle('active');
         });
     </script>
 </body>

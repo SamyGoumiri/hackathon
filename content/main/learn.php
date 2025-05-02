@@ -13,8 +13,6 @@ if (!isset($_GET['lang'])) {
 }
 
 $language_code = sanitize_input($conn, $_GET['lang']);
-
-// Map language codes to their directories
 $language_paths = [
     'fr' => 'french/french.php',
     'de' => 'german/german.php',
@@ -23,11 +21,9 @@ $language_paths = [
 ];
 
 if (isset($language_paths[$language_code])) {
-    // Redirect to the specific language page
     header("Location: " . $language_paths[$language_code]);
     exit();
 } else {
-    // Language not supported yet
     header("Location: dashboard.php");
     exit();
 }
