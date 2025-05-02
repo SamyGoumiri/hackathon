@@ -12,7 +12,8 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practice - Language Project</title>
-    <link rel="stylesheet" href="#">
+    <link rel="stylesheet" href="../style-exo.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
     <div class="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-6">
