@@ -101,6 +101,7 @@ if (isset($_POST['change_password'])) {
                 <ul>
                     <li><a href="dashboard.php">Dashboard</a></li>
                     <li><a href="achievements.php">Achievements</a></li>
+                    <li><a href="../chatbot/chatbot.php">ChatBot</a></li>
                 </ul>
             </nav>
             <div class="user-menu">

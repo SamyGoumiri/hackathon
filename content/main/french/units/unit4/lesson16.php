@@ -107,6 +107,23 @@
         <strong>Passenger:</strong> Bonjour, je voudrais un aller simple pour Lyon, s'il vous plaît.<br>
         <strong>Ticket Agent:</strong> Bonjour. Pour aujourd'hui?<br>
         <strong>Passenger:</strong> Oui, pour le train de 14h30.<br>
-        <strong>Ticket Agent:</strong> Très bien. Ça fera 45 euros.
+        <strong>Ticket Agent:</strong> Très bien. Ça fera 45 euros.<br>
+        <strong>Passenger:</strong> Voilà. Est-ce que le train part du quai 3?<br>
+        <strong>Ticket Agent:</strong> Non, il part du quai 5. Voici votre billet. Bon voyage!<br>
+        <strong>Passenger:</strong> Merci beaucoup!
     </p>
+</div>
+
+<h2>Common Transportation Issues</h2>
+<ul>
+    <li><span class="french-word">Le train/bus est en retard.</span> - The train/bus is late.</li>
+    <li><span class="french-word">Le vol est annulé.</span> - The flight is canceled.</li>
+    <li><span class="french-word">J'ai manqué mon train/bus.</span> - I missed my train/bus.</li>
+    <li><span class="french-word">Où puis-je acheter un billet?</span> - Where can I buy a ticket?</li>
+    <li><span class="french-word">Est-ce que je peux réserver en ligne?</span> - Can I book online?</li>
+</ul>
+
+<div class="practice-tip">
+    <h3>Practice Tip</h3>
+    <p>When using public transportation in France, it's common to validate your ticket in a machine before boarding. Listen for announcements about "composter votre billet" (validate your ticket).</p>
 </div>
