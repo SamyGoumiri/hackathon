@@ -44,9 +44,7 @@ require_once '../../../database/connect.php';
         let vocabQuestions = [
             { question: "What does this word mean ?", word: "Bonjour", image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png", options: ["Hello", "Goodnight", "Thankyou", "please"], answer: "Hello" },
             { question: "what is the french word of 'I' ? ", word: "", image: "https://img.icons8.com/ios-filled/100/i-pronoun.png", options: ["Je", "Tu", "Il", "Nous"], answer: "Je" }
-            { question: "What does this word mean ?", word: "Bonjour", image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png", options: ["Hello", "Goodnight", "Thankyou", "please"], answer: "Hello" },
-            { question: "what is the french word of 'I' ? ", word: "", image: "https://img.icons8.com/ios-filled/100/i-pronoun.png", options: ["Je", "Tu", "Il", "Nous"], answer: "Je" }
-            { question: "What does this word mean ?", word: "Bonjour", image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png", options: ["Hello", "Goodnight", "Thankyou", "please"], answer: "Hello" },
+      
 
         ];
 
