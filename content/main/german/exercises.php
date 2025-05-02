@@ -47,7 +47,7 @@ require_once '../../../database/connect.php';
 
         let fillQuestions = [
             { question: "Fill in the blank: Ich ___ müde.", answer: "bin" },
-            { question: "Fill in the blank: Er ___ nach Hause.", answer: "geht" }
+            { question: "Fill in the blank: Er ____ nach Hause.", answer: "geht" }
         ];
 
         function loadQuestion() {
