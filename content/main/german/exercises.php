@@ -1,4 +1,3 @@
-
 <?php
 require_once '../../../database/connect.php';
 ?>
@@ -10,16 +9,16 @@ require_once '../../../database/connect.php';
     <title>Practice - Language Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../style.css">
-</head>
 
-<body class=" min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
     <div class="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-6">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800">Practice</h2>
             <span id="questionCounter" class="text-sm text-gray-500">Question 1</span>
         </div>
 
-        <a href="german.php" class="flex items-center color :violet; hover:text-violet-600 mb-4">
+        <a href="german.php" class="flex items-center text-blue-600 hover:text-blue-800 mb-4">
             <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L4.414 9H18a1 1 0 110 2H4.414l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd" />
             </svg>
@@ -42,12 +41,20 @@ require_once '../../../database/connect.php';
 
         let vocabQuestions = [
             { question: "What does this word mean in German?", word: "Train", image: "https://img.icons8.com/dusk/64/train.png", options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], answer: "Zug" },
-            { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein","Ticket","Pass", "Karte"], answer: "Pass" }
+            { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein","Ticket","Pass", "Karte"], answer: "Pass" },
+            { question: "What does this word mean in German?", word: "Apple", image: "https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/external-apple-fruit-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png", options: ["Banane", "Apfel", "Traube", "Orange"], answer: "Apfel" },
+            { question: "What does this word mean in German?", word: "Book", image: "https://img.icons8.com/stickers/100/book-1.png", options: ["Buch", "Heft", "Papier", "Stift"], answer: "Buch" },
+            { question: "What does this word mean in German?", word: "House", image: "https://img.icons8.com/plasticine/50/cottage.png", options: ["Tur", "Zimmer", "Flugzeug", "Haus"], answer: "Haus" }
+
+
         ];
 
         let fillQuestions = [
             { question: "Fill in the blank: Ich ___ müde.", answer: "bin" },
-            { question: "Fill in the blank: Er ___ nach Hause.", answer: "geht" }
+            { question: "Fill in the blank: Er ___ nach Hause.", answer: "geht" },
+            { question: "Fill in the blank: Ich ___ Fußball.", answer: "spiele" },
+            { question: "Fill in the blank: Sie ___ ein Buch.", answer: "liest" },
+            { question: "Du ___ sehr schnell.", answer: "laufst" }
         ];
 
         function loadQuestion() {
@@ -87,7 +94,7 @@ require_once '../../../database/connect.php';
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     ${q.options.map(option => `
-                        <button class="option-btn bg-grey-300 border border-gray-300 rounded-xl p-4 hover:bg-violet-100 transition" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
+                        <button class="option-btn bg-white border border-gray-300 rounded-xl p-4 hover:bg-blue-100 transition" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
                     `).join('')}
                 </div>
             `;
@@ -98,7 +105,7 @@ require_once '../../../database/connect.php';
                 <p class="text-lg font-medium text-gray-700 mb-4">${q.question}</p>
                 <input type="text" id="fillInput" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your answer here...">
                 <div class="mt-4 flex justify-end">
-                    <button onclick='checkAnswerFill("${q.answer}")' class="bg-violet-00 text-white font-semibold px-6 py-2 rounded-full hover:bg-violet-700 transition">Check</button>
+                    <button onclick='checkAnswerFill("${q.answer}")' class="bg-green-600 text-white font-semibold px-6 py-2 rounded-full hover:bg-green-700 transition">Check</button>
                 </div>
             `;
 
@@ -201,4 +208,3 @@ require_once '../../../database/connect.php';
     </script>
 </body>
 </html>
-
