@@ -16,6 +16,45 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
+$course_query = "SELECT c.* FROM courses c
+                 JOIN languages l ON c.language_id = l.language_id
+                 WHERE l.code = 'fr' AND c.title = 'French Fundamentals'";
+$course_result = $conn->query($course_query);
+
+if ($course_result->num_rows == 0) {
+    $course_id = 0;
+} else {
+    $course = $course_result->fetch_assoc();
+    $course_id = $course['course_id'];
+}
+
+$units_query = "SELECT * FROM units 
+               WHERE course_id = ? 
+               ORDER BY order_index ASC";
+$stmt = $conn->prepare($units_query);
+$stmt->bind_param("i", $course_id);
+$stmt->execute();
+$units_result = $stmt->get_result();
+
+$progress_query = "SELECT l.unit_id, COUNT(l.lesson_id) AS total_lessons, 
+                   COUNT(up.lesson_id) AS completed_lessons
+                   FROM lessons l
+                   LEFT JOIN user_progress up ON l.lesson_id = up.lesson_id 
+                   AND up.user_id = ? AND up.status = 'completed'
+                   GROUP BY l.unit_id";
+$stmt = $conn->prepare($progress_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$progress_result = $stmt->get_result();
+
+$unit_progress = [];
+while ($row = $progress_result->fetch_assoc()) {
+    $unit_progress[$row['unit_id']] = [
+        'total' => $row['total_lessons'],
+        'completed' => $row['completed_lessons']
+    ];
+}
+
 if(isset($_GET['unit'])) {
     $unit_id = intval($_GET['unit']);
     
@@ -71,87 +110,81 @@ if(isset($_GET['unit'])) {
         <h1>French Courses <img src="https://flagcdn.com/w40/fr.png" alt="French Flag" class="flag-icon"></h1>
         
         <div class="course-list">
-            <div class="course-item">
-                <div class="course-header">
-                    <h2>Unit 1: Les Bases (The Basics)</h2>
-                    <span class="difficulty beginner">Beginner</span>
-                </div>
-                <div class="course-content">
-                    <p>Learn the foundation of French with basic greetings, introductions, and essential phrases.</p>
-                    <ul class="course-topics">
-                        <li><i class='bx bx-check-circle'></i> Greetings and introductions</li>
-                        <li><i class='bx bx-check-circle'></i> Basic pronunciation rules</li>
-                        <li><i class='bx bx-check-circle'></i> Numbers 1-20</li>
-                        <li><i class='bx bx-check-circle'></i> Simple questions</li>
-                    </ul>
-                    <div class="course-actions">
-                        <span class="lesson-count">5 Lessons</span>
-                        <a href="course-content.php?unit=1" class="btn btn-primary">Start Unit</a>
-                    </div>
-                </div>
-            </div>
+            <?php 
+            $unit_count = 1;
+            $last_completed_unit = 0;
+
+            foreach ($unit_progress as $unit_id => $progress) {
+                if ($progress['completed'] > 0 && $progress['completed'] >= $progress['total']) {
+                    if ($unit_id > $last_completed_unit) {
+                        $last_completed_unit = $unit_id;
+                    }
+                }
+            }
             
-            <div class="course-item">
+            if ($units_result->num_rows > 0) {
+                while($unit = $units_result->fetch_assoc()) {
+                    $is_locked = ($unit_count > 1 && $unit_count > $last_completed_unit + 1);
+                    
+                    $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
+                    $stmt = $conn->prepare($lessons_query);
+                    $stmt->bind_param("i", $unit['unit_id']);
+                    $stmt->execute();
+                    $lessons_result = $stmt->get_result();
+                    $lessons_data = $lessons_result->fetch_assoc();
+                    $lesson_count = $lessons_data['lesson_count'];
+                    
+                    if ($unit_count <= 2) {
+                        $difficulty = "beginner";
+                        $difficulty_text = "Beginner";
+                    } else {
+                        $difficulty = "intermediate";
+                        $difficulty_text = "Intermediate";
+                    }
+            ?>
+            <div class="course-item<?php echo $is_locked ? ' locked' : ''; ?>">
                 <div class="course-header">
-                    <h2>Unit 2: La Vie Quotidienne (Daily Life)</h2>
-                    <span class="difficulty beginner">Beginner</span>
+                    <h2><?php echo htmlspecialchars($unit['title']); ?></h2>
+                    <span class="difficulty <?php echo $difficulty; ?>"><?php echo $difficulty_text; ?></span>
                 </div>
                 <div class="course-content">
-                    <p>Practice everyday conversations and expand your vocabulary for daily activities.</p>
+                    <p><?php echo htmlspecialchars($unit['description']); ?></p>
+                    
+                    <?php
+                    $topics_query = "SELECT title FROM lessons WHERE unit_id = ? ORDER BY order_index ASC LIMIT 4";
+                    $stmt = $conn->prepare($topics_query);
+                    $stmt->bind_param("i", $unit['unit_id']);
+                    $stmt->execute();
+                    $topics_result = $stmt->get_result();
+                    
+                    if ($topics_result->num_rows > 0) {
+                    ?>
                     <ul class="course-topics">
-                        <li><i class='bx bx-check-circle'></i> Talking about your day</li>
-                        <li><i class='bx bx-check-circle'></i> Present tense verbs</li>
-                        <li><i class='bx bx-check-circle'></i> Times of day</li>
-                        <li><i class='bx bx-check-circle'></i> Basic adjectives</li>
+                        <?php while ($topic = $topics_result->fetch_assoc()) { ?>
+                        <li><i class='bx bx-check-circle'></i> <?php echo htmlspecialchars($topic['title']); ?></li>
+                        <?php } ?>
                     </ul>
+                    <?php } ?>
+                    
                     <div class="course-actions">
-                        <span class="lesson-count">6 Lessons</span>
-                        <a href="course-content.php?unit=2" class="btn btn-primary">Start Unit</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="course-item">
-                <div class="course-header">
-                    <h2>Unit 3: Faire des Courses (Shopping)</h2>
-                    <span class="difficulty intermediate">Intermediate</span>
-                </div>
-                <div class="course-content">
-                    <p>Learn vocabulary for shopping, dining, and handling money in French-speaking countries.</p>
-                    <ul class="course-topics">
-                        <li><i class='bx bx-check-circle'></i> Shopping vocabulary</li>
-                        <li><i class='bx bx-check-circle'></i> Restaurant phrases</li>
-                        <li><i class='bx bx-check-circle'></i> Numbers and currency</li>
-                        <li><i class='bx bx-check-circle'></i> Asking for help</li>
-                    </ul>
-                    <div class="course-actions">
-                        <span class="lesson-count">5 Lessons</span>
-                        <a href="course-content.php?unit=3" class="btn btn-primary">Start Unit</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="course-item locked">
-                <div class="course-header">
-                    <h2>Unit 4: Les Voyages (Traveling)</h2>
-                    <span class="difficulty intermediate">Intermediate</span>
-                </div>
-                <div class="course-content">
-                    <p>Navigate travel situations with confidence using specialized vocabulary and phrases.</p>
-                    <ul class="course-topics">
-                        <li><i class='bx bx-check-circle'></i> Transportation vocab</li>
-                        <li><i class='bx bx-check-circle'></i> Directions and locations</li>
-                        <li><i class='bx bx-check-circle'></i> Booking accommodations</li>
-                        <li><i class='bx bx-check-circle'></i> Travel expressions</li>
-                    </ul>
-                    <div class="course-actions">
-                        <span class="lesson-count">6 Lessons</span>
+                        <span class="lesson-count"><?php echo $lesson_count; ?> Lessons</span>
+                        <?php if (!$is_locked) { ?>
+                        <a href="course-content.php?unit=<?php echo $unit['unit_id']; ?>" class="btn btn-primary">Start Unit</a>
+                        <?php } else { ?>
                         <div class="lock-message">
                             <i class='bx bx-lock-alt'></i> Complete previous units to unlock
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
+            <?php 
+                $unit_count++;
+                }
+            } else {
+                echo "<p>No courses available at this time. Please check back later.</p>";
+            }
+            ?>
         </div>
         
         <div class="navigation-buttons">
@@ -165,7 +198,6 @@ if(isset($_GET['unit'])) {
     </div>
     
     <script>
-        // Toggle course content visibility
         document.querySelectorAll('.course-header').forEach(header => {
             header.addEventListener('click', function() {
                 const courseItem = this.parentElement;
@@ -174,8 +206,6 @@ if(isset($_GET['unit'])) {
                 }
             });
         });
-        
-        // Dropdown menu toggle
         document.querySelector('.user-info').addEventListener('click', function() {
             document.querySelector('.dropdown-menu').classList.toggle('active');
         });

@@ -181,15 +181,12 @@ if(isset($_GET['type'])) {
     </div>
 
     <script>
-        // Exercise filtering functionality
         const filterButtons = document.querySelectorAll('.filter-btn');
         const exerciseItems = document.querySelectorAll('.exercise-item');
         
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Remove active class from all buttons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
                 this.classList.add('active');
                 
                 const filterValue = this.getAttribute('data-filter');
@@ -204,7 +201,6 @@ if(isset($_GET['type'])) {
             });
         });
         
-        // Dropdown menu toggle
         document.querySelector('.user-info').addEventListener('click', function() {
             document.querySelector('.dropdown-menu').classList.toggle('active');
         });
