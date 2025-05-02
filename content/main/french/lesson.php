@@ -278,17 +278,20 @@ if (isset($_POST['complete_lesson'])) {
             
             <div class="lesson-content">
                 <?php
-                // Determine which unit the lesson belongs to
                 $unit_folder = "unit" . intval($unit_id);
                 $lesson_file = "lesson" . intval($lesson['order_index']) . ".php";
-                $lesson_path = "units/" . $unit_folder . "/" . $lesson_file;
+                $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
+                
+                if ($unit_id == 2) {
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . ".php";
+                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
+                }
                 
                 if (file_exists($lesson_path)) {
                     include($lesson_path);
                 } else {
                     echo "<p>This lesson will help you learn important French vocabulary and grammar concepts.</p>";
                     echo "<p>The full lesson content will be available soon. Please check back later.</p>";
-                    // Log missing lesson file for admin awareness
                     error_log("Missing lesson file: " . $lesson_path);
                 }
                 ?>
