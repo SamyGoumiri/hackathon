@@ -238,7 +238,7 @@ if (isset($_POST['submit_test'])) {
             <div class="score-display"><?php echo $score; ?> / 10 points (<?php echo round($percentage_score); ?>%)</div>
             
             <?php if ($percentage_score >= 80): ?>
-                <div class="result-message success">Excellent! You've mastered the basics of French.</div>
+                <div class="result-message success">Excellent! You've mastered the basics of Spanish.</div>
             <?php elseif ($percentage_score >= 60): ?>
                 <div class="result-message neutral">Good job! You have a solid understanding, but could review some concepts.</div>
             <?php else: ?>
@@ -249,207 +249,206 @@ if (isset($_POST['submit_test'])) {
         
         <div class="test-container">
             <?php if (!$test_submitted): ?>
-            <p>This test will assess your knowledge of basic French greetings, introductions, numbers, and essential phrases.</p>
+            <p>This test will assess your knowledge of basic Spanish greetings, introductions, numbers, and essential phrases.</p>
             <p>Answer all questions to the best of your ability.</p>
             
             <form method="post" action="">
                 <!-- Question 1 -->
                 <div class="question-container">
-                    <div class="question-text">1. Which phrase means "Hello" or "Good day" in French?</div>
+                    <div class="question-text">1. Which phrase means "Hello" or "Good day" in Spanish?</div>
                     <div class="options-container">
                         <div class="option">
-                            <input type="radio" id="q1_a" name="q1" value="salut">
-                            <label for="q1_a">Salut</label>
+                            <input type="radio" id="q1_a" name="q1" value="hola">
+                            <label for="q1_a">Hola</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q1_b" name="q1" value="bonjour">
-                            <label for="q1_b">Bonjour</label>
+                            <input type="radio" id="q1_b" name="q1" value="buenos_dias">
+                            <label for="q1_b">Buenos días</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q1_c" name="q1" value="bonsoir">
-                            <label for="q1_c">Bonsoir</label>
+                            <input type="radio" id="q1_c" name="q1" value="buenas_tardes">
+                            <label for="q1_c">Buenas tardes</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q1_d" name="q1" value="au_revoir">
-                            <label for="q1_d">Au revoir</label>
+                            <input type="radio" id="q1_d" name="q1" value="adios">
+                            <label for="q1_d">Adiós</label>
                         </div>
                     </div>
                 </div>
-                
+                            
                 <!-- Question 2 -->
                 <div class="question-container">
-                    <div class="question-text">2. Which phrase do you use to introduce yourself in French?</div>
+                    <div class="question-text">2. Which phrase do you use to introduce yourself in Spanish?</div>
                     <div class="options-container">
                         <div class="option">
-                            <input type="radio" id="q2_a" name="q2" value="je_mappelle">
-                            <label for="q2_a">Je m'appelle...</label>
+                            <input type="radio" id="q2_a" name="q2" value="me_llamo">
+                            <label for="q2_a">Me llamo...</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q2_b" name="q2" value="comment_tu_tappelles">
-                            <label for="q2_b">Comment tu t'appelles?</label>
+                            <input type="radio" id="q2_b" name="q2" value="como_te_llamas">
+                            <label for="q2_b">¿Cómo te llamas?</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q2_c" name="q2" value="enchante">
-                            <label for="q2_c">Enchanté</label>
+                            <input type="radio" id="q2_c" name="q2" value="mucho_gusto">
+                            <label for="q2_c">Mucho gusto</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q2_d" name="q2" value="je_suis_ici">
-                            <label for="q2_d">Je suis ici</label>
+                            <input type="radio" id="q2_d" name="q2" value="soy_aqui">
+                            <label for="q2_d">Estoy aquí</label>
                         </div>
                     </div>
                 </div>
-                
+                            
                 <!-- Question 3 -->
                 <div class="question-container">
-                    <div class="question-text">3. How do you say "Goodbye" in French?</div>
+                    <div class="question-text">3. How do you say "Goodbye" in Spanish?</div>
                     <div class="options-container">
                         <div class="option">
-                            <input type="radio" id="q3_a" name="q3" value="bonjour">
-                            <label for="q3_a">Bonjour</label>
+                            <input type="radio" id="q3_a" name="q3" value="adios">
+                            <label for="q3_a">Adiós</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q3_b" name="q3" value="merci">
-                            <label for="q3_b">Merci</label>
+                            <input type="radio" id="q3_b" name="q3" value="hasta_luego">
+                            <label for="q3_b">Hasta luego</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q3_c" name="q3" value="au_revoir">
-                            <label for="q3_c">Au revoir</label>
+                            <input type="radio" id="q3_c" name="q3" value="nos_vemos">
+                            <label for="q3_c">Nos vemos</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q3_d" name="q3" value="salut">
-                            <label for="q3_d">Salut</label>
+                            <input type="radio" id="q3_d" name="q3" value="chao">
+                            <label for="q3_d">Chao</label>
                         </div>
                     </div>
                 </div>
-                
+                            
                 <!-- Question 4 -->
                 <div class="question-container">
                     <div class="question-text">4. What do you say when meeting someone for the first time?</div>
                     <div class="options-container">
                         <div class="option">
-                            <input type="radio" id="q4_a" name="q4" value="au_revoir">
-                            <label for="q4_a">Au revoir</label>
+                            <input type="radio" id="q4_a" name="q4" value="mucho_gusto">
+                            <label for="q4_a">Mucho gusto</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q4_b" name="q4" value="enchante">
-                            <label for="q4_b">Enchanté(e)</label>
+                            <input type="radio" id="q4_b" name="q4" value="encantado">
+                            <label for="q4_b">Encantado(a)</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q4_c" name="q4" value="a_bientot">
-                            <label for="q4_c">À bientôt</label>
+                            <input type="radio" id="q4_c" name="q4" value="hola">
+                            <label for="q4_c">Hola</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q4_d" name="q4" value="je_mappelle">
-                            <label for="q4_d">Je m'appelle</label>
+                            <input type="radio" id="q4_d" name="q4" value="buenos_dias">
+                            <label for="q4_d">Buenos días</label>
                         </div>
                     </div>
                 </div>
-                
+                            
                 <!-- Question 5 -->
                 <div class="question-container">
-                    <div class="question-text">5. What is the French word for the number 12?</div>
+                    <div class="question-text">5. What is the Spanish word for the number 12?</div>
                     <div class="options-container">
                         <div class="option">
-                            <input type="radio" id="q5_a" name="q5" value="dix">
-                            <label for="q5_a">dix</label>
+                            <input type="radio" id="q5_a" name="q5" value="doce">
+                            <label for="q5_a">doce</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q5_b" name="q5" value="onze">
-                            <label for="q5_b">onze</label>
+                            <input type="radio" id="q5_b" name="q5" value="once">
+                            <label for="q5_b">once</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q5_c" name="q5" value="douze">
-                            <label for="q5_c">douze</label>
+                            <input type="radio" id="q5_c" name="q5" value="trece">
+                            <label for="q5_c">trece</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q5_d" name="q5" value="treize">
-                            <label for="q5_d">treize</label>
+                            <input type="radio" id="q5_d" name="q5" value="catorce">
+                            <label for="q5_d">catorce</label>
                         </div>
                     </div>
                 </div>
-                
+                            
                 <!-- Question 6 -->
                 <div class="question-container">
-                    <div class="question-text">6. Which question word means "how" in French?</div>
+                    <div class="question-text">6. Which question word means "how" in Spanish?</div>
                     <div class="options-container">
                         <div class="option">
-                            <input type="radio" id="q6_a" name="q6" value="quand">
-                            <label for="q6_a">quand</label>
+                            <input type="radio" id="q6_a" name="q6" value="cómo">
+                            <label for="q6_a">¿Cómo?</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q6_b" name="q6" value="qui">
-                            <label for="q6_b">qui</label>
+                            <input type="radio" id="q6_b" name="q6" value="cuándo">
+                            <label for="q6_b">¿Cuándo?</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q6_c" name="q6" value="comment">
-                            <label for="q6_c">comment</label>
+                            <input type="radio" id="q6_c" name="q6" value="quién">
+                            <label for="q6_c">¿Quién?</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q6_d" name="q6" value="pourquoi">
-                            <label for="q6_d">pourquoi</label>
+                            <input type="radio" id="q6_d" name="q6" value="por_qué">
+                            <label for="q6_d">¿Por qué?</label>
                         </div>
                     </div>
                 </div>
-                
+                            
                 <!-- Question 7 -->
                 <div class="question-container">
-                    <div class="question-text">7. Which phrase means "I don't understand" in French?</div>
+                    <div class="question-text">7. Which phrase means "I don't understand" in Spanish?</div>
                     <div class="options-container">
                         <div class="option">
-                            <input type="radio" id="q7_a" name="q7" value="je_ne_comprends_pas">
-                            <label for="q7_a">Je ne comprends pas</label>
+                            <input type="radio" id="q7_a" name="q7" value="no_entiendo">
+                            <label for="q7_a">No entiendo</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q7_b" name="q7" value="parlez_vous_anglais">
-                            <label for="q7_b">Parlez-vous anglais?</label>
+                            <input type="radio" id="q7_b" name="q7" value="no_se">
+                            <label for="q7_b">No sé</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q7_c" name="q7" value="pouvez_vous_repeter">
-                            <label for="q7_c">Pouvez-vous répéter?</label>
+                            <input type="radio" id="q7_c" name="q7" value="puedes_repetirlo">
+                            <label for="q7_c">¿Puedes repetirlo?</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q7_d" name="q7" value="excusez_moi">
-                            <label for="q7_d">Excusez-moi</label>
+                            <input type="radio" id="q7_d" name="q7" value="disculpa">
+                            <label for="q7_d">Disculpa</label>
                         </div>
                     </div>
                 </div>
-                
+                            
                 <!-- Question 8 -->
                 <div class="question-container">
-                    <div class="question-text">8. Fill in the blank: "_____ est la gare?" (Where is the train station?)</div>
+                    <div class="question-text">8. Fill in the blank: "¿está la estación?" (Where is the train station?)</div>
                     <div class="options-container">
                         <input type="text" name="q8" class="text-input" placeholder="Type the missing word">
                     </div>
                 </div>
-                
+                            
                 <!-- Question 9 -->
                 <div class="question-container">
-                    <div class="question-text">9. How do you say "Thank you very much" in French?</div>
+                    <div class="question-text">9. How do you say "Thank you very much" in Spanish?</div>
                     <div class="options-container">
-                        <input type="text" name="q9" class="text-input" placeholder="Type your answer in French">
+                        <input type="text" name="q9" class="text-input" placeholder="Type your answer in Spanish">
                     </div>
                 </div>
-                
+                            
                 <!-- Question 10 -->
                 <div class="question-container">
-                    <div class="question-text">10. What is the French word for 17?</div>
+                    <div class="question-text">10. What is the Spanish word for 17?</div>
                     <div class="options-container">
-                        
                         <div class="option">
-                            <input type="radio" id="q10_a" name="q10" value="sept">
-                            <label for="q10_a">sept</label>
+                            <input type="radio" id="q10_a" name="q10" value="diecisiete">
+                            <label for="q10_a">diecisiete</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q10_b" name="q10" value="dix-sept">
-                            <label for="q10_b">dix-sept</label>
+                            <input type="radio" id="q10_b" name="q10" value="dieciocho">
+                            <label for="q10_b">dieciocho</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q10_c" name="q10" value="seize">
-                            <label for="q10_c">seize</label>
+                            <input type="radio" id="q10_c" name="q10" value="veinte">
+                            <label for="q10_c">veinte</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q10_d" name="q10" value="sept-dix">
-                            <label for="q10_d">sept-dix</label>
+                            <input type="radio" id="q10_d" name="q10" value="quince">
+                            <label for="q10_d">quince</label>
                         </div>
                     </div>
                 </div>
