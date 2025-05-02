@@ -217,6 +217,21 @@ $stmt->execute();
     <div class="content-container">
         <h1><?php echo htmlspecialchars($unit['title']); ?> <img src="https://flagcdn.com/w40/es.png" alt="Spanish Flag" class="flag-icon"></h1>
         
+        <?php if (isset($_GET['completed_lesson']) && is_numeric($_GET['completed_lesson'])) { 
+            // Get the lesson title
+            $completed_lesson_id = intval($_GET['completed_lesson']);
+            $lesson_title_query = "SELECT title FROM lessons WHERE lesson_id = ?";
+            $stmt = $conn->prepare($lesson_title_query);
+            $stmt->bind_param("i", $completed_lesson_id);
+            $stmt->execute();
+            $lesson_title_result = $stmt->get_result();
+            $lesson_title = $lesson_title_result->num_rows > 0 ? $lesson_title_result->fetch_assoc()['title'] : 'Lesson';
+        ?>
+        <div class="alert alert-success">
+            <i class='bx bx-check-circle'></i> Great job! You've completed "<?php echo htmlspecialchars($lesson_title); ?>".
+        </div>
+        <?php } ?>
+        
         <p class="unit-description"><?php echo htmlspecialchars($unit['description']); ?></p>
         
         <?php
@@ -278,7 +293,7 @@ $stmt->execute();
                         <?php } ?>
                         
                         <?php if (!$is_locked) { ?>
-                            <a href="lesson.php?id=<?php echo $lesson_id; ?>" class="btn btn-primary">
+                            <a href="lesson.php?id=<?php echo $lesson['lesson_id']; ?>" class="btn btn-primary">
                                 <?php echo ($lesson_status == 'completed' ? 'Review' : 'Start'); ?>
                             </a>
                         <?php } ?>
@@ -298,8 +313,20 @@ $stmt->execute();
             <a href="units.php" class="btn btn-secondary">
                 <i class='bx bx-arrow-back'></i> Back to Courses
             </a>
-            <?php if ($completion_percentage == 100) { ?>
-            <a href="unit<?php echo $unit_id; ?>-test.php?unit=<?php echo $unit_id; ?>" class="btn btn-primary">
+            <?php if ($completion_percentage == 100) { 
+                // Map database unit IDs to file unit IDs
+                $file_unit_id = $unit_id;
+                if ($unit_id == 9) {
+                    $file_unit_id = 1;
+                } elseif ($unit_id == 10) {
+                    $file_unit_id = 2;
+                } elseif ($unit_id == 11) {
+                    $file_unit_id = 3;
+                } elseif ($unit_id == 12) {
+                    $file_unit_id = 4;
+                }
+            ?>
+            <a href="unit<?php echo $file_unit_id; ?>-test.php?unit=<?php echo $unit_id; ?>" class="btn btn-primary">
                 Take Unit Test <i class='bx bx-right-arrow-alt'></i>
             </a>
             <?php } ?>

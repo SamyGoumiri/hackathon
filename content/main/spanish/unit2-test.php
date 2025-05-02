@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$unit_id = 2;
+$unit_id = 10; // Second Spanish unit ID (assuming it's 10 based on lesson.php)
 
 $user_query = "SELECT username, first_name, last_name FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($user_query);
@@ -42,53 +42,53 @@ if (isset($_POST['submit_test'])) {
     $total_questions = 10;
     
     // Question 1
-    if (isset($_POST['q1']) && $_POST['q1'] === 'se_reveiller') {
+    if (isset($_POST['q1']) && $_POST['q1'] === 'despertarse') {
         $score++;
     }
     
     // Question 2
-    if (isset($_POST['q2']) && $_POST['q2'] === 'prendre') {
+    if (isset($_POST['q2']) && $_POST['q2'] === 'tomar') {
         $score++;
     }
     
     // Question 3
-    if (isset($_POST['q3']) && $_POST['q3'] === 'midi') {
+    if (isset($_POST['q3']) && $_POST['q3'] === 'mediodia') {
         $score++;
     }
     
     // Question 4
-    if (isset($_POST['q4']) && $_POST['q4'] === 'huit_heures_et_quart') {
+    if (isset($_POST['q4']) && $_POST['q4'] === 'ocho_y_cuarto') {
         $score++;
     }
     
     // Question 5
-    if (isset($_POST['q5']) && $_POST['q5'] === 'mercredi') {
+    if (isset($_POST['q5']) && $_POST['q5'] === 'miercoles') {
         $score++;
     }
     
     // Question 6
-    if (isset($_POST['q6']) && strtolower(trim($_POST['q6'])) === 'janvier') {
+    if (isset($_POST['q6']) && strtolower(trim($_POST['q6'])) === 'enero') {
         $score++;
     }
     
     // Question 7
-    if (isset($_POST['q7']) && $_POST['q7'] === 'il_fait_chaud') {
+    if (isset($_POST['q7']) && $_POST['q7'] === 'hace_calor') {
         $score++;
     }
     
     // Question 8
-    if (isset($_POST['q8']) && strtolower(trim($_POST['q8'])) === 'il pleut') {
+    if (isset($_POST['q8']) && strtolower(trim($_POST['q8'])) === 'está lloviendo') {
         $score++;
     }
     
     // Question 9
     $q9_answer = isset($_POST['q9']) ? $_POST['q9'] : '';
-    if ($q9_answer === 'ete') {
+    if ($q9_answer === 'verano') {
         $score++;
     }
     
     // Question 10
-    if (isset($_POST['q10']) && $_POST['q10'] === 'je_suis') {
+    if (isset($_POST['q10']) && $_POST['q10'] === 'soy') {
         $score++;
     }
     
@@ -232,7 +232,7 @@ if (isset($_POST['submit_test'])) {
     </header>
 
     <div class="content-container">
-        <h1>Unit 2 Test: La Vie Quotidienne (Daily Life)</h1>
+        <h1>Unit 2 Test: La Vida Cotidiana (Daily Life)</h1>
         
         <?php if ($test_submitted): ?>
         <div class="result-container">
@@ -256,114 +256,119 @@ if (isset($_POST['submit_test'])) {
             
             <form method="post" action="">
                 <!-- Question 1 -->
-                <div class="question-text">1. Which phrase means "to wake up" in Spanish?</div>
-                <div class="options-container">
-                    <div class="option">
-                        <input type="radio" id="q1_a" name="q1" value="levantarse">
-                        <label for="q1_a">levantarse</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q1_b" name="q1" value="despertarse">
-                        <label for="q1_b">despertarse</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q1_c" name="q1" value="ducharse">
-                        <label for="q1_c">ducharse</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q1_d" name="q1" value="vestirse">
-                        <label for="q1_d">vestirse</label>
+                <div class="question-container">
+                    <div class="question-text">1. Which phrase means "to wake up" in Spanish?</div>
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" id="q1_a" name="q1" value="levantarse">
+                            <label for="q1_a">levantarse</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q1_b" name="q1" value="despertarse">
+                            <label for="q1_b">despertarse</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q1_c" name="q1" value="ducharse">
+                            <label for="q1_c">ducharse</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q1_d" name="q1" value="vestirse">
+                            <label for="q1_d">vestirse</label>
+                        </div>
                     </div>
                 </div>
-
                 
                 <!-- Question 2 -->
-                                <div class="question-text">2. Which verb means "to take" or "to have" (as in having breakfast) in Spanish?</div>
-                <div class="options-container">
-                    <div class="option">
-                        <input type="radio" id="q2_a" name="q2" value="tomar">
-                        <label for="q2_a">tomar</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q2_b" name="q2" value="hacer">
-                        <label for="q2_b">hacer</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q2_c" name="q2" value="ir">
-                        <label for="q2_c">ir</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q2_d" name="q2" value="tener">
-                        <label for="q2_d">tener</label>
+                <div class="question-container">
+                    <div class="question-text">2. Which verb means "to take" or "to have" (as in having breakfast) in Spanish?</div>
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" id="q2_a" name="q2" value="tomar">
+                            <label for="q2_a">tomar</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q2_b" name="q2" value="hacer">
+                            <label for="q2_b">hacer</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q2_c" name="q2" value="ir">
+                            <label for="q2_c">ir</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q2_d" name="q2" value="tener">
+                            <label for="q2_d">tener</label>
+                        </div>
                     </div>
                 </div>
-
                 
                 <!-- Question 3 -->
-                                <div class="question-text">3. What is the Spanish word for "noon"?</div>
-                <div class="options-container">
-                    <div class="option">
-                        <input type="radio" id="q3_a" name="q3" value="medianoche">
-                        <label for="q3_a">medianoche</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q3_b" name="q3" value="mañana">
-                        <label for="q3_b">mañana</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q3_c" name="q3" value="mediodía">
-                        <label for="q3_c">mediodía</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q3_d" name="q3" value="tarde">
-                        <label for="q3_d">tarde</label>
+                <div class="question-container">
+                    <div class="question-text">3. What is the Spanish word for "noon"?</div>
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" id="q3_a" name="q3" value="medianoche">
+                            <label for="q3_a">medianoche</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q3_b" name="q3" value="manana">
+                            <label for="q3_b">mañana</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q3_c" name="q3" value="mediodia">
+                            <label for="q3_c">mediodía</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q3_d" name="q3" value="noche">
+                            <label for="q3_d">noche</label>
+                        </div>
                     </div>
                 </div>
-
                 
                 <!-- Question 4 -->
-                                <div class="question-text">4. How do you say "8:15" (quarter past eight) in Spanish?</div>
-                <div class="options-container">
-                    <div class="option">
-                        <input type="radio" id="q4_a" name="q4" value="ocho_menos_cuarto">
-                        <label for="q4_a">ocho menos cuarto</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q4_b" name="q4" value="ocho_y_cuarto">
-                        <label for="q4_b">ocho y cuarto</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q4_c" name="q4" value="ocho_quince">
-                        <label for="q4_c">ocho quince</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q4_d" name="q4" value="ocho_y_media">
-                        <label for="q4_d">ocho y media</label>
+                <div class="question-container">
+                    <div class="question-text">4. How do you say "8:15" (quarter past eight) in Spanish?</div>
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" id="q4_a" name="q4" value="ocho_menos_cuarto">
+                            <label for="q4_a">ocho menos cuarto</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q4_b" name="q4" value="ocho_y_cuarto">
+                            <label for="q4_b">ocho y cuarto</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q4_c" name="q4" value="ocho_y_quince">
+                            <label for="q4_c">ocho y quince</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q4_d" name="q4" value="ocho_cuarto">
+                            <label for="q4_d">ocho cuarto</label>
+                        </div>
                     </div>
                 </div>
-
                 
                 <!-- Question 5 -->
-                                <div class="question-text">5. Which day comes between Tuesday and Thursday?</div>
-                <div class="options-container">
-                    <div class="option">
-                        <input type="radio" id="q5_a" name="q5" value="lunes">
-                        <label for="q5_a">lunes</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q5_b" name="q5" value="martes">
-                        <label for="q5_b">martes</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q5_c" name="q5" value="miércoles">
-                        <label for="q5_c">miércoles</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q5_d" name="q5" value="viernes">
-                        <label for="q5_d">viernes</label>
+                <div class="question-container">
+                    <div class="question-text">5. Which day comes between Tuesday and Thursday?</div>
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" id="q5_a" name="q5" value="lunes">
+                            <label for="q5_a">lunes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q5_b" name="q5" value="martes">
+                            <label for="q5_b">martes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q5_c" name="q5" value="miercoles">
+                            <label for="q5_c">miércoles</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q5_d" name="q5" value="viernes">
+                            <label for="q5_d">viernes</label>
+                        </div>
                     </div>
                 </div>
-
                 
                 <!-- Question 6 -->
                 <div class="question-container">
@@ -374,26 +379,27 @@ if (isset($_POST['submit_test'])) {
                 </div>
                 
                 <!-- Question 7 -->
-                                <div class="question-text">7. How do you say "It's hot" when referring to the weather</div>
-                <div class="options-container">
-                    <div class="option">
-                        <input type="radio" id="q7_a" name="q7" value="hace_lluvia">
-                        <label for="q7_a">Llueve</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q7_b" name="q7" value="hace_sol">
-                        <label for="q7_b">Hace sol</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q7_c" name="q7" value="hace_calor">
-                        <label for="q7_c">Hace calor</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q7_d" name="q7" value="hace_frio">
-                        <label for="q7_d">Hace frío</label>
+                <div class="question-container">
+                    <div class="question-text">7. How do you say "It's hot" when referring to the weather?</div>
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" id="q7_a" name="q7" value="esta_lloviendo">
+                            <label for="q7_a">Está lloviendo</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q7_b" name="q7" value="hace_sol">
+                            <label for="q7_b">Hace sol</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q7_c" name="q7" value="hace_calor">
+                            <label for="q7_c">Hace calor</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q7_d" name="q7" value="hace_frio">
+                            <label for="q7_d">Hace frío</label>
+                        </div>
                     </div>
                 </div>
-
                 
                 <!-- Question 8 -->
                 <div class="question-container">
@@ -404,48 +410,50 @@ if (isset($_POST['submit_test'])) {
                 </div>
                 
                 <!-- Question 9 -->
-                                <div class="question-text">9. Which season in Spanish corresponds to summer?</div>
-                <div class="options-container">
-                    <div class="option">
-                        <input type="radio" id="q9_a" name="q9" value="primavera">
-                        <label for="q9_a">la primavera</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q9_b" name="q9" value="verano">
-                        <label for="q9_b">el verano</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q9_c" name="q9" value="otoño">
-                        <label for="q9_c">el otoño</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q9_d" name="q9" value="invierno">
-                        <label for="q9_d">el invierno</label>
+                <div class="question-container">
+                    <div class="question-text">9. Which season in Spanish corresponds to summer?</div>
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" id="q9_a" name="q9" value="primavera">
+                            <label for="q9_a">la primavera</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q9_b" name="q9" value="verano">
+                            <label for="q9_b">el verano</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q9_c" name="q9" value="otono">
+                            <label for="q9_c">el otoño</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q9_d" name="q9" value="invierno">
+                            <label for="q9_d">el invierno</label>
+                        </div>
                     </div>
                 </div>
-
                 
                 <!-- Question 10 -->
-                                <div class="question-text">10. What is the conjugation of "ser" (to be) for "I am"?</div>
-                <div class="options-container">
-                    <div class="option">
-                        <input type="radio" id="q10_a" name="q10" value="yo_soy">
-                        <label for="q10_a">yo soy</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q10_b" name="q10" value="tú_eres">
-                        <label for="q10_b">tú eres</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q10_c" name="q10" value="él_es">
-                        <label for="q10_c">él es</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" id="q10_d" name="q10" value="nosotros_somos">
-                        <label for="q10_d">nosotros somos</label>
+                <div class="question-container">
+                    <div class="question-text">10. What is the conjugation of "ser" (to be) for "I am"?</div>
+                    <div class="options-container">
+                        <div class="option">
+                            <input type="radio" id="q10_a" name="q10" value="soy">
+                            <label for="q10_a">soy</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q10_b" name="q10" value="eres">
+                            <label for="q10_b">eres</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q10_c" name="q10" value="es">
+                            <label for="q10_c">es</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="q10_d" name="q10" value="somos">
+                            <label for="q10_d">somos</label>
+                        </div>
                     </div>
                 </div>
-
                 
                 <div class="submit-container">
                     <button type="submit" name="submit_test" class="btn btn-primary">Submit Test</button>

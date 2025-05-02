@@ -113,7 +113,7 @@ if (isset($_POST['complete_lesson'])) {
     $stmt->bind_param("ii", $user_id, $lesson_id);
     $stmt->execute();
     
-    header("Location: lesson.php?id=" . $lesson_id . "&completed=1");
+    header("Location: units-content.php?unit=" . $unit_id . "&completed_lesson=" . $lesson_id);
     exit();
 }
 ?>
@@ -306,31 +306,55 @@ if (isset($_POST['complete_lesson'])) {
             
             <div class="lesson-content">
                 <?php
-                $unit_folder = "unit" . intval($unit_id);
-                $lesson_file = "lesson" . intval($lesson['order_index']) . "sp.php";
-                $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                
-                if ($unit_id == 2) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . "sp.php";
-                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
-                
-                if ($unit_id == 3) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . "sp.php";
-                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
-                
-                if ($unit_id == 4) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . "sp.php";
-                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
-                
-                if (file_exists($lesson_path)) {
-                    include($lesson_path);
+                // Map database unit IDs to directory names for Spanish course
+                // Spanish course has unit IDs 9-12 in database but directories are unit1-unit4
+                $unit_folder = "unit";
+                if ($unit_id == 9) {
+                    $unit_folder .= "1";
+                } elseif ($unit_id == 10) {
+                    $unit_folder .= "2";
+                } elseif ($unit_id == 11) {
+                    $unit_folder .= "3";
+                } elseif ($unit_id == 12) {
+                    $unit_folder .= "4";
                 } else {
+                    // Fallback to direct ID in case of custom units
+                    $unit_folder .= intval($unit_id);
+                }
+                
+                $lesson_number = intval($lesson['order_index']);
+                
+                // Adjust lesson number to match file naming pattern
+                // Units 9-12 correspond to lessons 41-60 in database
+                if ($unit_id == 9) {
+                    $lesson_number = $lesson_number - 0; // First unit, no adjustment needed
+                } elseif ($unit_id == 10) {
+                    $lesson_number = $lesson_number + 0; // Match patterns in filenames
+                } elseif ($unit_id == 11) {
+                    $lesson_number = $lesson_number + 0;
+                } elseif ($unit_id == 12) {
+                    $lesson_number = $lesson_number + 0;
+                }
+                
+                // Try multiple possible filename patterns
+                $possible_files = [
+                    __DIR__ . "/units/" . $unit_folder . "/lesson" . $lesson_number . "sp.php", // with sp suffix
+                    __DIR__ . "/units/" . $unit_folder . "/lesson" . $lesson_number . ".php",    // without sp suffix
+                ];
+                
+                $found_file = false;
+                foreach ($possible_files as $file_path) {
+                    if (file_exists($file_path)) {
+                        include($file_path);
+                        $found_file = true;
+                        break;
+                    }
+                }
+                
+                if (!$found_file) {
                     echo "<p>This lesson will help you learn important Spanish vocabulary and grammar concepts.</p>";
                     echo "<p>The full lesson content will be available soon. Please check back later.</p>";
-                    error_log("Missing lesson file: " . $lesson_path);
+                    error_log("Missing lesson file. Tried: " . implode(", ", $possible_files));
                 }
                 ?>
             </div>
