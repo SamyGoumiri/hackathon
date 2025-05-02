@@ -81,7 +81,7 @@ if(isset($_GET['unit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
-    <title>Lango - French Courses</title>
+    <title>Lango - German Courses</title>
 
 </head>
 <body>
@@ -197,9 +197,10 @@ if(isset($_GET['unit'])) {
         </div>
         
         <div class="navigation-buttons">
-            <a href="french.php" class="btn btn-secondary">
-                <i class='bx bx-arrow-back'></i> Back to French
+            <a href="german.php" class="btn btn-secondary">
+                <i class='bx bx-arrow-back'></i> Back to German
             </a>
+
             <a href="exercises.php" class="btn btn-primary">
                 Practice Exercises <i class='bx bx-right-arrow-alt'></i>
             </a>
