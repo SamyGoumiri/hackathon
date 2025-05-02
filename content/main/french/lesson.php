@@ -287,6 +287,11 @@ if (isset($_POST['complete_lesson'])) {
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 
+                if ($unit_id == 3) {
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . ".php";
+                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
+                }
+                
                 if (file_exists($lesson_path)) {
                     include($lesson_path);
                 } else {
