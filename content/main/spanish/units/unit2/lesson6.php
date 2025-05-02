@@ -5,36 +5,36 @@
     <tr>
         <th>French</th>
         <th>Pronunciation</th>
-        <th>English</th>
+        <th>Spanish</th>
     </tr>
     <tr>
-        <td class="french-word">se réveiller</td>
-        <td class="pronunciation">suh ray-vay-yay</td>
+        <td class="spanish-word">despertarse</td>
+        <td class="pronunciation">des-per-tar-seh</td>
         <td>to wake up</td>
     </tr>
     <tr>
-        <td class="french-word">se lever</td>
-        <td class="pronunciation">suh luh-vay</td>
+        <td class="spanish-word">levantarse</td>
+        <td class="pronunciation">leh-van-tar-seh</td>
         <td>to get up</td>
     </tr>
     <tr>
-        <td class="french-word">se doucher</td>
-        <td class="pronunciation">suh doo-shay</td>
+        <td class="spanish-word">ducharse</td>
+        <td class="pronunciation">doo-char-seh</td>
         <td>to shower</td>
     </tr>
     <tr>
-        <td class="french-word">se brosser les dents</td>
-        <td class="pronunciation">suh bro-say lay dahn</td>
+        <td class="spanish-word">cepillarse los dientes</td>
+        <td class="pronunciation">seh-pee-yaar-seh los dee-en-tehs</td>
         <td>to brush teeth</td>
     </tr>
     <tr>
-        <td class="french-word">s'habiller</td>
-        <td class="pronunciation">sah-bee-yay</td>
+        <td class="spanish-word">vestirse</td>
+        <td class="pronunciation">ves-teer-seh</td>
         <td>to get dressed</td>
     </tr>
     <tr>
-        <td class="french-word">prendre le petit déjeuner</td>
-        <td class="pronunciation">prahn-druh luh puh-tee day-zhuh-nay</td>
+        <td class="spanish-word">desayunar</td>
+        <td class="pronunciation">deh-sa-yoo-nar</td>
         <td>to have breakfast</td>
     </tr>
 </table>
@@ -47,17 +47,17 @@
         <th>English</th>
     </tr>
     <tr>
-        <td class="french-word">aller au travail/à l'école</td>
-        <td class="pronunciation">ah-lay oh trah-vay/ah lay-kol</td>
+        <td class="spanish-word">ir al trabajo / a la escuela</td>
+        <td class="pronunciation">eer al tra-ba-ho / a la es-kwe-la</td>
         <td>to go to work/school</td>
     </tr>
     <tr>
-        <td class="french-word">travailler</td>
-        <td class="pronunciation">trah-vah-yay</td>
+        <td class="french-word">trabajar</td>
+        <td class="pronunciation">tra-ba-har</td>
         <td>to work</td>
     </tr>
     <tr>
-        <td class="french-word">déjeuner</td>
+        <td class="french-word">almorzar / comer</td> //HERE
         <td class="pronunciation">day-zhuh-nay</td>
         <td>to have lunch</td>
     </tr>
