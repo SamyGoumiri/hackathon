@@ -39,6 +39,14 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+-- Note: In production, passwords should be properly hashed
+INSERT INTO `users` (`username`, `first_name`, `last_name`, `email`, `password`, `is_active`) VALUES
+('admin', 'Aziz', 'Boula', 'admin@lango.com', '123456', 1);
+
 -- --------------------------------------------------------
 
 --

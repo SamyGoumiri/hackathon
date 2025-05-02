@@ -1,11 +1,11 @@
-<p>In this lesson, you'll learn vocabulary for describing your daily routines and activities in French.</p>
+<p>In this lesson, you'll learn vocabulary for describing your daily routines and activities in Spanish.</p>
 
 <h2>Morning Routine</h2>
 <table class="vocabulary-table">
     <tr>
-        <th>French</th>
-        <th>Pronunciation</th>
         <th>Spanish</th>
+        <th>Pronunciation</th>
+        <th>English</th>
     </tr>
     <tr>
         <td class="spanish-word">despertarse</td>
@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td class="spanish-word">cepillarse los dientes</td>
-        <td class="pronunciation">seh-pee-yaar-seh los dee-en-tehs</td>
+        <td class="pronunciation">seh-pee-yar-seh lohs dee-en-tehs</td>
         <td>to brush teeth</td>
     </tr>
     <tr>
@@ -42,7 +42,7 @@
 <h2>Daily Activities</h2>
 <table class="vocabulary-table">
     <tr>
-        <th>French</th>
+        <th>Spanish</th>
         <th>Pronunciation</th>
         <th>English</th>
     </tr>
@@ -72,8 +72,8 @@
         <td>to do shopping</td>
     </tr>
     <tr>
-        <td class="french-word">préparer le dîner</td>
-        <td class="pronunciation">pray-pah-ray luh dee-nay</td>
+        <td class="spanish-word">preparar la cena</td>
+        <td class="pronunciation">preh-pa-rar lah seh-nah</td>
         <td>to prepare dinner</td>
     </tr>
 </table>
@@ -81,32 +81,32 @@
 <h2>Evening Routine</h2>
 <table class="vocabulary-table">
     <tr>
-        <th>French</th>
+        <th>Spanish</th>
         <th>Pronunciation</th>
         <th>English</th>
     </tr>
     <tr>
-        <td class="french-word">dîner</td>
-        <td class="pronunciation">dee-nay</td>
+        <td class="spanish-word">cenar</td>
+        <td class="pronunciation">seh-nar</td>
         <td>to have dinner</td>
     </tr>
     <tr>
-        <td class="french-word">regarder la télé</td>
-        <td class="pronunciation">ruh-gar-day lah tay-lay</td>
+        <td class="spanish-word">ver la tele</td>
+        <td class="pronunciation">vehr lah teh-leh</td>
         <td>to watch TV</td>
     </tr>
     <tr>
-        <td class="french-word">lire un livre</td>
-        <td class="pronunciation">leer uhn leev-ruh</td>
+        <td class="spanish-word">leer un libro</td>
+        <td class="pronunciation">leh-ehr oon lee-bro</td>
         <td>to read a book</td>
     </tr>
     <tr>
-        <td class="french-word">se coucher</td>
-        <td class="pronunciation">suh koo-shay</td>
+        <td class="spanish-word">acostarse</td>
+        <td class="pronunciation">ah-kos-tar-seh</td>
         <td>to go to bed</td>
     </tr>
     <tr>
-        <td class="french-word">dormir</td>
+        <td class="spanish-word">dormir</td>
         <td class="pronunciation">dor-meer</td>
         <td>to sleep</td>
     </tr>
@@ -115,33 +115,33 @@
 <h2>Time-Related Expressions</h2>
 <table class="vocabulary-table">
     <tr>
-        <th>French</th>
+        <th>Spanish</th>
         <th>Pronunciation</th>
         <th>English</th>
     </tr>
     <tr>
-        <td class="french-word">le matin</td>
-        <td class="pronunciation">luh mah-tan</td>
+        <td class="spanish-word">por la mañana</td>
+        <td class="pronunciation">por lah mah-nyah-nah</td>
         <td>in the morning</td>
     </tr>
     <tr>
-        <td class="french-word">l'après-midi</td>
-        <td class="pronunciation">lah-pray-mee-dee</td>
+        <td class="spanish-word">por la tarde</td>
+        <td class="pronunciation">por lah tar-deh</td>
         <td>in the afternoon</td>
     </tr>
     <tr>
-        <td class="french-word">le soir</td>
-        <td class="pronunciation">luh swahr</td>
+        <td class="spanish-word">por la noche</td>
+        <td class="pronunciation">por lah no-cheh</td>
         <td>in the evening</td>
     </tr>
     <tr>
-        <td class="french-word">la nuit</td>
-        <td class="pronunciation">lah nwee</td>
+        <td class="spanish-word">durante la noche</td>
+        <td class="pronunciation">doo-ran-teh lah no-cheh</td>
         <td>at night</td>
     </tr>
     <tr>
-        <td class="french-word">tous les jours</td>
-        <td class="pronunciation">too lay zhoor</td>
+        <td class="spanish-word">todos los días</td>
+        <td class="pronunciation">toh-dohs lohs dee-ahs</td>
         <td>every day</td>
     </tr>
 </table>
@@ -149,9 +149,7 @@
 <div class="example">
     <div class="example-title">Example: Describing Your Daily Routine</div>
     <p>
-        <strong>Le matin,</strong> je me réveille à 7 heures. Je me lève, puis je me douche et je m'habille. Je prends mon petit déjeuner à 7h30.<br><br>
-        <strong>Pendant la journée,</strong> je vais au travail à 8 heures. Je travaille jusqu'à midi, puis je déjeune. Je travaille encore l'après-midi et je rentre à la maison à 18 heures.<br><br>
-        <strong>Le soir,</strong> je prépare le dîner et je mange vers 19 heures. Après le dîner, je regarde la télé ou je lis un livre. Je me couche vers 23 heures.
+        <strong>Por la mañana,</strong> me despierto a las 7. Me levanto, me ducho y me visto. Desayuno a las 7:30.<br><br>
     </p>
 </div>
 

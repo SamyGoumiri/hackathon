@@ -31,7 +31,7 @@
     </tr>
     <tr>
         <td class="spanish-word">viernes</td>
-        <td class="pronunciation">bee-air-nes</td>
+        <td class="pronunciation">vee-air-nes</td>
         <td>Friday</td>
     </tr>
     <tr>

@@ -12,26 +12,26 @@
     <tr>
         <td class="spanish-word">Buenos días</td>
         <td class="pronunciation">bwenos dias</td>
-        <td>Hello</td>
+        <td>Hello / Good morning</td>
     </tr>
     <tr>
-        <td class="spanish-word">Halo</td>
-        <td class="pronunciation">Halo</td>
+        <td class="spanish-word">Hola</td>
+        <td class="pronunciation">oh-lah</td>
         <td>Hi (informal)</td>
     </tr>
     <tr>
         <td class="spanish-word">Buenas noches</td>
-        <td class="pronunciation">bwenas notch</td>
+        <td class="pronunciation">bwenas notch-es</td>
         <td>Good evening</td>
     </tr>
     <tr>
-        <td class="spanish-word">Au revoir</td>
-        <td class="pronunciation">oh-reh-vwahr</td>
+        <td class="spanish-word">Adiós</td>
+        <td class="pronunciation">ah-dee-ose</td>
         <td>Goodbye</td>
     </tr>
     <tr>
-        <td class="spanish-word">À bientôt</td>
-        <td class="pronunciation">ah bee-yen-toh</td>
+        <td class="spanish-word">Hasta luego</td>
+        <td class="pronunciation">ah-sta loo-eh-go</td>
         <td>See you soon</td>
     </tr>
 </table>
@@ -40,30 +40,30 @@
 <p>To introduce yourself in Spanish, you can use these phrases:</p>
 
 <ul>
-    <li><span class="spanish-word">Je m'appelle...</span> (zhuh mah-pehl) - My name is...</li>
-    <li><span class="spanish-word">Je suis...</span> (zhuh swee) - I am...</li>
-    <li><span class="spanish-word">Enchanté(e)</span> (ahn-shahn-tay) - Nice to meet you</li>
+    <li><span class="spanish-word">Me llamo...</span> (may yah-mo) - My name is...</li>
+    <li><span class="spanish-word">Soy...</span> (soy) - I am...</li>
+    <li><span class="spanish-word">Encantado/a</span> (en-can-tah-do/dah) - Nice to meet you</li>
 </ul>
 
 <div class="example">
     <div class="example-title">Example Conversation</div>
     <p>
-        <strong>Person A:</strong> Bonjour! Je m'appelle Marie.<br>
-        <strong>Person B:</strong> Bonjour Marie! Je m'appelle Paul. Enchanté!<br>
-        <strong>Person A:</strong> Enchantée, Paul!
+        <strong>Person A:</strong> ¡Hola! Me llamo María.<br>
+        <strong>Person B:</strong> ¡Hola María! Me llamo Pablo. ¡Encantado!<br>
+        <strong>Person A:</strong> ¡Encantada, Pablo!
     </p>
 </div>
 
 <h2>Practice</h2>
 <p>Try introducing yourself in Spanish. Complete these phrases:</p>
 <ul>
-    <li>Bonjour! Je m'appelle _______.</li>
-    <li>Je suis _______. (add your nationality or profession)</li>
+    <li>¡Hola! Me llamo _______.</li>
+    <li>Soy _______. (add your nationality or profession)</li>
 </ul>
 
 <h2>Key Points to Remember</h2>
 <ul>
-    <li>Use "Bonjour" during the day and "Bonsoir" in the evening.</li>
-    <li>"Salut" is informal and should only be used with friends and family.</li>
-    <li>When saying "Enchanté", men say "Enchanté" and women say "Enchantée".</li>
+    <li>Use "Buenos días" during the morning, "Buenas tardes" in the afternoon, and "Buenas noches" in the evening.</li>
+    <li>"Hola" is informal and can be used at any time of day.</li>
+    <li>When saying "Encantado", men say "Encantado" and women say "Encantada".</li>
 </ul>

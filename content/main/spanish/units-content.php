@@ -215,7 +215,7 @@ $stmt->execute();
     </header>
 
     <div class="content-container">
-        <h1><?php echo htmlspecialchars($unit['title']); ?> <img src="https://flagcdn.com/w40/fr.png" alt="French Flag" class="flag-icon"></h1>
+        <h1><?php echo htmlspecialchars($unit['title']); ?> <img src="https://flagcdn.com/w40/es.png" alt="Spanish Flag" class="flag-icon"></h1>
         
         <p class="unit-description"><?php echo htmlspecialchars($unit['description']); ?></p>
         
