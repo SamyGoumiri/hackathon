@@ -416,7 +416,7 @@ if (isset($_POST['submit_test'])) {
                             
                 <!-- Question 8 -->
                 <div class="question-container">
-                    <div class="question-text">8. Fill in the blank: "¿está la estación?" (Where is the train station?)</div>
+                    <div class="question-text">8. Fill in the blank: "_____ ¿está la estación?" (Where is the train station?)</div>
                     <div class="options-container">
                         <input type="text" name="q8" class="text-input" placeholder="Type the missing word">
                     </div>
