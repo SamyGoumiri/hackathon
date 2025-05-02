@@ -288,6 +288,8 @@ if (isset($_POST['complete_lesson'])) {
                 } else {
                     echo "<p>This lesson will help you learn important French vocabulary and grammar concepts.</p>";
                     echo "<p>The full lesson content will be available soon. Please check back later.</p>";
+                    // Log missing lesson file for admin awareness
+                    error_log("Missing lesson file: " . $lesson_path);
                 }
                 ?>
             </div>
