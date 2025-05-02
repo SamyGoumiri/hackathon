@@ -18,7 +18,7 @@ $user = $result->fetch_assoc();
 
 $course_query = "SELECT c.* FROM courses c
                  JOIN languages l ON c.language_id = l.language_id
-                 WHERE l.code = 'fr' AND c.title = 'French Fundamentals'";
+                 WHERE l.code = 'fr' AND c.title = 'Spanish Fundamentals'";
 $course_result = $conn->query($course_query);
 
 if ($course_result->num_rows == 0) {
@@ -67,7 +67,7 @@ if(isset($_GET['unit'])) {
     
     $log_query = "INSERT INTO user_activity (user_id, activity_type, activity_details) 
                  VALUES (?, 'course_access', ?)";
-    $details = json_encode(['language' => 'french', 'unit' => $unit_id]);
+    $details = json_encode(['language' => 'spanish', 'unit' => $unit_id]);
     $stmt = $conn->prepare($log_query);
     $stmt->bind_param("is", $user_id, $details);
     $stmt->execute();
@@ -81,7 +81,7 @@ if(isset($_GET['unit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
-    <title>Lango - French Courses</title>
+    <title>Lango - Spanish Courses</title>
 
 </head>
 <body>
@@ -116,7 +116,7 @@ if(isset($_GET['unit'])) {
     </header>
 
     <div class="content-container">
-        <h1>French Courses <img src="https://flagcdn.com/w40/fr.png" alt="French Flag" class="flag-icon"></h1>
+        <h1>Spanish Courses <img src="https://flagcdn.com/w40/es.png" alt="Spanish Flag" class="flag-icon"></h1>
         
         <div class="course-list">
             <?php 
@@ -197,8 +197,8 @@ if(isset($_GET['unit'])) {
         </div>
         
         <div class="navigation-buttons">
-            <a href="french.php" class="btn btn-secondary">
-                <i class='bx bx-arrow-back'></i> Back to French
+            <a href="spanish.php" class="btn btn-secondary">
+                <i class='bx bx-arrow-back'></i> Back to Spanish
             </a>
             <a href="exercises.php" class="btn btn-primary">
                 Practice Exercises <i class='bx bx-right-arrow-alt'></i>
