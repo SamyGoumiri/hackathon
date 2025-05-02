@@ -129,7 +129,7 @@
     <li><span class="french-word">Mon train/vol a été retardé/annulé.</span> (mon tran/vol ah ay-tay ruh-tar-day/ah-new-lay) - My train/flight has been delayed/cancelled.</li>
     <li><span class="french-word">J'ai manqué mon train/vol.</span> (zhay mon-kay mon tran/vol) - I missed my train/flight.</li>
     <li><span class="french-word">Quand est le prochain départ?</span> (kon ay luh pro-shan day-par) - When is the next departure?</li>
-    <li><span class="french-word">Puis-je être remboursé?</span> (pwee-zhuh etruh ram-boor-say) - Can I get a refund?</li>
+    <li><span class="french-word">Puis-je être remboursé?</span> (pwee-jhuh etruh ram-boor-say) - Can I get a refund?</li>
 </ul>
 
 <h3>Lost Items and Luggage</h3>
@@ -142,7 +142,7 @@
 
 <h3>Health Issues</h3>
 <ul>
-    <li><span class="french-word">Je ne me sens pas bien.</span> (zhuh nuh muh son pah bee-en) - I don't feel well.</li>
+    <li><span class="french-word">Je ne me sens pas bien.</span> (jhuh nuh muh son pah bee-en) - I don't feel well.</li>
     <li><span class="french-word">J'ai besoin d'un médecin.</span> (zhay buh-zwan dun may-duh-san) - I need a doctor.</li>
     <li><span class="french-word">Où est l'hôpital le plus proche?</span> (oo ay lo-pee-tal luh ploo prosh) - Where is the nearest hospital?</li>
     <li><span class="french-word">J'ai une assurance voyage.</span> (zhay ewn ah-sew-ronss voy-ahj) - I have travel insurance.</li>
@@ -152,7 +152,7 @@
 <ul>
     <li><span class="french-word">Au secours!</span> (oh suh-koor) - Help!</li>
     <li><span class="french-word">C'est une urgence!</span> (say tewn oor-zhonss) - It's an emergency!</li>
-    <li><span class="french-word">Appelez une ambulance/la police!</span> (ah-play ewn om-bew-lonss/lah po-leess) - Call an ambulance/the police!</li>
+    <li><span class="french-word">Appelez une ambulance/la police!</span> (ah-pley ewn om-bew-lonss/lah po-leess) - Call an ambulance/the police!</li>
     <li><span class="french-word">J'ai besoin d'aide.</span> (zhay buh-zwan ded) - I need help.</li>
 </ul>
 

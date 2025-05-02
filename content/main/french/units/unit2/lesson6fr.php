@@ -34,7 +34,7 @@
     </tr>
     <tr>
         <td class="french-word">prendre le petit déjeuner</td>
-        <td class="pronunciation">prahn-druh luh puh-tee day-zhuh-nay</td>
+        <td class="pronunciation">prahn-druh luh puh-tee day-jhuh-nay</td>
         <td>to have breakfast</td>
     </tr>
 </table>
@@ -58,7 +58,7 @@
     </tr>
     <tr>
         <td class="french-word">déjeuner</td>
-        <td class="pronunciation">day-zhuh-nay</td>
+        <td class="pronunciation">day-jhuh-nay</td>
         <td>to have lunch</td>
     </tr>
     <tr>

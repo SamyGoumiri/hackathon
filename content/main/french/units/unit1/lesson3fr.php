@@ -10,7 +10,7 @@
     <tr>
         <td>1</td>
         <td class="french-word">un</td>
-        <td class="pronunciation">uh(n)</td>
+        <td class="pronunciation">uh</td>
     </tr>
     <tr>
         <td>2</td>

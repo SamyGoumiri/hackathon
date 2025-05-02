@@ -64,7 +64,7 @@
     </tr>
     <tr>
         <td class="french-word">le petit-déjeuner</td>
-        <td class="pronunciation">luh puh-tee day-zhuh-nay</td>
+        <td class="pronunciation">luh puh-tee day-jhuh-nay</td>
         <td>breakfast</td>
     </tr>
 </table>
@@ -120,20 +120,20 @@
 
 <h2>Booking a Room</h2>
 <ul>
-    <li><span class="french-word">Je voudrais réserver une chambre.</span> (zhuh voo-dray ray-zair-vay ewn shom-bruh) - I would like to book a room.</li>
+    <li><span class="french-word">Je voudrais réserver une chambre.</span> (jhuh voo-dray ray-zair-vay ewn shom-bruh) - I would like to book a room.</li>
     <li><span class="french-word">Pour combien de nuits?</span> (poor kom-bee-en duh nwee) - For how many nights?</li>
     <li><span class="french-word">Du [date] au [date].</span> (dew [date] oh [date]) - From [date] to [date].</li>
     <li><span class="french-word">Avez-vous une chambre disponible?</span> (ah-vay voo ewn shom-bruh dee-spo-nee-bluh) - Do you have a room available?</li>
     <li><span class="french-word">Quel est le prix par nuit?</span> (kel ay luh pree par nwee) - What's the price per night?</li>
-    <li><span class="french-word">Le petit-déjeuner est-il inclus?</span> (luh puh-tee day-zhuh-nay ay-teel an-kloo) - Is breakfast included?</li>
+    <li><span class="french-word">Le petit-déjeuner est-il inclus?</span> (luh puh-tee day-jhuh-nay ay-teel an-kloo) - Is breakfast included?</li>
 </ul>
 
 <h2>At Check-in/Check-out</h2>
 <ul>
     <li><span class="french-word">J'ai une réservation au nom de...</span> (zhay ewn ray-zair-vah-see-on oh nom duh) - I have a reservation under the name...</li>
     <li><span class="french-word">À quelle heure est le check-out?</span> (ah kel er ay luh check-out) - What time is check-out?</li>
-    <li><span class="french-word">Je voudrais prolonger mon séjour.</span> (zhuh voo-dray pro-lon-zhay mon say-zhoor) - I would like to extend my stay.</li>
-    <li><span class="french-word">Je voudrais la note, s'il vous plaît.</span> (zhuh voo-dray lah not, seel voo play) - I would like the bill, please.</li>
+    <li><span class="french-word">Je voudrais prolonger mon séjour.</span> (jhuh voo-dray pro-lon-zhay mon say-zhoor) - I would like to extend my stay.</li>
+    <li><span class="french-word">Je voudrais la note, s'il vous plaît.</span> (jhuh voo-dray lah not, seel voo pley) - I would like the bill, please.</li>
     <li><span class="french-word">Y a-t-il un coffre-fort dans la chambre?</span> (ee ah-teel un kof-for don lah shom-bruh) - Is there a safe in the room?</li>
     <li><span class="french-word">Comment puis-je accéder au Wi-Fi?</span> (ko-mon pwee-zh ak-say-day oh wee-fee) - How can I access the Wi-Fi?</li>
 </ul>

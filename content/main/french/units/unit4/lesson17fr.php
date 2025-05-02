@@ -108,7 +108,7 @@
     <li><span class="french-word">Excusez-moi, où est...?</span> (ex-kew-zay mwah, oo ay) - Excuse me, where is...?</li>
     <li><span class="french-word">Comment aller à...?</span> (ko-mon ah-lay ah) - How do I get to...?</li>
     <li><span class="french-word">Pourriez-vous m'indiquer le chemin pour...?</span> (poo-ree-ay voo man-dee-kay luh shuh-man poor) - Could you show me the way to...?</li>
-    <li><span class="french-word">Je cherche...</span> (zhuh shersh) - I'm looking for...</li>
+    <li><span class="french-word">Je cherche...</span> (jhuh shersh) - I'm looking for...</li>
     <li><span class="french-word">Est-ce que c'est loin?</span> (ess kuh say lwan) - Is it far?</li>
     <li><span class="french-word">Combien de temps pour y aller à pied?</span> (kom-bee-en duh ton poor ee ah-lay ah pee-ay) - How long does it take to get there on foot?</li>
 </ul>

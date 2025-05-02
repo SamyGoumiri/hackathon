@@ -134,12 +134,12 @@
 
 <h2>Useful Purchase Phrases</h2>
 <ul>
-    <li><span class="french-word">Je voudrais acheter ceci.</span> (zhuh voo-dray ash-tay suh-see) - I would like to buy this.</li>
-    <li><span class="french-word">Je peux payer en espèces/par carte?</span> (zhuh puh pay-ay ahn es-pess/par kart) - Can I pay in cash/by card?</li>
-    <li><span class="french-word">Avez-vous un sac, s'il vous plaît?</span> (ah-vay voo uhn sak, seel voo play) - Do you have a bag, please?</li>
-    <li><span class="french-word">Est-ce que je peux avoir un reçu?</span> (ess-kuh zhuh puh ah-vwar uhn ruh-su) - Can I have a receipt?</li>
-    <li><span class="french-word">Est-ce que je peux échanger cet article?</span> (ess-kuh zhuh puh ay-shahn-zhay set ar-teekl) - Can I exchange this item?</li>
-    <li><span class="french-word">Je voudrais me faire rembourser.</span> (zhuh voo-dray muh fair rahm-boor-say) - I would like a refund.</li>
+    <li><span class="french-word">Je voudrais acheter ceci.</span> (jhuh voo-dray ash-tay suh-see) - I would like to buy this.</li>
+    <li><span class="french-word">Je peux payer en espèces/par carte?</span> (jhuh puh pay-ay ahn es-pess/par kart) - Can I pay in cash/by card?</li>
+    <li><span class="french-word">Avez-vous un sac, s'il vous plaît?</span> (ah-vay voo uhn sak, seel voo pley) - Do you have a bag, please?</li>
+    <li><span class="french-word">Est-ce que je peux avoir un reçu?</span> (ess-kuh jhuh puh ah-vwar uhn ruh-su) - Can I have a receipt?</li>
+    <li><span class="french-word">Est-ce que je peux échanger cet article?</span> (ess-kuh jhuh puh ay-shahn-zhay set ar-teekl) - Can I exchange this item?</li>
+    <li><span class="french-word">Je voudrais me faire rembourser.</span> (jhuh voo-dray muh fair rahm-boor-say) - I would like a refund.</li>
     <li><span class="french-word">C'est défectueux.</span> (say day-fek-too-uh) - It's defective.</li>
     <li><span class="french-word">Y a-t-il une garantie?</span> (ee ah-teel oon ga-rahn-tee) - Is there a warranty?</li>
 </ul>

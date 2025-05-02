@@ -106,7 +106,7 @@
     </tr>
     <tr>
         <td class="french-word">Je ne sais pas</td>
-        <td class="pronunciation">zhuh nuh say pah</td>
+        <td class="pronunciation">jhuh nuh say pah</td>
         <td>I don't know</td>
     </tr>
     <tr>

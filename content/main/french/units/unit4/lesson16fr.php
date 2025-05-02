@@ -95,10 +95,10 @@
 
 <h2>Useful Phrases for Traveling</h2>
 <ul>
-    <li><span class="french-word">Je voudrais un billet pour...</span> (zhuh voo-dray un bee-yay poor) - I would like a ticket to...</li>
+    <li><span class="french-word">Je voudrais un billet pour...</span> (jhuh voo-dray un bee-yay poor) - I would like a ticket to...</li>
     <li><span class="french-word">À quelle heure part le train/bus?</span> (ah kel er par luh tran/boos) - What time does the train/bus leave?</li>
     <li><span class="french-word">Où est la station/l'arrêt de...?</span> (oo ay lah stah-see-on/lah-ray duh) - Where is the station/stop for...?</li>
-    <li><span class="french-word">Je voudrais louer une voiture.</span> (zhuh voo-dray loo-ay oon vwah-toor) - I would like to rent a car.</li>
+    <li><span class="french-word">Je voudrais louer une voiture.</span> (jhuh voo-dray loo-ay oon vwah-toor) - I would like to rent a car.</li>
 </ul>
 
 <div class="example">

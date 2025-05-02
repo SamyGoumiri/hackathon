@@ -98,7 +98,7 @@
     </tr>
     <tr>
         <td class="french-word">Il fait nuageux</td>
-        <td class="pronunciation">eel fay noo-ah-zhuh</td>
+        <td class="pronunciation">eel fay noo-ah-jhuh</td>
         <td>It's cloudy</td>
     </tr>
 </table>

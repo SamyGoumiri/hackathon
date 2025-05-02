@@ -200,8 +200,8 @@
     <li><span class="french-word">C'est cher.</span> (say shair) - It's expensive.</li>
     <li><span class="french-word">C'est bon marché.</span> (say bon mar-shay) - It's inexpensive.</li>
     <li><span class="french-word">C'est en solde.</span> (say tahn sold) - It's on sale.</li>
-    <li><span class="french-word">Je peux payer par carte?</span> (zhuh puh pay-ay par kart) - Can I pay by card?</li>
-    <li><span class="french-word">Je n'ai pas assez d'argent.</span> (zhuh nay paz ah-say dar-zhahn) - I don't have enough money.</li>
+    <li><span class="french-word">Je peux payer par carte?</span> (jhuh puh pay-ay par kart) - Can I pay by card?</li>
+    <li><span class="french-word">Je n'ai pas assez d'argent.</span> (jhuh nay paz ah-say dar-zhahn) - I don't have enough money.</li>
 </ul>
 
 <div class="example">

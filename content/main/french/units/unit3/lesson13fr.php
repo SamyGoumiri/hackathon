@@ -159,13 +159,13 @@
 
 <h2>Useful Shopping Phrases</h2>
 <ul>
-    <li><span class="french-word">Je cherche...</span> (zhuh shersh) - I'm looking for...</li>
+    <li><span class="french-word">Je cherche...</span> (jhuh shersh) - I'm looking for...</li>
     <li><span class="french-word">Avez-vous ce/cette... en taille...</span> (ah-vay voo suh/set... ahn tie...) - Do you have this... in size...</li>
-    <li><span class="french-word">Je peux l'essayer?</span> (zhuh puh less-ay-yay) - Can I try it on?</li>
+    <li><span class="french-word">Je peux l'essayer?</span> (jhuh puh less-ay-yay) - Can I try it on?</li>
     <li><span class="french-word">La cabine d'essayage?</span> (lah kah-been dess-ay-ahzh) - The fitting room?</li>
     <li><span class="french-word">Ça me va bien?</span> (sah muh vah bee-en) - Does it look good on me?</li>
     <li><span class="french-word">C'est trop grand/petit.</span> (say troh grahn/puh-tee) - It's too big/small.</li>
-    <li><span class="french-word">Je vais le/la prendre.</span> (zhuh vay luh/lah prahn-druh) - I'll take it.</li>
+    <li><span class="french-word">Je vais le/la prendre.</span> (jhuh vay luh/lah prahn-druh) - I'll take it.</li>
 </ul>
 
 <div class="example">
