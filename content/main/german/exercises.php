@@ -12,8 +12,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practice - Language Project</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="#">
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
     <div class="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-6">
@@ -89,7 +88,7 @@ if (!isset($_SESSION['user_id'])) {
                     <p class="text-lg font-medium text-gray-700 mb-4">${q.question}</p>
                     <div class="flex justify-center mb-6">
                         <img src="${q.image}" alt="${q.word}" class="w-24 h-24">
-                        <h3>${q.word}</h3>
+                        <h3 >${q.word}</h3>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         ${q.options.map(option => `
