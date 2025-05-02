@@ -1,4 +1,5 @@
 <?php
+<<<<<<< Updated upstream
 session_start();
 require_once "../../../database/connect.php";
 
@@ -9,6 +10,10 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+=======
+    session_start();
+    require_once "../../../database/connect.php";
+>>>>>>> Stashed changes
 
 // Récupère les données JSON envoyées par le client
 $json_data = file_get_contents("php://input");
