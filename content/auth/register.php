@@ -75,12 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($stmt->execute()) {
             $user_id = $conn->insert_id;
-            
-            $_SESSION['user_id'] = $user_id;
-            $_SESSION['username'] = $username;
-            $_SESSION['first_name'] = $first_name;
-            
-            header("Location: ../main/dashboard.php");
+            header("Location: login.php?registered=success&username=" . urlencode($username));
             exit;
         } else {
             $error_message = "Registration failed. Please try again later.";
