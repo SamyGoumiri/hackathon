@@ -20,7 +20,7 @@ require_once '../../../database/connect.php';
             <span id="questionCounter" class="text-sm text-gray-500">Question 1</span>
         </div>
 
-        <a href="german.php" class="flex items-center color :violet; hover:text-violet-600 mb-4">
+        <a href="italian.php" class="flex items-center color :violet; hover:text-violet-600 mb-4">
             <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L4.414 9H18a1 1 0 110 2H4.414l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd" />
             </svg>
