@@ -8,6 +8,17 @@ if(isset($_SESSION['user_id'])) {
 }
 
 $error_message = "";
+$success_message = "";
+$prefill_username = "";
+
+// Check if user just registered successfully
+if(isset($_GET['registered']) && $_GET['registered'] === 'success') {
+    $success_message = "Registration successful! Please login with your new account.";
+    if(isset($_GET['username'])) {
+        $prefill_username = htmlspecialchars($_GET['username']);
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = sanitize_input($conn, $_POST['username']);
     $password = $_POST['password'];
@@ -89,14 +100,14 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="login.css">
-    <title>Welcome to Lango - Learn Languages</title>
+    <title>Welcome to Esperanto - Learn Languages</title>
 </head>
 
 <body>
     <div class="container">
         <div class="logo">
             <a href="../../index.php">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </a>
         </div>
         
@@ -109,8 +120,12 @@ $conn->close();
                     <div class="error-message"><?php echo $error_message; ?></div>
                 <?php endif; ?>
                 
+                <?php if(!empty($success_message)): ?>
+                    <div class="success-message"><?php echo $success_message; ?></div>
+                <?php endif; ?>
+                
                 <div class="input-box">
-                    <input type="text" name="username" placeholder="Email or Username" required>
+                    <input type="text" name="username" placeholder="Email or Username" value="<?php echo $prefill_username; ?>" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 
@@ -118,16 +133,11 @@ $conn->close();
                     <input type="password" name="password" placeholder="Password" required>
                     <i class='bx bxs-lock-alt'></i>
                 </div>
- 
-                <div class="remember-forget">
-                    <label><input type="checkbox" name="remember"> Remember Me</label>
-                    <a href="forgot_password.php">Forgot password?</a>
-                </div>
                 
                 <button class="btn" type="submit">Start Learning</button>
                 
                 <div class="register-link">
-                    <p>New to Lango? <a href="register.php">Join the community</a></p>
+                    <p>New to Esperanto? <a href="register.php">Join the community</a></p>
                 </div>
             </form>
         </div>

@@ -317,18 +317,18 @@ nav ul li a.active::after {
 }
 
 .difficulty.beginner {
-    background-color: #e6f7e6;
-    color: #2e7d32;
+    background-color: #fbe9e7;
+    color: #d84315;  /* Red for 0/5 */
 }
 
 .difficulty.intermediate {
     background-color: #fff8e1;
-    color: #ff8f00;
+    color: #ff8f00;  /* Yellow for 1/5 to 4/5 */
 }
 
 .difficulty.advanced {
-    background-color: #fbe9e7;
-    color: #d84315;
+    background-color: #e6f7e6;
+    color: #2e7d32;  /* Green for 5/5 */
 }
 
 .course-item.locked .course-header {

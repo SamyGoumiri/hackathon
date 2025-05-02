@@ -126,7 +126,7 @@ if (isset($_POST['complete_lesson'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
 
-    <title>Lango - <?php echo htmlspecialchars($lesson['title']); ?></title>
+    <title>Esperanto - <?php echo htmlspecialchars($lesson['title']); ?></title>
     <style>
         .lesson-container {
             background-color: white;
@@ -259,7 +259,7 @@ if (isset($_POST['complete_lesson'])) {
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </div>
             <nav>
                 <ul>

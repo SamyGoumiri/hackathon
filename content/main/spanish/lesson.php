@@ -126,7 +126,7 @@ if (isset($_POST['complete_lesson'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
 
-    <title>Lango - <?php echo htmlspecialchars($lesson['title']); ?></title>
+    <title>Esperanto - <?php echo htmlspecialchars($lesson['title']); ?></title>
     <style>
         .lesson-container {
             background-color: white;
@@ -259,7 +259,7 @@ if (isset($_POST['complete_lesson'])) {
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </div>
             <nav>
                 <ul>
@@ -306,8 +306,6 @@ if (isset($_POST['complete_lesson'])) {
             
             <div class="lesson-content">
                 <?php
-                // Map database unit IDs to directory names for Spanish course
-                // Spanish course has unit IDs 9-12 in database but directories are unit1-unit4
                 $unit_folder = "unit";
                 if ($unit_id == 9) {
                     $unit_folder .= "1";
@@ -318,43 +316,83 @@ if (isset($_POST['complete_lesson'])) {
                 } elseif ($unit_id == 12) {
                     $unit_folder .= "4";
                 } else {
-                    // Fallback to direct ID in case of custom units
                     $unit_folder .= intval($unit_id);
                 }
                 
                 $lesson_number = intval($lesson['order_index']);
                 
-                // Adjust lesson number to match file naming pattern
-                // Units 9-12 correspond to lessons 41-60 in database
-                if ($unit_id == 9) {
-                    $lesson_number = $lesson_number - 0; // First unit, no adjustment needed
-                } elseif ($unit_id == 10) {
-                    $lesson_number = $lesson_number + 0; // Match patterns in filenames
-                } elseif ($unit_id == 11) {
-                    $lesson_number = $lesson_number + 0;
-                } elseif ($unit_id == 12) {
-                    $lesson_number = $lesson_number + 0;
-                }
-                
-                // Try multiple possible filename patterns
                 $possible_files = [
-                    __DIR__ . "/units/" . $unit_folder . "/lesson" . $lesson_number . "sp.php", // with sp suffix
-                    __DIR__ . "/units/" . $unit_folder . "/lesson" . $lesson_number . ".php",    // without sp suffix
+                    __DIR__ . "/units/" . $unit_folder . "/lesson" . $lesson_number . "sp.php",
+                    __DIR__ . "/units/" . $unit_folder . "/lesson" . $lesson_number . ".php",
+                    __DIR__ . "/units/" . $unit_folder . "/lesson" . $lesson['lesson_id'] . "sp.php",
+                    __DIR__ . "/units/" . $unit_folder . "/lesson" . $lesson['lesson_id'] . ".php",
+                    __DIR__ . "/units/" . $unit_folder . "/lesson" . sprintf("%02d", $lesson_number) . "sp.php",
+                    __DIR__ . "/units/" . $unit_folder . "/lesson" . sprintf("%02d", $lesson_number) . ".php",
                 ];
+                
+                for ($i = 1; $i <= 20; $i++) {
+                    $possible_files[] = __DIR__ . "/units/" . $unit_folder . "/lesson" . $i . "sp.php";
+                }
+
+                error_log("Looking for lesson files with unit_id: " . $unit_id . ", unit_folder: " . $unit_folder . ", lesson_number: " . $lesson_number);
+                error_log("Lesson ID from database: " . $lesson['lesson_id']);
                 
                 $found_file = false;
                 foreach ($possible_files as $file_path) {
                     if (file_exists($file_path)) {
                         include($file_path);
                         $found_file = true;
+                        error_log("Found and included file: " . $file_path);
                         break;
+                    }
+                }
+                
+                if (!$found_file) {
+                    $unit_dir = __DIR__ . "/units/" . $unit_folder . "/";
+                    if (is_dir($unit_dir)) {
+                        $files = scandir($unit_dir);
+                        $lesson_files = [];
+                        
+                        foreach ($files as $file) {
+                            if (preg_match('/lesson\d+sp\.php$/', $file)) {
+                                $lesson_files[] = $file;
+                                error_log("Found lesson file in directory: " . $file);
+                            }
+                        }
+                        
+                        sort($lesson_files);
+                        error_log("Available lesson files: " . implode(", ", $lesson_files));
+                        
+                        foreach ($lesson_files as $file) {
+                            $file_path = $unit_dir . $file;
+                            include($file_path);
+                            $found_file = true;
+                            error_log("Included lesson file as fallback: " . $file_path);
+                            break;
+                        }
                     }
                 }
                 
                 if (!$found_file) {
                     echo "<p>This lesson will help you learn important Spanish vocabulary and grammar concepts.</p>";
                     echo "<p>The full lesson content will be available soon. Please check back later.</p>";
-                    error_log("Missing lesson file. Tried: " . implode(", ", $possible_files));
+                    echo "<p>Debug info: Looking for lesson in " . $unit_folder . ", lesson number " . $lesson_number . "</p>";
+                    
+                    echo "<p class='mt-4 text-gray-500 text-sm'>Technical information:<br>";
+                    echo "Unit ID: " . $unit_id . "<br>";
+                    echo "Unit folder: " . $unit_folder . "<br>";
+                    echo "Lesson ID: " . $lesson['lesson_id'] . "<br>";
+                    echo "Order index: " . $lesson['order_index'] . "</p>";
+                    
+                    echo "<details class='mt-2'>";
+                    echo "<summary class='text-sm text-gray-500 cursor-pointer'>Show checked file paths</summary>";
+                    echo "<div class='mt-2 text-xs text-gray-500 overflow-auto max-h-40 p-2 bg-gray-100 rounded'>";
+                    foreach ($possible_files as $file) {
+                        echo htmlspecialchars($file) . "<br>";
+                    }
+                    echo "</div></details>";
+                    
+                    error_log("Missing lesson file. Tried all possible files but none found.");
                 }
                 ?>
             </div>

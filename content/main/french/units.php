@@ -94,14 +94,14 @@ if(isset($_GET['unit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
-    <title>Lango - French Courses</title>
+    <title>Esperanto - French Courses</title>
 
 </head>
 <body>
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </div>
             <nav>
                 <ul>
@@ -157,18 +157,22 @@ if(isset($_GET['unit'])) {
                     $lessons_data = $lessons_result->fetch_assoc();
                     $lesson_count = $lessons_data['lesson_count'];
                     
-                    if ($unit_count <= 2) {
-                        $difficulty = "beginner";
-                        $difficulty_text = "Beginner";
+                    $completed = isset($unit_progress[$unit['unit_id']]) ? $unit_progress[$unit['unit_id']]['completed'] : 0;
+                    $total = isset($unit_progress[$unit['unit_id']]) ? $unit_progress[$unit['unit_id']]['total'] : $lesson_count;
+                    
+                    // Determine class based on completion level with new color scheme
+                    if ($completed == 0) {
+                        $progress_class = "beginner"; // Red for not started (0/5)
+                    } else if ($completed < $total) {
+                        $progress_class = "intermediate"; // Yellow for in progress (1/5 to 4/5)
                     } else {
-                        $difficulty = "intermediate";
-                        $difficulty_text = "Intermediate";
+                        $progress_class = "advanced"; // Green for completed (5/5)
                     }
             ?>
             <div class="course-item">
                 <div class="course-header">
                     <h2><?php echo htmlspecialchars($unit['title']); ?></h2>
-                    <span class="difficulty <?php echo $difficulty; ?>"><?php echo $difficulty_text; ?></span>
+                    <span class="difficulty <?php echo $progress_class; ?>"><?php echo $completed . "/" . $total; ?></span>
                 </div>
                 <div class="course-content">
                     <p><?php echo htmlspecialchars($unit['description']); ?></p>
@@ -180,11 +184,39 @@ if(isset($_GET['unit'])) {
                     $stmt->execute();
                     $topics_result = $stmt->get_result();
                     
+                    // Note: French course lessons are already in English in the database,
+                    // but adding translations for consistency in case they get changed later
+                    $translations = [
+                        "Greetings and Introductions" => "Greetings and Introductions",
+                        "Basic Pronunciation" => "Basic Pronunciation",
+                        "Numbers 1-20" => "Numbers 1-20",
+                        "Simple Questions" => "Simple Questions",
+                        "Common Phrases" => "Common Phrases",
+                        "Daily Routines" => "Daily Routines",
+                        "Present Tense Verbs" => "Present Tense Verbs",
+                        "Telling Time" => "Telling Time",
+                        "Days and Months" => "Days and Months",
+                        "Weather Expressions" => "Weather Expressions",
+                        "At the Supermarket" => "At the Supermarket",
+                        "At the Restaurant" => "At the Restaurant",
+                        "Shopping for Clothes" => "Shopping for Clothes",
+                        "Money and Numbers" => "Money and Numbers",
+                        "Making Purchases" => "Making Purchases",
+                        "Transportation Vocabulary" => "Transportation Vocabulary",
+                        "Asking for Directions" => "Asking for Directions",
+                        "Hotel Reservations" => "Hotel Reservations",
+                        "Tourist Attractions" => "Tourist Attractions",
+                        "Travel Problems" => "Travel Problems"
+                    ];
+                    
                     if ($topics_result->num_rows > 0) {
                     ?>
                     <ul class="course-topics">
-                        <?php while ($topic = $topics_result->fetch_assoc()) { ?>
-                        <li><i class='bx bx-check-circle'></i> <?php echo htmlspecialchars($topic['title']); ?></li>
+                        <?php while ($topic = $topics_result->fetch_assoc()) { 
+                            // Display English translation if available, otherwise display original
+                            $displayTitle = isset($translations[$topic['title']]) ? $translations[$topic['title']] : $topic['title'];
+                        ?>
+                        <li><i class='bx bx-check-circle'></i> <?php echo htmlspecialchars($displayTitle); ?></li>
                         <?php } ?>
                     </ul>
                     <?php } ?>

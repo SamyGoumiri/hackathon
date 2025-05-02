@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `lango`
+-- Base de données : `Esperanto`
 --
 
 -- --------------------------------------------------------
@@ -241,7 +241,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `email`, `password`, `profile_image`, `registration_date`, `last_login`, `remember_token`, `is_active`) VALUES
-(1, 'admin', 'Aziz', 'Boula', 'admin@lango.com', '$2y$10$Cerx0cFH8GZ7rDr1zEajhe3J/t9w4bqYZWtb4rEdscG/oOfK7Jb.S', 'default.png', '2025-05-02 14:48:13', '2025-05-02 14:55:19', NULL, 1);
+(1, 'admin', 'Aziz', 'Boula', 'admin@esperanto.com', '$2y$10$Cerx0cFH8GZ7rDr1zEajhe3J/t9w4bqYZWtb4rEdscG/oOfK7Jb.S', 'default.png', '2025-05-02 14:48:13', '2025-05-02 14:55:19', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -346,7 +346,12 @@ INSERT INTO `user_activity` (`activity_id`, `user_id`, `activity_type`, `activit
 (82, 1, 'start_language', '{\"language_id\":5,\"language_code\":\"it\"}', '2025-05-02 17:50:45'),
 (83, 1, 'language_page_access', '{\"language\":\"italian\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:50:45'),
 (84, 1, 'language_page_access', '{\"language\":\"italian\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:50:52'),
-(85, 1, 'language_page_access', '{\"language\":\"french\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:56:02');
+(85, 1, 'language_page_access', '{\"language\":\"french\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:56:02'),
+(86, 1, 'lesson_access', '{\"lesson_id\":1,\"lesson_title\":\"Greetings and Introductions\",\"unit_id\":1}', '2025-04-28 10:15:22'),
+(87, 1, 'lesson_access', '{\"lesson_id\":2,\"lesson_title\":\"Basic Pronunciation\",\"unit_id\":1}', '2025-04-29 11:30:45'),
+(88, 1, 'lesson_access', '{\"lesson_id\":3,\"lesson_title\":\"Numbers 1-20\",\"unit_id\":1}', '2025-04-30 09:22:18'),
+(89, 1, 'lesson_access', '{\"lesson_id\":4,\"lesson_title\":\"Simple Questions\",\"unit_id\":1}', '2025-05-01 14:45:30'),
+(90, 1, 'lesson_access', '{\"lesson_id\":5,\"lesson_title\":\"Common Phrases\",\"unit_id\":1}', '2025-05-02 16:20:15');
 
 -- --------------------------------------------------------
 
@@ -408,12 +413,27 @@ CREATE TABLE `user_progress` (
 -- Déchargement des données de la table `user_progress`
 --
 
-INSERT INTO `user_progress` (`progress_id`, `user_id`, `lesson_id`, `status`, `completion_date`, `score`, `last_activity`) VALUES
-(1, 1, 41, 'completed', '2025-05-02 16:07:09', NULL, '2025-05-02 16:07:09'),
-(2, 1, 42, 'completed', '2025-05-02 16:09:00', NULL, '2025-05-02 16:09:00'),
-(3, 1, 43, 'completed', '2025-05-02 16:09:08', NULL, '2025-05-02 16:09:08'),
-(4, 1, 44, 'completed', '2025-05-02 16:09:15', NULL, '2025-05-02 16:09:15'),
-(5, 1, 45, 'completed', '2025-05-02 16:09:18', NULL, '2025-05-02 16:09:18');
+INSERT INTO `user_progress` (`progress_id`, `user_id`, `lesson_id`, `status`, `completion_date`, `score`, `last_activity`, `attempts`) VALUES
+(1, 1, 41, 'completed', '2025-05-02 16:07:09', NULL, '2025-05-02 16:07:09', 1),
+(2, 1, 42, 'completed', '2025-05-02 16:09:00', NULL, '2025-05-02 16:09:00', 1),
+(3, 1, 43, 'completed', '2025-05-02 16:09:08', NULL, '2025-05-02 16:09:08', 1),
+(4, 1, 44, 'completed', '2025-05-02 16:09:15', NULL, '2025-05-02 16:09:15', 1),
+(5, 1, 45, 'completed', '2025-05-02 16:09:18', NULL, '2025-05-02 16:09:18', 1),
+(6, 1, 1, 'completed', '2025-04-28 10:35:22', 95, '2025-04-28 10:35:22', 1),
+(7, 1, 2, 'completed', '2025-04-29 11:50:45', 88, '2025-04-29 11:50:45', 1),
+(8, 1, 3, 'completed', '2025-04-30 09:40:18', 92, '2025-04-30 09:40:18', 2),
+(9, 1, 4, 'completed', '2025-05-01 15:05:30', 85, '2025-05-01 15:05:30', 1),
+(10, 1, 5, 'completed', '2025-05-02 16:40:15', 90, '2025-05-02 16:40:15', 1),
+(11, 1, 61, 'completed', '2025-05-02 14:56:30', 88, '2025-05-02 14:56:30', 1),
+(12, 1, 62, 'completed', '2025-05-02 15:10:45', 92, '2025-05-02 15:10:45', 1),
+(13, 1, 63, 'completed', '2025-05-02 15:25:18', 85, '2025-05-02 15:25:18', 1),
+(14, 1, 64, 'completed', '2025-05-02 15:40:30', 90, '2025-05-02 15:40:30', 2),
+(15, 1, 65, 'completed', '2025-05-02 15:55:15', 95, '2025-05-02 15:55:15', 1),
+(16, 1, 21, 'completed', '2025-05-02 17:50:55', 80, '2025-05-02 17:50:55', 1),
+(17, 1, 22, 'completed', '2025-05-02 17:55:45', 85, '2025-05-02 17:55:45', 2),
+(18, 1, 23, 'completed', '2025-05-02 18:10:18', 90, '2025-05-02 18:10:18', 1),
+(19, 1, 24, 'completed', '2025-05-02 18:25:30', 95, '2025-05-02 18:25:30', 1),
+(20, 1, 25, 'completed', '2025-05-02 18:40:15', 88, '2025-05-02 18:40:15', 1);
 
 -- --------------------------------------------------------
 
@@ -454,6 +474,14 @@ CREATE TABLE `test_results` (
   `passed` tinyint(1) NOT NULL DEFAULT 0,
   `completion_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `test_results`
+--
+
+INSERT INTO `test_results` (`result_id`, `user_id`, `test_id`, `score`, `passed`, `completion_date`) VALUES
+(1, 1, 1, 85, 1, '2025-05-02 16:00:00'),
+(2, 1, 2, 78, 1, '2025-05-02 17:30:00');
 
 -- --------------------------------------------------------
 
@@ -580,7 +608,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `activity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `activity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT pour la table `user_languages`
@@ -598,7 +626,7 @@ ALTER TABLE `user_preferences`
 -- AUTO_INCREMENT pour la table `user_progress`
 --
 ALTER TABLE `user_progress`
-  MODIFY `progress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `progress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `unit_tests`

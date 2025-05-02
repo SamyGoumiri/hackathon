@@ -250,3 +250,15 @@ body {
     text-align: center;
     font-weight: 500;
 }
+
+.success-message {
+    background-color: #f0fff0;
+    color: #28a745;
+    padding: 12px;
+    border-radius: 12px;
+    border-left: 4px solid #28a745;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+}
