@@ -1,48 +1,48 @@
-<p>Welcome to your first French lesson! In this lesson, you will learn basic greetings and how to introduce yourself in French.</p>
+<p>Welcome to your first Spanish lesson! In this lesson, you will learn basic greetings and how to introduce yourself in Spanish.</p>
 
 <h2>Basic Greetings</h2>
-<p>Here are some essential French greetings you'll use in everyday conversations:</p>
+<p>Here are some essential Spanish greetings you'll use in everyday conversations:</p>
 
 <table class="vocabulary-table">
     <tr>
-        <th>French</th>
+        <th>Spanish</th>
         <th>Pronunciation</th>
         <th>English</th>
     </tr>
     <tr>
-        <td class="french-word">Bonjour</td>
-        <td class="pronunciation">bon-zhoor</td>
-        <td>Hello / Good day</td>
+        <td class="spanish-word">Buenos días</td>
+        <td class="pronunciation">bwenos dias</td>
+        <td>Hello</td>
     </tr>
     <tr>
-        <td class="french-word">Salut</td>
-        <td class="pronunciation">sa-lü</td>
+        <td class="spanish-word">Halo</td>
+        <td class="pronunciation">Halo</td>
         <td>Hi (informal)</td>
     </tr>
     <tr>
-        <td class="french-word">Bonsoir</td>
-        <td class="pronunciation">bon-swahr</td>
+        <td class="spanish-word">Buenas noches</td>
+        <td class="pronunciation">bwenas notch</td>
         <td>Good evening</td>
     </tr>
     <tr>
-        <td class="french-word">Au revoir</td>
+        <td class="spanish-word">Au revoir</td>
         <td class="pronunciation">oh-reh-vwahr</td>
         <td>Goodbye</td>
     </tr>
     <tr>
-        <td class="french-word">À bientôt</td>
+        <td class="spanish-word">À bientôt</td>
         <td class="pronunciation">ah bee-yen-toh</td>
         <td>See you soon</td>
     </tr>
 </table>
 
 <h2>Introducing Yourself</h2>
-<p>To introduce yourself in French, you can use these phrases:</p>
+<p>To introduce yourself in Spanish, you can use these phrases:</p>
 
 <ul>
-    <li><span class="french-word">Je m'appelle...</span> (zhuh mah-pehl) - My name is...</li>
-    <li><span class="french-word">Je suis...</span> (zhuh swee) - I am...</li>
-    <li><span class="french-word">Enchanté(e)</span> (ahn-shahn-tay) - Nice to meet you</li>
+    <li><span class="spanish-word">Je m'appelle...</span> (zhuh mah-pehl) - My name is...</li>
+    <li><span class="spanish-word">Je suis...</span> (zhuh swee) - I am...</li>
+    <li><span class="spanish-word">Enchanté(e)</span> (ahn-shahn-tay) - Nice to meet you</li>
 </ul>
 
 <div class="example">
@@ -55,7 +55,7 @@
 </div>
 
 <h2>Practice</h2>
-<p>Try introducing yourself in French. Complete these phrases:</p>
+<p>Try introducing yourself in Spanish. Complete these phrases:</p>
 <ul>
     <li>Bonjour! Je m'appelle _______.</li>
     <li>Je suis _______. (add your nationality or profession)</li>

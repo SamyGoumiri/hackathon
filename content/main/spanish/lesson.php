@@ -307,21 +307,21 @@ if (isset($_POST['complete_lesson'])) {
             <div class="lesson-content">
                 <?php
                 $unit_folder = "unit" . intval($unit_id);
-                $lesson_file = "lesson" . intval($lesson['order_index']) . ".php";
+                $lesson_file = "lesson" . intval($lesson['order_index']) . "sp.php";
                 $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 
                 if ($unit_id == 2) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . ".php";
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . "sp.php";
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 
                 if ($unit_id == 3) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . ".php";
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . "sp.php";
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 
                 if ($unit_id == 4) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . ".php";
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . "sp.php";
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 
