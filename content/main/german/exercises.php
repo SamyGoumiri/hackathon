@@ -12,55 +12,100 @@
     
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
-    <img width="50" height="50" src="https://img.icons8.com/fluency/100/goal--v1.png" alt="goal--v1"/>
       <h2 class="text-2xl font-bold text-gray-800">Practice</h2>
-      <span class="text-sm text-gray-500">Question 1 of 10</span>
+      <span id="questionCounter" class="text-sm text-gray-500">Question 1</span>
     </div>
 
-    <!-- Question Prompt -->
-    <div class="mb-4">
-      <p class="text-lg font-medium text-gray-700">What does this word mean in German?</p>
-    </div>
+    <a href="../index.html" class="back-button">
+  <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+    <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L4.414 9H18a1 1 0 110 2H4.414l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+  </svg>
+  <span>Back</span>
+</a>
 
-    <!-- Image/Icon -->
-    <div class="flex justify-center mb-6">
-      <img src="https://cdn-icons-png.flaticon.com/512/167/167707.png" alt="Train icon" class="w-24 h-24">
-    </div>
 
-    <!-- Options -->
-    <div class="grid grid-cols-1 gap-4">
-      <button class="bg-white border border-gray-300 rounded-xl p-4 text-left hover:bg-blue-100 transition duration-200">
-        🚗 Auto
-      </button>
-      <button class="bg-white border border-gray-300 rounded-xl p-4 text-left hover:bg-blue-100 transition duration-200">
-        🚉 Zug
-      </button>
-      <button class="bg-white border border-gray-300 rounded-xl p-4 text-left hover:bg-blue-100 transition duration-200">
-        ✈️ Flugzeug
-      </button>
-      <button class="bg-white border border-gray-300 rounded-xl p-4 text-left hover:bg-blue-100 transition duration-200">
-        🚲 Fahrrad
-      </button>
-    </div>
+
+    <!-- Question Area -->
+    <div id="questionArea" class="mb-6"></div>
 
     <!-- Footer -->
     <div class="mt-6 flex justify-end">
-      <button class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-full hover:bg-blue-700 transition">Next</button>
+      <button onclick="loadRandomQuestion()" class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-full hover:bg-blue-700 transition">Next</button>
     </div>
-
-    <!-- Divider -->
-    <hr class="my-8">
-
-    <!-- Another Type: Fill in the blank -->
-    <div class="mb-4">
-      <p class="text-lg font-medium text-gray-700">Fill in the blank: <span class="font-bold">Ich ___ müde.</span></p>
-    </div>
-    <input type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your answer here...">
-    
-    <div class="mt-6 flex justify-end">
-      <button class="bg-green-600 text-white font-semibold px-6 py-2 rounded-full hover:bg-green-700 transition">Check</button>
-    </div>
-    
   </div>
+
+  <script>
+    let currentQuestion = 1;
+
+    const vocabQuestions = [
+      {
+        question: "What does this word mean in German?",
+        word: "Train",
+        image: "https://cdn-icons-png.flaticon.com/512/167/167707.png",
+        options: ["Auto", "Zug", "Flugzeug", "Fahrrad"],
+        answer: "Zug"
+      },
+      {
+        question: "What does this word mean in German?",
+        word: "Passport",
+        image: "https://cdn-icons-png.flaticon.com/512/1828/1828911.png",
+        options: ["Führerschein", "Pass", "Ticket", "Karte"],
+        answer: "Pass"
+      }
+    ];
+
+    const fillQuestions = [
+      {
+        question: "Fill in the blank: Ich ___ müde.",
+        answer: "bin"
+      },
+      {
+        question: "Fill in the blank: Er ___ nach Hause.",
+        answer: "geht"
+      }
+    ];
+
+    function loadRandomQuestion() {
+      const questionArea = document.getElementById("questionArea");
+      const counter = document.getElementById("questionCounter");
+      counter.textContent = `Question ${currentQuestion++}`;
+
+      const isVocab = Math.random() > 0.5;
+
+      if (isVocab) {
+        const q = vocabQuestions[Math.floor(Math.random() * vocabQuestions.length)];
+
+        questionArea.innerHTML = `
+          <div class="mb-4">
+            <p class="text-lg font-medium text-gray-700">${q.question}</p>
+          </div>
+          <div class="flex justify-center mb-6">
+            <img src="${q.image}" alt="${q.word}" class="w-24 h-24">
+          </div>
+          <div class="grid grid-cols-1 gap-4">
+            ${q.options.map(option => `
+              <button class="bg-white border border-gray-300 rounded-xl p-4 text-left hover:bg-blue-100 transition duration-200">${option}</button>
+            `).join("")}
+          </div>
+        `;
+      } else {
+        const q = fillQuestions[Math.floor(Math.random() * fillQuestions.length)];
+
+        questionArea.innerHTML = `
+          <div class="mb-4">
+            <p class="text-lg font-medium text-gray-700">${q.question}</p>
+          </div>
+          <input type="text" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your answer here...">
+          <div class="mt-6 flex justify-end">
+            <button class="bg-green-600 text-white font-semibold px-6 py-2 rounded-full hover:bg-green-700 transition">Check</button>
+          </div>
+        `;
+      }
+    }
+
+
+
+    window.onload = loadRandomQuestion;
+  </script>
 </body>
 </html>
