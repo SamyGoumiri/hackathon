@@ -12,12 +12,15 @@
 </head>
 
 <body>
-    <h1 id = "welcome">Welcome</h1>
+    <div class="header">
+        <h1 id="welcome">Welcome</h1>
+        <a href="../auth/logout.php" class="disconnect-btn">Disconnect</a>
+    </div>
     
     <script>
-        const userName = "";//User Name
-        document.getElementById("welcome").textContent = `Welcome "${userName}"`;
-        document.title = `Welcome "${userName}"`;
+        const userName = "<?php echo isset($_SESSION['first_name']) ? $_SESSION['first_name'] : ''; ?>";//User Name
+        document.getElementById("welcome").textContent = userName ? `Welcome "${userName}"` : 'Welcome';
+        document.title = userName ? `Welcome "${userName}"` : 'Welcome';
     </script>
 
     <div class="container">

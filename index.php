@@ -28,6 +28,7 @@ $is_logged_in = isset($_SESSION['user_id']);
             <div class="auth-buttons">
                 <?php if($is_logged_in): ?>
                     <a href="content/main/dashboard.php" class="btn btn-primary">My Dashboard</a>
+                    <a href="content/auth/logout.php" class="btn btn-secondary">Disconnect</a>
                 <?php else: ?>
                     <a href="content/auth/login.php" class="btn btn-secondary">Log In</a>
                 <?php endif; ?>

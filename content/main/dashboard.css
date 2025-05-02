@@ -43,3 +43,29 @@ body {
     transform: scale(1.1);
     background: #444;
   }
+  
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .disconnect-btn {
+    background: #FF5757;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .disconnect-btn:hover {
+    background: #FF3838;
+  }
