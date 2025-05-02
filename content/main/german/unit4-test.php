@@ -120,7 +120,7 @@ if (isset($_POST['q10']) && $_POST['q10'] === 'verspätung') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="french.css">
+    <link rel="stylesheet" href="german.css">
     <title>Lango - Unit 4 Test: Die Reisen</title>
     <style>
         .test-container {
@@ -380,7 +380,7 @@ if (isset($_POST['q10']) && $_POST['q10'] === 'verspätung') {
     <div class="question-container">
         <div class="question-text">6. How do you say "I am lost" in German?</div>
         <div class="options-container">
-            <input type="text" name="q6" class="text-input" placeholder="Type your answer in French">
+            <input type="text" name="q6" class="text-input" placeholder="Type your answer in German">
         </div>
     </div>
 
@@ -411,7 +411,7 @@ if (isset($_POST['q10']) && $_POST['q10'] === 'verspätung') {
     <div class="question-container">
         <div class="question-text">8. How do you ask "What is the price?" in German?</div>
         <div class="options-container">
-            <input type="text" name="q8" class="text-input" placeholder="Type your answer in French">
+            <input type="text" name="q8" class="text-input" placeholder="Type your answer in German">
         </div>
     </div>
 

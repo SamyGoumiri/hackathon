@@ -211,7 +211,7 @@ if (isset($_POST['complete_lesson'])) {
             border-bottom: none;
         }
         
-        .french-word {
+        .German-word {
             color: #7F57F1;
             font-weight: 600;
         }
@@ -328,7 +328,8 @@ if (isset($_POST['complete_lesson'])) {
                 if (file_exists($lesson_path)) {
                     include($lesson_path);
                 } else {
-                    echo "<p>This lesson will help you learn important French vocabulary and grammar concepts.</p>";
+
+                    echo "<p>This lesson will help you learn important German vocabulary and grammar concepts.</p>";
                     echo "<p>The full lesson content will be available soon. Please check back later.</p>";
                     error_log("Missing lesson file: " . $lesson_path);
                 }
