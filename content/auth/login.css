@@ -31,6 +31,13 @@ body {
     margin-bottom: 24px;
 }
 
+.logo a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
 .logo img {
     width: 60px;
     height: 60px;
