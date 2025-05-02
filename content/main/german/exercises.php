@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Practice - Language Project</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+
   <link rel="stylesheet" href="../style-exo.css">
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
@@ -167,3 +167,4 @@
   </script>
 </body>
 </html>
+
