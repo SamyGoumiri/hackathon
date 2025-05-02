@@ -1,11 +1,7 @@
 
 <?php
     // Assuming you have a database connection established
-    $servername = "your_servername";
-    $username = "your_username";
-    $password = "your_password";
-    $dbname = "your_dbname";
-
+    
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
