@@ -1,11 +1,13 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="deutsch.css">
     <title>Website name</title>
+
 </head>
 <body>
     <h1>Choose which u want to start with</h1>
@@ -24,6 +26,7 @@
         <img src="#" alt="img">
         <a href="exercice.php">Start exercice</a>
     </div>
+
 
 </div>
 
