@@ -272,9 +272,6 @@ if (isset($_POST['complete_lesson'])) {
         <div class="lesson-container">
             <div class="lesson-header">
                 <h1><?php echo htmlspecialchars($lesson['title']); ?></h1>
-                <div class="est-time">
-                    <i class='bx bx-time'></i> <?php echo $lesson['estimated_time']; ?> min
-                </div>
             </div>
             
             <div class="lesson-content">
