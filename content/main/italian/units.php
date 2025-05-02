@@ -55,10 +55,7 @@ while ($row = $progress_result->fetch_assoc()) {
     ];
 }
 
-// Modified: All units are unlocked now
-$unlocked_units = array(); // We'll fill this with all unit IDs
-
-// Get all unit IDs to unlock them
+$unlocked_units = array();
 $all_units_query = "SELECT unit_id FROM units WHERE course_id = ?";
 $stmt = $conn->prepare($all_units_query);
 $stmt->bind_param("i", $course_id);
@@ -139,7 +136,6 @@ if(isset($_GET['unit'])) {
             
             if ($units_result->num_rows > 0) {
                 while($unit = $units_result->fetch_assoc()) {
-                    // All units are unlocked now
                     $is_locked = false;
                     
                     $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
