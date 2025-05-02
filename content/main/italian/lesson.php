@@ -310,19 +310,24 @@ if (isset($_POST['complete_lesson'])) {
                 $lesson_file = "lesson" . intval($lesson['order_index']) . "it.php";
                 $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 
-                if ($unit_id == 6) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . "it.php";
-                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
-                
-                if ($unit_id == 7) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . "it.php";
-                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
-                
-                if ($unit_id == 8) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . "it.php";
-                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
+                if (!file_exists($lesson_path)) {
+                    if ($unit_id == 5) {
+                        $lesson_index = intval($lesson['order_index']);
+                        $lesson_file = "lesson" . $lesson_index . "it.php";
+                        $lesson_path = __DIR__ . "/units/unit1/" . $lesson_file;
+                    } elseif ($unit_id == 6) {
+                        $lesson_index = intval($lesson['order_index']) + 5;
+                        $lesson_file = "lesson" . $lesson_index . "it.php";
+                        $lesson_path = __DIR__ . "/units/unit2/" . $lesson_file;
+                    } elseif ($unit_id == 7) {
+                        $lesson_index = intval($lesson['order_index']) + 10;
+                        $lesson_file = "lesson" . $lesson_index . "it.php";
+                        $lesson_path = __DIR__ . "/units/unit3/" . $lesson_file;
+                    } elseif ($unit_id == 8) {
+                        $lesson_index = intval($lesson['order_index']) + 15;
+                        $lesson_file = "lesson" . $lesson_index . "it.php";
+                        $lesson_path = __DIR__ . "/units/unit4/" . $lesson_file;
+                    }
                 }
                 
                 if (file_exists($lesson_path)) {

@@ -12,7 +12,7 @@
     <tr>
         <td class="french-word">Bonjour</td>
         <td class="pronunciation">bon-jhoor</td>
-        <td>Hello / Good day</td>
+        <td>Hello</td>
     </tr>
     <tr>
         <td class="french-word">Salut</td>
