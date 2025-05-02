@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 02 mai 2025 à 15:48
+-- Généré le : ven. 02 mai 2025 à 19:02
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -46,7 +46,8 @@ INSERT INTO `courses` (`course_id`, `language_id`, `title`, `description`, `diff
 (1, 3, 'French Fundamentals', 'Master the basics of French language with this comprehensive beginner course.', 'beginner', 'french_basic.jpg', 1, '2025-05-02 13:47:07'),
 (2, 3, 'Intermediate French', 'Take your French skills to the next level with more advanced concepts and vocabulary.', 'intermediate', 'french_intermediate.jpg', 1, '2025-05-02 13:47:07'),
 (3, 2, 'Spanish for Beginners', 'Learn essential Spanish vocabulary and grammar for everyday conversations.', 'beginner', 'spanish_basic.jpg', 1, '2025-05-02 13:47:07'),
-(4, 5, 'Italian Fundamentals', 'Master the basics of Italian language with this comprehensive beginner course.', 'beginner', 'italian_basic.jpg', 1, '2025-05-02 13:47:07');
+(4, 5, 'Italian Fundamentals', 'Master the basics of Italian language with this comprehensive beginner course.', 'beginner', 'italian_basic.jpg', 1, '2025-05-02 13:47:07'),
+(5, 4, 'German Fundamentals', 'Master the basics of German language with this comprehensive beginner course.', 'beginner', 'german_basic.jpg', 1, '2025-05-02 13:47:07');
 
 -- --------------------------------------------------------
 
@@ -156,7 +157,27 @@ INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`
 (57, 12, 'Pidiendo Direcciones', 'How to ask for and understand directions in Spanish.', 2, 20, 1),
 (58, 12, 'Reservaciones de Hotel', 'Vocabulary and phrases for booking and staying at hotels.', 3, 20, 1),
 (59, 12, 'Atracciones Turísticas', 'Discussing sightseeing and cultural attractions in Spanish.', 4, 25, 1),
-(60, 12, 'Problemas de Viaje', 'How to handle common issues that may arise when traveling.', 5, 20, 1);
+(60, 12, 'Problemas de Viaje', 'How to handle common issues that may arise when traveling.', 5, 20, 1),
+(61, 13, 'Begrüßungen und Vorstellungen', 'Learn how to say hello and introduce yourself in German.', 1, 15, 1),
+(62, 13, 'Grundlegende Aussprache', 'Master the essential sounds of German language.', 2, 20, 1),
+(63, 13, 'Zahlen 1-20', 'Learn how to count from 1 to 20 in German.', 3, 15, 1),
+(64, 13, 'Einfache Fragen', 'Learn how to ask and answer basic questions in German.', 4, 20, 1),
+(65, 13, 'Häufige Ausdrücke', 'Essential phrases to help you in everyday situations.', 5, 15, 1),
+(66, 14, 'Tägliche Routinen', 'Vocabulary for describing your daily activities.', 1, 20, 1),
+(67, 14, 'Verben im Präsens', 'Learn how to conjugate common verbs in present tense.', 2, 25, 1),
+(68, 14, 'Die Uhrzeit', 'Learn how to tell and ask for time in German.', 3, 15, 1),
+(69, 14, 'Wochentage und Monate', 'Learn the days of the week and months of the year.', 4, 15, 1),
+(70, 14, 'Wetterausdrücke', 'Describe different weather conditions in German.', 5, 15, 1),
+(71, 15, 'Im Supermarkt', 'Learn vocabulary and expressions for grocery shopping in German.', 1, 20, 1),
+(72, 15, 'Im Restaurant', 'How to order food and interact with waitstaff in German.', 2, 25, 1),
+(73, 15, 'Kleidung Einkaufen', 'Vocabulary for clothing items and shopping expressions in German.', 3, 20, 1),
+(74, 15, 'Geld und Zahlen', 'Learn about euros and how to discuss prices in German.', 4, 15, 1),
+(75, 15, 'Etwas kaufen', 'Practice conversations for making purchases in different settings in German.', 5, 20, 1),
+(76, 16, 'Verkehrsmittel', 'Learn words for different modes of transportation in German.', 1, 15, 1),
+(77, 16, 'Nach dem Weg fragen', 'How to ask for and understand directions in German.', 2, 20, 1),
+(78, 16, 'Hotelreservierungen', 'Vocabulary and phrases for booking and staying at hotels in German.', 3, 20, 1),
+(79, 16, 'Sehenswürdigkeiten', 'Discussing sightseeing and cultural attractions in German.', 4, 25, 1),
+(80, 16, 'Reiseprobleme', 'How to handle common issues that may arise when traveling in German.', 5, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +210,11 @@ INSERT INTO `units` (`unit_id`, `course_id`, `title`, `description`, `order_inde
 (9, 3, 'Los Fundamentos (The Basics)', 'Learn the foundation of Spanish with basic greetings, introductions, and essential phrases.', 1, 1),
 (10, 3, 'La Vida Cotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
 (11, 3, 'De Compras (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Spanish-speaking countries.', 3, 1),
-(12, 3, 'Los Viajes (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
+(12, 3, 'Los Viajes (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
+(13, 5, 'Die Grundlagen (The Basics)', 'Learn the foundation of German with basic greetings, introductions, and essential phrases.', 1, 1),
+(14, 5, 'Das tägliche Leben (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(15, 5, 'Einkaufen (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in German-speaking countries.', 3, 1),
+(16, 5, 'Das Reisen (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -216,7 +241,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `email`, `password`, `profile_image`, `registration_date`, `last_login`, `remember_token`, `is_active`) VALUES
-(1, 'admin', 'Aziz', 'Boula', 'admin@lango.com', '$2y$10$Cerx0cFH8GZ7rDr1zEajhe3J/t9w4bqYZWtb4rEdscG/oOfK7Jb.S', 'default.png', '2025-05-02 14:48:13', NULL, NULL, 1);
+(1, 'admin', 'Aziz', 'Boula', 'admin@lango.com', '$2y$10$Cerx0cFH8GZ7rDr1zEajhe3J/t9w4bqYZWtb4rEdscG/oOfK7Jb.S', 'default.png', '2025-05-02 14:48:13', '2025-05-02 14:55:19', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -227,10 +252,101 @@ INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `email`, 
 CREATE TABLE `user_activity` (
   `activity_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `activity_type` varchar(50) NOT NULL,
+  `activity_type` varchar(50) NOT NULL COMMENT 'Types: lesson_access, unit_access, language_page_access, unit_test, start_language, etc.',
   `activity_details` text DEFAULT NULL,
   `timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user_activity`
+--
+
+INSERT INTO `user_activity` (`activity_id`, `user_id`, `activity_type`, `activity_details`, `timestamp`) VALUES
+(1, 1, 'start_language', '{\"language_id\":4,\"language_code\":\"de\"}', '2025-05-02 14:56:03'),
+(2, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 14:56:03'),
+(3, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 14:56:06'),
+(4, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 15:51:40'),
+(5, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 15:52:11'),
+(6, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 15:52:14'),
+(7, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 15:52:32'),
+(8, 1, 'start_language', '{\"language_id\":2,\"language_code\":\"es\"}', '2025-05-02 15:52:35'),
+(9, 1, 'language_page_access', '{\"language\":\"spanish\",\"proficiency_level\":\"beginner\"}', '2025-05-02 15:52:35'),
+(10, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 15:55:04'),
+(11, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 15:55:05'),
+(12, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 15:55:08'),
+(13, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 15:55:10'),
+(14, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 15:57:23'),
+(15, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 15:57:23'),
+(16, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 15:57:24'),
+(17, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 15:57:25'),
+(18, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 15:57:35'),
+(19, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 15:57:37'),
+(20, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 15:57:38'),
+(21, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 16:05:01'),
+(22, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:05:03'),
+(23, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:05:06'),
+(24, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:05:10'),
+(25, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:05:15'),
+(26, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:07:03'),
+(27, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:07:04'),
+(28, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 16:07:04'),
+(29, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:07:06'),
+(30, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 16:07:07'),
+(31, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 16:07:09'),
+(32, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 16:07:09'),
+(33, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 16:07:11'),
+(34, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:08:57'),
+(35, 1, 'lesson_access', '{\"lesson_id\":42,\"lesson_title\":\"Pronunciaci\\u00f3n B\\u00e1sica\",\"unit_id\":9}', '2025-05-02 16:08:58'),
+(36, 1, 'lesson_access', '{\"lesson_id\":42,\"lesson_title\":\"Pronunciaci\\u00f3n B\\u00e1sica\",\"unit_id\":9}', '2025-05-02 16:09:00'),
+(37, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:09:00'),
+(38, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 16:09:02'),
+(39, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:09:03'),
+(40, 1, 'lesson_access', '{\"lesson_id\":43,\"lesson_title\":\"N\\u00fameros 1-20\",\"unit_id\":9}', '2025-05-02 16:09:06'),
+(41, 1, 'lesson_access', '{\"lesson_id\":43,\"lesson_title\":\"N\\u00fameros 1-20\",\"unit_id\":9}', '2025-05-02 16:09:08'),
+(42, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:09:08'),
+(43, 1, 'lesson_access', '{\"lesson_id\":44,\"lesson_title\":\"Preguntas Simples\",\"unit_id\":9}', '2025-05-02 16:09:09'),
+(44, 1, 'lesson_access', '{\"lesson_id\":44,\"lesson_title\":\"Preguntas Simples\",\"unit_id\":9}', '2025-05-02 16:09:15'),
+(45, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:09:15'),
+(46, 1, 'lesson_access', '{\"lesson_id\":45,\"lesson_title\":\"Frases Comunes\",\"unit_id\":9}', '2025-05-02 16:09:16'),
+(47, 1, 'lesson_access', '{\"lesson_id\":45,\"lesson_title\":\"Frases Comunes\",\"unit_id\":9}', '2025-05-02 16:09:18'),
+(48, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:09:18'),
+(49, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:09:23'),
+(50, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:11:33'),
+(51, 1, 'unit_access', '{\"unit_id\":1,\"unit_title\":\"Les Bases (The Basics)\"}', '2025-05-02 16:11:34'),
+(52, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:11:37'),
+(53, 1, 'unit_access', '{\"unit_id\":1,\"unit_title\":\"Les Bases (The Basics)\"}', '2025-05-02 16:11:41'),
+(54, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:11:46'),
+(55, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:12:02'),
+(56, 1, 'unit_access', '{\"unit_id\":1,\"unit_title\":\"Les Bases (The Basics)\"}', '2025-05-02 16:12:04'),
+(57, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:12:10'),
+(58, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:27:04'),
+(59, 1, 'lesson_access', '{\"lesson_id\":41,\"lesson_title\":\"Saludos y Presentaciones\",\"unit_id\":9}', '2025-05-02 16:27:04'),
+(60, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 16:27:06'),
+(61, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 17:25:25'),
+(62, 1, 'unit_access', '{\"unit_id\":9,\"unit_title\":\"Los Fundamentos (The Basics)\"}', '2025-05-02 17:25:28'),
+(63, 1, 'lesson_access', '{\"lesson_id\":45,\"lesson_title\":\"Frases Comunes\",\"unit_id\":9}', '2025-05-02 17:25:29'),
+(64, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:25:39'),
+(65, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:28:44'),
+(66, 1, 'language_page_access', '{\"language\":\"spanish\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:28:47'),
+(67, 1, 'unit_access', '{\"unit_id\":10,\"unit_title\":\"La Vida Cotidiana (Daily Life)\"}', '2025-05-02 17:28:50'),
+(68, 1, 'language_page_access', '{\"language\":\"spanish\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:28:52'),
+(69, 1, 'language_page_access', '{\"language\":\"spanish\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:29:48'),
+(70, 1, 'unit_access', '{\"unit_id\":11,\"unit_title\":\"De Compras (Shopping)\"}', '2025-05-02 17:30:08'),
+(71, 1, 'language_page_access', '{\"language\":\"spanish\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:38:48'),
+(72, 1, 'unit_access', '{\"unit_id\":11,\"unit_title\":\"De Compras (Shopping)\"}', '2025-05-02 17:39:49'),
+(73, 1, 'language_page_access', '{\"language\":\"spanish\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:47:47'),
+(74, 1, 'unit_access', '{\"unit_id\":12,\"unit_title\":\"Los Viajes (Traveling)\"}', '2025-05-02 17:47:55'),
+(75, 1, 'language_page_access', '{\"language\":\"spanish\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:47:58'),
+(76, 1, 'start_language', '{\"language_id\":3,\"language_code\":\"fr\"}', '2025-05-02 17:48:58'),
+(77, 1, 'language_page_access', '{\"language\":\"french\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:48:59'),
+(78, 1, 'language_page_access', '{\"language\":\"french\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:49:11'),
+(79, 1, 'language_page_access', '{\"language\":\"french\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:49:16'),
+(80, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:50:40'),
+(81, 1, 'language_page_access', '{\"language\":\"german\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:50:43'),
+(82, 1, 'start_language', '{\"language_id\":5,\"language_code\":\"it\"}', '2025-05-02 17:50:45'),
+(83, 1, 'language_page_access', '{\"language\":\"italian\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:50:45'),
+(84, 1, 'language_page_access', '{\"language\":\"italian\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:50:52'),
+(85, 1, 'language_page_access', '{\"language\":\"french\",\"proficiency_level\":\"beginner\"}', '2025-05-02 17:56:02');
 
 -- --------------------------------------------------------
 
@@ -247,6 +363,16 @@ CREATE TABLE `user_languages` (
   `is_native` tinyint(1) NOT NULL DEFAULT 0,
   `start_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user_languages`
+--
+
+INSERT INTO `user_languages` (`user_language_id`, `user_id`, `language_id`, `proficiency_level`, `is_learning`, `is_native`, `start_date`) VALUES
+(1, 1, 4, 'beginner', 1, 0, '2025-05-02 14:56:03'),
+(2, 1, 2, 'beginner', 1, 0, '2025-05-02 15:52:35'),
+(3, 1, 3, 'beginner', 1, 0, '2025-05-02 17:48:58'),
+(4, 1, 5, 'beginner', 1, 0, '2025-05-02 17:50:45');
 
 -- --------------------------------------------------------
 
@@ -274,7 +400,67 @@ CREATE TABLE `user_progress` (
   `status` enum('not_started','in_progress','completed') NOT NULL DEFAULT 'not_started',
   `completion_date` datetime DEFAULT NULL,
   `score` int(11) DEFAULT NULL COMMENT 'Score in percentage if applicable',
-  `last_activity` datetime NOT NULL DEFAULT current_timestamp()
+  `last_activity` datetime NOT NULL DEFAULT current_timestamp(),
+  `attempts` int(11) DEFAULT 0 COMMENT 'Number of attempts at the lesson or test'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user_progress`
+--
+
+INSERT INTO `user_progress` (`progress_id`, `user_id`, `lesson_id`, `status`, `completion_date`, `score`, `last_activity`) VALUES
+(1, 1, 41, 'completed', '2025-05-02 16:07:09', NULL, '2025-05-02 16:07:09'),
+(2, 1, 42, 'completed', '2025-05-02 16:09:00', NULL, '2025-05-02 16:09:00'),
+(3, 1, 43, 'completed', '2025-05-02 16:09:08', NULL, '2025-05-02 16:09:08'),
+(4, 1, 44, 'completed', '2025-05-02 16:09:15', NULL, '2025-05-02 16:09:15'),
+(5, 1, 45, 'completed', '2025-05-02 16:09:18', NULL, '2025-05-02 16:09:18');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `unit_tests`
+--
+
+CREATE TABLE IF NOT EXISTS `unit_tests` (
+  `test_id` int(11) NOT NULL AUTO_INCREMENT,
+  `unit_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `passing_score` int(11) NOT NULL DEFAULT 60,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`test_id`),
+  KEY `unit_id` (`unit_id`),
+  CONSTRAINT `unit_tests_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `unit_tests`
+--
+
+INSERT INTO `unit_tests` (`test_id`, `unit_id`, `title`, `description`, `passing_score`, `is_active`) VALUES
+(1, 13, 'Die Grundlagen Test', 'Test your knowledge of German basics, greetings, and essential phrases.', 60, 1),
+(2, 14, 'Das tägliche Leben Test', 'Test your knowledge of daily routines, time telling, and weather in German.', 60, 1),
+(3, 15, 'Einkaufen Test', 'Test your knowledge of shopping vocabulary and expressions in German.', 60, 1),
+(4, 16, 'Das Reisen Test', 'Test your knowledge of travel-related vocabulary and phrases in German.', 60, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `test_results`
+--
+
+CREATE TABLE IF NOT EXISTS `test_results` (
+  `result_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `test_id` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `passed` tinyint(1) NOT NULL DEFAULT 0,
+  `completion_date` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`result_id`),
+  KEY `user_id` (`user_id`),
+  KEY `test_id` (`test_id`),
+  CONSTRAINT `test_results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `test_results_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `unit_tests` (`test_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -355,7 +541,7 @@ ALTER TABLE `user_progress`
 -- AUTO_INCREMENT pour la table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `languages`
@@ -367,7 +553,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT pour la table `lessons`
 --
 ALTER TABLE `lessons`
-  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT pour la table `units`
@@ -385,13 +571,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `activity_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `activity_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT pour la table `user_languages`
 --
 ALTER TABLE `user_languages`
-  MODIFY `user_language_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `user_preferences`
@@ -403,7 +589,13 @@ ALTER TABLE `user_preferences`
 -- AUTO_INCREMENT pour la table `user_progress`
 --
 ALTER TABLE `user_progress`
-  MODIFY `progress_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `progress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `unit_tests`
+--
+ALTER TABLE `unit_tests`
+  AUTO_INCREMENT = 5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -452,6 +644,20 @@ ALTER TABLE `user_preferences`
 ALTER TABLE `user_progress`
   ADD CONSTRAINT `user_progress_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `user_progress_ibfk_2` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`lesson_id`);
+
+--
+-- Contraintes pour la table `unit_tests`
+--
+ALTER TABLE `unit_tests`
+  ADD CONSTRAINT `unit_tests_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `test_results`
+--
+ALTER TABLE `test_results`
+  ADD CONSTRAINT `test_results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `test_results_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `unit_tests` (`test_id`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

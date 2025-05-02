@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once "../../../database/connect.php";
@@ -288,7 +287,7 @@ if (isset($_POST['complete_lesson'])) {
 
     <div class="content-container">
         <div class="breadcrumb">
-            <a href="courses.php">Courses</a> &gt; 
+            <a href="units.php">Courses</a> &gt; 
             <a href="units-content.php?unit=<?php echo $unit_id; ?>"><?php echo htmlspecialchars($lesson['unit_title']); ?></a> &gt; 
             <span><?php echo htmlspecialchars($lesson['title']); ?></span>
         </div>

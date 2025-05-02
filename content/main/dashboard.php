@@ -74,7 +74,7 @@ while ($lang = $learning_result->fetch_assoc()) {
         <div class="dashboard-container">
             <section class="welcome-section">
                 <div class="welcome-card">
-                    <h2>Welcome back, <?php echo htmlspecialchars(ucfirst($user['first_name'])); ?>!</h2>
+                    <h2>Hi <?php echo htmlspecialchars(ucfirst($user['first_name'])); ?>!</h2>
                     <p>Continue your language journey by selecting a language below.</p>
                 </div>
             </section>

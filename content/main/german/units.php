@@ -18,7 +18,7 @@ $user = $result->fetch_assoc();
 
 $course_query = "SELECT c.* FROM courses c
                  JOIN languages l ON c.language_id = l.language_id
-                 WHERE l.code = 'fr' AND c.title = 'German Fundamentals'";
+                 WHERE l.code = 'de' AND c.title = 'German Fundamentals'";
 $course_result = $conn->query($course_query);
 
 if ($course_result->num_rows == 0) {
