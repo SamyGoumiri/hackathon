@@ -100,20 +100,20 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="register.css">
-    <title>Join Lango - Learn Languages</title>
+    <title>Join Esperanto - Learn Languages</title>
 </head>
 
 <body>
     <div class="container">
         <div class="logo">
             <a href="../../index.php">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </a>
         </div>
         
         <div class="wrapper">
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <h2>Join Lango</h2>
+                <h2>Join Esperanto</h2>
                 <p class="subtitle">Begin your language learning adventure</p>
                 
                 <?php if(!empty($error_message)): ?>

@@ -10,14 +10,14 @@ $is_logged_in = isset($_SESSION['user_id']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="index.css">
-    <title>Lango - Learn Languages Effectively</title>
+    <title>Esperanto - Learn Languages Effectively</title>
 </head>
 
 <body>
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </div>
             <nav>
                 <ul>
@@ -38,7 +38,7 @@ $is_logged_in = isset($_SESSION['user_id']);
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Master Any Language with Lango</h1>
+            <h1>Master Any Language with Esperanto</h1>
             <p>The fun, effective way to learn a new language.</p>
             <div class="hero-cta">
                 <a href="#how-it-works" class="btn btn-outline">Learn More</a>
@@ -76,7 +76,7 @@ $is_logged_in = isset($_SESSION['user_id']);
     </section>
 
     <section id="features" class="features">
-        <h2>Why Choose Lango?</h2>
+        <h2>Why Choose Esperanto?</h2>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">
@@ -110,7 +110,7 @@ $is_logged_in = isset($_SESSION['user_id']);
     </section>
 
     <section id="how-it-works" class="how-it-works">
-        <h2>How Lango Works</h2>
+        <h2>How Esperanto Works</h2>
         <div class="steps">
             <div class="step">
                 <div class="step-number">1</div>

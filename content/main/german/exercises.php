@@ -1,3 +1,4 @@
+
 <?php
 require_once '../../../database/connect.php';
 ?>
@@ -9,9 +10,9 @@ require_once '../../../database/connect.php';
     <title>Practice - Language Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../style.css">
-
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
+
+<body class=" min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
     <div class="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-6">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-bold text-violet-500">Practice</h1>
@@ -41,19 +42,20 @@ require_once '../../../database/connect.php';
 
         let vocabQuestions = [
             { question: "What does this word mean in German?", word: "Train", image: "https://img.icons8.com/dusk/64/train.png", options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], answer: "Zug" },
+<<<<<<< HEAD
             { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein","Ticket","Pass", "Karte"], answer: "Pass" },
             { question: "What does this word mean in German?", word: "Book", image: "https://img.icons8.com/dusk/100/book.png", options: ["Buch", "Heft", "Papier", "Stift"], answer: "Buch" },
             { question: "What does this word mean in German?", word: "House", image: "https://img.icons8.com/emoji/100/house-emoji.png", options: ["Tur", "Zimmer", "Flugzeug", "Haus"], answer: "Haus" }
 
 
+=======
+            { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein","Ticket","Pass", "Karte"], answer: "Pass" }
+>>>>>>> b95a19720fb71f81ccb06e978a684faff8e1b166
         ];
 
         let fillQuestions = [
             { question: "Fill in the blank: Ich ___ müde.", answer: "bin" },
-            { question: "Fill in the blank: Er ___ nach Hause.", answer: "geht" },
-            { question: "Fill in the blank: Ich ___ Fußball.", answer: "spiele" },
-            { question: "Fill in the blank: Sie ___ ein Buch.", answer: "liest" },
-            { question: "Du ___ sehr schnell.", answer: "laufst" }
+            { question: "Fill in the blank: Er ____ nach Hause.", answer: "geht" }
         ];
 
         function loadQuestion() {
@@ -93,7 +95,7 @@ require_once '../../../database/connect.php';
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     ${q.options.map(option => `
-                        <button class="option-btn bg-white border border-gray-300 rounded-xl p-4 hover:bg-violet-100 transition" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
+                        <button class="option-btn bg-grey-300 border border-gray-300 rounded-xl p-4 hover:bg-violet-100 transition" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
                     `).join('')}
                 </div>
             `;
@@ -104,7 +106,7 @@ require_once '../../../database/connect.php';
                 <p class="text-lg font-medium text-gray-700 mb-4">${q.question}</p>
                 <input type="text" id="fillInput" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your answer here...">
                 <div class="mt-4 flex justify-end">
-                    <button onclick='checkAnswerFill("${q.answer}")' class="bg-violet-500 text-white font-semibold px-6 py-2 rounded-full hover:bg-violet-700 transition">Check</button>
+                    <button onclick='checkAnswerFill("${q.answer}")' class="bg-violet-00 text-white font-semibold px-6 py-2 rounded-full hover:bg-violet-700 transition">Check</button>
                 </div>
             `;
 
@@ -207,3 +209,4 @@ require_once '../../../database/connect.php';
     </script>
 </body>
 </html>
+
