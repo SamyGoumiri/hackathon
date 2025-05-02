@@ -47,10 +47,34 @@
         <td class="pronunciation">oon oh-jet-to per-so/roo-bah-to</td>
         <td>a lost/stolen item</td>
     </tr>
+</table>
+
+<h2>Common Phrases for Travel Problems</h2>
+<table class="vocabulary-table">
     <tr>
-        <td class="italian-word">un problema di prenotazione</td>
-        <td class="pronunciation">oon pro-bleh-mah dee preh-no-tah-tsyo-neh</td>
-        <td>a booking problem</td>
+        <th>Italian</th>
+        <th>Pronunciation</th>
+        <th>English</th>
+    </tr>
+    <tr>
+        <td class="italian-word">Il mio volo è in ritardo</td>
+        <td class="pronunciation">eel mee-oh vo-lo eh in ree-tar-doh</td>
+        <td>My flight is delayed</td>
+    </tr>
+    <tr>
+        <td class="italian-word">Ho perso il treno</td>
+        <td class="pronunciation">oh per-so eel treh-no</td>
+        <td>I missed the train</td>
+    </tr>
+    <tr>
+        <td class="italian-word">Ho bisogno di aiuto</td>
+        <td class="pronunciation">oh bee-zo-nyo dee ah-yoo-toh</td>
+        <td>I need help</td>
+    </tr>
+    <tr>
+        <td class="italian-word">Ho perso il mio passaporto</td>
+        <td class="pronunciation">oh per-so eel mee-oh pass-ah-por-toh</td>
+        <td>I lost my passport</td>
     </tr>
 </table>
 
@@ -159,23 +183,3 @@
 <div class="example">
     <div class="example-title">Example Conversation - Lost Luggage</div>
     <p>
-        <strong>Traveler:</strong> Mi scusi, ho un problema. Non trovo la mia valigia sul nastro trasportatore.<br>
-        <strong>Airport Staff:</strong> Mi dispiace sentirlo. Può descrivere la sua valigia, per favore?<br>
-        <strong>Traveler:</strong> È una valigia grande nera con un'etichetta rossa. Il mio nome è scritto sopra.<br>
-        <strong>Airport Staff:</strong> Va bene. Deve compilare un modulo per bagagli smarriti. Ha il suo biglietto aereo e l'etichetta del bagaglio?<br>
-        <strong>Traveler:</strong> Sì, ecco il mio biglietto e l'etichetta.<br>
-        <strong>Airport Staff:</strong> Grazie. Per favore, compili questo modulo con i suoi dati di contatto. La contatteremo non appena avremo notizie della sua valigia.<br>
-        <strong>Traveler:</strong> Quanto tempo ci vorrà per ritrovarla?<br>
-        <strong>Airport Staff:</strong> Di solito troviamo i bagagli entro 24-48 ore. Faremo del nostro meglio per ritrovarla il prima possibile.
-    </p>
-</div>
-
-<div class="practice-tip">
-    <h3>Practice Tip</h3>
-    <p>Before traveling to an Italian-speaking country, save important emergency phrases to your phone or write them down to carry with you. Having these phrases ready can help you communicate effectively in stressful situations.</p>
-</div>
-
-<div class="important-note">
-    <h3>Important Note</h3>
-    <p>When traveling abroad, always keep copies of important documents (passport, ID, insurance information) in a separate place from the originals. Also, know the address and phone number of your country's embassy or consulate in the country you're visiting.</p>
-</div>

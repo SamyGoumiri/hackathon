@@ -11,7 +11,7 @@
     </tr>
     <tr>
         <td class="french-word">Bonjour</td>
-        <td class="pronunciation">bon-zhoor</td>
+        <td class="pronunciation">bon-jhoor</td>
         <td>Hello / Good day</td>
     </tr>
     <tr>
@@ -40,8 +40,8 @@
 <p>To introduce yourself in French, you can use these phrases:</p>
 
 <ul>
-    <li><span class="french-word">Je m'appelle...</span> (zhuh mah-pehl) - My name is...</li>
-    <li><span class="french-word">Je suis...</span> (zhuh swee) - I am...</li>
+    <li><span class="french-word">Je m'appelle...</span> (jhuh mah-pehl) - My name is...</li>
+    <li><span class="french-word">Je suis...</span> (jhuh swee) - I am...</li>
     <li><span class="french-word">Enchanté(e)</span> (ahn-shahn-tay) - Nice to meet you</li>
 </ul>
 
