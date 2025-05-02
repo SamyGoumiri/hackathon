@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 require_once "../../../database/connect.php";
@@ -17,7 +18,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: units.php");
+    header("Location: courses.php");
     exit();
 }
 
@@ -33,7 +34,7 @@ $stmt->execute();
 $lesson_result = $stmt->get_result();
 
 if ($lesson_result->num_rows == 0) {
-    header("Location: units.php");
+    header("Location: courses.php");
     exit();
 }
 
@@ -125,7 +126,6 @@ if (isset($_POST['complete_lesson'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
-
     <title>Lango - <?php echo htmlspecialchars($lesson['title']); ?></title>
     <style>
         .lesson-container {
@@ -288,7 +288,7 @@ if (isset($_POST['complete_lesson'])) {
 
     <div class="content-container">
         <div class="breadcrumb">
-            <a href="units.php">Courses</a> &gt; 
+            <a href="courses.php">Courses</a> &gt; 
             <a href="course-content.php?unit=<?php echo $unit_id; ?>"><?php echo htmlspecialchars($lesson['unit_title']); ?></a> &gt; 
             <span><?php echo htmlspecialchars($lesson['title']); ?></span>
         </div>

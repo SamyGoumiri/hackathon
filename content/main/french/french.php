@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+
 $user_id = $_SESSION['user_id'];
 $user_query = "SELECT username, first_name, last_name FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($user_query);
@@ -43,7 +44,7 @@ $stmt->execute();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="french.css">
+    <link rel="stylesheet" href="../style.css">
     <title>Lango - French</title>
 </head>
 <body>

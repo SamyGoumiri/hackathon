@@ -114,8 +114,7 @@ if (isset($_POST['submit_test'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="../style.css">
-
+    <link rel="stylesheet" href="french.css">
     <title>Lango - Unit 2 Test: La Vie Quotidienne</title>
     <style>
         .test-container {
@@ -464,7 +463,7 @@ if (isset($_POST['submit_test'])) {
                 <a href="course-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
                     <i class='bx bx-arrow-back'></i> Back to Unit
                 </a>
-                <a href="units.php" class="btn btn-primary">
+                <a href="courses.php" class="btn btn-primary">
                     Continue to Next Unit <i class='bx bx-right-arrow-alt'></i>
                 </a>
             </div>
