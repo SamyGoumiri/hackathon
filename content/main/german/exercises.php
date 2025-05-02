@@ -1,18 +1,15 @@
 <?php
-session_start();
-require_once "../../../database/connect.php";
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../../auth/login.php");
-    exit();
-}
+require_once '../../../database/connect.php';
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practice - Language Project</title>
-    <link rel="stylesheet" href="../style-exo.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
@@ -25,7 +22,7 @@ if (!isset($_SESSION['user_id'])) {
 
         <!-- Back Button -->
         <a href="german.php" class="flex items-center text-blue-600 hover:text-blue-800 mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="back" fill="currentColor" viewBox="0 0 20 20">
+            <svg  class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L4.414 9H18a1 1 0 110 2H4.414l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd" />
             </svg>
             Back
@@ -89,7 +86,7 @@ if (!isset($_SESSION['user_id'])) {
                     <p class="text-lg font-medium text-gray-700 mb-4">${q.question}</p>
                     <div class="flex justify-center mb-6">
                         <img src="${q.image}" alt="${q.word}" class="w-24 h-24">
-                        <h3 >${q.word}</h3>
+                        <h3>${q.word}</h3>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         ${q.options.map(option => `
