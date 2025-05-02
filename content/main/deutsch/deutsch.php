@@ -1,10 +1,11 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="deutsch.css">
+    <link rel="stylesheet" href="../style.css">
     <title>Website name</title>
 
 </head>
@@ -16,13 +17,16 @@
   <h2>What would you like to do?</h2>
   <div class="options">
     <a href="courses.php" class="card">
-      <h3>📘 Courses</h3>
-      <p>Lessons to guide your learning journey.</p>
+    <img width="100" height="100" src="https://img.icons8.com/isometric/100/book-stack.png" alt="book-stack"/>
+      <h3>Courses</h3>
+      <p>lessons to guide your learning journey.</p>
+
 
     </a>
     <a href="exercises.php" class="card">
-      <h3>📝 Exercises</h3>
-      <p>Practice what you've learned with interactive tasks.</p>
+    <img width="100" height="100" src="https://img.icons8.com/fluency/100/goal--v1.png" alt="goal--v1"/>
+      <h3>Practice</h3>
+      <p>use what you've learned with interactive tasks.</p>
 
     </a>
   </div>
