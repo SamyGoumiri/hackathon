@@ -55,11 +55,17 @@ while ($row = $progress_result->fetch_assoc()) {
     ];
 }
 
-$highest_accessed_unit = 5; // Starting with unit 5 for Italian
-foreach ($unit_progress as $unit_id => $progress) {
-    if ($progress['completed'] > 0 && $unit_id > $highest_accessed_unit) {
-        $highest_accessed_unit = $unit_id;
-    }
+// Modified: All units are unlocked now
+$unlocked_units = array(); // We'll fill this with all unit IDs
+
+// Get all unit IDs to unlock them
+$all_units_query = "SELECT unit_id FROM units WHERE course_id = ?";
+$stmt = $conn->prepare($all_units_query);
+$stmt->bind_param("i", $course_id);
+$stmt->execute();
+$all_units_result = $stmt->get_result();
+while($unit = $all_units_result->fetch_assoc()) {
+    $unlocked_units[] = $unit['unit_id'];
 }
 
 if(isset($_GET['unit'])) {
@@ -133,7 +139,8 @@ if(isset($_GET['unit'])) {
             
             if ($units_result->num_rows > 0) {
                 while($unit = $units_result->fetch_assoc()) {
-                    $is_locked = ($unit_count > 1 && $unit['unit_id'] > $highest_accessed_unit + 2);
+                    // All units are unlocked now
+                    $is_locked = false;
                     
                     $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
                     $stmt = $conn->prepare($lessons_query);
@@ -151,7 +158,7 @@ if(isset($_GET['unit'])) {
                         $difficulty_text = "Intermediate";
                     }
             ?>
-            <div class="course-item<?php echo $is_locked ? ' locked' : ''; ?>">
+            <div class="course-item">
                 <div class="course-header">
                     <h2><?php echo htmlspecialchars($unit['title']); ?></h2>
                     <span class="difficulty <?php echo $difficulty; ?>"><?php echo $difficulty_text; ?></span>
@@ -177,13 +184,7 @@ if(isset($_GET['unit'])) {
                     
                     <div class="course-actions">
                         <span class="lesson-count"><?php echo $lesson_count; ?> Lessons</span>
-                        <?php if (!$is_locked) { ?>
                         <a href="units-content.php?unit=<?php echo $unit['unit_id']; ?>" class="btn btn-primary">Start Unit</a>
-                        <?php } else { ?>
-                        <div class="lock-message">
-                            <i class='bx bx-lock-alt'></i> Complete previous units to unlock
-                        </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -210,9 +211,7 @@ if(isset($_GET['unit'])) {
         document.querySelectorAll('.course-header').forEach(header => {
             header.addEventListener('click', function() {
                 const courseItem = this.parentElement;
-                if (!courseItem.classList.contains('locked')) {
-                    courseItem.classList.toggle('expanded');
-                }
+                courseItem.classList.toggle('expanded');
             });
         });
         document.querySelector('.user-info').addEventListener('click', function() {
