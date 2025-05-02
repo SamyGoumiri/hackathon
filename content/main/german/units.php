@@ -133,7 +133,8 @@ if(isset($_GET['unit'])) {
             
             if ($units_result->num_rows > 0) {
                 while($unit = $units_result->fetch_assoc()) {
-                    $is_locked = ($unit_count > 1 && $unit['unit_id'] > $highest_accessed_unit + 2);
+                    // Make locking less restrictive - only lock units that are far ahead
+                    $is_locked = ($unit_count > 1 && $unit['unit_id'] > $highest_accessed_unit + 1);
                     
                     $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
                     $stmt = $conn->prepare($lessons_query);
@@ -211,9 +212,8 @@ if(isset($_GET['unit'])) {
         document.querySelectorAll('.course-header').forEach(header => {
             header.addEventListener('click', function() {
                 const courseItem = this.parentElement;
-                if (!courseItem.classList.contains('locked')) {
-                    courseItem.classList.toggle('expanded');
-                }
+                // Allow expanding all units, even locked ones
+                courseItem.classList.toggle('expanded');
             });
         });
         document.querySelector('.user-info').addEventListener('click', function() {
