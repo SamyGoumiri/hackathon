@@ -236,7 +236,7 @@ if (isset($_POST['submit_test'])) {
     </header>
 
     <div class="content-container">
-        <h1>Unit 4 Test: Les Voyages (Traveling)</h1>
+        <h1>Unit 4 Test: Los Viajes (Traveling)</h1>
         
         <?php if ($test_submitted): ?>
         <div class="result-container">

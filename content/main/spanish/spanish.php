@@ -18,13 +18,13 @@ $user = $result->fetch_assoc();
 $language_query = "SELECT ul.proficiency_level, ul.user_language_id 
                    FROM user_languages ul 
                    JOIN languages l ON ul.language_id = l.language_id 
-                   WHERE ul.user_id = ? AND l.code = 'fr' AND ul.is_learning = 1";
+                   WHERE ul.user_id = ? AND l.code = 'es' AND ul.is_learning = 1";
 $stmt = $conn->prepare($language_query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $lang_result = $stmt->get_result();
 if ($lang_result->num_rows === 0) {
-    header("Location: ../start_language.php?lang=fr");
+    header("Location: ../start_language.php?lang=es");
     exit();
 }
 
