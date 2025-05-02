@@ -83,7 +83,20 @@ if(isset($_GET['unit'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
     <title>Lango - Spanish Courses</title>
-
+    <style>
+        .course-content {
+            display: none;
+            padding: 0 20px 20px;
+        }
+        
+        .course-item.expanded .course-content {
+            display: block;
+        }
+        
+        .course-header {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -211,9 +224,7 @@ if(isset($_GET['unit'])) {
         document.querySelectorAll('.course-header').forEach(header => {
             header.addEventListener('click', function() {
                 const courseItem = this.parentElement;
-                if (!courseItem.classList.contains('locked')) {
-                    courseItem.classList.toggle('expanded');
-                }
+                courseItem.classList.toggle('expanded');
             });
         });
         document.querySelector('.user-info').addEventListener('click', function() {
