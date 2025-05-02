@@ -1,0 +1,122 @@
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f4f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .container {
+    background: #fff;
+    max-width: 600px;
+    width: 90%;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+
+  .header h2 {
+    font-size: 24px;
+    color: #333;
+  }
+
+  .header span {
+    font-size: 14px;
+    color: #888;
+  }
+
+  .question {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .icon-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+
+  .icon-box img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .options {
+    display: grid;
+    gap: 15px;
+  }
+
+  .option {
+    border: 2px solid #ccc;
+    border-radius: 16px;
+    padding: 15px;
+    cursor: pointer;
+    background: #fff;
+    transition: 0.3s ease;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .option:hover {
+    background-color: #e0f0ff;
+    border-color: #7F57F1;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+  }
+
+
+  .footer button {
+    background: #7F57F1;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+
+  .footer button:hover {
+    background: #7F57F1;
+  }
+
+  .divider {
+    height: 1px;
+    background: #eee;
+    margin: 40px 0;
+  }
+
+  .input-question {
+    margin-bottom: 15px;
+  }
+
+  .input-box input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    transition: 0.3s ease;
+  }
+
+  .input-box input:focus {
+    border-color: #7F57F1;
+    outline: none;
+  }

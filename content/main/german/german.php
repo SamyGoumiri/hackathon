@@ -87,6 +87,7 @@ $stmt->execute();
                 <p>Structured lessons to guide your learning journey.</p>
             </a>
             <a href="exercises.php" class="card">
+                
                 <img width="100" height="100" src="https://img.icons8.com/fluency/100/goal--v1.png" alt="goal--v1"/>
                 <h3>Practice</h3>
                 <p>Interactive exercises to reinforce what you've learned.</p>
