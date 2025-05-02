@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,24 +9,23 @@
 
 </head>
 <body>
-    <h1>Choose which u want to start with</h1>
-    <h2>Choose a course or an exercice</h2>
-
-<div class="container">
-
-    <div class="course">
-        <h2>Course</h2>
-        <img src="#" alt="img">
-        <a href="course.php">Start course</a>
-    </div>
-
-    <div class="exercice">
-        <h2>Exercice</h2>
-        <img src="#" alt="img">
-        <a href="exercice.php">Start exercice</a>
-    </div>
 
 
+<div class="selection-container">
+<h1>Choose which u want to start with</h1>
+  <h2>What would you like to do?</h2>
+  <div class="options">
+    <a href="courses.php" class="card">
+      <h3>📘 Courses</h3>
+      <p>Lessons to guide your learning journey.</p>
+
+    </a>
+    <a href="exercises.php" class="card">
+      <h3>📝 Exercises</h3>
+      <p>Practice what you've learned with interactive tasks.</p>
+
+    </a>
+  </div>
 </div>
 
 </body>
