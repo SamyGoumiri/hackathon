@@ -1,12 +1,85 @@
 <?php
 session_start();
+require_once "../../database/connect.php";
+
 if(isset($_SESSION['user_id'])) {
     header("Location: ../main/dashboard.php");
     exit;
 }
 
-$error_message = isset($_SESSION['error']) ? $_SESSION['error'] : "";
-$_SESSION['error'] = "";
+$error_message = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = sanitize_input($conn, $_POST['username']);
+    $password = $_POST['password'];
+    $remember = isset($_POST['remember']) ? true : false;
+    
+    $sql = "SELECT * FROM users WHERE username = ? OR email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $username, $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        
+        if (password_verify($password, $user['password'])) {
+            // Set session
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['first_name'] = $user['first_name'];
+            
+            if ($remember) {
+                $token = bin2hex(random_bytes(32));
+                $expires = time() + (30 * 24 * 60 * 60); // 30 days
+                
+                $sql = "UPDATE users SET remember_token = ? WHERE user_id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("si", $token, $user['user_id']);
+                $stmt->execute();
+                
+                setcookie('remember_token', $token, $expires, '/');
+                setcookie('user_id', $user['user_id'], $expires, '/');
+            }
+            
+            $sql = "UPDATE users SET last_login = NOW() WHERE user_id = ?";
+            $stmt->prepare($sql);
+            $stmt->bind_param("i", $user['user_id']);
+            $stmt->execute();
+            
+            header("Location: ../main/dashboard.php");
+            exit;
+        } else {
+            $error_message = "Invalid password. Please try again.";
+        }
+    } else {
+        $error_message = "User not found. Please check your username or email.";
+    }
+    
+    $stmt->close();
+}
+
+if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token']) && isset($_COOKIE['user_id'])) {
+    $token = $_COOKIE['remember_token'];
+    $user_id = $_COOKIE['user_id'];
+    
+    $sql = "SELECT * FROM users WHERE user_id = ? AND remember_token = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("is", $user_id, $token);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['first_name'] = $user['first_name'];
+        
+        header("Location: ../main/dashboard.php");
+        exit;
+    }
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -22,11 +95,13 @@ $_SESSION['error'] = "";
 <body>
     <div class="container">
         <div class="logo">
-            <h1>Lango</h1>
+            <a href="../../index.php">
+                <h1>Lango</h1>
+            </a>
         </div>
         
         <div class="wrapper">
-            <form action="process_login.php" method="POST">
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <h2>Welcome Back!</h2>
                 <p class="subtitle">Continue your language adventure</p>
                 

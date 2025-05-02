@@ -1,73 +1,145 @@
+<?php
+session_start();
+$is_logged_in = isset($_SESSION['user_id']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Languages - Homepage</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="index.css">
+    <title>Lango - Learn Languages Effectively</title>
 </head>
-<body class="bg-gray-100 font-sans">
-    <!-- Header -->
-    <header class="bg-blue-600 text-white">
-        <nav class="container mx-auto flex items-center justify-between py-4">
-            <div class="text-2xl font-bold">Learn Languages</div>
-            <ul class="flex space-x-6">
-                <li><a href="#" class="hover:underline">Home</a></li>
-                <li><a href="#" class="hover:underline">Courses</a></li>
-                <li><a href="#" class="hover:underline">About</a></li>
-                <li><a href="#" class="hover:underline">Contact</a></li>
-            </ul>
-        </nav>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>Lango</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <?php if($is_logged_in): ?>
+                    <a href="content/main/dashboard.php" class="btn btn-primary">My Dashboard</a>
+                <?php else: ?>
+                    <a href="content/auth/login.php" class="btn btn-secondary">Log In</a>
+                <?php endif; ?>
+            </div>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-blue-500 text-white py-20">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Master a New Language Today</h1>
-            <p class="text-lg md:text-xl mb-8">Join our interactive courses and start speaking fluently with confidence.</p>
-            <a href="#" class="bg-yellow-400 text-blue-800 px-6 py-3 rounded-full font-semibold hover:bg-yellow-500">Get Started</a>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Master Any Language with Lango</h1>
+            <p>The fun, effective way to learn a new language.</p>
+            <div class="hero-cta">
+                <a href="#how-it-works" class="btn btn-outline">Learn More</a>
+            </div>
         </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-12">Why Choose Us?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4">Interactive Lessons</h3>
-                    <p>Engage with fun, interactive exercises designed to boost your learning experience.</p>
+        <div class="hero-image">
+            <div class="flag-container">
+                <div class="flag-rectangle france">
+                    <div class="flag">
+                        <img src="https://flagcdn.com/w320/fr.png" alt="French Flag">
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4">Expert Instructors</h3>
-                    <p>Learn from native speakers and certified language professionals.</p>
+                <div class="flag-rectangle uk">
+                    <div class="flag">
+                        <img src="https://flagcdn.com/w320/gb.png" alt="UK Flag">
+                    </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4">Flexible Schedule</h3>
-                    <p>Study at your own pace with access to courses anytime, anywhere.</p>
+                <div class="flag-rectangle spain">
+                    <div class="flag">
+                        <img src="https://flagcdn.com/w320/es.png" alt="Spanish Flag">
+                    </div>
+                </div>
+                <div class="flag-rectangle italy">
+                    <div class="flag">
+                        <img src="https://flagcdn.com/w320/it.png" alt="Italian Flag">
+                    </div>
+                </div>
+                <div class="flag-rectangle germany">
+                    <div class="flag">
+                        <img src="https://flagcdn.com/w320/de.png" alt="German Flag">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="bg-gray-800 text-white py-16">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-4">Ready to Speak Fluently?</h2>
-            <p class="text-lg mb-8">Sign up today and start your language learning journey!</p>
-            <a href="#" class="bg-yellow-400 text-blue-800 px-6 py-3 rounded-full font-semibold hover:bg-yellow-500">Join Now</a>
+    <section id="features" class="features">
+        <h2>Why Choose Lango?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class='bx bx-conversation'></i>
+                </div>
+                <h3>Interactive Learning</h3>
+                <p>Learn through conversation, not memorization. Our interactive approach keeps you engaged and motivated.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class='bx bx-brain'></i>
+                </div>
+                <h3>Smart Algorithm</h3>
+                <p>Our AI adapts to your learning style, focusing on what you need to practice most.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class='bx bx-time-five'></i>
+                </div>
+                <h3>Learn Anywhere</h3>
+                <p>Short, effective lessons that fit into your busy schedule. Just 15 minutes a day makes a difference.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class='bx bx-medal'></i>
+                </div>
+                <h3>Achievement System</h3>
+                <p>Earn badges and rewards as you progress, keeping you motivated throughout your journey.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2025 Learn Languages. All rights reserved.</p>
-            <div class="mt-4">
-                <a href="#" class="text-gray-400 hover:text-white mx-2">Privacy Policy</a>
-                <a href="#" class="text-gray-400 hover:text-white mx-2">Terms of Service</a>
+    <section id="how-it-works" class="how-it-works">
+        <h2>How Lango Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Choose Your Language</h3>
+                <p>Select from our variety of languages and set your proficiency level.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Daily Practice</h3>
+                <p>Complete short, interactive lessons tailored to your learning style.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Track Progress</h3>
+                <p>Monitor your improvement with detailed statistics and achievement badges.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Become Fluent</h3>
+                <p>Advance through levels and achieve real-world conversation skills.</p>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <section class="cta">
+        <div class="cta-content">
+            <h2>Ready to Start Your Language Journey?</h2>
+            <p>Join thousands of successful language learners today.</p>
+            <a href="content/auth/register.php" class="btn btn-primary btn-large">Sign Up Free</a>
+        </div>
+    </section>
 </body>
 </html>
