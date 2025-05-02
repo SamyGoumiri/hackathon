@@ -12,14 +12,14 @@ require_once '../../../database/connect.php';
     <link rel="stylesheet" href="../style.css">
 
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
+<body class=" min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
     <div class="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-6">
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-2xl font-bold text-gray-800">Practice</h2>
             <span id="questionCounter" class="text-sm text-gray-500">Question 1</span>
         </div>
 
-        <a href="german.php" class="flex items-center text-blue-600 hover:text-blue-800 mb-4">
+        <a href="german.php" class="flex items-center color :violet; hover:text-violet-600 mb-4">
             <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L4.414 9H18a1 1 0 110 2H4.414l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd" />
             </svg>
@@ -87,7 +87,7 @@ require_once '../../../database/connect.php';
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     ${q.options.map(option => `
-                        <button class="option-btn bg-white border border-gray-300 rounded-xl p-4 hover:bg-blue-100 transition" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
+                        <button class="option-btn bg-violet-300 border border-gray-300 rounded-xl p-4 hover:bg-blue-100 transition" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
                     `).join('')}
                 </div>
             `;
