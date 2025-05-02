@@ -145,7 +145,8 @@ CREATE TABLE `courses` (
 INSERT INTO `courses` (`course_id`, `language_id`, `title`, `description`, `difficulty`, `image_path`, `is_active`) VALUES
 (1, 3, 'French Fundamentals', 'Master the basics of French language with this comprehensive beginner course.', 'beginner', 'french_basic.jpg', 1),
 (2, 3, 'Intermediate French', 'Take your French skills to the next level with more advanced concepts and vocabulary.', 'intermediate', 'french_intermediate.jpg', 1),
-(3, 2, 'Spanish for Beginners', 'Learn essential Spanish vocabulary and grammar for everyday conversations.', 'beginner', 'spanish_basic.jpg', 1);
+(3, 2, 'Spanish for Beginners', 'Learn essential Spanish vocabulary and grammar for everyday conversations.', 'beginner', 'spanish_basic.jpg', 1),
+(4, 5, 'Italian Fundamentals', 'Master the basics of Italian language with this comprehensive beginner course.', 'beginner', 'italian_basic.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -172,7 +173,11 @@ INSERT INTO `units` (`unit_id`, `course_id`, `title`, `description`, `order_inde
 (1, 1, 'Les Bases (The Basics)', 'Learn the foundation of French with basic greetings, introductions, and essential phrases.', 1, 1),
 (2, 1, 'La Vie Quotidienne (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
 (3, 1, 'Faire des Courses (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in French-speaking countries.', 3, 1),
-(4, 1, 'Les Voyages (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
+(4, 1, 'Les Voyages (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
+(5, 4, 'Le Basi (The Basics)', 'Learn the foundation of Italian with basic greetings, introductions, and essential phrases.', 1, 1),
+(6, 4, 'La Vita Quotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(7, 4, 'Fare Acquisti (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Italian-speaking countries.', 3, 1),
+(8, 4, 'I Viaggi (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -216,7 +221,27 @@ INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`
 (17, 4, 'Asking for Directions', 'How to ask for and understand directions in French.', 2, 20, 1),
 (18, 4, 'Hotel Reservations', 'Vocabulary and phrases for booking and staying at hotels.', 3, 20, 1),
 (19, 4, 'Tourist Attractions', 'Discussing sightseeing and cultural attractions in French.', 4, 25, 1),
-(20, 4, 'Travel Problems', 'How to handle common issues that may arise when traveling.', 5, 20, 1);
+(20, 4, 'Travel Problems', 'How to handle common issues that may arise when traveling.', 5, 20, 1),
+(21, 5, 'Saluti e Presentazioni', 'Learn how to say hello and introduce yourself in Italian.', 1, 15, 1),
+(22, 5, 'Pronuncia di Base', 'Master the essential sounds of Italian language.', 2, 20, 1),
+(23, 5, 'Numeri 1-20', 'Learn how to count from 1 to 20 in Italian.', 3, 15, 1),
+(24, 5, 'Domande Semplici', 'Learn how to ask and answer basic questions in Italian.', 4, 20, 1),
+(25, 5, 'Frasi Comuni', 'Essential phrases to help you in everyday situations.', 5, 15, 1),
+(26, 6, 'Routine Quotidiane', 'Vocabulary for describing your daily activities.', 1, 20, 1),
+(27, 6, 'Verbi al Presente', 'Learn how to conjugate common verbs in present tense.', 2, 25, 1),
+(28, 6, 'Dire l\'Ora', 'Learn how to tell and ask for time in Italian.', 3, 15, 1),
+(29, 6, 'Giorni e Mesi', 'Learn the days of the week and months of the year.', 4, 15, 1),
+(30, 6, 'Espressioni sul Tempo', 'Describe different weather conditions in Italian.', 5, 15, 1),
+(31, 7, 'Al Supermercato', 'Learn vocabulary and expressions for grocery shopping.', 1, 20, 1),
+(32, 7, 'Al Ristorante', 'How to order food and interact with waitstaff in Italian.', 2, 25, 1),
+(33, 7, 'Shopping per Vestiti', 'Vocabulary for clothing items and shopping expressions.', 3, 20, 1),
+(34, 7, 'Denaro e Numeri', 'Learn about euros and how to discuss prices in Italian.', 4, 15, 1),
+(35, 7, 'Fare Acquisti', 'Practice conversations for making purchases in different settings.', 5, 20, 1),
+(36, 8, 'Vocabolario dei Trasporti', 'Learn words for different modes of transportation in Italian.', 1, 15, 1),
+(37, 8, 'Chiedere Indicazioni', 'How to ask for and understand directions in Italian.', 2, 20, 1),
+(38, 8, 'Prenotazioni Alberghiere', 'Vocabulary and phrases for booking and staying at hotels.', 3, 20, 1),
+(39, 8, 'Attrazioni Turistiche', 'Discussing sightseeing and cultural attractions in Italian.', 4, 25, 1),
+(40, 8, 'Problemi di Viaggio', 'How to handle common issues that may arise when traveling.', 5, 20, 1);
 
 -- --------------------------------------------------------
 

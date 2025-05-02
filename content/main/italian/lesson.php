@@ -113,7 +113,7 @@ if (isset($_POST['complete_lesson'])) {
     $stmt->bind_param("ii", $user_id, $lesson_id);
     $stmt->execute();
     
-    header("Location: units-content.php?unit=" . $unit_id . "&completed=1");
+    header("Location: lesson.php?id=" . $lesson_id . "&completed=1");
     exit();
 }
 ?>
@@ -211,7 +211,7 @@ if (isset($_POST['complete_lesson'])) {
             border-bottom: none;
         }
         
-        .french-word {
+        .italian-word {
             color: #7F57F1;
             font-weight: 600;
         }
@@ -289,7 +289,7 @@ if (isset($_POST['complete_lesson'])) {
     <div class="content-container">
         <div class="breadcrumb">
             <a href="units.php">Courses</a> &gt; 
-            <a href="units-content.php?unit=<?php echo $unit_id; ?>"><?php echo htmlspecialchars($lesson['unit_title']); ?></a> &gt; 
+            <a href="course-content.php?unit=<?php echo $unit_id; ?>"><?php echo htmlspecialchars($lesson['unit_title']); ?></a> &gt; 
             <span><?php echo htmlspecialchars($lesson['title']); ?></span>
         </div>
         
@@ -306,29 +306,14 @@ if (isset($_POST['complete_lesson'])) {
             
             <div class="lesson-content">
                 <?php
-                $unit_folder = "unit" . intval($unit_id);
+                $unit_folder = "unit" . intval($lesson['unit_id'] - 4); // Adjust ID for Italian units
                 $lesson_file = "lesson" . intval($lesson['order_index']) . ".php";
                 $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                
-                if ($unit_id == 2) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . ".php";
-                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
-                
-                if ($unit_id == 3) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . ".php";
-                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
-                
-                if ($unit_id == 4) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . ".php";
-                    $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
-                }
                 
                 if (file_exists($lesson_path)) {
                     include($lesson_path);
                 } else {
-                    echo "<p>This lesson will help you learn important French vocabulary and grammar concepts.</p>";
+                    echo "<p>This lesson will help you learn important Italian vocabulary and grammar concepts.</p>";
                     echo "<p>The full lesson content will be available soon. Please check back later.</p>";
                     error_log("Missing lesson file: " . $lesson_path);
                 }
@@ -346,7 +331,7 @@ if (isset($_POST['complete_lesson'])) {
         </div>
         
         <div class="navigation-buttons">
-            <a href="units-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
+            <a href="course-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
                 <i class='bx bx-arrow-back'></i> Back to Unit
             </a>
         </div>
@@ -359,4 +344,3 @@ if (isset($_POST['complete_lesson'])) {
     </script>
 </body>
 </html>
-
