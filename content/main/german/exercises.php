@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 <?php
 require_once '../../../database/connect.php';
 ?>
@@ -201,6 +201,4 @@ require_once '../../../database/connect.php';
     </script>
 </body>
 </html>
-=======
 
->>>>>>> Stashed changes
