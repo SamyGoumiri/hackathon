@@ -72,9 +72,24 @@ if ($unit_result->num_rows == 0) {
 
 $unit = $unit_result->fetch_assoc();
 
-$lessons_query = "SELECT * FROM lessons 
-                 WHERE unit_id = ? 
-                 ORDER BY order_index ASC";
+$lessons_query = "SELECT l.*, 
+                 CASE 
+                    WHEN l.title LIKE '%(%' THEN l.title
+                    WHEN l.title = 'Saludos y Presentaciones' THEN 'Saludos y Presentaciones (Greetings and Introductions)'
+                    WHEN l.title = 'Pronunciación Básica' THEN 'Pronunciación Básica (Basic Pronunciation)'
+                    WHEN l.title = 'Números 1-20' THEN 'Números 1-20 (Numbers 1-20)'
+                    WHEN l.title = 'Preguntas Simples' THEN 'Preguntas Simples (Simple Questions)'
+                    WHEN l.title = 'Frases Comunes' THEN 'Frases Comunes (Common Phrases)'
+                    WHEN l.title = 'Rutinas Diarias' THEN 'Rutinas Diarias (Daily Routines)'
+                    WHEN l.title = 'Verbos en Presente' THEN 'Verbos en Presente (Present Tense Verbs)'
+                    WHEN l.title = 'Decir la Hora' THEN 'Decir la Hora (Telling Time)'
+                    WHEN l.title = 'Días y Meses' THEN 'Días y Meses (Days and Months)'
+                    WHEN l.title = 'Expresiones sobre el Clima' THEN 'Expresiones sobre el Clima (Weather Expressions)'
+                    ELSE CONCAT(l.title, ' (', l.title, ')')
+                 END AS display_title
+                 FROM lessons l
+                 WHERE l.unit_id = ? 
+                 ORDER BY l.order_index ASC";
 $stmt = $conn->prepare($lessons_query);
 $stmt->bind_param("i", $unit_id);
 $stmt->execute();
@@ -306,7 +321,7 @@ $stmt->execute();
                 <div class="lesson-header">
                     <div class="lesson-title">
                         <span class="lesson-number"><?php echo $lesson_number; ?></span>
-                        <h2><?php echo htmlspecialchars($lesson['title']); ?></h2>
+                        <h2><?php echo htmlspecialchars($lesson['display_title']); ?></h2>
                     </div>
                     <div class="lesson-status">
                         <?php if ($is_locked) { ?>
