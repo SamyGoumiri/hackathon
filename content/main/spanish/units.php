@@ -37,6 +37,7 @@ $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $units_result = $stmt->get_result();
 
+// Improved unit progress tracking
 $progress_query = "SELECT l.unit_id, COUNT(l.lesson_id) AS total_lessons, 
                    COUNT(up.lesson_id) AS completed_lessons
                    FROM lessons l
@@ -56,11 +57,17 @@ while ($row = $progress_result->fetch_assoc()) {
     ];
 }
 
-$highest_accessed_unit = 1;
-foreach ($unit_progress as $unit_id => $progress) {
-    if ($progress['completed'] > 0 && $unit_id > $highest_accessed_unit) {
-        $highest_accessed_unit = $unit_id;
-    }
+// Modified: All units are unlocked now
+$unlocked_units = array(); // We'll fill this with all unit IDs
+
+// Get all unit IDs to unlock them
+$all_units_query = "SELECT unit_id FROM units WHERE course_id = ?";
+$stmt = $conn->prepare($all_units_query);
+$stmt->bind_param("i", $course_id);
+$stmt->execute();
+$all_units_result = $stmt->get_result();
+while($unit = $all_units_result->fetch_assoc()) {
+    $unlocked_units[] = $unit['unit_id'];
 }
 
 if(isset($_GET['unit'])) {
@@ -83,7 +90,20 @@ if(isset($_GET['unit'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
     <title>Lango - Spanish Courses</title>
-
+    <style>
+        .course-content {
+            display: none;
+            padding: 0 20px 20px;
+        }
+        
+        .course-item.expanded .course-content {
+            display: block;
+        }
+        
+        .course-header {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -119,6 +139,12 @@ if(isset($_GET['unit'])) {
     <div class="content-container">
         <h1>Spanish Courses <img src="https://flagcdn.com/w40/es.png" alt="Spanish Flag" class="flag-icon"></h1>
         
+        <?php if (isset($_GET['error']) && $_GET['error'] == 'locked') { ?>
+        <div class="alert alert-warning">
+            <i class='bx bx-lock-alt'></i> You need to complete previous units before accessing this one.
+        </div>
+        <?php } ?>
+        
         <div class="course-list">
             <?php 
             $unit_count = 1;
@@ -134,7 +160,8 @@ if(isset($_GET['unit'])) {
             
             if ($units_result->num_rows > 0) {
                 while($unit = $units_result->fetch_assoc()) {
-                    $is_locked = ($unit_count > 1 && $unit['unit_id'] > $highest_accessed_unit + 2);
+                    // All units are unlocked now
+                    $is_locked = false;
                     
                     $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
                     $stmt = $conn->prepare($lessons_query);
@@ -152,7 +179,7 @@ if(isset($_GET['unit'])) {
                         $difficulty_text = "Intermediate";
                     }
             ?>
-            <div class="course-item<?php echo $is_locked ? ' locked' : ''; ?>">
+            <div class="course-item">
                 <div class="course-header">
                     <h2><?php echo htmlspecialchars($unit['title']); ?></h2>
                     <span class="difficulty <?php echo $difficulty; ?>"><?php echo $difficulty_text; ?></span>
@@ -178,13 +205,8 @@ if(isset($_GET['unit'])) {
                     
                     <div class="course-actions">
                         <span class="lesson-count"><?php echo $lesson_count; ?> Lessons</span>
-                        <?php if (!$is_locked) { ?>
+                        <!-- All units now have the Start Unit button -->
                         <a href="units-content.php?unit=<?php echo $unit['unit_id']; ?>" class="btn btn-primary">Start Unit</a>
-                        <?php } else { ?>
-                        <div class="lock-message">
-                            <i class='bx bx-lock-alt'></i> Complete previous units to unlock
-                        </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -211,9 +233,7 @@ if(isset($_GET['unit'])) {
         document.querySelectorAll('.course-header').forEach(header => {
             header.addEventListener('click', function() {
                 const courseItem = this.parentElement;
-                if (!courseItem.classList.contains('locked')) {
-                    courseItem.classList.toggle('expanded');
-                }
+                courseItem.classList.toggle('expanded');
             });
         });
         document.querySelector('.user-info').addEventListener('click', function() {

@@ -40,17 +40,15 @@ require_once '../../../database/connect.php';
         const totalQuestions = 10;
         let answered = false;
 
-
         let vocabQuestions = [
-            { question: "What does this word mean in french?", word: "Train", image: "https://img.icons8.com/dusk/64/train.png", options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], answer: "Zug" },
+            { question: "What does this word mean in German?", word: "Train", image: "https://img.icons8.com/dusk/64/train.png", options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], answer: "Zug" },
             { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein","Ticket","Pass", "Karte"], answer: "Pass" }
         ];
-        
+
         let fillQuestions = [
             { question: "Fill in the blank: Ich ___ müde.", answer: "bin" },
             { question: "Fill in the blank: Er ___ nach Hause.", answer: "geht" }
         ];
-
 
         function loadQuestion() {
             const questionArea = document.getElementById("questionArea");

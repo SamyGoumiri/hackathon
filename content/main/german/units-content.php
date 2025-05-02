@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once "../../../database/connect.php";
@@ -297,7 +296,7 @@ $stmt->execute();
         </div>
         
         <div class="navigation-buttons">
-            <a href="courses.php" class="btn btn-secondary">
+            <a href="units.php" class="btn btn-secondary">
                 <i class='bx bx-arrow-back'></i> Back to Courses
             </a>
             <?php if ($completion_percentage == 100) { ?>
