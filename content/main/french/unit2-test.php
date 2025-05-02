@@ -464,7 +464,7 @@ if (isset($_POST['submit_test'])) {
                 <a href="units-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
                     <i class='bx bx-arrow-back'></i> Back to Unit
                 </a>
-                <a href="courses.php" class="btn btn-primary">
+                <a href="units.php" class="btn btn-primary">
                     Continue to Next Unit <i class='bx bx-right-arrow-alt'></i>
                 </a>
             </div>
