@@ -413,12 +413,12 @@ CREATE TABLE `user_progress` (
 -- Déchargement des données de la table `user_progress`
 --
 
-INSERT INTO `user_progress` (`progress_id`, `user_id`, `lesson_id`, `status`, `completion_date`, `score`, `last_activity`) VALUES
-(1, 1, 41, 'completed', '2025-05-02 16:07:09', NULL, '2025-05-02 16:07:09'),
-(2, 1, 42, 'completed', '2025-05-02 16:09:00', NULL, '2025-05-02 16:09:00'),
-(3, 1, 43, 'completed', '2025-05-02 16:09:08', NULL, '2025-05-02 16:09:08'),
-(4, 1, 44, 'completed', '2025-05-02 16:09:15', NULL, '2025-05-02 16:09:15'),
-(5, 1, 45, 'completed', '2025-05-02 16:09:18', NULL, '2025-05-02 16:09:18'),
+INSERT INTO `user_progress` (`progress_id`, `user_id`, `lesson_id`, `status`, `completion_date`, `score`, `last_activity`, `attempts`) VALUES
+(1, 1, 41, 'completed', '2025-05-02 16:07:09', NULL, '2025-05-02 16:07:09', 1),
+(2, 1, 42, 'completed', '2025-05-02 16:09:00', NULL, '2025-05-02 16:09:00', 1),
+(3, 1, 43, 'completed', '2025-05-02 16:09:08', NULL, '2025-05-02 16:09:08', 1),
+(4, 1, 44, 'completed', '2025-05-02 16:09:15', NULL, '2025-05-02 16:09:15', 1),
+(5, 1, 45, 'completed', '2025-05-02 16:09:18', NULL, '2025-05-02 16:09:18', 1),
 (6, 1, 1, 'completed', '2025-04-28 10:35:22', 95, '2025-04-28 10:35:22', 1),
 (7, 1, 2, 'completed', '2025-04-29 11:50:45', 88, '2025-04-29 11:50:45', 1),
 (8, 1, 3, 'completed', '2025-04-30 09:40:18', 92, '2025-04-30 09:40:18', 2),
