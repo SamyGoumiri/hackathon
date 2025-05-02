@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -35,5 +36,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
