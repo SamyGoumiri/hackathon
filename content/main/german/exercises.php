@@ -42,20 +42,19 @@ require_once '../../../database/connect.php';
 
         let vocabQuestions = [
             { question: "What does this word mean in German?", word: "Train", image: "https://img.icons8.com/dusk/64/train.png", options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], answer: "Zug" },
-<<<<<<< HEAD
             { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein","Ticket","Pass", "Karte"], answer: "Pass" },
             { question: "What does this word mean in German?", word: "Book", image: "https://img.icons8.com/dusk/100/book.png", options: ["Buch", "Heft", "Papier", "Stift"], answer: "Buch" },
             { question: "What does this word mean in German?", word: "House", image: "https://img.icons8.com/emoji/100/house-emoji.png", options: ["Tur", "Zimmer", "Flugzeug", "Haus"], answer: "Haus" }
-
-
-=======
             { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein","Ticket","Pass", "Karte"], answer: "Pass" }
->>>>>>> b95a19720fb71f81ccb06e978a684faff8e1b166
+
         ];
 
         let fillQuestions = [
             { question: "Fill in the blank: Ich ___ müde.", answer: "bin" },
             { question: "Fill in the blank: Er ____ nach Hause.", answer: "geht" }
+            { question: "Fill in the blank: Ich  Fußball.", answer: "spiele" },
+            { question: "Fill in the blank: Sie  ein Buch.", answer: "liest" },
+            { question: "Du ___ sehr schnell.", answer: "laufst" }
         ];
 
         function loadQuestion() {
