@@ -30,67 +30,69 @@ $lessons_data = $lessons_result->fetch_assoc();
 
 if ($lessons_data['completed_lessons'] < $lessons_data['total_lessons']) {
     $_SESSION['error_message'] = "Please complete all lessons in this unit before taking the test.";
-    header("Location: course-content.php?unit=" . $unit_id);
+    header("Location: units-content.php?unit=" . $unit_id);
     exit();
 }
 
 $score = 0;
 $test_submitted = false;
 
-if (isset($_POST['submit_test'])) {
-    $test_submitted = true;
-    $total_questions = 10;
-    
-    // Question 1
-    if (isset($_POST['q1']) && $_POST['q1'] === 'se_reveiller') {
-        $score++;
-    }
-    
-    // Question 2
-    if (isset($_POST['q2']) && $_POST['q2'] === 'prendre') {
-        $score++;
-    }
-    
-    // Question 3
-    if (isset($_POST['q3']) && $_POST['q3'] === 'midi') {
-        $score++;
-    }
-    
-    // Question 4
-    if (isset($_POST['q4']) && $_POST['q4'] === 'huit_heures_et_quart') {
-        $score++;
-    }
-    
-    // Question 5
-    if (isset($_POST['q5']) && $_POST['q5'] === 'mercredi') {
-        $score++;
-    }
-    
-    // Question 6
-    if (isset($_POST['q6']) && strtolower(trim($_POST['q6'])) === 'janvier') {
-        $score++;
-    }
-    
-    // Question 7
-    if (isset($_POST['q7']) && $_POST['q7'] === 'il_fait_chaud') {
-        $score++;
-    }
-    
-    // Question 8
-    if (isset($_POST['q8']) && strtolower(trim($_POST['q8'])) === 'il pleut') {
-        $score++;
-    }
-    
-    // Question 9
-    $q9_answer = isset($_POST['q9']) ? $_POST['q9'] : '';
-    if ($q9_answer === 'ete') {
-        $score++;
-    }
-    
-    // Question 10
-    if (isset($_POST['q10']) && $_POST['q10'] === 'je_suis') {
-        $score++;
-    }
+
+$score = 0;
+
+// Question 1
+if (isset($_POST['q1']) && $_POST['q1'] === 'aufwachen') {
+    $score++;
+}
+
+// Question 2
+if (isset($_POST['q2']) && $_POST['q2'] === 'nehmen') {
+    $score++;
+}
+
+// Question 3
+if (isset($_POST['q3']) && $_POST['q3'] === 'Mittag') {
+    $score++;
+}
+
+// Question 4
+if (isset($_POST['q4']) && $_POST['q4'] === 'acht_uhr_viertel_nach') {
+    $score++;
+}
+
+// Question 5
+if (isset($_POST['q5']) && $_POST['q5'] === 'Mittwoch') {
+    $score++;
+}
+
+// Question 6
+if (isset($_POST['q6']) && strtolower(trim($_POST['q6'])) === 'januar') {
+    $score++;
+}
+
+// Question 7
+if (isset($_POST['q7']) && $_POST['q7'] === 'es_ist_heiss') {
+    $score++;
+}
+
+// Question 8
+if (isset($_POST['q8']) && strtolower(trim($_POST['q8'])) === 'es_regnet') {
+    $score++;
+}
+
+// Question 9
+$q9_answer = isset($_POST['q9']) ? $_POST['q9'] : '';
+if ($q9_answer === 'der_sommer') {
+    $score++;
+}
+
+// Question 10
+if (isset($_POST['q10']) && $_POST['q10'] === 'ich_bin') {
+    $score++;
+}
+
+
+
     
     $percentage_score = ($score / $total_questions) * 100;
     
@@ -105,7 +107,7 @@ if (isset($_POST['submit_test'])) {
     $stmt = $conn->prepare($record_test_query);
     $stmt->bind_param("is", $user_id, $test_details);
     $stmt->execute();
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -114,9 +116,11 @@ if (isset($_POST['submit_test'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="french.css">
-    <title>Lango - Unit 2 Test: La Vie Quotidienne</title>
+    <link rel="stylesheet" href="../style.css">
+    <title>Lango - Unit 2 Test: Der Alltag/title>
+
     <style>
+
         .test-container {
             background-color: white;
             border-radius: 20px;
@@ -231,7 +235,7 @@ if (isset($_POST['submit_test'])) {
     </header>
 
     <div class="content-container">
-        <h1>Unit 2 Test: La Vie Quotidienne (Daily Life)</h1>
+        <h1>Unit 2 Test: Der Alltag (Daily Life)</h1>
         
         <?php if ($test_submitted): ?>
         <div class="result-container">
@@ -239,9 +243,9 @@ if (isset($_POST['submit_test'])) {
             <div class="score-display"><?php echo $score; ?> / 10 points (<?php echo round($percentage_score); ?>%)</div>
             
             <?php if ($percentage_score >= 80): ?>
-                <div class="result-message success">Excellent! You have a strong grasp of daily life vocabulary in French.</div>
+                <div class="result-message success">Excellent! You have a strong grasp of daily life vocabulary in German.</div>
             <?php elseif ($percentage_score >= 60): ?>
-                <div class="result-message neutral">Good job! You understand many aspects of daily life in French, but there's room for improvement.</div>
+                <div class="result-message neutral">Good job! You understand many aspects of daily life in German, but there's room for improvement.</div>
             <?php else: ?>
                 <div class="result-message failure">You might need more practice with daily routines and time expressions. Consider reviewing the lessons again.</div>
             <?php endif; ?>
@@ -250,219 +254,137 @@ if (isset($_POST['submit_test'])) {
         
         <div class="test-container">
             <?php if (!$test_submitted): ?>
-            <p>This test will assess your knowledge of daily routines, telling time, days and months, and weather expressions in French.</p>
+            <p>This test will assess your knowledge of daily routines, telling time, days and months, and weather expressions in German.</p>
             <p>Answer all questions to the best of your ability.</p>
             
             <form method="post" action="">
-                <!-- Question 1 -->
-                <div class="question-container">
-                    <div class="question-text">1. Which phrase means "to wake up" in French?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q1_a" name="q1" value="se_lever">
-                            <label for="q1_a">se lever</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1_b" name="q1" value="se_reveiller">
-                            <label for="q1_b">se réveiller</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1_c" name="q1" value="se_doucher">
-                            <label for="q1_c">se doucher</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1_d" name="q1" value="shabiller">
-                            <label for="q1_d">s'habiller</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 2 -->
-                <div class="question-container">
-                    <div class="question-text">2. Which verb means "to take" or "to have" (as in having breakfast) in French?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q2_a" name="q2" value="prendre">
-                            <label for="q2_a">prendre</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2_b" name="q2" value="faire">
-                            <label for="q2_b">faire</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2_c" name="q2" value="aller">
-                            <label for="q2_c">aller</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2_d" name="q2" value="avoir">
-                            <label for="q2_d">avoir</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 3 -->
-                <div class="question-container">
-                    <div class="question-text">3. What is the French word for "noon"?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q3_a" name="q3" value="minuit">
-                            <label for="q3_a">minuit</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3_b" name="q3" value="matin">
-                            <label for="q3_b">matin</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3_c" name="q3" value="midi">
-                            <label for="q3_c">midi</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3_d" name="q3" value="soir">
-                            <label for="q3_d">soir</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 4 -->
-                <div class="question-container">
-                    <div class="question-text">4. How do you say "8:15" (quarter past eight) in French?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q4_a" name="q4" value="huit_heures_moins_le_quart">
-                            <label for="q4_a">huit heures moins le quart</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4_b" name="q4" value="huit_heures_et_quart">
-                            <label for="q4_b">huit heures et quart</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4_c" name="q4" value="huit_heures_quinze">
-                            <label for="q4_c">huit heures quinze</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4_d" name="q4" value="huit_quart">
-                            <label for="q4_d">huit quart</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 5 -->
-                <div class="question-container">
-                    <div class="question-text">5. Which day comes between Tuesday and Thursday?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q5_a" name="q5" value="lundi">
-                            <label for="q5_a">lundi</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5_b" name="q5" value="mardi">
-                            <label for="q5_b">mardi</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5_c" name="q5" value="mercredi">
-                            <label for="q5_c">mercredi</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5_d" name="q5" value="vendredi">
-                            <label for="q5_d">vendredi</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 6 -->
-                <div class="question-container">
-                    <div class="question-text">6. What is the first month of the year in French?</div>
-                    <div class="options-container">
-                        <input type="text" name="q6" class="text-input" placeholder="Type your answer in French">
-                    </div>
-                </div>
-                
-                <!-- Question 7 -->
-                <div class="question-container">
-                    <div class="question-text">7. How do you say "It's hot" when referring to the weather?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q7_a" name="q7" value="il_pleut">
-                            <label for="q7_a">Il pleut</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q7_b" name="q7" value="il_fait_du_soleil">
-                            <label for="q7_b">Il fait du soleil</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q7_c" name="q7" value="il_fait_chaud">
-                            <label for="q7_c">Il fait chaud</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q7_d" name="q7" value="il_fait_froid">
-                            <label for="q7_d">Il fait froid</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 8 -->
-                <div class="question-container">
-                    <div class="question-text">8. Translate: "It's raining."</div>
-                    <div class="options-container">
-                        <input type="text" name="q8" class="text-input" placeholder="Type your answer in French">
-                    </div>
-                </div>
-                
-                <!-- Question 9 -->
-                <div class="question-container">
-                    <div class="question-text">9. Which season in French corresponds to summer?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q9_a" name="q9" value="printemps">
-                            <label for="q9_a">le printemps</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q9_b" name="q9" value="ete">
-                            <label for="q9_b">l'été</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q9_c" name="q9" value="automne">
-                            <label for="q9_c">l'automne</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q9_d" name="q9" value="hiver">
-                            <label for="q9_d">l'hiver</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 10 -->
-                <div class="question-container">
-                    <div class="question-text">10. What is the conjugation of "être" (to be) for "I am"?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q10_a" name="q10" value="je_suis">
-                            <label for="q10_a">je suis</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q10_b" name="q10" value="tu_es">
-                            <label for="q10_b">tu es</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q10_c" name="q10" value="il_est">
-                            <label for="q10_c">il est</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q10_d" name="q10" value="nous_sommes">
-                            <label for="q10_d">nous sommes</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="submit-container">
-                    <button type="submit" name="submit_test" class="btn btn-primary">Submit Test</button>
-                </div>
-            </form>
+    <!-- Question 1 -->
+    <div class="question-container">
+        <div class="question-text">1. Which word means "to wake up" in German?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q1_a" name="q1" value="aufstehen">
+                <label for="q1_a">aufstehen</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q1_b" name="q1" value="aufwachen">
+                <label for="q1_b">aufwachen</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q1_c" name="q1" value="duschen">
+                <label for="q1_c">duschen</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q1_d" name="q1" value="anziehen">
+                <label for="q1_d">anziehen</label>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Question 2 -->
+    <div class="question-container">
+        <div class="question-text">2. Which verb means "to take" or "to have" (e.g., to have breakfast) in German?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q2_a" name="q2" value="nehmen">
+                <label for="q2_a">nehmen</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q2_b" name="q2" value="machen">
+                <label for="q2_b">machen</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q2_c" name="q2" value="gehen">
+                <label for="q2_c">gehen</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q2_d" name="q2" value="haben">
+                <label for="q2_d">haben</label>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Question 3 -->
+    <div class="question-container">
+        <div class="question-text">3. How do you say "noon" in German?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q3_a" name="q3" value="Mitternacht">
+                <label for="q3_a">Mitternacht</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q3_b" name="q3" value="Morgen">
+                <label for="q3_b">Morgen</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q3_c" name="q3" value="Mittag">
+                <label for="q3_c">Mittag</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q3_d" name="q3" value="Abend">
+                <label for="q3_d">Abend</label>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Question 4 -->
+    <div class="question-container">
+        <div class="question-text">4. How do you say "8:15" (quarter past eight) in German?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q4_a" name="q4" value="acht_uhr_viertel_vor">
+                <label for="q4_a">acht Uhr viertel vor</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q4_b" name="q4" value="acht_uhr_viertel_nach">
+                <label for="q4_b">acht Uhr viertel nach</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q4_c" name="q4" value="acht_uhr_fuenfzehn">
+                <label for="q4_c">acht Uhr fünfzehn</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q4_d" name="q4" value="acht_quart">
+                <label for="q4_d">acht quart</label>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Question 5 -->
+    <div class="question-container">
+        <div class="question-text">5. Which day comes between Tuesday and Thursday?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q5_a" name="q5" value="Montag">
+                <label for="q5_a">Montag</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q5_b" name="q5" value="Dienstag">
+                <label for="q5_b">Dienstag</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q5_c" name="q5" value="Mittwoch">
+                <label for="q5_c">Mittwoch</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q5_d" name="q5" value="Freitag">
+                <label for="q5_d">Freitag</label>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Question 6 -->
+    <div class="question-container">
+        <div class="question-text">6. What is the first month of the year in German?</div>
+        <div class="options-container">
+            <input type="text" name="q6"
+
             <?php else: ?>
             <div class="navigation-buttons">
-                <a href="course-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
+                <a href="units-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
                     <i class='bx bx-arrow-back'></i> Back to Unit
                 </a>
+
                 <a href="courses.php" class="btn btn-primary">
                     Continue to Next Unit <i class='bx bx-right-arrow-alt'></i>
                 </a>
@@ -477,4 +399,5 @@ if (isset($_POST['submit_test'])) {
         });
     </script>
 </body>
+
 </html>
