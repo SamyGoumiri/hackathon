@@ -1,72 +1,66 @@
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: black;
-    font-family: sans-serif;
-  }
-  
-  .container {
-    text-align: center;
-  }
-  
+  margin: 0;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  background-image: url(../../resources/image/file-20210111-23-bqsfwl.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
-  .globe {
-    width: 200px;
-    height: 200px;
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Globe_icon.svg/1024px-Globe_icon.svg.png');
-    background-size: cover;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    animation: spin 20s linear infinite;
+.container{
+  text-align: center;
+  width: 600px;
+  background: transparent;
+  border: 2px solid rgba(255 , 255 , 255 ,.2);
+  backdrop-filter: blur(7px);
+  box-shadow: 0 0 10px rgba(0 , 0 , 0,.5);
+  color: rgb(255, 255, 255);
+  border-radius: 12px;
+  padding: 30px 40px;
+  height: auto;
+ 
+}
+
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.languages {
+  margin-top: 50px;
+}
+
+.languages button {
+  background-color: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin: 8px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.languages button:hover {
+  transform: scale(1.1);
+  background-color: #333;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
+    font-size: 0.9rem;
   }
-  
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  
+
   .languages button {
-    background: #222;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 8px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: transform 0.3s ease; background: 0.3s;
+    padding: 10px 14px;
+    font-size: 0.9rem;
   }
-  
-  .languages button:hover {
-    transform: scale(1.1);
-    background: #444;
-  }
-  
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .disconnect-btn {
-    background: #FF5757;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s;
-  }
-  
-  .disconnect-btn:hover {
-    background: #FF3838;
-  }
+}
