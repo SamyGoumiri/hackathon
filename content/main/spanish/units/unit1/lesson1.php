@@ -12,7 +12,7 @@
     <tr>
         <td class="spanish-word">Buenos días</td>
         <td class="pronunciation">bwenos dias</td>
-        <td>Hello / Good day</td>
+        <td>Hello</td>
     </tr>
     <tr>
         <td class="spanish-word">Halo</td>
