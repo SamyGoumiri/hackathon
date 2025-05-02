@@ -23,11 +23,11 @@
     <div class="globe"></div>
     <h1>Choose your language</h1>
     <div class="languages">
-      <button data-lang="de">Deutsch</button>
-      <button data-lang="it">Italian</button>
-      <button data-lang="es">Spanish</button>
-      <button data-lang="en">English</button>
-      <button data-lang="fr">French</button>
+      <a href = "deutsch/deutsch.php"><button type="button">Deutsch</button></a>
+      <a href = "italian/italian.php"><button type="button">Italian</button></a>
+      <a href = "sapnish/spanish.php"><button type="button">Spanish</button></a>
+      <a href = "english/english.php"><button type="button">English</button></a>
+      <a href = "french/french.php"><button type="button">French</button></a>
     </div>  
   </div>
 
