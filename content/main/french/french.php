@@ -15,10 +15,29 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
+// Check if user is learning French
+$language_query = "SELECT ul.proficiency_level, ul.user_language_id 
+                   FROM user_languages ul 
+                   JOIN languages l ON ul.language_id = l.language_id 
+                   WHERE ul.user_id = ? AND l.code = 'fr' AND ul.is_learning = 1";
+$stmt = $conn->prepare($language_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$lang_result = $stmt->get_result();
+
+// If user is not learning French, redirect to start learning
+if ($lang_result->num_rows === 0) {
+    header("Location: ../start_language.php?lang=fr");
+    exit();
+}
+
+$language_data = $lang_result->fetch_assoc();
+$proficiency_level = $language_data['proficiency_level'];
+
 // Log activity
 $log_query = "INSERT INTO user_activity (user_id, activity_type, activity_details) 
               VALUES (?, 'language_page_access', ?)";
-$details = json_encode(['language' => 'french']);
+$details = json_encode(['language' => 'french', 'proficiency_level' => $proficiency_level]);
 $stmt = $conn->prepare($log_query);
 $stmt->bind_param("is", $user_id, $details);
 $stmt->execute();

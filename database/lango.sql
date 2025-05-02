@@ -106,6 +106,22 @@ CREATE TABLE `user_preferences` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_activity`
+--
+
+CREATE TABLE `user_activity` (
+  `activity_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `activity_type` varchar(50) NOT NULL,
+  `activity_details` text DEFAULT NULL,
+  `timestamp` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`activity_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Constraints for table relations
 --
 
@@ -115,6 +131,9 @@ ALTER TABLE `user_languages`
 
 ALTER TABLE `user_preferences`
   ADD CONSTRAINT `user_preferences_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+ALTER TABLE `user_activity`
+  ADD CONSTRAINT `user_activity_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 COMMIT;
 
