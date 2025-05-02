@@ -5,7 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< Updated upstream:content/main/deutsch/deutsch.php
     <link rel="stylesheet" href="../style.css">
+=======
+    <link rel="stylesheet" href="german.css">
+>>>>>>> Stashed changes:content/main/german/german.php
     <title>Website name</title>
 
 </head>
