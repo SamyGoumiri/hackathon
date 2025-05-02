@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 require_once "../../../database/connect.php";
@@ -125,7 +126,6 @@ if (isset($_POST['complete_lesson'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
-
     <title>Lango - <?php echo htmlspecialchars($lesson['title']); ?></title>
     <style>
         .lesson-container {
