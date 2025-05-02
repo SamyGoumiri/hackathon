@@ -91,12 +91,30 @@ CREATE TABLE `user_languages` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_preferences`
+--
+
+CREATE TABLE `user_preferences` (
+  `preference_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `email_notifications` tinyint(1) NOT NULL DEFAULT 1,
+  `progress_reminders` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`preference_id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Constraints for table relations
 --
 
 ALTER TABLE `user_languages`
   ADD CONSTRAINT `user_languages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `user_languages_ibfk_2` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`);
+
+ALTER TABLE `user_preferences`
+  ADD CONSTRAINT `user_preferences_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 COMMIT;
 
