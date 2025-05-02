@@ -39,6 +39,14 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `users`
+--
+
+-- Note: In production, passwords should be properly hashed
+INSERT INTO `users` (`username`, `first_name`, `last_name`, `email`, `password`, `is_active`) VALUES
+('admin', 'Aziz', 'Boula', 'admin@lango.com', '123456', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -242,6 +250,40 @@ INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`
 (38, 8, 'Prenotazioni Alberghiere', 'Vocabulary and phrases for booking and staying at hotels.', 3, 20, 1),
 (39, 8, 'Attrazioni Turistiche', 'Discussing sightseeing and cultural attractions in Italian.', 4, 25, 1),
 (40, 8, 'Problemi di Viaggio', 'How to handle common issues that may arise when traveling.', 5, 20, 1);
+
+-- Add units for Spanish course
+INSERT INTO `units` (`unit_id`, `course_id`, `title`, `description`, `order_index`, `is_active`) VALUES
+(9, 3, 'Los Fundamentos (The Basics)', 'Learn the foundation of Spanish with basic greetings, introductions, and essential phrases.', 1, 1),
+(10, 3, 'La Vida Cotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(11, 3, 'De Compras (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Spanish-speaking countries.', 3, 1),
+(12, 3, 'Los Viajes (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
+
+-- Add lessons for Spanish units
+INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`, `estimated_time`, `is_active`) VALUES
+-- Unit 9 - Los Fundamentos (The Basics)
+(41, 9, 'Saludos y Presentaciones', 'Learn how to say hello and introduce yourself in Spanish.', 1, 15, 1),
+(42, 9, 'Pronunciación Básica', 'Master the essential sounds of Spanish language.', 2, 20, 1),
+(43, 9, 'Números 1-20', 'Learn how to count from 1 to 20 in Spanish.', 3, 15, 1),
+(44, 9, 'Preguntas Simples', 'Learn how to ask and answer basic questions in Spanish.', 4, 20, 1),
+(45, 9, 'Frases Comunes', 'Essential phrases to help you in everyday situations.', 5, 15, 1),
+-- Unit 10 - La Vida Cotidiana (Daily Life)
+(46, 10, 'Rutinas Diarias', 'Vocabulary for describing your daily activities.', 1, 20, 1),
+(47, 10, 'Verbos en Presente', 'Learn how to conjugate common verbs in present tense.', 2, 25, 1),
+(48, 10, 'Decir la Hora', 'Learn how to tell and ask for time in Spanish.', 3, 15, 1),
+(49, 10, 'Días y Meses', 'Learn the days of the week and months of the year.', 4, 15, 1),
+(50, 10, 'Expresiones sobre el Clima', 'Describe different weather conditions in Spanish.', 5, 15, 1),
+-- Unit 11 - De Compras (Shopping)
+(51, 11, 'En el Supermercado', 'Learn vocabulary and expressions for grocery shopping.', 1, 20, 1),
+(52, 11, 'En el Restaurante', 'How to order food and interact with waitstaff in Spanish.', 2, 25, 1),
+(53, 11, 'Comprando Ropa', 'Vocabulary for clothing items and shopping expressions.', 3, 20, 1),
+(54, 11, 'Dinero y Números', 'Learn about euros and how to discuss prices in Spanish.', 4, 15, 1),
+(55, 11, 'Haciendo Compras', 'Practice conversations for making purchases in different settings.', 5, 20, 1),
+-- Unit 12 - Los Viajes (Traveling)
+(56, 12, 'Vocabulario de Transporte', 'Learn words for different modes of transportation in Spanish.', 1, 15, 1),
+(57, 12, 'Pidiendo Direcciones', 'How to ask for and understand directions in Spanish.', 2, 20, 1),
+(58, 12, 'Reservaciones de Hotel', 'Vocabulary and phrases for booking and staying at hotels.', 3, 20, 1),
+(59, 12, 'Atracciones Turísticas', 'Discussing sightseeing and cultural attractions in Spanish.', 4, 25, 1),
+(60, 12, 'Problemas de Viaje', 'How to handle common issues that may arise when traveling.', 5, 20, 1);
 
 -- --------------------------------------------------------
 

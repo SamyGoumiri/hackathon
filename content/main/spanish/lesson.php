@@ -17,7 +17,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: courses.php");
+    header("Location: units.php");
     exit();
 }
 
@@ -33,7 +33,7 @@ $stmt->execute();
 $lesson_result = $stmt->get_result();
 
 if ($lesson_result->num_rows == 0) {
-    header("Location: courses.php");
+    header("Location: units.php");
     exit();
 }
 
@@ -288,7 +288,7 @@ if (isset($_POST['complete_lesson'])) {
 
     <div class="content-container">
         <div class="breadcrumb">
-            <a href="courses.php">Courses</a> &gt; 
+            <a href="units.php">Courses</a> &gt; 
             <a href="units-content.php?unit=<?php echo $unit_id; ?>"><?php echo htmlspecialchars($lesson['unit_title']); ?></a> &gt; 
             <span><?php echo htmlspecialchars($lesson['title']); ?></span>
         </div>
@@ -307,21 +307,21 @@ if (isset($_POST['complete_lesson'])) {
             <div class="lesson-content">
                 <?php
                 $unit_folder = "unit" . intval($unit_id);
-                $lesson_file = "lesson" . intval($lesson['order_index']) . ".php";
+                $lesson_file = "lesson" . intval($lesson['order_index']) . "sp.php";
                 $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 
                 if ($unit_id == 2) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . ".php";
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . "sp.php";
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 
                 if ($unit_id == 3) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . ".php";
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . "sp.php";
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 
                 if ($unit_id == 4) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . ".php";
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . "sp.php";
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 

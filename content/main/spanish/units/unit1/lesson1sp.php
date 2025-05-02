@@ -12,7 +12,7 @@
     <tr>
         <td class="spanish-word">Buenos días</td>
         <td class="pronunciation">bwenos dias</td>
-        <td>Hello / Good morning</td>
+        <td>Hello / Good day</td>
     </tr>
     <tr>
         <td class="spanish-word">Hola</td>
@@ -63,7 +63,7 @@
 
 <h2>Key Points to Remember</h2>
 <ul>
-    <li>Use "Buenos días" during the morning, "Buenas tardes" in the afternoon, and "Buenas noches" in the evening.</li>
+    <li>Use "Buenos días" during the day, "Buenas tardes" in the afternoon, and "Buenas noches" in the evening.</li>
     <li>"Hola" is informal and can be used at any time of day.</li>
     <li>When saying "Encantado", men say "Encantado" and women say "Encantada".</li>
 </ul>

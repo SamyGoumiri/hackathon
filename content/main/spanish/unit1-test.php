@@ -42,52 +42,52 @@ if (isset($_POST['submit_test'])) {
     $total_questions = 10;
     
     // Question 1
-    if (isset($_POST['q1']) && $_POST['q1'] === 'bonjour') {
+    if (isset($_POST['q1']) && $_POST['q1'] === 'hola') {
         $score++;
     }
     
     // Question 2
-    if (isset($_POST['q2']) && $_POST['q2'] === 'je_mappelle') {
+    if (isset($_POST['q2']) && $_POST['q2'] === 'me_llamo') {
         $score++;
     }
     
     // Question 3
-    if (isset($_POST['q3']) && $_POST['q3'] === 'au_revoir') {
+    if (isset($_POST['q3']) && $_POST['q3'] === 'adios') {
         $score++;
     }
     
     // Question 4
-    if (isset($_POST['q4']) && $_POST['q4'] === 'enchante') {
+    if (isset($_POST['q4']) && $_POST['q4'] === 'mucho_gusto') {
         $score++;
     }
     
     // Question 5
-    if (isset($_POST['q5']) && $_POST['q5'] === 'douze') {
+    if (isset($_POST['q5']) && $_POST['q5'] === 'doce') {
         $score++;
     }
     
     // Question 6
-    if (isset($_POST['q6']) && $_POST['q6'] === 'comment') {
+    if (isset($_POST['q6']) && $_POST['q6'] === 'cómo') {
         $score++;
     }
     
     // Question 7
-    if (isset($_POST['q7']) && $_POST['q7'] === 'je_ne_comprends_pas') {
+    if (isset($_POST['q7']) && $_POST['q7'] === 'no_entiendo') {
         $score++;
     }
     
     // Question 8
-    if (isset($_POST['q8']) && strtolower(trim($_POST['q8'])) === 'où') {
+    if (isset($_POST['q8']) && strtolower(trim($_POST['q8'])) === 'dónde') {
         $score++;
     }
     
     // Question 9
-    if (isset($_POST['q9']) && strtolower(trim($_POST['q9'])) === 'merci beaucoup') {
+    if (isset($_POST['q9']) && strtolower(trim($_POST['q9'])) === 'muchas gracias') {
         $score++;
     }
     
     // Question 10
-    if (isset($_POST['q10']) && $_POST['q10'] === 'dix-sept') {
+    if (isset($_POST['q10']) && $_POST['q10'] === 'diecisiete') {
         $score++;
     }
     

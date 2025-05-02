@@ -116,7 +116,7 @@ if (isset($_POST['submit_test'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
 
-    <title>Lango - Unit 2 Test: La Vie Quotidienne</title>
+    <title>Lango - Unit 2 Test: La Vida Cotidiana</title>
     <style>
         .test-container {
             background-color: white;
