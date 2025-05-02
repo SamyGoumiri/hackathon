@@ -71,6 +71,145 @@ while ($lang = $learning_result->fetch_assoc()) {
     $learning_languages[$lang['code']]['progress_percentage'] = ($total_units > 0) ? 
         ($completed_units / $total_units) * 100 : 0;
 }
+
+// Calculate Daily Streak
+function calculateStreak($conn, $user_id) {
+    $today = date('Y-m-d');
+    $streak = 0;
+    $day = $today;
+    
+    // Check if user was active today
+    $today_query = "SELECT COUNT(*) as active FROM user_activity 
+                   WHERE user_id = ? AND DATE(timestamp) = ?";
+    $stmt = $conn->prepare($today_query);
+    $stmt->bind_param("is", $user_id, $today);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $today_active = $result->fetch_assoc()['active'] > 0;
+    
+    if (!$today_active) {
+        // If not active today, check yesterday to see if streak is broken
+        $yesterday = date('Y-m-d', strtotime('-1 day'));
+        $yesterday_query = "SELECT COUNT(*) as active FROM user_activity 
+                           WHERE user_id = ? AND DATE(timestamp) = ?";
+        $stmt = $conn->prepare($yesterday_query);
+        $stmt->bind_param("is", $user_id, $yesterday);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $yesterday_active = $result->fetch_assoc()['active'] > 0;
+        
+        if (!$yesterday_active) {
+            return 0; // Streak broken
+        }
+        
+        $day = $yesterday; // Start counting from yesterday
+        $streak = 1;
+    } else {
+        $streak = 1; // Active today, start with 1
+    }
+    
+    // Count back days with activity
+    while (true) {
+        $previous_day = date('Y-m-d', strtotime("$day -1 day"));
+        $query = "SELECT COUNT(*) as active FROM user_activity 
+                 WHERE user_id = ? AND DATE(timestamp) = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("is", $user_id, $previous_day);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $was_active = $result->fetch_assoc()['active'] > 0;
+        
+        if (!$was_active) {
+            break;
+        }
+        
+        $streak++;
+        $day = $previous_day;
+    }
+    
+    return $streak;
+}
+
+// Calculate Minutes Learned
+function calculateMinutesLearned($conn, $user_id) {
+    $query = "SELECT SUM(l.estimated_time) as total_minutes
+              FROM user_progress up
+              JOIN lessons l ON up.lesson_id = l.lesson_id
+              WHERE up.user_id = ? AND up.status = 'completed'";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
+    
+    return $data['total_minutes'] ?? 0;
+}
+
+// Calculate XP Points (10 XP per completed lesson)
+function calculateXP($conn, $user_id) {
+    $query = "SELECT COUNT(*) as completed_lessons
+              FROM user_progress
+              WHERE user_id = ? AND status = 'completed'";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
+    
+    return $data['completed_lessons'] * 10;
+}
+
+// Calculate Achievements (for now, count completed units)
+function calculateAchievements($conn, $user_id) {
+    $achievements = 0;
+    
+    // Get all units
+    $units_query = "SELECT u.unit_id, u.course_id
+                   FROM units u
+                   JOIN courses c ON u.course_id = c.course_id";
+    $stmt_units = $conn->prepare($units_query);
+    $stmt_units->execute();
+    $units_result = $stmt_units->get_result();
+    
+    while ($unit = $units_result->fetch_assoc()) {
+        $unit_id = $unit['unit_id'];
+        
+        // Count total lessons in this unit
+        $lessons_query = "SELECT COUNT(*) as total_lessons
+                         FROM lessons WHERE unit_id = ?";
+        $stmt_lessons = $conn->prepare($lessons_query);
+        $stmt_lessons->bind_param("i", $unit_id);
+        $stmt_lessons->execute();
+        $lessons_result = $stmt_lessons->get_result();
+        $total_lessons = $lessons_result->fetch_assoc()['total_lessons'];
+        
+        if ($total_lessons > 0) {
+            // Count completed lessons in this unit
+            $completed_lessons_query = "SELECT COUNT(*) as completed_count
+                                      FROM user_progress
+                                      WHERE user_id = ? 
+                                      AND lesson_id IN (SELECT lesson_id FROM lessons WHERE unit_id = ?)
+                                      AND status = 'completed'";
+            $stmt_completed = $conn->prepare($completed_lessons_query);
+            $stmt_completed->bind_param("ii", $user_id, $unit_id);
+            $stmt_completed->execute();
+            $completed_result = $stmt_completed->get_result();
+            $completed_data = $completed_result->fetch_assoc();
+            
+            if ($completed_data['completed_count'] == $total_lessons) {
+                $achievements++;
+            }
+        }
+    }
+    
+    return $achievements;
+}
+
+// Get user stats
+$daily_streak = calculateStreak($conn, $user_id);
+$minutes_learned = calculateMinutesLearned($conn, $user_id);
+$xp_points = calculateXP($conn, $user_id);
+$achievements = calculateAchievements($conn, $user_id);
 ?>
 
 <!DOCTYPE html>
@@ -235,28 +374,28 @@ while ($lang = $learning_result->fetch_assoc()) {
                     <div class="stat-card">
                         <div class="stat-icon"><i class='bx bx-calendar-check'></i></div>
                         <div class="stat-content">
-                            <div class="stat-value">0</div>
+                            <div class="stat-value"><?php echo $daily_streak; ?></div>
                             <div class="stat-label">Daily Streak</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon"><i class='bx bx-time'></i></div>
                         <div class="stat-content">
-                            <div class="stat-value">0</div>
+                            <div class="stat-value"><?php echo $minutes_learned; ?></div>
                             <div class="stat-label">Minutes Learned</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon"><i class='bx bx-star'></i></div>
                         <div class="stat-content">
-                            <div class="stat-value">0</div>
+                            <div class="stat-value"><?php echo $xp_points; ?></div>
                             <div class="stat-label">XP Points</div>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon"><i class='bx bx-crown'></i></div>
                         <div class="stat-content">
-                            <div class="stat-value">0</div>
+                            <div class="stat-value"><?php echo $achievements; ?></div>
                             <div class="stat-label">Achievements</div>
                         </div>
                     </div>
