@@ -55,6 +55,13 @@ while ($row = $progress_result->fetch_assoc()) {
     ];
 }
 
+$highest_accessed_unit = 1;
+foreach ($unit_progress as $unit_id => $progress) {
+    if ($progress['completed'] > 0 && $unit_id > $highest_accessed_unit) {
+        $highest_accessed_unit = $unit_id;
+    }
+}
+
 if(isset($_GET['unit'])) {
     $unit_id = intval($_GET['unit']);
     
@@ -124,7 +131,7 @@ if(isset($_GET['unit'])) {
             
             if ($units_result->num_rows > 0) {
                 while($unit = $units_result->fetch_assoc()) {
-                    $is_locked = ($unit_count > 1 && $unit_count > $last_completed_unit + 1);
+                    $is_locked = ($unit_count > 1 && $unit['unit_id'] > $highest_accessed_unit + 2);
                     
                     $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
                     $stmt = $conn->prepare($lessons_query);
