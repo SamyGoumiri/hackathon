@@ -30,66 +30,58 @@ $lessons_data = $lessons_result->fetch_assoc();
 
 if ($lessons_data['completed_lessons'] < $lessons_data['total_lessons']) {
     $_SESSION['error_message'] = "Please complete all lessons in this unit before taking the test.";
-    header("Location: course-content.php?unit=" . $unit_id);
+    header("Location: units-content.php?unit=" . $unit_id);
     exit();
 }
 
-$score = 0;
-$test_submitted = false;
+//updated the german aswer-checking-logic
 
-if (isset($_POST['submit_test'])) {
-    $test_submitted = true;
-    $total_questions = 10;
-    
-    // Question 1
-    if (isset($_POST['q1']) && $_POST['q1'] === 'bonjour') {
+$score = 0;
+$submitted = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $submitted = true;
+
+    if (!empty($_POST['question1']) && $_POST['question1'] === 'guten_tag') {
         $score++;
     }
-    
-    // Question 2
-    if (isset($_POST['q2']) && $_POST['q2'] === 'je_mappelle') {
+
+    if (!empty($_POST['question2']) && $_POST['question2'] === 'ich_heisse') {
         $score++;
     }
-    
-    // Question 3
-    if (isset($_POST['q3']) && $_POST['q3'] === 'au_revoir') {
+
+    if (!empty($_POST['question3']) && $_POST['question3'] === 'auf_wiedersehen') {
         $score++;
     }
-    
-    // Question 4
-    if (isset($_POST['q4']) && $_POST['q4'] === 'enchante') {
+
+    if (!empty($_POST['question4']) && $_POST['question4'] === 'angenehm') {
         $score++;
     }
-    
-    // Question 5
-    if (isset($_POST['q5']) && $_POST['q5'] === 'douze') {
+
+    if (!empty($_POST['question5']) && $_POST['question5'] === 'zwoelf') {
         $score++;
     }
-    
-    // Question 6
-    if (isset($_POST['q6']) && $_POST['q6'] === 'comment') {
+
+    if (!empty($_POST['question6']) && $_POST['question6'] === 'wie') {
         $score++;
     }
-    
-    // Question 7
-    if (isset($_POST['q7']) && $_POST['q7'] === 'je_ne_comprends_pas') {
+
+    if (!empty($_POST['question7']) && $_POST['question7'] === 'ich_verstehe_nicht') {
         $score++;
     }
-    
-    // Question 8
-    if (isset($_POST['q8']) && strtolower(trim($_POST['q8'])) === 'où') {
+
+    if (!empty($_POST['question8']) && $_POST['question8'] === 'wo') {
         $score++;
     }
-    
-    // Question 9
-    if (isset($_POST['q9']) && strtolower(trim($_POST['q9'])) === 'merci beaucoup') {
+
+    if (!empty($_POST['question9']) && $_POST['question9'] === 'vielen dank') {
         $score++;
     }
-    
-    // Question 10
-    if (isset($_POST['q10']) && $_POST['q10'] === 'dix-sept') {
+
+    if (!empty($_POST['question10']) && $_POST['question10'] === 'siebzehn') {
         $score++;
     }
+
     
     $percentage_score = ($score / $total_questions) * 100;
     $record_test_query = "INSERT INTO user_activity (user_id, activity_type, activity_details) 
@@ -112,9 +104,10 @@ if (isset($_POST['submit_test'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="french.css">
-    <title>Lango - Unit 1 Test: Les Bases</title>
+    <link rel="stylesheet" href="../style.css">
+    <title>Lango - Unit 1 Test: Die Grundlagen.</title>
     <style>
+
         .test-container {
             background-color: white;
             border-radius: 20px;
@@ -229,7 +222,9 @@ if (isset($_POST['submit_test'])) {
     </header>
 
     <div class="content-container">
-        <h1>Unit 1 Test: Les Bases (The Basics)</h1>
+        <h1>Unit 1 Test: Die Grundlagen (The Basics)</h1>
+
+
         
         <?php if ($test_submitted): ?>
         <div class="result-container">
@@ -237,7 +232,7 @@ if (isset($_POST['submit_test'])) {
             <div class="score-display"><?php echo $score; ?> / 10 points (<?php echo round($percentage_score); ?>%)</div>
             
             <?php if ($percentage_score >= 80): ?>
-                <div class="result-message success">Excellent! You've mastered the basics of French.</div>
+                <div class="result-message success">Excellent! You've mastered the basics of German.</div>
             <?php elseif ($percentage_score >= 60): ?>
                 <div class="result-message neutral">Good job! You have a solid understanding, but could review some concepts.</div>
             <?php else: ?>
@@ -248,217 +243,219 @@ if (isset($_POST['submit_test'])) {
         
         <div class="test-container">
             <?php if (!$test_submitted): ?>
-            <p>This test will assess your knowledge of basic French greetings, introductions, numbers, and essential phrases.</p>
+            <p>This test will assess your knowledge of basic German greetings, introductions, numbers, and essential phrases.</p>
             <p>Answer all questions to the best of your ability.</p>
-            
-            <form method="post" action="">
-                <!-- Question 1 -->
-                <div class="question-container">
-                    <div class="question-text">1. Which phrase means "Hello" or "Good day" in French?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q1_a" name="q1" value="salut">
-                            <label for="q1_a">Salut</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1_b" name="q1" value="bonjour">
-                            <label for="q1_b">Bonjour</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1_c" name="q1" value="bonsoir">
-                            <label for="q1_c">Bonsoir</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q1_d" name="q1" value="au_revoir">
-                            <label for="q1_d">Au revoir</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 2 -->
-                <div class="question-container">
-                    <div class="question-text">2. Which phrase do you use to introduce yourself in French?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q2_a" name="q2" value="je_mappelle">
-                            <label for="q2_a">Je m'appelle...</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2_b" name="q2" value="comment_tu_tappelles">
-                            <label for="q2_b">Comment tu t'appelles?</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2_c" name="q2" value="enchante">
-                            <label for="q2_c">Enchanté</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q2_d" name="q2" value="je_suis_ici">
-                            <label for="q2_d">Je suis ici</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 3 -->
-                <div class="question-container">
-                    <div class="question-text">3. How do you say "Goodbye" in French?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q3_a" name="q3" value="bonjour">
-                            <label for="q3_a">Bonjour</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3_b" name="q3" value="merci">
-                            <label for="q3_b">Merci</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3_c" name="q3" value="au_revoir">
-                            <label for="q3_c">Au revoir</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q3_d" name="q3" value="salut">
-                            <label for="q3_d">Salut</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 4 -->
-                <div class="question-container">
-                    <div class="question-text">4. What do you say when meeting someone for the first time?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q4_a" name="q4" value="au_revoir">
-                            <label for="q4_a">Au revoir</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4_b" name="q4" value="enchante">
-                            <label for="q4_b">Enchanté(e)</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4_c" name="q4" value="a_bientot">
-                            <label for="q4_c">À bientôt</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q4_d" name="q4" value="je_mappelle">
-                            <label for="q4_d">Je m'appelle</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 5 -->
-                <div class="question-container">
-                    <div class="question-text">5. What is the French word for the number 12?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q5_a" name="q5" value="dix">
-                            <label for="q5_a">dix</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5_b" name="q5" value="onze">
-                            <label for="q5_b">onze</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5_c" name="q5" value="douze">
-                            <label for="q5_c">douze</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q5_d" name="q5" value="treize">
-                            <label for="q5_d">treize</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 6 -->
-                <div class="question-container">
-                    <div class="question-text">6. Which question word means "how" in French?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q6_a" name="q6" value="quand">
-                            <label for="q6_a">quand</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q6_b" name="q6" value="qui">
-                            <label for="q6_b">qui</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q6_c" name="q6" value="comment">
-                            <label for="q6_c">comment</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q6_d" name="q6" value="pourquoi">
-                            <label for="q6_d">pourquoi</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 7 -->
-                <div class="question-container">
-                    <div class="question-text">7. Which phrase means "I don't understand" in French?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q7_a" name="q7" value="je_ne_comprends_pas">
-                            <label for="q7_a">Je ne comprends pas</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q7_b" name="q7" value="parlez_vous_anglais">
-                            <label for="q7_b">Parlez-vous anglais?</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q7_c" name="q7" value="pouvez_vous_repeter">
-                            <label for="q7_c">Pouvez-vous répéter?</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q7_d" name="q7" value="excusez_moi">
-                            <label for="q7_d">Excusez-moi</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Question 8 -->
-                <div class="question-container">
-                    <div class="question-text">8. Fill in the blank: "_____ est la gare?" (Where is the train station?)</div>
-                    <div class="options-container">
-                        <input type="text" name="q8" class="text-input" placeholder="Type the missing word">
-                    </div>
-                </div>
-                
-                <!-- Question 9 -->
-                <div class="question-container">
-                    <div class="question-text">9. How do you say "Thank you very much" in French?</div>
-                    <div class="options-container">
-                        <input type="text" name="q9" class="text-input" placeholder="Type your answer in French">
-                    </div>
-                </div>
-                
-                <!-- Question 10 -->
-                <div class="question-container">
-                    <div class="question-text">10. What is the French word for 17?</div>
-                    <div class="options-container">
-                        <div class="option">
-                            <input type="radio" id="q10_a" name="q10" value="sept">
-                            <label for="q10_a">sept</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q10_b" name="q10" value="dix-sept">
-                            <label for="q10_b">dix-sept</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q10_c" name="q10" value="seize">
-                            <label for="q10_c">seize</label>
-                        </div>
-                        <div class="option">
-                            <input type="radio" id="q10_d" name="q10" value="sept-dix">
-                            <label for="q10_d">sept-dix</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="submit-container">
-                    <button type="submit" name="submit_test" class="btn btn-primary">Submit Test</button>
-                </div>
-            </form>
+    <form method="post" action="">
+    <!-- German test all set -->
+    <!-- Question 1 -->
+    <div class="question-container">
+        <div class="question-text">1. Which phrase means "Hello" or "Good day" in German?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q1_a" name="q1" value="hallo">
+                <label for="q1_a">Hallo</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q1_b" name="q1" value="guten_tag">
+                <label for="q1_b">Guten Tag</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q1_c" name="q1" value="guten_abend">
+                <label for="q1_c">Guten Abend</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q1_d" name="q1" value="auf_wiedersehen">
+                <label for="q1_d">Auf Wiedersehen</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question-container">
+        <div class="question-text">2. Which phrase do you use to introduce yourself in German?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q2_a" name="q2" value="ich_heisse">
+                <label for="q2_a">Ich heiße...</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q2_b" name="q2" value="wie_heisst_du">
+                <label for="q2_b">Wie heißt du?</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q2_c" name="q2" value="angenehm">
+                <label for="q2_c">Angenehm</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q2_d" name="q2" value="ich_bin_hier">
+                <label for="q2_d">Ich bin hier</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question-container">
+        <div class="question-text">3. How do you say "Goodbye" in German?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q3_a" name="q3" value="guten_tag">
+                <label for="q3_a">Guten Tag</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q3_b" name="q3" value="danke">
+                <label for="q3_b">Danke</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q3_c" name="q3" value="auf_wiedersehen">
+                <label for="q3_c">Auf Wiedersehen</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q3_d" name="q3" value="hallo">
+                <label for="q3_d">Hallo</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question-container">
+        <div class="question-text">4. What do you say when meeting someone for the first time?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q4_a" name="q4" value="auf_wiedersehen">
+                <label for="q4_a">Auf Wiedersehen</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q4_b" name="q4" value="angenehm">
+                <label for="q4_b">Angenehm</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q4_c" name="q4" value="bis_bald">
+                <label for="q4_c">Bis bald</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q4_d" name="q4" value="ich_heisse">
+                <label for="q4_d">Ich heiße</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question-container">
+        <div class="question-text">5. What is the German word for the number 12?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q5_a" name="q5" value="zehn">
+                <label for="q5_a">zehn</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q5_b" name="q5" value="elf">
+                <label for="q5_b">elf</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q5_c" name="q5" value="zwoelf">
+                <label for="q5_c">zwölf</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q5_d" name="q5" value="dreizehn">
+                <label for="q5_d">dreizehn</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 6 -->
+    <div class="question-container">
+        <div class="question-text">6. Which question word means "how" in German?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q6_a" name="q6" value="wann">
+                <label for="q6_a">wann</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q6_b" name="q6" value="wer">
+                <label for="q6_b">wer</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q6_c" name="q6" value="wie">
+                <label for="q6_c">wie</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q6_d" name="q6" value="warum">
+                <label for="q6_d">warum</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 7 -->
+    <div class="question-container">
+        <div class="question-text">7. Which phrase means "I don't understand" in German?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q7_a" name="q7" value="ich_verstehe_nicht">
+                <label for="q7_a">Ich verstehe nicht</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q7_b" name="q7" value="sprechen_sie_englisch">
+                <label for="q7_b">Sprechen Sie Englisch?</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q7_c" name="q7" value="koennen_sie_wiederholen">
+                <label for="q7_c">Können Sie das wiederholen?</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q7_d" name="q7" value="entschuldigung">
+                <label for="q7_d">Entschuldigung</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 8 -->
+    <div class="question-container">
+        <div class="question-text">8. Fill in the blank: "_____ ist der Bahnhof?" (Where is the train station?)</div>
+        <div class="options-container">
+            <input type="text" name="q8" class="text-input" placeholder="Type the missing word">
+        </div>
+    </div>
+
+    <!-- Question 9 -->
+    <div class="question-container">
+        <div class="question-text">9. How do you say "Thank you very much" in German?</div>
+        <div class="options-container">
+            <input type="text" name="q9" class="text-input" placeholder="Type your answer in German">
+        </div>
+    </div>
+
+    <!-- Question 10 -->
+    <div class="question-container">
+        <div class="question-text">10. What is the German word for 17?</div>
+        <div class="options-container">
+            <div class="option">
+                <input type="radio" id="q10_a" name="q10" value="sieben">
+                <label for="q10_a">sieben</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q10_b" name="q10" value="siebzehn">
+                <label for="q10_b">siebzehn</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q10_c" name="q10" value="sechzehn">
+                <label for="q10_c">sechzehn</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q10_d" name="q10" value="sieben_zehn">
+                <label for="q10_d">sieben zehn</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="submit-container">
+        <button type="submit" name="submit_test" class="btn btn-primary">Submit Test</button>
+    </div>
+</form>
+
+           
             <?php else: ?>
             <div class="navigation-buttons">
-                <a href="course-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
+                <a href="units-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
                     <i class='bx bx-arrow-back'></i> Back to Unit
                 </a>
                 <a href="courses.php" class="btn btn-primary">
