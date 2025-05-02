@@ -41,7 +41,6 @@ $lesson = $lesson_result->fetch_assoc();
 $unit_id = $lesson['unit_id'];
 $current_order_index = $lesson['order_index'];
 
-// Check if user has completed all previous lessons in this unit
 $previous_lessons_query = "SELECT l.lesson_id, l.title, l.order_index 
                           FROM lessons l 
                           WHERE l.unit_id = ? AND l.order_index < ? 
@@ -52,7 +51,6 @@ $stmt->execute();
 $previous_lessons_result = $stmt->get_result();
 
 if ($previous_lessons_result->num_rows > 0) {
-    // Check user's progress on previous lessons
     while ($prev_lesson = $previous_lessons_result->fetch_assoc()) {
         $prev_lesson_id = $prev_lesson['lesson_id'];
         
@@ -64,7 +62,6 @@ if ($previous_lessons_result->num_rows > 0) {
         $progress_check = $stmt->get_result();
         
         if ($progress_check->num_rows == 0 || $progress_check->fetch_assoc()['status'] != 'completed') {
-            // User hasn't completed a previous lesson, redirect to first incomplete lesson
             $_SESSION['error_message'] = "You need to complete the previous lessons first.";
             header("Location: lesson.php?id=" . $prev_lesson_id);
             exit();
