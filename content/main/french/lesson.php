@@ -289,7 +289,7 @@ if (isset($_POST['complete_lesson'])) {
     <div class="content-container">
         <div class="breadcrumb">
             <a href="courses.php">Courses</a> &gt; 
-            <a href="course-content.php?unit=<?php echo $unit_id; ?>"><?php echo htmlspecialchars($lesson['unit_title']); ?></a> &gt; 
+            <a href="units-content.php?unit=<?php echo $unit_id; ?>"><?php echo htmlspecialchars($lesson['unit_title']); ?></a> &gt; 
             <span><?php echo htmlspecialchars($lesson['title']); ?></span>
         </div>
         
@@ -346,7 +346,7 @@ if (isset($_POST['complete_lesson'])) {
         </div>
         
         <div class="navigation-buttons">
-            <a href="course-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
+            <a href="units-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
                 <i class='bx bx-arrow-back'></i> Back to Unit
             </a>
         </div>
