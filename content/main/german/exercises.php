@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Practice - Language Project</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+
   <link rel="stylesheet" href="../style-exo.css">
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
@@ -36,6 +36,9 @@
 
   <script>
     let currentQuestion = 1;
+    let score = 0;
+    const totalQuestions = 10;
+
 
     const vocabQuestions = [
       {
@@ -103,9 +106,65 @@
       }
     }
 
+    function submitResult() {
+    fetch("save_score.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ score: score, total: totalQuestions })
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("questionArea").innerHTML = `
+        <div class="text-center">
+          <h2 class="text-2xl font-bold mb-4">Results</h2>
+          <p class="text-xl">You scored <strong>${score}</strong> out of <strong>${totalQuestions}</strong></p>
+        </div>
+      `;
+    });
+  }
+
+  function loadRandomQuestion() {
+    if (currentQuestion >= totalQuestions) {
+      submitResult();
+      return;
+    }
+
+    const isVocab = Math.random() > 0.5;
+    const questionArea = document.getElementById("questionArea");
+    currentQuestion++;
+
+    if (isVocab) {
+      const q = vocabQuestions[Math.floor(Math.random() * vocabQuestions.length)];
+      questionArea.innerHTML = `
+        <div class="mb-4">${q.question}</div>
+        <img src="${q.image}" class="w-20 mx-auto mb-4">
+        ${q.options.map(option => `
+          <button class="option-btn" onclick="handleAnswer('${option}', '${q.answer}')">${option}</button>
+        `).join('')}
+      `;
+    } else {
+      const q = fillQuestions[Math.floor(Math.random() * fillQuestions.length)];
+      questionArea.innerHTML = `
+        <div class="mb-4">${q.question}</div>
+        <input id="fillInput" type="text" class="border rounded p-2 w-full mb-4">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="handleAnswer(document.getElementById('fillInput').value, '${q.answer}')">Submit</button>
+      `;
+    }
+  }
+
+  function handleAnswer(userAnswer, correctAnswer) {
+    if (checkAnswer(userAnswer, correctAnswer)) {
+      score++;
+    }
+    loadRandomQuestion();
+  }
+
 
 
     window.onload = loadRandomQuestion;
   </script>
 </body>
 </html>
+
