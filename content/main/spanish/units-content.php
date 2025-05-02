@@ -22,7 +22,6 @@ if (!isset($_GET['unit']) || !is_numeric($_GET['unit'])) {
 
 $unit_id = intval($_GET['unit']);
 
-// Check if this unit should be accessible to the user
 $course_query = "SELECT course_id FROM units WHERE unit_id = ?";
 $stmt = $conn->prepare($course_query);
 $stmt->bind_param("i", $unit_id);
@@ -37,7 +36,6 @@ if ($course_result->num_rows == 0) {
 $course_data = $course_result->fetch_assoc();
 $course_id = $course_data['course_id'];
 
-// Get all units for this course in order
 $all_units_query = "SELECT unit_id, order_index FROM units 
                    WHERE course_id = ? 
                    ORDER BY order_index ASC";
@@ -56,31 +54,6 @@ while ($unit_row = $all_units_result->fetch_assoc()) {
         $current_unit_index = $i;
     }
     $i++;
-}
-
-// First unit is always accessible
-if ($current_unit_index > 0) {
-    // For units beyond the first, check if previous unit has sufficient completion
-    $prev_unit_id = $units_by_order[$current_unit_index - 1];
-    
-    $completion_check = "SELECT COUNT(l.lesson_id) AS total_lessons,
-                         COUNT(up.lesson_id) AS completed_lessons
-                         FROM lessons l
-                         LEFT JOIN user_progress up ON l.lesson_id = up.lesson_id 
-                             AND up.user_id = ? AND up.status = 'completed'
-                         WHERE l.unit_id = ?";
-    $stmt = $conn->prepare($completion_check);
-    $stmt->bind_param("ii", $user_id, $prev_unit_id);
-    $stmt->execute();
-    $completion_result = $stmt->get_result();
-    $completion_data = $completion_result->fetch_assoc();
-    
-    // If previous unit has less than 80% completion, redirect back
-    if ($completion_data['total_lessons'] == 0 || 
-        ($completion_data['completed_lessons'] / $completion_data['total_lessons']) < 0.8) {
-        header("Location: units.php?error=locked");
-        exit();
-    }
 }
 
 $unit_query = "SELECT u.*, c.title as course_title 

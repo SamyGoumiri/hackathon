@@ -57,38 +57,17 @@ while ($row = $progress_result->fetch_assoc()) {
     ];
 }
 
-// Calculate the highest unit that should be unlocked
-$unlocked_units = array(9); // First unit (ID 9) is always unlocked
-$last_completed_unit = 0;
+// Modified: All units are unlocked now
+$unlocked_units = array(); // We'll fill this with all unit IDs
 
-foreach ($unit_progress as $unit_id => $progress) {
-    // Consider a unit completed if all lessons are done or at least 80% are completed
-    if ($progress['completed'] > 0 && ($progress['completed'] >= $progress['total'] || 
-        ($progress['completed'] / $progress['total']) >= 0.8)) {
-        $last_completed_unit = $unit_id;
-        
-        // Find the next unit in sequence
-        $next_unit_query = "SELECT unit_id FROM units 
-                           WHERE course_id = ? AND order_index = (
-                               SELECT order_index + 1 FROM units WHERE unit_id = ?
-                           )";
-        $stmt = $conn->prepare($next_unit_query);
-        $stmt->bind_param("ii", $course_id, $unit_id);
-        $stmt->execute();
-        $next_unit_result = $stmt->get_result();
-        
-        if ($next_unit_result->num_rows > 0) {
-            $next_unit = $next_unit_result->fetch_assoc();
-            $unlocked_units[] = $next_unit['unit_id'];
-        }
-    }
-}
-
-$highest_accessed_unit = 1;
-foreach ($unit_progress as $unit_id => $progress) {
-    if ($progress['completed'] > 0 && $unit_id > $highest_accessed_unit) {
-        $highest_accessed_unit = $unit_id;
-    }
+// Get all unit IDs to unlock them
+$all_units_query = "SELECT unit_id FROM units WHERE course_id = ?";
+$stmt = $conn->prepare($all_units_query);
+$stmt->bind_param("i", $course_id);
+$stmt->execute();
+$all_units_result = $stmt->get_result();
+while($unit = $all_units_result->fetch_assoc()) {
+    $unlocked_units[] = $unit['unit_id'];
 }
 
 if(isset($_GET['unit'])) {
@@ -181,8 +160,8 @@ if(isset($_GET['unit'])) {
             
             if ($units_result->num_rows > 0) {
                 while($unit = $units_result->fetch_assoc()) {
-                    // A unit is locked if it's not in the unlocked_units array
-                    $is_locked = !in_array($unit['unit_id'], $unlocked_units);
+                    // All units are unlocked now
+                    $is_locked = false;
                     
                     $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
                     $stmt = $conn->prepare($lessons_query);
@@ -200,7 +179,7 @@ if(isset($_GET['unit'])) {
                         $difficulty_text = "Intermediate";
                     }
             ?>
-            <div class="course-item<?php echo $is_locked ? ' locked' : ''; ?>">
+            <div class="course-item">
                 <div class="course-header">
                     <h2><?php echo htmlspecialchars($unit['title']); ?></h2>
                     <span class="difficulty <?php echo $difficulty; ?>"><?php echo $difficulty_text; ?></span>
@@ -226,13 +205,8 @@ if(isset($_GET['unit'])) {
                     
                     <div class="course-actions">
                         <span class="lesson-count"><?php echo $lesson_count; ?> Lessons</span>
-                        <?php if (!$is_locked) { ?>
+                        <!-- All units now have the Start Unit button -->
                         <a href="units-content.php?unit=<?php echo $unit['unit_id']; ?>" class="btn btn-primary">Start Unit</a>
-                        <?php } else { ?>
-                        <div class="lock-message">
-                            <i class='bx bx-lock-alt'></i> Complete previous unit to unlock
-                        </div>
-                        <?php } ?>
                     </div>
                 </div>
             </div>
