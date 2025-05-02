@@ -46,7 +46,8 @@ INSERT INTO `courses` (`course_id`, `language_id`, `title`, `description`, `diff
 (1, 3, 'French Fundamentals', 'Master the basics of French language with this comprehensive beginner course.', 'beginner', 'french_basic.jpg', 1, '2025-05-02 13:47:07'),
 (2, 3, 'Intermediate French', 'Take your French skills to the next level with more advanced concepts and vocabulary.', 'intermediate', 'french_intermediate.jpg', 1, '2025-05-02 13:47:07'),
 (3, 2, 'Spanish for Beginners', 'Learn essential Spanish vocabulary and grammar for everyday conversations.', 'beginner', 'spanish_basic.jpg', 1, '2025-05-02 13:47:07'),
-(4, 5, 'Italian Fundamentals', 'Master the basics of Italian language with this comprehensive beginner course.', 'beginner', 'italian_basic.jpg', 1, '2025-05-02 13:47:07');
+(4, 5, 'Italian Fundamentals', 'Master the basics of Italian language with this comprehensive beginner course.', 'beginner', 'italian_basic.jpg', 1, '2025-05-02 13:47:07'),
+(5, 4, 'German Fundamentals', 'Master the basics of German language with this comprehensive beginner course.', 'beginner', 'german_basic.jpg', 1, '2025-05-02 13:47:07');
 
 -- --------------------------------------------------------
 
@@ -156,7 +157,27 @@ INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`
 (57, 12, 'Pidiendo Direcciones', 'How to ask for and understand directions in Spanish.', 2, 20, 1),
 (58, 12, 'Reservaciones de Hotel', 'Vocabulary and phrases for booking and staying at hotels.', 3, 20, 1),
 (59, 12, 'Atracciones Turísticas', 'Discussing sightseeing and cultural attractions in Spanish.', 4, 25, 1),
-(60, 12, 'Problemas de Viaje', 'How to handle common issues that may arise when traveling.', 5, 20, 1);
+(60, 12, 'Problemas de Viaje', 'How to handle common issues that may arise when traveling.', 5, 20, 1),
+(61, 13, 'Begrüßungen und Vorstellungen', 'Learn how to say hello and introduce yourself in German.', 1, 15, 1),
+(62, 13, 'Grundlegende Aussprache', 'Master the essential sounds of German language.', 2, 20, 1),
+(63, 13, 'Zahlen 1-20', 'Learn how to count from 1 to 20 in German.', 3, 15, 1),
+(64, 13, 'Einfache Fragen', 'Learn how to ask and answer basic questions in German.', 4, 20, 1),
+(65, 13, 'Häufige Ausdrücke', 'Essential phrases to help you in everyday situations.', 5, 15, 1),
+(66, 14, 'Tägliche Routinen', 'Vocabulary for describing your daily activities.', 1, 20, 1),
+(67, 14, 'Verben im Präsens', 'Learn how to conjugate common verbs in present tense.', 2, 25, 1),
+(68, 14, 'Die Uhrzeit', 'Learn how to tell and ask for time in German.', 3, 15, 1),
+(69, 14, 'Wochentage und Monate', 'Learn the days of the week and months of the year.', 4, 15, 1),
+(70, 14, 'Wetterausdrücke', 'Describe different weather conditions in German.', 5, 15, 1),
+(71, 15, 'Im Supermarkt', 'Learn vocabulary and expressions for grocery shopping in German.', 1, 20, 1),
+(72, 15, 'Im Restaurant', 'How to order food and interact with waitstaff in German.', 2, 25, 1),
+(73, 15, 'Kleidung Einkaufen', 'Vocabulary for clothing items and shopping expressions in German.', 3, 20, 1),
+(74, 15, 'Geld und Zahlen', 'Learn about euros and how to discuss prices in German.', 4, 15, 1),
+(75, 15, 'Etwas kaufen', 'Practice conversations for making purchases in different settings in German.', 5, 20, 1),
+(76, 16, 'Verkehrsmittel', 'Learn words for different modes of transportation in German.', 1, 15, 1),
+(77, 16, 'Nach dem Weg fragen', 'How to ask for and understand directions in German.', 2, 20, 1),
+(78, 16, 'Hotelreservierungen', 'Vocabulary and phrases for booking and staying at hotels in German.', 3, 20, 1),
+(79, 16, 'Sehenswürdigkeiten', 'Discussing sightseeing and cultural attractions in German.', 4, 25, 1),
+(80, 16, 'Reiseprobleme', 'How to handle common issues that may arise when traveling in German.', 5, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -189,7 +210,11 @@ INSERT INTO `units` (`unit_id`, `course_id`, `title`, `description`, `order_inde
 (9, 3, 'Los Fundamentos (The Basics)', 'Learn the foundation of Spanish with basic greetings, introductions, and essential phrases.', 1, 1),
 (10, 3, 'La Vida Cotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
 (11, 3, 'De Compras (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Spanish-speaking countries.', 3, 1),
-(12, 3, 'Los Viajes (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
+(12, 3, 'Los Viajes (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
+(13, 5, 'Die Grundlagen (The Basics)', 'Learn the foundation of German with basic greetings, introductions, and essential phrases.', 1, 1),
+(14, 5, 'Das tägliche Leben (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(15, 5, 'Einkaufen (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in German-speaking countries.', 3, 1),
+(16, 5, 'Das Reisen (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -227,7 +252,7 @@ INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `email`, 
 CREATE TABLE `user_activity` (
   `activity_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `activity_type` varchar(50) NOT NULL,
+  `activity_type` varchar(50) NOT NULL COMMENT 'Types: lesson_access, unit_access, language_page_access, unit_test, start_language, etc.',
   `activity_details` text DEFAULT NULL,
   `timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -375,7 +400,8 @@ CREATE TABLE `user_progress` (
   `status` enum('not_started','in_progress','completed') NOT NULL DEFAULT 'not_started',
   `completion_date` datetime DEFAULT NULL,
   `score` int(11) DEFAULT NULL COMMENT 'Score in percentage if applicable',
-  `last_activity` datetime NOT NULL DEFAULT current_timestamp()
+  `last_activity` datetime NOT NULL DEFAULT current_timestamp(),
+  `attempts` int(11) DEFAULT 0 COMMENT 'Number of attempts at the lesson or test'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -388,6 +414,54 @@ INSERT INTO `user_progress` (`progress_id`, `user_id`, `lesson_id`, `status`, `c
 (3, 1, 43, 'completed', '2025-05-02 16:09:08', NULL, '2025-05-02 16:09:08'),
 (4, 1, 44, 'completed', '2025-05-02 16:09:15', NULL, '2025-05-02 16:09:15'),
 (5, 1, 45, 'completed', '2025-05-02 16:09:18', NULL, '2025-05-02 16:09:18');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `unit_tests`
+--
+
+CREATE TABLE IF NOT EXISTS `unit_tests` (
+  `test_id` int(11) NOT NULL AUTO_INCREMENT,
+  `unit_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `passing_score` int(11) NOT NULL DEFAULT 60,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`test_id`),
+  KEY `unit_id` (`unit_id`),
+  CONSTRAINT `unit_tests_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `unit_tests`
+--
+
+INSERT INTO `unit_tests` (`test_id`, `unit_id`, `title`, `description`, `passing_score`, `is_active`) VALUES
+(1, 13, 'Die Grundlagen Test', 'Test your knowledge of German basics, greetings, and essential phrases.', 60, 1),
+(2, 14, 'Das tägliche Leben Test', 'Test your knowledge of daily routines, time telling, and weather in German.', 60, 1),
+(3, 15, 'Einkaufen Test', 'Test your knowledge of shopping vocabulary and expressions in German.', 60, 1),
+(4, 16, 'Das Reisen Test', 'Test your knowledge of travel-related vocabulary and phrases in German.', 60, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `test_results`
+--
+
+CREATE TABLE IF NOT EXISTS `test_results` (
+  `result_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `test_id` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  `passed` tinyint(1) NOT NULL DEFAULT 0,
+  `completion_date` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`result_id`),
+  KEY `user_id` (`user_id`),
+  KEY `test_id` (`test_id`),
+  CONSTRAINT `test_results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  CONSTRAINT `test_results_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `unit_tests` (`test_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Index pour les tables déchargées
@@ -467,7 +541,7 @@ ALTER TABLE `user_progress`
 -- AUTO_INCREMENT pour la table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `languages`
@@ -479,7 +553,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT pour la table `lessons`
 --
 ALTER TABLE `lessons`
-  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT pour la table `units`
@@ -516,6 +590,12 @@ ALTER TABLE `user_preferences`
 --
 ALTER TABLE `user_progress`
   MODIFY `progress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `unit_tests`
+--
+ALTER TABLE `unit_tests`
+  AUTO_INCREMENT = 5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -564,6 +644,20 @@ ALTER TABLE `user_preferences`
 ALTER TABLE `user_progress`
   ADD CONSTRAINT `user_progress_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `user_progress_ibfk_2` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`lesson_id`);
+
+--
+-- Contraintes pour la table `unit_tests`
+--
+ALTER TABLE `unit_tests`
+  ADD CONSTRAINT `unit_tests_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `test_results`
+--
+ALTER TABLE `test_results`
+  ADD CONSTRAINT `test_results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `test_results_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `unit_tests` (`test_id`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
