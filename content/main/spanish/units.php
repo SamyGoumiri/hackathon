@@ -16,9 +16,10 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
+// Fix the course query - update course title from "Spanish Fundamentals" to "Spanish for Beginners"
 $course_query = "SELECT c.* FROM courses c
                  JOIN languages l ON c.language_id = l.language_id
-                 WHERE l.code = 'es' AND c.title = 'Spanish Fundamentals'";
+                 WHERE l.code = 'es' AND c.title = 'Spanish for Beginners'";
 $course_result = $conn->query($course_query);
 
 if ($course_result->num_rows == 0) {
