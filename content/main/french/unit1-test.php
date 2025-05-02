@@ -30,7 +30,7 @@ $lessons_data = $lessons_result->fetch_assoc();
 
 if ($lessons_data['completed_lessons'] < $lessons_data['total_lessons']) {
     $_SESSION['error_message'] = "Please complete all lessons in this unit before taking the test.";
-    header("Location: course-content.php?unit=" . $unit_id);
+    header("Location: units-content.php?unit=" . $unit_id);
     exit();
 }
 
@@ -459,10 +459,10 @@ if (isset($_POST['submit_test'])) {
             </form>
             <?php else: ?>
             <div class="navigation-buttons">
-                <a href="course-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
+                <a href="units-content.php?unit=<?php echo $unit_id; ?>" class="btn btn-secondary">
                     <i class='bx bx-arrow-back'></i> Back to Unit
                 </a>
-                <a href="courses.php" class="btn btn-primary">
+                <a href="units.php" class="btn btn-primary">
                     Continue to Next Unit <i class='bx bx-right-arrow-alt'></i>
                 </a>
             </div>
