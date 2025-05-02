@@ -82,13 +82,12 @@ if (isset($_POST['submit_test'])) {
     }
     
     // Question 9
-    $q9_answer = isset($_POST['q9']) ? $_POST['q9'] : '';
-    if ($q9_answer === 'estate') {
+    if (isset($_POST['q9']) && $_POST['q9'] === 'estate') {
         $score++;
     }
     
     // Question 10
-    if (isset($_POST['q10']) && $_POST['q10'] === 'io_sono') {
+    if (isset($_POST['q10']) && $_POST['q10'] === 'sono') {
         $score++;
     }
     
@@ -116,7 +115,7 @@ if (isset($_POST['submit_test'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
 
-    <title>Lango - Unit 2 Test: La Vita Quotidiana</title>
+    <title>Lango - Unit 6 Test: La Vita Quotidiana</title>
     <style>
         .test-container {
             background-color: white;
@@ -232,7 +231,7 @@ if (isset($_POST['submit_test'])) {
     </header>
 
     <div class="content-container">
-        <h1>Unit 2 Test: La Vita Quotidiana (Daily Life)</h1>
+        <h1>Unit 6 Test: La Vita Quotidiana (Daily Life)</h1>
         
         <?php if ($test_submitted): ?>
         <div class="result-container">
@@ -240,9 +239,9 @@ if (isset($_POST['submit_test'])) {
             <div class="score-display"><?php echo $score; ?> / 10 points (<?php echo round($percentage_score); ?>%)</div>
             
             <?php if ($percentage_score >= 80): ?>
-                <div class="result-message success">Eccellente! You have a strong grasp of daily life vocabulary in Italian.</div>
+                <div class="result-message success">Excellent! You have a strong grasp of daily life vocabulary in Italian.</div>
             <?php elseif ($percentage_score >= 60): ?>
-                <div class="result-message neutral">Buon lavoro! You understand many aspects of daily life in Italian, but there's room for improvement.</div>
+                <div class="result-message neutral">Good job! You understand many aspects of daily life in Italian, but there's room for improvement.</div>
             <?php else: ?>
                 <div class="result-message failure">You might need more practice with daily routines and time expressions. Consider reviewing the lessons again.</div>
             <?php endif; ?>
@@ -268,8 +267,8 @@ if (isset($_POST['submit_test'])) {
                             <label for="q1_b">svegliarsi</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q1_c" name="q1" value="farsi_la_doccia">
-                            <label for="q1_c">farsi la doccia</label>
+                            <input type="radio" id="q1_c" name="q1" value="fare_la_doccia">
+                            <label for="q1_c">fare la doccia</label>
                         </div>
                         <div class="option">
                             <input type="radio" id="q1_d" name="q1" value="vestirsi">
@@ -349,7 +348,7 @@ if (isset($_POST['submit_test'])) {
                 
                 <!-- Question 5 -->
                 <div class="question-container">
-                    <div class="question-text">5. Which day comes between Tuesday and Thursday in Italian?</div>
+                    <div class="question-text">5. Which day comes between Tuesday (martedì) and Thursday (giovedì)?</div>
                     <div class="options-container">
                         <div class="option">
                             <input type="radio" id="q5_a" name="q5" value="lunedi">
@@ -387,8 +386,8 @@ if (isset($_POST['submit_test'])) {
                             <label for="q7_a">Piove</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q7_b" name="q7" value="fa_sole">
-                            <label for="q7_b">Fa sole</label>
+                            <input type="radio" id="q7_b" name="q7" value="ce_sole">
+                            <label for="q7_b">C'è sole</label>
                         </div>
                         <div class="option">
                             <input type="radio" id="q7_c" name="q7" value="fa_caldo">
@@ -403,7 +402,7 @@ if (isset($_POST['submit_test'])) {
                 
                 <!-- Question 8 -->
                 <div class="question-container">
-                    <div class="question-text">8. Translate: "It's raining." to Italian</div>
+                    <div class="question-text">8. Translate: "It's raining." into Italian</div>
                     <div class="options-container">
                         <input type="text" name="q8" class="text-input" placeholder="Type your answer in Italian">
                     </div>
@@ -415,42 +414,42 @@ if (isset($_POST['submit_test'])) {
                     <div class="options-container">
                         <div class="option">
                             <input type="radio" id="q9_a" name="q9" value="primavera">
-                            <label for="q9_a">primavera</label>
+                            <label for="q9_a">la primavera</label>
                         </div>
                         <div class="option">
                             <input type="radio" id="q9_b" name="q9" value="estate">
-                            <label for="q9_b">estate</label>
+                            <label for="q9_b">l'estate</label>
                         </div>
                         <div class="option">
                             <input type="radio" id="q9_c" name="q9" value="autunno">
-                            <label for="q9_c">autunno</label>
+                            <label for="q9_c">l'autunno</label>
                         </div>
                         <div class="option">
                             <input type="radio" id="q9_d" name="q9" value="inverno">
-                            <label for="q9_d">inverno</label>
+                            <label for="q9_d">l'inverno</label>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Question 10 -->
                 <div class="question-container">
-                    <div class="question-text">10. What is the conjugation of "essere" (to be) for "I am" in Italian?</div>
+                    <div class="question-text">10. What is the conjugation of "essere" (to be) for "I am"?</div>
                     <div class="options-container">
                         <div class="option">
-                            <input type="radio" id="q10_a" name="q10" value="io_sono">
-                            <label for="q10_a">io sono</label>
+                            <input type="radio" id="q10_a" name="q10" value="sono">
+                            <label for="q10_a">sono</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q10_b" name="q10" value="tu_sei">
-                            <label for="q10_b">tu sei</label>
+                            <input type="radio" id="q10_b" name="q10" value="sei">
+                            <label for="q10_b">sei</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q10_c" name="q10" value="lui_e">
-                            <label for="q10_c">lui è</label>
+                            <input type="radio" id="q10_c" name="q10" value="e">
+                            <label for="q10_c">è</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q10_d" name="q10" value="noi_siamo">
-                            <label for="q10_d">noi siamo</label>
+                            <input type="radio" id="q10_d" name="q10" value="siamo">
+                            <label for="q10_d">siamo</label>
                         </div>
                     </div>
                 </div>

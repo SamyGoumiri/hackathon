@@ -298,8 +298,11 @@ $stmt->execute();
             <a href="units.php" class="btn btn-secondary">
                 <i class='bx bx-arrow-back'></i> Back to Courses
             </a>
-            <?php if ($completion_percentage == 100) { ?>
-            <a href="unit<?php echo $unit_id; ?>-test.php?unit=<?php echo $unit_id; ?>" class="btn btn-primary">
+            <?php if ($completion_percentage == 100) { 
+                // Map the unit IDs (5-8) to the test file numbers (1-4)
+                $test_file_num = $unit_id - 4;
+            ?>
+            <a href="unit<?php echo $test_file_num; ?>-test.php?unit=<?php echo $unit_id; ?>" class="btn btn-primary">
                 Take Unit Test <i class='bx bx-right-arrow-alt'></i>
             </a>
             <?php } ?>

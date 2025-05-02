@@ -113,7 +113,7 @@ if (isset($_POST['submit_test'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
-    <title>Lango - Unit 1 Test: Le Basi</title>
+    <title>Lango - Unit 5 Test: Le Basi</title>
     <style>
         .test-container {
             background-color: white;
@@ -229,7 +229,7 @@ if (isset($_POST['submit_test'])) {
     </header>
 
     <div class="content-container">
-        <h1>Unit 1 Test: Le Basi (The Basics)</h1>
+        <h1>Unit 5 Test: Le Basi (The Basics)</h1>
         
         <?php if ($test_submitted): ?>
         <div class="result-container">
@@ -237,9 +237,9 @@ if (isset($_POST['submit_test'])) {
             <div class="score-display"><?php echo $score; ?> / 10 points (<?php echo round($percentage_score); ?>%)</div>
             
             <?php if ($percentage_score >= 80): ?>
-                <div class="result-message success">Eccellente! You've mastered the basics of Italian.</div>
+                <div class="result-message success">Excellent! You've mastered the basics of Italian.</div>
             <?php elseif ($percentage_score >= 60): ?>
-                <div class="result-message neutral">Buon lavoro! You have a solid understanding, but could review some concepts.</div>
+                <div class="result-message neutral">Good job! You have a solid understanding, but could review some concepts.</div>
             <?php else: ?>
                 <div class="result-message failure">You might need more practice. Consider reviewing the lessons again.</div>
             <?php endif; ?>
@@ -446,8 +446,8 @@ if (isset($_POST['submit_test'])) {
                             <label for="q10_c">sedici</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q10_d" name="q10" value="settedi">
-                            <label for="q10_d">settedi</label>
+                            <input type="radio" id="q10_d" name="q10" value="settedici">
+                            <label for="q10_d">settedici</label>
                         </div>
                     </div>
                 </div>
