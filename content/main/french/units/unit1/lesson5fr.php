@@ -11,12 +11,12 @@
     </tr>
     <tr>
         <td class="french-word">S'il vous plaît</td>
-        <td class="pronunciation">seel voo play</td>
+        <td class="pronunciation">seel voo pley</td>
         <td>Please (formal)</td>
     </tr>
     <tr>
         <td class="french-word">S'il te plaît</td>
-        <td class="pronunciation">seel tuh play</td>
+        <td class="pronunciation">seel tuh pley</td>
         <td>Please (informal)</td>
     </tr>
     <tr>
@@ -36,7 +36,7 @@
     </tr>
     <tr>
         <td class="french-word">Je vous en prie</td>
-        <td class="pronunciation">zhuh voo zahn pree</td>
+        <td class="pronunciation">jhuh voo zahn pree</td>
         <td>You're welcome (formal)</td>
     </tr>
     <tr>
@@ -67,7 +67,7 @@
     </tr>
     <tr>
         <td class="french-word">Je ne comprends pas</td>
-        <td class="pronunciation">zhuh nuh kom-prahn pah</td>
+        <td class="pronunciation">jhuh nuh kom-prahn pah</td>
         <td>I don't understand</td>
     </tr>
     <tr>
@@ -82,7 +82,7 @@
     </tr>
     <tr>
         <td class="french-word">Je ne parle pas bien français</td>
-        <td class="pronunciation">zhuh nuh parl pah bee-en frahn-say</td>
+        <td class="pronunciation">jhuh nuh parl pah bee-en frahn-say</td>
         <td>I don't speak French well</td>
     </tr>
 </table>
@@ -118,7 +118,7 @@
     </tr>
     <tr>
         <td class="french-word">Je voudrais...</td>
-        <td class="pronunciation">zhuh voo-dray</td>
+        <td class="pronunciation">jhuh voo-dray</td>
         <td>I would like...</td>
     </tr>
 </table>
@@ -139,17 +139,17 @@
     </tr>
     <tr>
         <td class="french-word">Appelez la police!</td>
-        <td class="pronunciation">ah-play lah po-lees</td>
+        <td class="pronunciation">ah-pley lah po-lees</td>
         <td>Call the police!</td>
     </tr>
     <tr>
         <td class="french-word">Appelez un médecin!</td>
-        <td class="pronunciation">ah-play an may-duh-san</td>
+        <td class="pronunciation">ah-pley an may-duh-san</td>
         <td>Call a doctor!</td>
     </tr>
     <tr>
         <td class="french-word">Je suis perdu(e)</td>
-        <td class="pronunciation">zhuh swee pehr-doo</td>
+        <td class="pronunciation">jhuh swee pehr-doo</td>
         <td>I am lost</td>
     </tr>
 </table>

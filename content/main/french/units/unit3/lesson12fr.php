@@ -90,19 +90,19 @@
 
 <h2>Useful Phrases for Ordering</h2>
 <ul>
-    <li><span class="french-word">Je voudrais réserver une table pour...</span> (zhuh voo-dray ray-zair-vay oon tahbl poor...) - I would like to book a table for...</li>
-    <li><span class="french-word">Une table pour deux, s'il vous plaît.</span> (oon tahbl poor duh, seel voo play) - A table for two, please.</li>
-    <li><span class="french-word">Puis-je voir la carte, s'il vous plaît?</span> (pwee-zh vwar lah kart, seel voo play) - May I see the menu, please?</li>
-    <li><span class="french-word">Je voudrais...</span> (zhuh voo-dray) - I would like...</li>
+    <li><span class="french-word">Je voudrais réserver une table pour...</span> (jhuh voo-dray ray-zair-vay oon tahbl poor...) - I would like to book a table for...</li>
+    <li><span class="french-word">Une table pour deux, s'il vous plaît.</span> (oon tahbl poor duh, seel voo pley) - A table for two, please.</li>
+    <li><span class="french-word">Puis-je voir la carte, s'il vous plaît?</span> (pwee-zh vwar lah kart, seel voo pley) - May I see the menu, please?</li>
+    <li><span class="french-word">Je voudrais...</span> (jhuh voo-dray) - I would like...</li>
     <li><span class="french-word">Qu'est-ce que vous recommandez?</span> (kess kuh voo ruh-koh-mahn-day) - What do you recommend?</li>
-    <li><span class="french-word">L'addition, s'il vous plaît.</span> (lah-dee-see-ohn, seel voo play) - The bill, please.</li>
+    <li><span class="french-word">L'addition, s'il vous plaît.</span> (lah-dee-see-ohn, seel voo pley) - The bill, please.</li>
 </ul>
 
 <h2>Food Preferences and Dietary Restrictions</h2>
 <ul>
-    <li><span class="french-word">Je suis végétarien(ne).</span> (zhuh swee vay-zhay-tah-ree-en/vay-zhay-tah-ree-en) - I am vegetarian.</li>
-    <li><span class="french-word">Je suis allergique à...</span> (zhuh swee ah-lehr-zheek ah) - I am allergic to...</li>
-    <li><span class="french-word">Sans gluten, s'il vous plaît.</span> (sahn gloo-ten, seel voo play) - Gluten-free, please.</li>
+    <li><span class="french-word">Je suis végétarien(ne).</span> (jhuh swee vay-zhay-tah-ree-en/vay-zhay-tah-ree-en) - I am vegetarian.</li>
+    <li><span class="french-word">Je suis allergique à...</span> (jhuh swee ah-lehr-zheek ah) - I am allergic to...</li>
+    <li><span class="french-word">Sans gluten, s'il vous plaît.</span> (sahn gloo-ten, seel voo pley) - Gluten-free, please.</li>
     <li><span class="french-word">Pas trop épicé.</span> (pah troh ay-pee-say) - Not too spicy.</li>
 </ul>
 

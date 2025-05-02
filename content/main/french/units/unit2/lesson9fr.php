@@ -26,7 +26,7 @@
     </tr>
     <tr>
         <td class="french-word">jeudi</td>
-        <td class="pronunciation">zhuh-dee</td>
+        <td class="pronunciation">jhuh-dee</td>
         <td>Thursday</td>
     </tr>
     <tr>

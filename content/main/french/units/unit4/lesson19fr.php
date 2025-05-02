@@ -122,7 +122,7 @@
     <li><span class="french-word">Combien coûte l'entrée?</span> (kom-bee-en koot lon-tray) - How much is the admission?</li>
     <li><span class="french-word">Y a-t-il une réduction pour les étudiants?</span> (ee ah-teel ewn ray-dewk-see-on poor lay zay-tew-dee-on) - Is there a discount for students?</li>
     <li><span class="french-word">Est-ce qu'il y a une visite guidée en anglais?</span> (es keel ee ah ewn vee-zeet gee-day on on-glay) - Is there a guided tour in English?</li>
-    <li><span class="french-word">Est-ce que je peux prendre des photos?</span> (es kuh zhuh puh pron-druh day fo-toh) - Can I take pictures?</li>
+    <li><span class="french-word">Est-ce que je peux prendre des photos?</span> (es kuh jhuh puh pron-druh day fo-toh) - Can I take pictures?</li>
     <li><span class="french-word">Où sont les toilettes?</span> (oo son lay twa-let) - Where are the restrooms?</li>
 </ul>
 
