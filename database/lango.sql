@@ -203,7 +203,20 @@ INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`
 (4, 1, 'Simple Questions', 'Learn how to ask and answer basic questions in French.', 4, 20, 1),
 (5, 1, 'Common Phrases', 'Essential phrases to help you in everyday situations.', 5, 15, 1),
 (6, 2, 'Daily Routines', 'Vocabulary for describing your daily activities.', 1, 20, 1),
-(7, 2, 'Present Tense Verbs', 'Learn how to conjugate common verbs in present tense.', 2, 25, 1);
+(7, 2, 'Present Tense Verbs', 'Learn how to conjugate common verbs in present tense.', 2, 25, 1),
+(8, 2, 'Telling Time', 'Learn how to tell and ask for time in French.', 3, 15, 1),
+(9, 2, 'Days and Months', 'Learn the days of the week and months of the year.', 4, 15, 1),
+(10, 2, 'Weather Expressions', 'Describe different weather conditions in French.', 5, 15, 1),
+(11, 3, 'At the Supermarket', 'Learn vocabulary and expressions for grocery shopping.', 1, 20, 1),
+(12, 3, 'At the Restaurant', 'How to order food and interact with waitstaff in French.', 2, 25, 1),
+(13, 3, 'Shopping for Clothes', 'Vocabulary for clothing items and shopping expressions.', 3, 20, 1),
+(14, 3, 'Money and Numbers', 'Learn about euros and how to discuss prices in French.', 4, 15, 1),
+(15, 3, 'Making Purchases', 'Practice conversations for making purchases in different settings.', 5, 20, 1),
+(16, 4, 'Transportation Vocabulary', 'Learn words for different modes of transportation in French.', 1, 15, 1),
+(17, 4, 'Asking for Directions', 'How to ask for and understand directions in French.', 2, 20, 1),
+(18, 4, 'Hotel Reservations', 'Vocabulary and phrases for booking and staying at hotels.', 3, 20, 1),
+(19, 4, 'Tourist Attractions', 'Discussing sightseeing and cultural attractions in French.', 4, 25, 1),
+(20, 4, 'Travel Problems', 'How to handle common issues that may arise when traveling.', 5, 20, 1);
 
 -- --------------------------------------------------------
 
