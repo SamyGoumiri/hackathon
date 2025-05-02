@@ -1,0 +1,55 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+form {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    padding: 8px;
+    background-color: #ecf0f1;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+
+li::before {
+    content: "🏆 ";
+    margin-right: 5px;
+}
+
+iframe {
+    margin-top: 20px;
+    background-color: #e1f5fe;
+    border-radius: 8px;
+    font-weight: bold;
+    padding: 10px;
+}
