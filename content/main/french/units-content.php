@@ -78,7 +78,6 @@ while ($progress = $progress_result->fetch_assoc()) {
     ];
 }
 
-// Get the last completed lesson to determine what should be unlocked
 $last_completed_lesson_query = "SELECT MAX(l.order_index) as last_completed_index
                               FROM user_progress up
                               JOIN lessons l ON up.lesson_id = l.lesson_id
@@ -260,19 +259,15 @@ $stmt->execute();
         <div class="lesson-list">
             <?php
             $lesson_number = 1;
-            $previous_completed = true; // First lesson is always unlocked
+            $previous_completed = true;
             
             if ($lessons_result->num_rows > 0) {
                 
                 while($lesson = $lessons_result->fetch_assoc()) {
                     $lesson_id = $lesson['lesson_id'];
                     $lesson_status = isset($user_progress[$lesson_id]) ? $user_progress[$lesson_id]['status'] : 'not_started';
-                    
-                    // A lesson is locked if it's not the first one and the previous lesson is not completed
-                    // OR if its order index is more than 1 position ahead of the last completed lesson
                     $is_locked = ($lesson_number > 1 && $lesson['order_index'] > $last_completed_index + 1);
                     
-                    // Update the previous_completed status for next iteration
                     $previous_completed = ($lesson_status == 'completed');
             ?>
             <div class="lesson-item <?php echo $lesson_status; ?><?php echo $is_locked ? ' locked' : ''; ?>">
