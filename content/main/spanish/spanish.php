@@ -82,7 +82,7 @@ $stmt->execute();
         <h1>Spanish Language Learning</h1>
         <h2>What would you like to do today?</h2>
         <div class="options">
-            <a href="courses.php" class="card">
+            <a href="units.php" class="card">
                 <img width="100" height="100" src="https://img.icons8.com/isometric/100/book-stack.png" alt="book-stack"/>
                 <h3>Courses</h3>
                 <p>Structured lessons to guide your learning journey.</p>

@@ -16,7 +16,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if (!isset($_GET['unit']) || !is_numeric($_GET['unit'])) {
-    header("Location: courses.php");
+    header("Location: units.php");
     exit();
 }
 
@@ -32,7 +32,7 @@ $stmt->execute();
 $unit_result = $stmt->get_result();
 
 if ($unit_result->num_rows == 0) {
-    header("Location: courses.php");
+    header("Location: units.php");
     exit();
 }
 
@@ -295,7 +295,7 @@ $stmt->execute();
         </div>
         
         <div class="navigation-buttons">
-            <a href="courses.php" class="btn btn-secondary">
+            <a href="units.php" class="btn btn-secondary">
                 <i class='bx bx-arrow-back'></i> Back to Courses
             </a>
             <?php if ($completion_percentage == 100) { ?>

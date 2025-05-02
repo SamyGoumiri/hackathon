@@ -17,7 +17,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    header("Location: courses.php");
+    header("Location: units.php");
     exit();
 }
 
@@ -33,7 +33,7 @@ $stmt->execute();
 $lesson_result = $stmt->get_result();
 
 if ($lesson_result->num_rows == 0) {
-    header("Location: courses.php");
+    header("Location: units.php");
     exit();
 }
 
@@ -288,7 +288,7 @@ if (isset($_POST['complete_lesson'])) {
 
     <div class="content-container">
         <div class="breadcrumb">
-            <a href="courses.php">Courses</a> &gt; 
+            <a href="units.php">Courses</a> &gt; 
             <a href="units-content.php?unit=<?php echo $unit_id; ?>"><?php echo htmlspecialchars($lesson['unit_title']); ?></a> &gt; 
             <span><?php echo htmlspecialchars($lesson['title']); ?></span>
         </div>

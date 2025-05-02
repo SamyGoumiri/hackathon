@@ -52,23 +52,23 @@
         <td>to go to work/school</td>
     </tr>
     <tr>
-        <td class="french-word">trabajar</td>
+        <td class="spanish-word">trabajar</td>
         <td class="pronunciation">tra-ba-har</td>
         <td>to work</td>
     </tr>
     <tr>
-        <td class="french-word">almorzar / comer</td> //HERE
-        <td class="pronunciation">day-zhuh-nay</td>
+        <td class="spanish-word">almorzar</td>
+        <td class="pronunciation">al-mor-sar</td>
         <td>to have lunch</td>
     </tr>
     <tr>
-        <td class="french-word">rentrer à la maison</td>
-        <td class="pronunciation">rahn-tray ah lah may-zon</td>
+        <td class="spanish-word">volver a casa</td>
+        <td class="pronunciation">vol-ver ah kah-sah</td>
         <td>to return home</td>
     </tr>
     <tr>
-        <td class="french-word">faire les courses</td>
-        <td class="pronunciation">fair lay koors</td>
+        <td class="spanish-word">hacer la compra</td>
+        <td class="pronunciation">ah-ser lah kom-prah</td>
         <td>to do shopping</td>
     </tr>
     <tr>
