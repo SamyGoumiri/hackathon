@@ -307,22 +307,22 @@ if (isset($_POST['complete_lesson'])) {
             <div class="lesson-content">
                 <?php
                 $unit_folder = "unit" . intval($unit_id);
-                $lesson_file = "lesson" . intval($lesson['order_index']) . "it.php";
+                $lesson_file = "lesson" . intval($lesson['order_index']) . "it.php"; // Changed to include "it" suffix
                 $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 
                 // Adjust the lesson file name based on the unit, similar to the French implementation
                 if ($unit_id == 6) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . "it.php";
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 5) . "it.php"; // Changed to include "it" suffix
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 
                 if ($unit_id == 7) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . "it.php";
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 10) . "it.php"; // Changed to include "it" suffix
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 
                 if ($unit_id == 8) {
-                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . "it.php";
+                    $lesson_file = "lesson" . (intval($lesson['order_index']) + 15) . "it.php"; // Changed to include "it" suffix
                     $lesson_path = __DIR__ . "/units/" . $unit_folder . "/" . $lesson_file;
                 }
                 
