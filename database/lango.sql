@@ -1,9 +1,16 @@
 -- phpMyAdmin SQL Dump
--- Database schema for Lango - Language Learning Platform
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : ven. 02 mai 2025 à 15:48
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -11,60 +18,52 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Lango`
+-- Base de données : `lango`
 --
-CREATE DATABASE IF NOT EXISTS `Lango` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `Lango`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `courses`
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `profile_image` varchar(255) DEFAULT 'default.png',
-  `registration_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `last_login` datetime DEFAULT NULL,
-  `remember_token` varchar(255) DEFAULT NULL,
+CREATE TABLE `courses` (
+  `course_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `difficulty` enum('beginner','intermediate','advanced') NOT NULL DEFAULT 'beginner',
+  `image_path` varchar(255) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `courses`
 --
 
--- Note: In production, passwords should be properly hashed
-INSERT INTO `users` (`username`, `first_name`, `last_name`, `email`, `password`, `is_active`) VALUES
-('admin', 'Aziz', 'Boula', 'admin@lango.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1);
+INSERT INTO `courses` (`course_id`, `language_id`, `title`, `description`, `difficulty`, `image_path`, `is_active`, `created_at`) VALUES
+(1, 3, 'French Fundamentals', 'Master the basics of French language with this comprehensive beginner course.', 'beginner', 'french_basic.jpg', 1, '2025-05-02 13:47:07'),
+(2, 3, 'Intermediate French', 'Take your French skills to the next level with more advanced concepts and vocabulary.', 'intermediate', 'french_intermediate.jpg', 1, '2025-05-02 13:47:07'),
+(3, 2, 'Spanish for Beginners', 'Learn essential Spanish vocabulary and grammar for everyday conversations.', 'beginner', 'spanish_basic.jpg', 1, '2025-05-02 13:47:07'),
+(4, 5, 'Italian Fundamentals', 'Master the basics of Italian language with this comprehensive beginner course.', 'beginner', 'italian_basic.jpg', 1, '2025-05-02 13:47:07');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages`
+-- Structure de la table `languages`
 --
 
 CREATE TABLE `languages` (
-  `language_id` int(11) NOT NULL AUTO_INCREMENT,
+  `language_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `code` varchar(5) NOT NULL,
   `flag_icon` varchar(255) DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`language_id`),
-  UNIQUE KEY `code` (`code`)
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `languages`
+-- Déchargement des données de la table `languages`
 --
 
 INSERT INTO `languages` (`language_id`, `name`, `code`, `flag_icon`, `is_active`) VALUES
@@ -80,133 +79,21 @@ INSERT INTO `languages` (`language_id`, `name`, `code`, `flag_icon`, `is_active`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_languages`
---
-
-CREATE TABLE `user_languages` (
-  `user_language_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `proficiency_level` enum('beginner','intermediate','advanced','fluent') NOT NULL DEFAULT 'beginner',
-  `is_learning` tinyint(1) NOT NULL DEFAULT 1,
-  `is_native` tinyint(1) NOT NULL DEFAULT 0,
-  `start_date` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`user_language_id`),
-  KEY `user_id` (`user_id`),
-  KEY `language_id` (`language_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_preferences`
---
-
-CREATE TABLE `user_preferences` (
-  `preference_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `email_notifications` tinyint(1) NOT NULL DEFAULT 1,
-  `progress_reminders` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`preference_id`),
-  UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_activity`
---
-
-CREATE TABLE `user_activity` (
-  `activity_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `activity_type` varchar(50) NOT NULL,
-  `activity_details` text DEFAULT NULL,
-  `timestamp` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`activity_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `courses`
---
-
-CREATE TABLE `courses` (
-  `course_id` int(11) NOT NULL AUTO_INCREMENT,
-  `language_id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL,
-  `difficulty` enum('beginner','intermediate','advanced') NOT NULL DEFAULT 'beginner',
-  `image_path` varchar(255) DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`course_id`),
-  KEY `language_id` (`language_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `courses`
---
-
-INSERT INTO `courses` (`course_id`, `language_id`, `title`, `description`, `difficulty`, `image_path`, `is_active`) VALUES
-(1, 3, 'French Fundamentals', 'Master the basics of French language with this comprehensive beginner course.', 'beginner', 'french_basic.jpg', 1),
-(2, 3, 'Intermediate French', 'Take your French skills to the next level with more advanced concepts and vocabulary.', 'intermediate', 'french_intermediate.jpg', 1),
-(3, 2, 'Spanish for Beginners', 'Learn essential Spanish vocabulary and grammar for everyday conversations.', 'beginner', 'spanish_basic.jpg', 1),
-(4, 5, 'Italian Fundamentals', 'Master the basics of Italian language with this comprehensive beginner course.', 'beginner', 'italian_basic.jpg', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `units`
---
-
-CREATE TABLE `units` (
-  `unit_id` int(11) NOT NULL AUTO_INCREMENT,
-  `course_id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `description` text DEFAULT NULL,
-  `order_index` int(11) NOT NULL DEFAULT 1,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`unit_id`),
-  KEY `course_id` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `units`
---
-
-INSERT INTO `units` (`unit_id`, `course_id`, `title`, `description`, `order_index`, `is_active`) VALUES
-(1, 1, 'Les Bases (The Basics)', 'Learn the foundation of French with basic greetings, introductions, and essential phrases.', 1, 1),
-(2, 1, 'La Vie Quotidienne (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
-(3, 1, 'Faire des Courses (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in French-speaking countries.', 3, 1),
-(4, 1, 'Les Voyages (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
-(5, 4, 'Le Basi (The Basics)', 'Learn the foundation of Italian with basic greetings, introductions, and essential phrases.', 1, 1),
-(6, 4, 'La Vita Quotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
-(7, 4, 'Fare Acquisti (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Italian-speaking countries.', 3, 1),
-(8, 4, 'I Viaggi (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lessons`
+-- Structure de la table `lessons`
 --
 
 CREATE TABLE `lessons` (
-  `lesson_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lesson_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `content` text DEFAULT NULL,
   `order_index` int(11) NOT NULL DEFAULT 1,
   `estimated_time` int(11) DEFAULT NULL COMMENT 'Estimated completion time in minutes',
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`lesson_id`),
-  KEY `unit_id` (`unit_id`)
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `lessons`
+-- Déchargement des données de la table `lessons`
 --
 
 INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`, `estimated_time`, `is_active`) VALUES
@@ -249,36 +136,22 @@ INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`
 (37, 8, 'Chiedere Indicazioni', 'How to ask for and understand directions in Italian.', 2, 20, 1),
 (38, 8, 'Prenotazioni Alberghiere', 'Vocabulary and phrases for booking and staying at hotels.', 3, 20, 1),
 (39, 8, 'Attrazioni Turistiche', 'Discussing sightseeing and cultural attractions in Italian.', 4, 25, 1),
-(40, 8, 'Problemi di Viaggio', 'How to handle common issues that may arise when traveling.', 5, 20, 1);
-
--- Add units for Spanish course
-INSERT INTO `units` (`unit_id`, `course_id`, `title`, `description`, `order_index`, `is_active`) VALUES
-(9, 3, 'Los Fundamentos (The Basics)', 'Learn the foundation of Spanish with basic greetings, introductions, and essential phrases.', 1, 1),
-(10, 3, 'La Vida Cotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
-(11, 3, 'De Compras (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Spanish-speaking countries.', 3, 1),
-(12, 3, 'Los Viajes (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
-
--- Add lessons for Spanish units
-INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`, `estimated_time`, `is_active`) VALUES
--- Unit 9 - Los Fundamentos (The Basics)
+(40, 8, 'Problemi di Viaggio', 'How to handle common issues that may arise when traveling.', 5, 20, 1),
 (41, 9, 'Saludos y Presentaciones', 'Learn how to say hello and introduce yourself in Spanish.', 1, 15, 1),
 (42, 9, 'Pronunciación Básica', 'Master the essential sounds of Spanish language.', 2, 20, 1),
 (43, 9, 'Números 1-20', 'Learn how to count from 1 to 20 in Spanish.', 3, 15, 1),
 (44, 9, 'Preguntas Simples', 'Learn how to ask and answer basic questions in Spanish.', 4, 20, 1),
 (45, 9, 'Frases Comunes', 'Essential phrases to help you in everyday situations.', 5, 15, 1),
--- Unit 10 - La Vida Cotidiana (Daily Life)
 (46, 10, 'Rutinas Diarias', 'Vocabulary for describing your daily activities.', 1, 20, 1),
 (47, 10, 'Verbos en Presente', 'Learn how to conjugate common verbs in present tense.', 2, 25, 1),
 (48, 10, 'Decir la Hora', 'Learn how to tell and ask for time in Spanish.', 3, 15, 1),
 (49, 10, 'Días y Meses', 'Learn the days of the week and months of the year.', 4, 15, 1),
 (50, 10, 'Expresiones sobre el Clima', 'Describe different weather conditions in Spanish.', 5, 15, 1),
--- Unit 11 - De Compras (Shopping)
 (51, 11, 'En el Supermercado', 'Learn vocabulary and expressions for grocery shopping.', 1, 20, 1),
 (52, 11, 'En el Restaurante', 'How to order food and interact with waitstaff in Spanish.', 2, 25, 1),
 (53, 11, 'Comprando Ropa', 'Vocabulary for clothing items and shopping expressions.', 3, 20, 1),
 (54, 11, 'Dinero y Números', 'Learn about euros and how to discuss prices in Spanish.', 4, 15, 1),
 (55, 11, 'Haciendo Compras', 'Practice conversations for making purchases in different settings.', 5, 20, 1),
--- Unit 12 - Los Viajes (Traveling)
 (56, 12, 'Vocabulario de Transporte', 'Learn words for different modes of transportation in Spanish.', 1, 15, 1),
 (57, 12, 'Pidiendo Direcciones', 'How to ask for and understand directions in Spanish.', 2, 20, 1),
 (58, 12, 'Reservaciones de Hotel', 'Vocabulary and phrases for booking and staying at hotels.', 3, 20, 1),
@@ -288,51 +161,297 @@ INSERT INTO `lessons` (`lesson_id`, `unit_id`, `title`, `content`, `order_index`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_progress`
+-- Structure de la table `units`
 --
 
-CREATE TABLE `user_progress` (
-  `progress_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `units` (
+  `unit_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `order_index` int(11) NOT NULL DEFAULT 1,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `units`
+--
+
+INSERT INTO `units` (`unit_id`, `course_id`, `title`, `description`, `order_index`, `is_active`) VALUES
+(1, 1, 'Les Bases (The Basics)', 'Learn the foundation of French with basic greetings, introductions, and essential phrases.', 1, 1),
+(2, 1, 'La Vie Quotidienne (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(3, 1, 'Faire des Courses (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in French-speaking countries.', 3, 1),
+(4, 1, 'Les Voyages (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
+(5, 4, 'Le Basi (The Basics)', 'Learn the foundation of Italian with basic greetings, introductions, and essential phrases.', 1, 1),
+(6, 4, 'La Vita Quotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(7, 4, 'Fare Acquisti (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Italian-speaking countries.', 3, 1),
+(8, 4, 'I Viaggi (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
+(9, 3, 'Los Fundamentos (The Basics)', 'Learn the foundation of Spanish with basic greetings, introductions, and essential phrases.', 1, 1),
+(10, 3, 'La Vida Cotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(11, 3, 'De Compras (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Spanish-speaking countries.', 3, 1),
+(12, 3, 'Los Viajes (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `lesson_id` int(11) NOT NULL,
-  `status` enum('not_started','in_progress','completed') NOT NULL DEFAULT 'not_started',
-  `completion_date` datetime DEFAULT NULL,
-  `score` int(11) DEFAULT NULL COMMENT 'Score in percentage if applicable',
-  `last_activity` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`progress_id`),
-  UNIQUE KEY `user_lesson` (`user_id`,`lesson_id`),
-  KEY `lesson_id` (`lesson_id`)
+  `username` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `profile_image` varchar(255) DEFAULT 'default.png',
+  `registration_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `last_login` datetime DEFAULT NULL,
+  `remember_token` varchar(255) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `email`, `password`, `profile_image`, `registration_date`, `last_login`, `remember_token`, `is_active`) VALUES
+(1, 'admin', 'Aziz', 'Boula', 'admin@lango.com', '$2y$10$Cerx0cFH8GZ7rDr1zEajhe3J/t9w4bqYZWtb4rEdscG/oOfK7Jb.S', 'default.png', '2025-05-02 14:48:13', NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_activity`
+--
+
+CREATE TABLE `user_activity` (
+  `activity_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `activity_type` varchar(50) NOT NULL,
+  `activity_details` text DEFAULT NULL,
+  `timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Constraints for table relations
+-- Structure de la table `user_languages`
 --
 
+CREATE TABLE `user_languages` (
+  `user_language_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `proficiency_level` enum('beginner','intermediate','advanced','fluent') NOT NULL DEFAULT 'beginner',
+  `is_learning` tinyint(1) NOT NULL DEFAULT 1,
+  `is_native` tinyint(1) NOT NULL DEFAULT 0,
+  `start_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_preferences`
+--
+
+CREATE TABLE `user_preferences` (
+  `preference_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `email_notifications` tinyint(1) NOT NULL DEFAULT 1,
+  `progress_reminders` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_progress`
+--
+
+CREATE TABLE `user_progress` (
+  `progress_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `lesson_id` int(11) NOT NULL,
+  `status` enum('not_started','in_progress','completed') NOT NULL DEFAULT 'not_started',
+  `completion_date` datetime DEFAULT NULL,
+  `score` int(11) DEFAULT NULL COMMENT 'Score in percentage if applicable',
+  `last_activity` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`course_id`),
+  ADD KEY `language_id` (`language_id`);
+
+--
+-- Index pour la table `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`language_id`),
+  ADD UNIQUE KEY `code` (`code`);
+
+--
+-- Index pour la table `lessons`
+--
+ALTER TABLE `lessons`
+  ADD PRIMARY KEY (`lesson_id`),
+  ADD KEY `unit_id` (`unit_id`);
+
+--
+-- Index pour la table `units`
+--
+ALTER TABLE `units`
+  ADD PRIMARY KEY (`unit_id`),
+  ADD KEY `course_id` (`course_id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Index pour la table `user_activity`
+--
+ALTER TABLE `user_activity`
+  ADD PRIMARY KEY (`activity_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Index pour la table `user_languages`
+--
+ALTER TABLE `user_languages`
+  ADD PRIMARY KEY (`user_language_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `language_id` (`language_id`);
+
+--
+-- Index pour la table `user_preferences`
+--
+ALTER TABLE `user_preferences`
+  ADD PRIMARY KEY (`preference_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
+-- Index pour la table `user_progress`
+--
+ALTER TABLE `user_progress`
+  ADD PRIMARY KEY (`progress_id`),
+  ADD UNIQUE KEY `user_lesson` (`user_id`,`lesson_id`),
+  ADD KEY `lesson_id` (`lesson_id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT pour la table `lessons`
+--
+ALTER TABLE `lessons`
+  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+
+--
+-- AUTO_INCREMENT pour la table `units`
+--
+ALTER TABLE `units`
+  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `user_activity`
+--
+ALTER TABLE `user_activity`
+  MODIFY `activity_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `user_languages`
+--
+ALTER TABLE `user_languages`
+  MODIFY `user_language_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `user_preferences`
+--
+ALTER TABLE `user_preferences`
+  MODIFY `preference_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `user_progress`
+--
+ALTER TABLE `user_progress`
+  MODIFY `progress_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `courses`
+--
+ALTER TABLE `courses`
+  ADD CONSTRAINT `courses_ibfk_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`);
+
+--
+-- Contraintes pour la table `lessons`
+--
+ALTER TABLE `lessons`
+  ADD CONSTRAINT `lessons_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `units`
+--
+ALTER TABLE `units`
+  ADD CONSTRAINT `units_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `user_activity`
+--
+ALTER TABLE `user_activity`
+  ADD CONSTRAINT `user_activity_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `user_languages`
+--
 ALTER TABLE `user_languages`
   ADD CONSTRAINT `user_languages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `user_languages_ibfk_2` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`);
 
+--
+-- Contraintes pour la table `user_preferences`
+--
 ALTER TABLE `user_preferences`
   ADD CONSTRAINT `user_preferences_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
-ALTER TABLE `user_activity`
-  ADD CONSTRAINT `user_activity_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
-
-ALTER TABLE `courses`
-  ADD CONSTRAINT `courses_ibfk_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`);
-
-ALTER TABLE `units`
-  ADD CONSTRAINT `units_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`course_id`) ON DELETE CASCADE;
-
-ALTER TABLE `lessons`
-  ADD CONSTRAINT `lessons_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`) ON DELETE CASCADE;
-
+--
+-- Contraintes pour la table `user_progress`
+--
 ALTER TABLE `user_progress`
   ADD CONSTRAINT `user_progress_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `user_progress_ibfk_2` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`lesson_id`);
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
