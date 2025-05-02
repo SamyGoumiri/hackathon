@@ -15,7 +15,7 @@ require_once '../../../database/connect.php';
 <body class=" min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
     <div class="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-6">
         <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold text-gray-800">Practice</h2>
+            <h2 class="text-2xl font-bold text-violet-500">Practice</h2>
             <span id="questionCounter" class="text-sm text-gray-500">Question 1</span>
         </div>
 
@@ -44,10 +44,7 @@ require_once '../../../database/connect.php';
         let vocabQuestions = [
             { question: "What does this word mean ?", word: "Bonjour", image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png", options: ["Hello", "Goodnight", "Thankyou", "please"], answer: "Hello" },
             { question: "what is the french word of 'I' ? ", word: "", image: "https://img.icons8.com/ios-filled/100/i-pronoun.png", options: ["Je", "Tu", "Il", "Nous"], answer: "Je" }
-            { question: "What does this word mean ?", word: "Bonjour", image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png", options: ["Hello", "Goodnight", "Thankyou", "please"], answer: "Hello" },
-            { question: "what is the french word of 'I' ? ", word: "", image: "https://img.icons8.com/ios-filled/100/i-pronoun.png", options: ["Je", "Tu", "Il", "Nous"], answer: "Je" }
-            { question: "What does this word mean ?", word: "Bonjour", image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png", options: ["Hello", "Goodnight", "Thankyou", "please"], answer: "Hello" },
-
+      
 
         ];
 
