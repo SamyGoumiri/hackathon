@@ -118,11 +118,6 @@ $conn->close();
                     <input type="password" name="password" placeholder="Password" required>
                     <i class='bx bxs-lock-alt'></i>
                 </div>
- 
-                <div class="remember-forget">
-                    <label><input type="checkbox" name="remember"> Remember Me</label>
-                    <a href="forgot_password.php">Forgot password?</a>
-                </div>
                 
                 <button class="btn" type="submit">Start Learning</button>
                 

@@ -88,14 +88,14 @@ if (isset($_POST['change_password'])) {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="settings.css">
-    <title>Lango - Settings</title>
+    <title>Esperanto - Settings</title>
 </head>
 
 <body>
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </div>
             <nav>
                 <ul>
@@ -204,7 +204,7 @@ if (isset($_POST['change_password'])) {
 
     <footer>
         <div class="footer-container">
-            <p>&copy; <?php echo date('Y'); ?> Lango. All rights reserved.</p>
+            <p>&copy; <?php echo date('Y'); ?> Esperanto. All rights reserved.</p>
         </div>
     </footer>
 

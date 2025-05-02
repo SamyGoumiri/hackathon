@@ -94,14 +94,14 @@ if(isset($_GET['unit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
-    <title>Lango - German Courses</title>
+    <title>Esperanto - German Courses</title>
 
 </head>
 <body>
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Lango</h1>
+                <h1>Esperanto</h1>
             </div>
             <nav>
                 <ul>
