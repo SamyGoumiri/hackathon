@@ -455,12 +455,21 @@ $stmt->execute();
                     <img src="${q.image}" alt="${q.word}" onerror="this.src='https://img.icons8.com/ios/100/question-mark.png'">
                     <h3>${q.word}</h3>
                 </div>
-                <div class="options-grid">
-                    ${shuffleArray([...q.options]).map(option => `
-                        <button class="option-btn" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
-                    `).join('')}
+                <div class="options-grid" id="options-container">
                 </div>
             `;
+            
+            // Create option buttons using DOM manipulation instead of string interpolation
+            const optionsContainer = document.getElementById("options-container");
+            shuffleArray([...q.options]).forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.textContent = option;
+                button.addEventListener('click', function() {
+                    checkAnswerVocab(option, q.answer);
+                });
+                optionsContainer.appendChild(button);
+            });
         }
 
         function renderFillQuestion(q) {
