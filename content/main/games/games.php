@@ -89,7 +89,7 @@ $high_score = $high_score_data['high_score'] ?? 0;
                             <div class="stat-label">Your High Score</div>
                             <div class="stat-value"><?php echo $high_score; ?> words</div>
                         </div>
-                        <a href="speed-translate.php" class="btn btn-primary">Play Now</a>
+                        <a href="speed-translate/speed-translate.php" class="btn btn-primary">Play Now</a>
                     </div>
                 </div>
             </section>
