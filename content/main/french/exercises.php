@@ -272,10 +272,6 @@ $stmt->execute();
         const totalQuestions = 10;
         let answered = false;
 
-<<<<<<< Updated upstream
-=======
-        ///done
->>>>>>> Stashed changes
         let vocabQuestions = [
             { 
                 question: "What does 'Bonjour' mean in English?", 
@@ -599,7 +595,6 @@ $stmt->execute();
             }
         }
 
-<<<<<<< Updated upstream
         function showResults() {
             const percentage = (score / totalQuestions) * 100;
             let feedback;
@@ -631,37 +626,12 @@ $stmt->execute();
                 total: totalQuestions,
                 activity_type: 'french_practice'
             };
-=======
-        
-        //debug the java
-        function submitResult() {
-            const payload = { score, total: totalQuestions };
->>>>>>> Stashed changes
 
             fetch("../../../api/save_activity.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             })
-<<<<<<< Updated upstream
-=======
-            
-            .then(res => {
-                if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                document.getElementById("questionArea").innerHTML = `
-                    <div class="text-center">
-                        <h2 class="text-2xl font-bold mb-4">Results</h2>
-                        <p class="text-xl">You scored <strong>${score}</strong> out of <strong>${totalQuestions}</strong></p>
-                        ${data.rating ? `<p class="mt-2">Your rating: <strong>${data.rating}</strong></p>` : ""}
-                    </div>
-                `;
-                document.getElementById("questionCounter").style.display = "none";
-                document.getElementById("nextButton").style.display = "none";
-            })
->>>>>>> Stashed changes
             .catch(err => {
                 console.error("Error saving results:", err);
             });
