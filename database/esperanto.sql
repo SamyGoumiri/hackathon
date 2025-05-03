@@ -444,7 +444,7 @@ CREATE TABLE `user_experience` (
   `exp_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `xp_points` int(11) NOT NULL DEFAULT 0,
-  `level` int(11) NOT NULL DEFAULT 1,
+  `level` int(11) NOT NULL DEFAULT 0,
   `last_updated` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -453,7 +453,7 @@ CREATE TABLE `user_experience` (
 --
 
 INSERT INTO `user_experience` (`exp_id`, `user_id`, `xp_points`, `level`, `last_updated`) VALUES
-(1, 1, 347, 4, '2025-05-02 18:45:20');
+(1, 1, 347, 0, '2025-05-02 18:45:20');
 
 -- --------------------------------------------------------
 

@@ -24,6 +24,15 @@ $high_score_result = $stmt->get_result();
 $high_score_data = $high_score_result->fetch_assoc();
 $high_score = $high_score_data['score'] ?? 0;
 
+// Get Word Master high score
+$word_master_score_query = "SELECT score FROM game_high_scores WHERE user_id = ? AND game_id = 'word_master'";
+$stmt = $conn->prepare($word_master_score_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$word_master_result = $stmt->get_result();
+$word_master_data = $word_master_result->fetch_assoc();
+$word_master_score = $word_master_data['score'] ?? 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -78,19 +87,18 @@ $high_score = $high_score_data['score'] ?? 0;
 
             <section class="games-section">
                 <h2>Choose a Game to Play</h2>
-                
-                <div class="game-cards">
+                    
                     <div class="game-card">
                         <div class="game-icon">
-                            <i class='bx bx-time'></i>
+                            <i class='bx bx-globe'></i>
                         </div>
-                        <h3>Speed Translate</h3>
-                        <p>Race against the clock to translate as many words as possible in a limited time. Test your vocabulary and translation speed!</p>
+                        <h3>Word Master</h3>
+                        <p>Test your translation skills! Choose a language and time limit, then translate as many words as you can to earn points and XP.</p>
                         <div class="game-stats">
                             <div class="stat-label">Your High Score</div>
-                            <div class="stat-value"><?php echo $high_score; ?> points</div>
+                            <div class="stat-value"><?php echo $word_master_score; ?> points</div>
                         </div>
-                        <a href="speed-translate/speed-translate.php" class="btn btn-primary">Play Now</a>
+                        <a href="word-master/word-master.php" class="btn btn-primary">Play Now</a>
                     </div>
                 </div>
             </section>
