@@ -107,11 +107,52 @@ $stmt->bind_param("is", $user_id, $details);
 $stmt->execute();
 
 if (isset($_POST['complete_lesson'])) {
+    // Check if lesson was already completed to avoid giving XP multiple times
+    $check_completed = "SELECT status FROM user_progress WHERE user_id = ? AND lesson_id = ?";
+    $stmt = $conn->prepare($check_completed);
+    $stmt->bind_param("ii", $user_id, $lesson_id);
+    $stmt->execute();
+    $completed_result = $stmt->get_result();
+    $was_already_completed = false;
+    
+    if ($completed_result->num_rows > 0) {
+        $completed_data = $completed_result->fetch_assoc();
+        $was_already_completed = ($completed_data['status'] === 'completed');
+    }
+    
+    // Update lesson status to completed
     $update_status = "UPDATE user_progress SET status = 'completed', completion_date = NOW(), 
                     last_activity = NOW() WHERE user_id = ? AND lesson_id = ?";
     $stmt = $conn->prepare($update_status);
     $stmt->bind_param("ii", $user_id, $lesson_id);
     $stmt->execute();
+    
+    // If this is a newly completed lesson, award 100 XP
+    if (!$was_already_completed) {
+        // Check if user has an entry in user_experience
+        $check_exp = "SELECT exp_id, xp_points FROM user_experience WHERE user_id = ?";
+        $stmt = $conn->prepare($check_exp);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $exp_result = $stmt->get_result();
+        
+        if ($exp_result->num_rows > 0) {
+            // Update existing XP
+            $exp_data = $exp_result->fetch_assoc();
+            $new_xp = $exp_data['xp_points'] + 100;
+            
+            $update_exp = "UPDATE user_experience SET xp_points = ?, last_updated = NOW() WHERE user_id = ?";
+            $stmt = $conn->prepare($update_exp);
+            $stmt->bind_param("ii", $new_xp, $user_id);
+            $stmt->execute();
+        } else {
+            // Create new XP entry
+            $insert_exp = "INSERT INTO user_experience (user_id, xp_points, level, last_updated) VALUES (?, 100, 1, NOW())";
+            $stmt = $conn->prepare($insert_exp);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+        }
+    }
     
     header("Location: lesson.php?id=" . $lesson_id . "&completed=1");
     exit();
