@@ -165,6 +165,10 @@ $high_score = $high_score_data['score'] ?? 0;
                     <p>High Score: <span id="high-score">0</span> points</p>
                 </div>
                 
+                <div class="xp-reward">
+                    <p>Experience Gained: <span id="xp-earned">0</span> XP <span id="xp-bonus" class="xp-bonus"></span></p>
+                </div>
+                
                 <div class="stats-summary">
                     <div class="stat">
                         <p>Words Attempted: <span id="words-attempted">0</span></p>

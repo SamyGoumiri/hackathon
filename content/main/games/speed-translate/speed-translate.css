@@ -480,6 +480,42 @@
     transform: translateY(4px);
 }
 
+/* XP Reward Display */
+.xp-reward {
+    text-align: center;
+    margin: 25px 0;
+    padding: 15px;
+    background-color: #f8f5ff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(127, 87, 241, 0.1);
+}
+
+.xp-reward p {
+    color: #555;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0;
+}
+
+.xp-reward #xp-earned {
+    color: #7F57F1;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.xp-bonus {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 16px;
+    color: #666;
+}
+
+.xp-bonus-active {
+    color: #ff9800;
+    font-weight: 700;
+    animation: pulse 1.5s infinite alternate;
+}
+
 /* Responsive adjustments */
 @media screen and (max-width: 600px) {
     .setup-options {

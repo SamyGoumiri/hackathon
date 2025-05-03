@@ -191,6 +191,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function saveHighScore() {
+        // Show saving indicator if needed
+        console.log("Saving score:", currentScore);
+        
         fetch('save-score.php', {
             method: 'POST',
             headers: {
@@ -198,16 +201,42 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: `user_id=${userId}&score=${currentScore}&test_id=0`
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.success) {
+                console.log("Score saved successfully");
                 if (data.is_high_score) {
+                    console.log("New high score set!");
                     highScore = currentScore;
                     userHighScoreDisplay.textContent = highScore;
                 }
+                
+                // Display XP earned
+                const xpEarnedElement = document.getElementById('xp-earned');
+                if (xpEarnedElement) {
+                    xpEarnedElement.textContent = data.xp_earned;
+                    
+                    // Add special styling for high score XP bonus
+                    if (data.is_high_score) {
+                        document.getElementById('xp-bonus').textContent = '(10x High Score Bonus!)';
+                        document.getElementById('xp-bonus').classList.add('xp-bonus-active');
+                    } else {
+                        document.getElementById('xp-bonus').textContent = '(4x Regular Bonus)';
+                        document.getElementById('xp-bonus').classList.remove('xp-bonus-active');
+                    }
+                }
+            } else {
+                console.error("Failed to save score:", data.message);
             }
         })
-        .catch(error => console.error('Error saving score:', error));
+        .catch(error => {
+            console.error('Error saving score:', error);
+        });
     }
     
     function showScreen(screen) {

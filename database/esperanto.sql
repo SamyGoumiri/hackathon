@@ -583,7 +583,7 @@ INSERT INTO `user_achievements` (`user_achievement_id`, `user_id`, `achievement_
 --
 
 CREATE TABLE `game_high_scores` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `game_id` varchar(50) NOT NULL,
   `score` int(11) NOT NULL,
@@ -591,9 +591,8 @@ CREATE TABLE `game_high_scores` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_game` (`user_id`, `game_id`),
-  INDEX `game_id_index` (`game_id`),
-  INDEX `user_score_index` (`user_id`, `score`),
-  CONSTRAINT `game_high_scores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+  KEY `game_id_index` (`game_id`),
+  KEY `user_score_index` (`user_id`, `score`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

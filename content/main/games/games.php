@@ -15,13 +15,14 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-$high_score_query = "SELECT MAX(score) as high_score FROM test_results WHERE user_id = ? AND test_id = 0";
+// Update high score query to use the game_high_scores table
+$high_score_query = "SELECT score FROM game_high_scores WHERE user_id = ? AND game_id = 'speed_translate'";
 $stmt = $conn->prepare($high_score_query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $high_score_result = $stmt->get_result();
 $high_score_data = $high_score_result->fetch_assoc();
-$high_score = $high_score_data['high_score'] ?? 0;
+$high_score = $high_score_data['score'] ?? 0;
 
 ?>
 
@@ -87,7 +88,7 @@ $high_score = $high_score_data['high_score'] ?? 0;
                         <p>Race against the clock to translate as many words as possible in a limited time. Test your vocabulary and translation speed!</p>
                         <div class="game-stats">
                             <div class="stat-label">Your High Score</div>
-                            <div class="stat-value"><?php echo $high_score; ?> words</div>
+                            <div class="stat-value"><?php echo $high_score; ?> points</div>
                         </div>
                         <a href="speed-translate/speed-translate.php" class="btn btn-primary">Play Now</a>
                     </div>
