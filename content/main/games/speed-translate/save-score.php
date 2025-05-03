@@ -35,7 +35,6 @@ if ($_SESSION['user_id'] != $user_id) {
     exit();
 }
 
-// Check if game_high_scores table exists
 $check_table_query = "CREATE TABLE IF NOT EXISTS `game_high_scores` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `user_id` int(11) NOT NULL,
@@ -47,7 +46,6 @@ $check_table_query = "CREATE TABLE IF NOT EXISTS `game_high_scores` (
     UNIQUE KEY `user_game` (`user_id`, `game_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
 
-// Execute the table check/creation and log any errors
 if (!$conn->query($check_table_query)) {
     error_log("Speed Translate: Failed to create game_high_scores table: " . $conn->error);
     echo json_encode(['success' => false, 'message' => 'Failed to initialize game data']);
