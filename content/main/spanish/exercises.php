@@ -47,9 +47,9 @@ require_once '../../../database/connect.php';
         let vocabQuestions = [
 
             {question: "What does 'Hola' mean?",word: "Hola",options: ["Hello", "Goodbye", "Thank you", "Please"],answer: "Hello",image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png"},//done
-            {question: "What is the Spanish word for 'I'?",word:"",options: ["Yo", "Tú", "Él", "Nosotros"],answer: "Yo",image: "images/download.png"},//done
-            {question: "How do you say 'apple' in Spanish?",word:"Apple",options: ["Manzana", "Plátano", "Naranja", "Uva"],answer: "Manzana",image: "images/download(1).png"},//done
-            {question: "Translate to Spanish: 'How are you?'",word:"",options: ["¿Cómo estás?", "¿Dónde está la manzana?", "Eres un chico.", "Estoy cansado."],answer: "¿Cómo estás?",image: "images/download(2).png"},
+            {question: "What is the Spanish word for 'I'?",word:"",options: ["Yo", "Tú", "Él", "Nosotros"],answer: "Yo",image: "https://img.icons8.com/ios/100/i-pronoun.png"},//done
+            {question: "How do you say 'apple' in Spanish?",word:"Apple",options: ["Manzana", "Plátano", "Naranja", "Uva"],answer: "Manzana",image: "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/100/external-apple-autumn-season-flaticons-lineal-color-flat-icons-3.png"},//done
+            {question: "Translate to Spanish: 'How are you?'",word:"",options: ["¿Cómo estás?", "¿Dónde está la manzana?", "Eres un chico.", "Estoy cansado."],answer: "¿Cómo estás?",image: "https://img.icons8.com/ios-filled/100/communication.png"},
             {question: "Which one means 'I am' in Spanish?",word:"I am",options: ["Yo soy", "Tú eres", "Él es", "Nosotros somos"],answer: "Yo soy",image: "https://img.icons8.com/ios/100/i-pronoun.png"},//done
         ];
 
