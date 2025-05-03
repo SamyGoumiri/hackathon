@@ -579,6 +579,26 @@ INSERT INTO `user_achievements` (`user_achievement_id`, `user_id`, `achievement_
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `game_high_scores`
+--
+
+CREATE TABLE `game_high_scores` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `game_id` varchar(50) NOT NULL,
+  `score` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_game` (`user_id`, `game_id`),
+  INDEX `game_id_index` (`game_id`),
+  INDEX `user_score_index` (`user_id`, `score`),
+  CONSTRAINT `game_high_scores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Index pour les tables déchargées
 --
 
@@ -786,6 +806,12 @@ ALTER TABLE `user_achievements`
   MODIFY `user_achievement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT pour la table `game_high_scores`
+--
+ALTER TABLE `game_high_scores`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Contraintes pour les tables déchargées
 --
 
@@ -864,6 +890,12 @@ ALTER TABLE `test_results`
 ALTER TABLE `user_achievements`
   ADD CONSTRAINT `user_achievements_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `user_achievements_ibfk_2` FOREIGN KEY (`achievement_id`) REFERENCES `achievements` (`achievement_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `game_high_scores`
+--
+ALTER TABLE `game_high_scores`
+  ADD CONSTRAINT `game_high_scores_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 COMMIT;
 
