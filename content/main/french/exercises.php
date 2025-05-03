@@ -1,36 +1,268 @@
-
 <?php
-require_once '../../../database/connect.php';
+session_start();
+require_once "../../../database/connect.php";
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../auth/login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+
+$user_query = "SELECT username, first_name, last_name FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($user_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+
+$log_query = "INSERT INTO user_activity (user_id, activity_type, activity_details) 
+             VALUES (?, 'practice_exercise', ?)";
+$details = json_encode(['language' => 'french', 'type' => 'mixed']);
+$stmt = $conn->prepare($log_query);
+$stmt->bind_param("is", $user_id, $details);
+$stmt->execute();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice - Language Project</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../style.css">
+    <title>Esperanto - French Practice Exercises</title>
+    <style>
+        .exercise-container {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(127, 87, 241, 0.1);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .question-counter {
+            color: #7F57F1;
+            font-weight: 600;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .word-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .word-display img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        
+        .word-display h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #7F57F1;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .option-btn {
+            background-color: #f8f5ff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .option-btn:hover {
+            background-color: #eee6ff;
+            border-color: #7F57F1;
+        }
+        
+        .option-btn.correct {
+            background-color: #e6f7e6;
+            border-color: #2e7d32;
+            color: #2e7d32;
+        }
+        
+        .option-btn.incorrect {
+            background-color: #fbe9e7;
+            border-color: #d84315;
+            color: #d84315;
+        }
+        
+        .fill-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: border 0.3s ease;
+        }
+        
+        .fill-input:focus {
+            border-color: #7F57F1;
+            outline: none;
+        }
+        
+        .check-button {
+            background-color: #7F57F1;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .check-button:hover {
+            background-color: #6642d1;
+        }
+        
+        .results {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .results h2 {
+            color: #7F57F1;
+            margin-bottom: 15px;
+        }
+        
+        .results p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .results .score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #7F57F1;
+            margin: 15px 0;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .match-pairs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            margin-bottom: 25px;
+        }
+        
+        .pair-item {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background-color: #f8f5ff;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .pair-item:hover {
+            background-color: #eee6ff;
+        }
+        
+        .pair-item.selected {
+            background-color: #7F57F1;
+            color: white;
+        }
+        
+        .pair-item.matched {
+            background-color: #e6f7e6;
+            border-color: #2e7d32;
+            color: #2e7d32;
+            cursor: default;
+        }
+        
+        .pronunciation-section audio {
+            width: 100%;
+            margin: 10px 0 20px;
+        }
+    </style>
 </head>
-
-<body class=" min-h-screen flex items-center justify-center p-4 font-[Quicksand]">
-    <div class="max-w-2xl w-full bg-white rounded-2xl shadow-lg p-6">
-        <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold text-violet-500">Practice</h2>
-            <span id="questionCounter" class="text-sm text-gray-500">Question 1</span>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>Esperanto</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../dashboard.php">Dashboard</a></li>
+                    <li><a href="../games/games.php">Games</a></li>
+                    <li><a href="../chatbot/chatbot.php">ChatBot</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <div class="user-info">
+                    <span><?php echo htmlspecialchars(ucfirst($user['first_name']) . ' ' . ucfirst($user['last_name'])); ?></span>
+                    <div class="user-avatar">
+                        <span class="user-initials">
+                            <?php echo strtoupper(substr($user['first_name'], 0, 1) . substr($user['last_name'], 0, 1)); ?>
+                        </span>
+                    </div>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="../profile.php"><i class='bx bx-user'></i> Profile</a>
+                    <a href="../settings.php"><i class='bx bx-cog'></i> Settings</a>
+                    <a href="../../auth/logout.php"><i class='bx bx-log-out'></i> Log Out</a>
+                </div>
+            </div>
         </div>
+    </header>
 
-        <a href="french.php" class="flex items-center color :violet; hover:text-violet-600 mb-4">
-            <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L4.414 9H18a1 1 0 110 2H4.414l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-            </svg>
-            Back
-        </a>
-
-        <div id="questionArea" class="mb-6"></div>
-
-        <div class="mt-6 flex justify-end">
+    <div class="content-container">
+        <h1>French Practice Exercises <img src="https://flagcdn.com/w40/fr.png" alt="French Flag" class="flag-icon"></h1>
+        
+        <div class="exercise-container">
+            <div class="question-header">
+                <h2>Test Your Knowledge</h2>
+                <span id="questionCounter" class="question-counter">Question 1/10</span>
+            </div>
             
-            <button id="nextButton" onclick="handleNextQuestion()" class="btn-primary">Next</button>
+            <div id="questionArea"></div>
+            
+            <div class="navigation-buttons">
+                <a href="french.php" class="btn btn-secondary">
+                    <i class='bx bx-arrow-back'></i> Back to French
+                </a>
+                <button id="nextButton" class="btn btn-primary">Next Question</button>
+            </div>
         </div>
     </div>
 
@@ -40,71 +272,192 @@ require_once '../../../database/connect.php';
         const totalQuestions = 10;
         let answered = false;
 
-
-
-
-        ///done
         let vocabQuestions = [
-
-            { question: "What does this word mean ?", word: "Bonjour", image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png", options: ["Hello", "Goodnight", "Thankyou", "please"], answer: "Hello" },
-            { question: "what is the french word of 'I' ? ", word: "", image: "https://img.icons8.com/ios-filled/100/i-pronoun.png", options: ["Je", "Tu", "Il", "Nous"], answer: "Je" },
-            {question: "How do you say 'the boy' in French?",word:"Boy", image:"https://img.icons8.com/keek/100/boy.png", options: ["Le garçon", "La fille", "L’homme", "Le chien"],anwser: "Le garçon"},
-            {question: "What is the French word for 'apple'?",word:"Apple", image:"https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/100/external-apple-fruit-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png", options: ["Orange", "Pomme", "Banane", "Fraise"], answer: "Pomme"},
-            {question: "What does 'Merci' mean in English?",word:"Merci", image:"https://img.icons8.com/ios-filled/100/you-singular.png", options: ["Please", "Goodbye", "Thank you", "Hello"], answer: "Thank you"},
-      
-
-            
+            { 
+                question: "What does 'Bonjour' mean in English?", 
+                word: "Bonjour", 
+                image: "https://img.icons8.com/fluency/100/waving-hand-light-skin-tone.png", 
+                options: ["Hello", "Goodbye", "Thank you", "Please"], 
+                answer: "Hello" 
+            },
+            { 
+                question: "What is the French word for 'I'?", 
+                word: "Je", 
+                image: "https://img.icons8.com/ios-filled/100/i-pronoun.png", 
+                options: ["Je", "Tu", "Il", "Nous"], 
+                answer: "Je" 
+            },
+            {
+                question: "How do you say 'the boy' in French?",
+                word: "The boy", 
+                image: "https://img.icons8.com/fluency/100/child.png", 
+                options: ["Le garçon", "La fille", "L'homme", "Le chien"], 
+                answer: "Le garçon"
+            },
+            {
+                question: "What is the French word for 'apple'?",
+                word: "Apple", 
+                image: "https://img.icons8.com/fluency/100/apple.png", 
+                options: ["Orange", "Pomme", "Banane", "Fraise"], 
+                answer: "Pomme"
+            },
+            {
+                question: "What does 'Merci beaucoup' mean?",
+                word: "Merci beaucoup", 
+                image: "https://img.icons8.com/fluency/100/handshake.png", 
+                options: ["Please wait", "Thank you very much", "Excuse me", "You're welcome"], 
+                answer: "Thank you very much"
+            },
+            {
+                question: "What is the French word for 'water'?",
+                word: "Water", 
+                image: "https://img.icons8.com/fluency/100/water.png", 
+                options: ["L'eau", "Le pain", "Le lait", "Le vin"], 
+                answer: "L'eau"
+            },
+            {
+                question: "How do you say 'good night' in French?",
+                word: "Good night", 
+                image: "https://img.icons8.com/fluency/100/sleeping.png", 
+                options: ["Bonjour", "Bonsoir", "Bonne nuit", "Au revoir"], 
+                answer: "Bonne nuit"
+            },
+            {
+                question: "What does 'Comment allez-vous?' mean?",
+                word: "Comment allez-vous?", 
+                image: "https://img.icons8.com/fluency/100/question-mark.png", 
+                options: ["What is your name?", "How are you?", "Where are you going?", "What time is it?"], 
+                answer: "How are you?"
+            }
         ];
 
-        ///done
         let fillQuestions = [
- 
-            { question: "Fill in the blank: Je ___ français.", answer: "suis" },
-            { question: "Fill in the blank: Nous ___ à l'école.", answer: "sommes" },
-            { question: "Fill in the blank: Tu ___ une pizza.", answer: "manges" },
-            { question: "Fill in the blank: Elle ___ une chanson.", answer: "chante" },
-            { question: "Fill in the blank: Ils ___ en voiture.", answer: "voyagent" }
+            { 
+                question: "Fill in the blank: Je ____ français. (I am French)", 
+                answer: "suis" 
+            },
+            { 
+                question: "Fill in the blank: Nous ____ à l'école. (We are at school)", 
+                answer: "sommes" 
+            },
+            { 
+                question: "Fill in the blank: Tu ____ une pizza. (You are eating a pizza)", 
+                answer: "manges" 
+            },
+            { 
+                question: "Fill in the blank: Elle ____ une chanson. (She sings a song)", 
+                answer: "chante" 
+            },
+            { 
+                question: "Fill in the blank: Ils ____ en voiture. (They are traveling by car)", 
+                answer: "voyagent" 
+            },
+            { 
+                question: "Fill in the blank: J'____ un livre. (I have a book)", 
+                answer: "ai" 
+            },
+            { 
+                question: "Fill in the blank: Vous ____ du café? (Do you want some coffee?)", 
+                answer: "voulez" 
+            },
+            { 
+                question: "Fill in the blank: Elles ____ à la plage. (They go to the beach)", 
+                answer: "vont" 
+            }
+        ];
+        
+        let matchingQuestions = [
+            {
+                question: "Match the French words with their English translations:",
+                pairs: [
+                    {french: "Chien", english: "Dog"},
+                    {french: "Chat", english: "Cat"},
+                    {french: "Maison", english: "House"},
+                    {french: "Voiture", english: "Car"}
+                ]
+            },
+            {
+                question: "Match the French verbs with their meanings:",
+                pairs: [
+                    {french: "Manger", english: "To eat"},
+                    {french: "Dormir", english: "To sleep"},
+                    {french: "Parler", english: "To speak"},
+                    {french: "Courir", english: "To run"}
+                ]
+            }
+        ];
+        
+        let listeningQuestions = [
+            {
+                question: "Listen to the audio and choose what the speaker is saying:",
+                audioSrc: "path/to/audio/bonjour-comment-allez-vous.mp3",
+                options: [
+                    "Bonjour, comment allez-vous?",
+                    "Bonsoir, où allez-vous?",
+                    "Bonjour, quand allez-vous partir?",
+                    "Bonsoir, comment vous appelez-vous?"
+                ],
+                answer: "Bonjour, comment allez-vous?"
+            }
         ];
 
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
         function loadQuestion() {
             const questionArea = document.getElementById("questionArea");
             const counter = document.getElementById("questionCounter");
-            counter.textContent = `Question ${currentQuestion} / ${totalQuestions}`;
+            counter.textContent = `Question ${currentQuestion}/${totalQuestions}`;
             answered = false;
 
-            // Choose from vocab or fill, only if questions remain
-            let q;
-            if (vocabQuestions.length > 0 && fillQuestions.length > 0) {
-                if (Math.random() > 0.5) {
-                    q = vocabQuestions.splice(Math.floor(Math.random() * vocabQuestions.length), 1)[0];
-                    renderVocabQuestion(q);
-                } else {
-                    q = fillQuestions.splice(Math.floor(Math.random() * fillQuestions.length), 1)[0];
-                    renderFillQuestion(q);
-                }
-            } else if (vocabQuestions.length > 0) {
-                q = vocabQuestions.splice(Math.floor(Math.random() * vocabQuestions.length), 1)[0];
-                renderVocabQuestion(q);
-            } else if (fillQuestions.length > 0) {
-                q = fillQuestions.splice(Math.floor(Math.random() * fillQuestions.length), 1)[0];
-                renderFillQuestion(q);
-            } else {
-                questionArea.innerHTML = "<p class='text-center text-gray-700'>No more questions available.</p>";
-                document.getElementById("nextButton").style.display = "none";
+            let questionTypes = [];
+            if (vocabQuestions.length > 0) questionTypes.push("vocab");
+            if (fillQuestions.length > 0) questionTypes.push("fill");
+            if (matchingQuestions.length > 0 && currentQuestion > 2) questionTypes.push("matching");
+            
+            if (questionTypes.length === 0) {
+                showResults();
+                return;
             }
+
+            const questionType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+            
+            switch(questionType) {
+                case "vocab":
+                    const vocabIndex = Math.floor(Math.random() * vocabQuestions.length);
+                    const vocabQ = vocabQuestions.splice(vocabIndex, 1)[0];
+                    renderVocabQuestion(vocabQ);
+                    break;
+                case "fill":
+                    const fillIndex = Math.floor(Math.random() * fillQuestions.length);
+                    const fillQ = fillQuestions.splice(fillIndex, 1)[0];
+                    renderFillQuestion(fillQ);
+                    break;
+                case "matching":
+                    const matchIndex = Math.floor(Math.random() * matchingQuestions.length);
+                    const matchQ = matchingQuestions.splice(matchIndex, 1)[0];
+                    renderMatchingQuestion(matchQ);
+                    break;
+            }
+
+            document.getElementById("nextButton").textContent = currentQuestion < totalQuestions ? "Next Question" : "Finish Quiz";
         }
 
         function renderVocabQuestion(q) {
             document.getElementById("questionArea").innerHTML = `
-                <p class="text-lg font-medium text-gray-700 mb-4">${q.question}</p>
-                <div class="flex flex-col items-center mb-4">
-                    <img src="${q.image}" alt="${q.word}" class="w-24 h-24 mb-2">
-                    <h3 class="text-xl font-semibold">${q.word}</h3>
+                <p class="question-text">${q.question}</p>
+                <div class="word-display">
+                    <img src="${q.image}" alt="${q.word}" onerror="this.src='https://img.icons8.com/ios/100/question-mark.png'">
+                    <h3>${q.word}</h3>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    ${q.options.map(option => `
-                        <button class="option-btn bg-grey-300 border border-gray-300 rounded-xl p-4 hover:bg-violet-100 transition" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
+                <div class="options-grid">
+                    ${shuffleArray([...q.options]).map(option => `
+                        <button class="option-btn" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
                     `).join('')}
                 </div>
             `;
@@ -112,11 +465,9 @@ require_once '../../../database/connect.php';
 
         function renderFillQuestion(q) {
             document.getElementById("questionArea").innerHTML = `
-                <p class="text-lg font-medium text-gray-700 mb-4">${q.question}</p>
-                <input type="text" id="fillInput" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your answer here...">
-                <div class="mt-4 flex justify-end">
-                    <button onclick='checkAnswerFill("${q.answer}")' class="bg-violet-500 text-white font-semibold px-6 py-2 rounded-full hover:bg-violet-700 transition">Check</button>
-                </div>
+                <p class="question-text">${q.question}</p>
+                <input type="text" id="fillInput" class="fill-input" placeholder="Type your answer here...">
+                <button onclick='checkAnswerFill("${q.answer}")' class="check-button">Check Answer</button>
             `;
 
             setTimeout(() => {
@@ -126,7 +477,68 @@ require_once '../../../database/connect.php';
                         checkAnswerFill(q.answer);
                     }
                 });
+                document.getElementById("fillInput").focus();
             }, 0);
+        }
+        
+        function renderMatchingQuestion(q) {
+            const shuffledFrench = shuffleArray([...q.pairs.map(p => p.french)]);
+            const shuffledEnglish = shuffleArray([...q.pairs.map(p => p.english)]);
+            
+            document.getElementById("questionArea").innerHTML = `
+                <p class="question-text">${q.question}</p>
+                <div class="match-pairs">
+                    ${shuffledFrench.map(term => `
+                        <div class="pair-item french-term" data-term="${term}">${term}</div>
+                    `).join('')}
+                    ${shuffledEnglish.map(term => `
+                        <div class="pair-item english-term" data-term="${term}">${term}</div>
+                    `).join('')}
+                </div>
+            `;
+            
+            let selectedItem = null;
+            document.querySelectorAll('.pair-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this.classList.contains('matched')) return;
+                    
+                    if (selectedItem) {
+                        const isSelectedFrench = selectedItem.classList.contains('french-term');
+                        const isThisFrench = this.classList.contains('french-term');
+                        
+                        if (isSelectedFrench === isThisFrench) {
+                            selectedItem.classList.remove('selected');
+                            this.classList.add('selected');
+                            selectedItem = this;
+                        } else {
+                            const frenchTerm = isSelectedFrench ? selectedItem.dataset.term : this.dataset.term;
+                            const englishTerm = isSelectedFrench ? this.dataset.term : selectedItem.dataset.term;
+                            
+                            const isCorrectMatch = q.pairs.some(p => p.french === frenchTerm && p.english === englishTerm);
+                            
+                            if (isCorrectMatch) {
+                                selectedItem.classList.add('matched');
+                                this.classList.add('matched');
+                                selectedItem.classList.remove('selected');
+                                
+                                const matchedCount = document.querySelectorAll('.matched').length;
+                                if (matchedCount === q.pairs.length * 2) {
+                                    score++;
+                                    answered = true;
+                                }
+                            } else {
+                                selectedItem.classList.remove('selected');
+                            }
+                            selectedItem = null;
+                        }
+                    } else {
+                        this.classList.add('selected');
+                        selectedItem = this;
+                    }
+                });
+            });
+            
+            answered = true;
         }
 
         function checkAnswerVocab(selected, correct) {
@@ -135,15 +547,14 @@ require_once '../../../database/connect.php';
 
             document.querySelectorAll('.option-btn').forEach(btn => {
                 if (btn.textContent === correct) {
-                    btn.classList.add('bg-green-200', 'border-green-500');
+                    btn.classList.add('correct');
                 } else if (btn.textContent === selected) {
-                    btn.classList.add('bg-red-200', 'border-red-500');
+                    btn.classList.add(selected === correct ? 'correct' : 'incorrect');
                 }
                 btn.disabled = true;
             });
 
             if (selected === correct) score++;
-            updateNextButton();
         }
 
         function checkAnswerFill(correct) {
@@ -151,27 +562,27 @@ require_once '../../../database/connect.php';
             answered = true;
 
             const input = document.getElementById("fillInput");
-            const value = input.value.trim();
-            const checkBtn = input.nextElementSibling;
-
-            if (value.toLowerCase() === correct.toLowerCase()) {
+            const value = input.value.trim().toLowerCase();
+            
+            if (value === correct.toLowerCase()) {
                 score++;
-                input.classList.add('bg-green-200', 'border-green-500');
+                input.classList.add('correct');
+                input.style.borderColor = "#2e7d32";
             } else {
-                input.classList.add('bg-red-200', 'border-red-500');
+                input.classList.add('incorrect');
+                input.style.borderColor = "#d84315";
+                
+                const feedbackDiv = document.createElement("div");
+                feedbackDiv.innerHTML = `<p style="color: #d84315;">Correct answer: ${correct}</p>`;
+                input.parentNode.insertBefore(feedbackDiv, input.nextSibling);
             }
 
             input.disabled = true;
-            checkBtn.disabled = true;
-            updateNextButton();
-        }
-
-        function updateNextButton() {
-            document.getElementById("nextButton").textContent = currentQuestion < totalQuestions ? "Next" : "Finish";
+            document.querySelector('.check-button').disabled = true;
         }
 
         function handleNextQuestion() {
-            if (!answered) {
+            if (!answered && currentQuestion <= totalQuestions) {
                 alert("Please answer the question first.");
                 return;
             }
@@ -179,40 +590,58 @@ require_once '../../../database/connect.php';
             if (currentQuestion < totalQuestions) {
                 currentQuestion++;
                 loadQuestion();
-                document.getElementById("nextButton").textContent = "Next";
             } else {
-                submitResult();
+                showResults();
             }
         }
 
-        function submitResult() {
-            const payload = { score, total: totalQuestions };
+        function showResults() {
+            const percentage = (score / totalQuestions) * 100;
+            let feedback;
+            
+            if (percentage >= 90) {
+                feedback = "Excellent! Vous parlez très bien français!";
+            } else if (percentage >= 70) {
+                feedback = "Très bien! Keep practicing to improve.";
+            } else if (percentage >= 50) {
+                feedback = "Bien! You're making progress.";
+            } else {
+                feedback = "Continue practicing to improve your French skills.";
+            }
+            
+            document.getElementById("questionArea").innerHTML = `
+                <div class="results">
+                    <h2>Quiz Complete!</h2>
+                    <div class="score">${score}/${totalQuestions}</div>
+                    <p>${feedback}</p>
+                </div>
+            `;
+            
+            document.getElementById("questionCounter").style.display = "none";
+            document.getElementById("nextButton").style.display = "none";
+            
+            const payload = {
+                user_id: <?php echo $user_id; ?>,
+                score: score,
+                total: totalQuestions,
+                activity_type: 'french_practice'
+            };
 
-            fetch("save_score.php", {
+            fetch("../../../api/save_activity.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             })
-            .then(res => {
-                if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                document.getElementById("questionArea").innerHTML = `
-                    <div class="text-center">
-                        <h2 class="text-2xl font-bold mb-4">Results</h2>
-                        <p class="text-xl">You scored <strong>${score}</strong> out of <strong>${totalQuestions}</strong></p>
-                        ${data.rating ? `<p class="mt-2">Your rating: <strong>${data.rating}</strong></p>` : ""}
-                    </div>
-                `;
-                document.getElementById("questionCounter").style.display = "none";
-                document.getElementById("nextButton").style.display = "none";
-            })
             .catch(err => {
-                console.error("Error:", err);
-                document.getElementById("questionArea").innerHTML = "<p class='text-center text-red-500'>Error submitting results. Try again later.</p>";
+                console.error("Error saving results:", err);
             });
         }
+
+        document.getElementById("nextButton").addEventListener("click", handleNextQuestion);
+        
+        document.querySelector('.user-info').addEventListener('click', function() {
+            document.querySelector('.dropdown-menu').classList.toggle('active');
+        });
 
         window.onload = loadQuestion;
     </script>

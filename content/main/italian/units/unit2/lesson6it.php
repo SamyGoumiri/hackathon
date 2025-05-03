@@ -25,7 +25,7 @@
     <tr>
         <td class="italian-word">lavarsi i denti</td>
         <td class="pronunciation">lah-var-see ee den-tee</td>
-        <td>to brush teeth</td>
+        <td>to brush one's teeth</td>
     </tr>
     <tr>
         <td class="italian-word">vestirsi</td>

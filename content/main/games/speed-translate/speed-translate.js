@@ -200,16 +200,22 @@ document.addEventListener('DOMContentLoaded', function() {
         let fallbackXpMultiplier = currentScore > highScore ? 10 : 4;
         let fallbackXpEarned = currentScore * fallbackXpMultiplier;
         
+        const formData = new FormData();
+        formData.append('user_id', userId);
+        formData.append('score', currentScore);
+        formData.append('debug', '1');
+        
         fetch('save-score.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `user_id=${userId}&score=${currentScore}`
+            body: formData
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.statusText);
+                console.error(`Server error: ${response.status} ${response.statusText}`);
+                return response.text().then(text => {
+                    console.error("Raw response:", text);
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                });
             }
             return response.json();
         })
@@ -238,7 +244,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error("Failed to save score:", data.message, data.error);
                 displayFallbackXp(fallbackXpEarned, currentScore > highScore);
                 
-                // Show more helpful error message
                 let errorMsg = "Failed to save score: " + data.message;
                 if (data.error) {
                     errorMsg += " (" + data.error + ")";
@@ -249,8 +254,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error saving score:', error);
             displayFallbackXp(fallbackXpEarned, currentScore > highScore);
-            
-            // Show a more specific error message
             alert("Error connecting to server: " + error.message + "\n\nYour score will be displayed but may not be saved permanently.");
         });
     }

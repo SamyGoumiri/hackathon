@@ -137,9 +137,9 @@
     <div class="example-title">Conversation 2</div>
     <p>
         <strong>Person A:</strong> Est-ce que tu parles anglais?<br>
-        <strong>Person B:</strong> Oui, un peu. Et toi?<br>
-        <strong>Person A:</strong> Je parle bien anglais. Tu habites où?<br>
-        <strong>Person B:</strong> J'habite à Paris. Et toi?<br>
-        <strong>Person A:</strong> J'habite à Lyon.
+        <strong>Person B:</strong> Oui, je parle un peu anglais. Et toi?<br>
+        <strong>Person A:</strong> Je parle bien anglais. Je suis professeur d'anglais.<br>
+        <strong>Person B:</strong> C'est génial! Peut-être que tu peux m'aider à pratiquer?<br>
+        <strong>Person A:</strong> Bien sûr, avec plaisir!
     </p>
 </div>

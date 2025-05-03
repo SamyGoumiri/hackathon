@@ -1,47 +1,37 @@
 <?php
 header('Content-Type: application/json');
-
-ob_start();
-
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
-require_once '../../../database/connect.php';
-
-if (mysqli_connect_errno()) {
-    error_log("Speed Translate: Database connection failed: " . mysqli_connect_error());
-    echo json_encode(['success' => false, 'message' => 'Database connection failed: ' . mysqli_connect_error()]);
-    exit();
-}
-
-if (!isset($_SESSION['user_id'])) {
-    error_log("Speed Translate: User not logged in");
-    echo json_encode(['success' => false, 'message' => 'Not logged in']);
-    exit();
-}
-
-if (!isset($_POST['user_id']) || !isset($_POST['score'])) {
-    error_log("Speed Translate: Missing required data - user_id: " . (isset($_POST['user_id']) ? $_POST['user_id'] : 'missing') . 
-              ", score: " . (isset($_POST['score']) ? $_POST['score'] : 'missing'));
-    echo json_encode(['success' => false, 'message' => 'Missing required data']);
-    exit();
-}
-
-$user_id = $_POST['user_id'];
-$score = intval($_POST['score']);
-$game_id = 'speed_translate';
-
-if ($_SESSION['user_id'] != $user_id) {
-    error_log("Speed Translate: Session user ID ({$_SESSION['user_id']}) doesn't match posted user ID ($user_id)");
-    echo json_encode(['success' => false, 'message' => 'Invalid user']);
-    exit();
-}
-
-ob_clean();
+ob_start();
 
 try {
+    session_start();
+    require_once '../../../database/connect.php';
+
+    error_log("Speed Translate: Received score save request");
+    
+    if (!isset($_SESSION['user_id'])) {
+        throw new Exception("User not logged in");
+    }
+
+    if (!isset($_POST['user_id']) || !isset($_POST['score'])) {
+        $postData = print_r($_POST, true);
+        error_log("Speed Translate: Missing required data. POST data: " . $postData);
+        throw new Exception("Missing required data");
+    }
+
+    $user_id = $_POST['user_id'];
+    $score = intval($_POST['score']);
+    $game_id = 'speed_translate';
+
+    if ($_SESSION['user_id'] != $user_id) {
+        error_log("Speed Translate: Session user ID ({$_SESSION['user_id']}) doesn't match posted user ID ($user_id)");
+        throw new Exception("Invalid user");
+    }
+    ob_clean();
+
     $check_table_query = "CREATE TABLE IF NOT EXISTS `game_high_scores` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `user_id` int(11) NOT NULL,
@@ -88,7 +78,6 @@ try {
                 throw new Exception("Execute update failed: " . $stmt->error);
             }
             $is_high_score = true;
-            
             error_log("Speed Translate: Updated high score for user $user_id to $score (was $current_high_score)");
         }
     } else {
@@ -103,13 +92,10 @@ try {
             throw new Exception("Execute insert failed: " . $stmt->error);
         }
         $is_high_score = true;
-        
         error_log("Speed Translate: Inserted first high score for user $user_id: $score");
     }
-
     $xp_multiplier = $is_high_score ? 10 : 4;
     $xp_earned = $score * $xp_multiplier;
-
     try {
         $xp_check_query = "SELECT xp_points, level FROM user_experience WHERE user_id = ?";
         $stmt = $conn->prepare($xp_check_query);
@@ -140,7 +126,6 @@ try {
             
             error_log("Speed Translate: Created XP record for user $user_id: $xp_earned");
         }
-        
         try {
             $activity_details = json_encode([
                 'game' => $game_id,
@@ -160,9 +145,7 @@ try {
     } catch (Exception $e) {
         error_log("Speed Translate: XP update failed: " . $e->getMessage());
     }
-
     ob_clean();
-    
     echo json_encode([
         'success' => true, 
         'is_high_score' => $is_high_score, 
@@ -173,14 +156,13 @@ try {
 
 } catch (Exception $e) {
     ob_clean();
-    
     error_log("Speed Translate Error: " . $e->getMessage());
+    http_response_code(500);
     echo json_encode([
         'success' => false, 
         'message' => 'Error processing score', 
         'error' => $e->getMessage()
     ]);
 }
-
 ob_end_flush();
 ?>
