@@ -36,7 +36,7 @@ $user = $result->fetch_assoc();
             <nav>
                 <ul>
                     <li><a href="../dashboard.php">Dashboard</a></li>
-                    <li><a href="games.php">Games</a></li>
+                    <li><a href="../games/games.php">Games</a></li>
                     <li><a href="chatbot.php" class="active">ChatBot</a></li>
                 </ul>
             </nav>

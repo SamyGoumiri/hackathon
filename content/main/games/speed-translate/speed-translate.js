@@ -173,18 +173,19 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (currentScore > highScore) {
             highScore = currentScore;
-            saveHighScore();
             finalScoreDisplay.textContent = currentScore + " - NEW HIGH SCORE!";
             finalScoreDisplay.classList.add("new-high-score");
         } else {
             finalScoreDisplay.textContent = currentScore;
             finalScoreDisplay.classList.remove("new-high-score");
-            saveHighScore();
         }
         
         highScoreDisplay.textContent = highScore;
         wordsAttemptedDisplay.textContent = wordsAttempted;
         correctAnswersDisplay.textContent = correctAnswers;
+        
+        // Always save the score, but the server will determine if it's a high score
+        saveHighScore();
         
         showScreen(gameOverScreen);
     }
@@ -201,6 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             if (data.success) {
                 if (data.is_high_score) {
+                    highScore = currentScore;
                     userHighScoreDisplay.textContent = highScore;
                 }
             }

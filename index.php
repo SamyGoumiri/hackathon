@@ -163,30 +163,5 @@ $is_logged_in = isset($_SESSION['user_id']);
             <a href="content/auth/register.php" class="btn btn-primary btn-large">Sign Up Free</a>
         </div>
     </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <h2>Esperanto</h2>
-                <p>Making language learning accessible for everyone</p>
-            </div>
-            <div class="footer-links">
-                <div class="footer-links-column">
-                    <h3>Platform</h3>
-                    <a href="#features">Features</a>
-                    <a href="#how-it-works">How It Works</a>
-                    <a href="#languages">Languages</a>
-                </div>
-                <div class="footer-links-column">
-                    <h3>Account</h3>
-                    <a href="content/auth/register.php">Sign Up</a>
-                    <a href="content/auth/login.php">Log In</a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <?php echo date('Y'); ?> Esperanto. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>
