@@ -232,8 +232,24 @@ $user = $result->fetch_assoc();
         let answered = false;
 
         let vocabQuestions = [
-            { question: "What does this word mean in German?", word: "Train", image: "https://img.icons8.com/dusk/64/train.png", options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], answer: "Zug" },
-            { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein", "Reisepass", "Ausweis", "Karte"], answer: "Reisepass" },
+            { 
+                category: "Transportation",
+                question: "What does this word mean in German?", 
+                word: "Train", 
+                image: "https://img.icons8.com/dusk/64/train.png", 
+                options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], 
+                answer: "Zug",
+                context: "Essential for traveling within Germany"
+            },
+            { 
+                category: "Travel Documents",
+                question: "What does this word mean in German?", 
+                word: "Passport", 
+                image: "https://img.icons8.com/dusk/64/passport.png", 
+                options: ["Führerschein", "Reisepass", "Ausweis", "Karte"], 
+                answer: "Reisepass",
+                context: "Required for international travel"
+            },
             { question: "What does this word mean in German?", word: "Apple", image: "https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/external-apple-fruit-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png", options: ["Banane", "Apfel", "Traube", "Orange"], answer: "Apfel" },
             { question: "What does this word mean in German?", word: "Book", image: "https://img.icons8.com/stickers/100/book-1.png", options: ["Buch", "Heft", "Papier", "Stift"], answer: "Buch" },
             { question: "What does this word mean in German?", word: "House", image: "https://img.icons8.com/plasticine/50/cottage.png", options: ["Tür", "Zimmer", "Fenster", "Haus"], answer: "Haus" },
@@ -263,16 +279,22 @@ $user = $result->fetch_assoc();
             if (currentQuestion <= 6) {
                 if (vocabQuestions.length > 0) {
                     const index = Math.floor(Math.random() * vocabQuestions.length);
-                    q = vocabQuestions[index];
-                    vocabQuestions.splice(index, 1);
+                    q = vocabQuestions.splice(index, 1)[0];
                     renderVocabQuestion(q);
+                } else if (fillQuestions.length > 0) {
+                    const index = Math.floor(Math.random() * fillQuestions.length);
+                    q = fillQuestions.splice(index, 1)[0];
+                    renderFillQuestion(q);
                 }
             } else {
                 if (fillQuestions.length > 0) {
                     const index = Math.floor(Math.random() * fillQuestions.length);
-                    q = fillQuestions[index];
-                    fillQuestions.splice(index, 1);
+                    q = fillQuestions.splice(index, 1)[0];
                     renderFillQuestion(q);
+                } else if (vocabQuestions.length > 0) {
+                    const index = Math.floor(Math.random() * vocabQuestions.length);
+                    q = vocabQuestions.splice(index, 1)[0];
+                    renderVocabQuestion(q);
                 }
             }
             
@@ -284,25 +306,39 @@ $user = $result->fetch_assoc();
 
         function renderVocabQuestion(q) {
             document.getElementById("questionArea").innerHTML = `
+                ${q.category ? `<span class="category-label">${q.category}</span>` : ''}
                 <p class="question-text">${q.question}</p>
+                ${q.context ? `<p class="context-hint">${q.context}</p>` : ''}
                 <div class="vocab-display">
                     <img src="${q.image}" alt="${q.word}" class="vocab-image">
                     <h3 class="vocab-word">${q.word}</h3>
                 </div>
-                <div class="options-grid">
-                    ${q.options.map(option => `
-                        <button class="option-btn" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
-                    `).join('')}
+                <div class="options-grid" id="options-container">
                 </div>
             `;
+            
+            const optionsContainer = document.getElementById("options-container");
+            shuffleArray([...q.options]).forEach((option) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.dataset.option = option;
+                btn.dataset.answer = q.answer;
+                btn.addEventListener('click', function() {
+                    checkAnswerVocab(this.dataset.option, this.dataset.answer);
+                });
+                optionsContainer.appendChild(btn);
+            });
         }
 
         function renderFillQuestion(q) {
             document.getElementById("questionArea").innerHTML = `
+                ${q.category ? `<span class="category-label">${q.category || "Grammar"}</span>` : ''}
                 <p class="question-text">${q.question}</p>
+                ${q.context ? `<p class="context-hint">${q.context}</p>` : ''}
                 <input type="text" id="fillInput" class="fill-input" placeholder="Type your answer here...">
                 <div class="navigation-buttons" style="justify-content: flex-end; margin-top: 15px;">
-                    <button onclick="checkAnswerFill('${q.answer}')" class="btn btn-primary">Check</button>
+                    <button id="checkAnswerBtn" class="btn btn-primary">Check</button>
                 </div>
             `;
 
@@ -313,6 +349,10 @@ $user = $result->fetch_assoc();
                         checkAnswerFill(q.answer);
                     }
                 });
+                document.getElementById("checkAnswerBtn").addEventListener("click", function() {
+                    checkAnswerFill(q.answer);
+                });
+                document.getElementById("fillInput").focus();
             }, 0);
         }
 
@@ -420,6 +460,14 @@ $user = $result->fetch_assoc();
                     'activity_details': JSON.stringify(activity_details)
                 })
             });
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
 
         window.onload = function() {

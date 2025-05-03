@@ -424,11 +424,17 @@ $user = $result->fetch_assoc();
                 if (vocabQuestions.length > 0) {
                     q = vocabQuestions.pop();
                     renderVocabQuestion(q);
+                } else if (fillQuestions.length > 0) {
+                    q = fillQuestions.pop();
+                    renderFillQuestion(q);
                 }
             } else {
                 if (fillQuestions.length > 0) {
                     q = fillQuestions.pop();
                     renderFillQuestion(q);
+                } else if (vocabQuestions.length > 0) {
+                    q = vocabQuestions.pop();
+                    renderVocabQuestion(q);
                 }
             }
             
@@ -447,12 +453,22 @@ $user = $result->fetch_assoc();
                     <img src="${q.image}" alt="${q.word}" class="vocab-image">
                     ${q.word ? `<h3 class="vocab-word">${q.word}</h3>` : ''}
                 </div>
-                <div class="options-grid">
-                    ${shuffleArray([...q.options]).map(option => `
-                        <button class="option-btn" onclick="checkAnswerVocab('${option}', '${q.answer}')">${option}</button>
-                    `).join('')}
+                <div class="options-grid" id="options-container">
                 </div>
             `;
+            
+            const optionsContainer = document.getElementById("options-container");
+            shuffleArray([...q.options]).forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.dataset.option = option;
+                btn.dataset.answer = q.answer;
+                btn.addEventListener('click', function() {
+                    checkAnswerVocab(this.dataset.option, this.dataset.answer);
+                });
+                optionsContainer.appendChild(btn);
+            });
         }
 
         function renderFillQuestion(q) {
@@ -465,7 +481,7 @@ $user = $result->fetch_assoc();
                 ${q.context ? `<p class="context-hint">${q.context}</p>` : ''}
                 <input type="text" id="fillInput" class="fill-input" placeholder="Type your answer here..." autofocus>
                 <div class="navigation-buttons" style="justify-content: flex-end; margin-top: 15px;">
-                    <button onclick="checkAnswerFill('${q.answer}')" class="btn btn-primary">Check</button>
+                    <button id="checkAnswerBtn" class="btn btn-primary">Check</button>
                 </div>
             `;
 
@@ -475,6 +491,9 @@ $user = $result->fetch_assoc();
                         event.preventDefault();
                         checkAnswerFill(q.answer);
                     }
+                });
+                document.getElementById("checkAnswerBtn").addEventListener("click", function() {
+                    checkAnswerFill(q.answer);
                 });
                 document.getElementById("fillInput").focus();
             }, 0);

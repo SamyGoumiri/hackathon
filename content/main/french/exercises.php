@@ -389,8 +389,8 @@ $stmt->execute();
         
         let listeningQuestions = [
             {
-                question: "Listen to the audio and choose what the speaker is saying:",
-                audioSrc: "path/to/audio/bonjour-comment-allez-vous.mp3",
+                question: "Choose the correct phrase that this would translate to:",
+                audioSrc: null, // Remove non-existent audio reference
                 options: [
                     "Bonjour, comment allez-vous?",
                     "Bonsoir, où allez-vous?",
@@ -487,7 +487,7 @@ $stmt->execute();
             
             document.getElementById("questionArea").innerHTML = `
                 <p class="question-text">${q.question}</p>
-                <div class="match-pairs">
+                <div class="match-pairs" id="matching-container">
                     ${shuffledFrench.map(term => `
                         <div class="pair-item french-term" data-term="${term}">${term}</div>
                     `).join('')}
@@ -495,9 +495,13 @@ $stmt->execute();
                         <div class="pair-item english-term" data-term="${term}">${term}</div>
                     `).join('')}
                 </div>
+                <div id="match-feedback" style="margin-top: 15px; text-align: center;"></div>
             `;
             
             let selectedItem = null;
+            let matchedPairs = 0;
+            const totalPairs = q.pairs.length;
+            
             document.querySelectorAll('.pair-item').forEach(item => {
                 item.addEventListener('click', function() {
                     if (this.classList.contains('matched')) return;
@@ -506,39 +510,61 @@ $stmt->execute();
                         const isSelectedFrench = selectedItem.classList.contains('french-term');
                         const isThisFrench = this.classList.contains('french-term');
                         
+                        // Only allow matching between different types (French to English)
                         if (isSelectedFrench === isThisFrench) {
                             selectedItem.classList.remove('selected');
                             this.classList.add('selected');
                             selectedItem = this;
-                        } else {
-                            const frenchTerm = isSelectedFrench ? selectedItem.dataset.term : this.dataset.term;
-                            const englishTerm = isSelectedFrench ? this.dataset.term : selectedItem.dataset.term;
-                            
-                            const isCorrectMatch = q.pairs.some(p => p.french === frenchTerm && p.english === englishTerm);
-                            
-                            if (isCorrectMatch) {
-                                selectedItem.classList.add('matched');
-                                this.classList.add('matched');
-                                selectedItem.classList.remove('selected');
-                                
-                                const matchedCount = document.querySelectorAll('.matched').length;
-                                if (matchedCount === q.pairs.length * 2) {
-                                    score++;
-                                    answered = true;
-                                }
-                            } else {
-                                selectedItem.classList.remove('selected');
-                            }
-                            selectedItem = null;
+                            return;
                         }
+                        
+                        // Get the terms for matching check
+                        const frenchTerm = isSelectedFrench ? selectedItem.dataset.term : this.dataset.term;
+                        const englishTerm = isSelectedFrench ? this.dataset.term : selectedItem.dataset.term;
+                        
+                        // Find if there's a match in the pairs
+                        let isCorrectMatch = false;
+                        for (let i = 0; i < q.pairs.length; i++) {
+                            if (q.pairs[i].french === frenchTerm && q.pairs[i].english === englishTerm) {
+                                isCorrectMatch = true;
+                                break;
+                            }
+                        }
+                        
+                        if (isCorrectMatch) {
+                            selectedItem.classList.add('matched');
+                            this.classList.add('matched');
+                            selectedItem.classList.remove('selected');
+                            this.classList.remove('selected');
+                            
+                            matchedPairs++;
+                            
+                            // Check if all pairs are matched
+                            if (matchedPairs === totalPairs) {
+                                score++;
+                                document.getElementById('match-feedback').innerHTML = 
+                                    `<p style="color: #2e7d32; font-weight: bold;">All pairs matched correctly! Well done!</p>`;
+                                answered = true;
+                            }
+                        } else {
+                            // Give visual feedback for incorrect match
+                            selectedItem.classList.add('incorrect');
+                            this.classList.add('incorrect');
+                            
+                            // Remove incorrect styling after a short delay
+                            setTimeout(() => {
+                                selectedItem.classList.remove('incorrect', 'selected');
+                                this.classList.remove('incorrect', 'selected');
+                            }, 800);
+                        }
+                        
+                        selectedItem = null;
                     } else {
                         this.classList.add('selected');
                         selectedItem = this;
                     }
                 });
             });
-            
-            answered = true;
         }
 
         function checkAnswerVocab(selected, correct) {
@@ -582,7 +608,10 @@ $stmt->execute();
         }
 
         function handleNextQuestion() {
-            if (!answered && currentQuestion <= totalQuestions) {
+            // For matching questions, don't require explicit answering,
+            // just check if the question has been rendered
+            if (!answered && currentQuestion <= totalQuestions && 
+                !document.getElementById("questionArea").innerHTML.includes('match-pairs')) {
                 alert("Please answer the question first.");
                 return;
             }
@@ -627,10 +656,20 @@ $stmt->execute();
                 activity_type: 'french_practice'
             };
 
-            fetch("../../../api/save_activity.php", {
+            fetch("../../../api/log_activity.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({
+                    'user_id': <?php echo $user_id; ?>,
+                    'activity_type': 'exercise_completion',
+                    'activity_details': JSON.stringify({
+                        'exercise_type': 'french_practice',
+                        'score': score,
+                        'total': totalQuestions,
+                        'percentage': percentage,
+                        'date': new Date().toISOString()
+                    })
+                })
             })
             .catch(err => {
                 console.error("Error saving results:", err);

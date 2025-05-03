@@ -502,3 +502,45 @@ nav ul li a.active::after {
         justify-content: center;
     }
 }
+
+/* Additional styles for exercises */
+.pair-item.incorrect {
+    background-color: #fbe9e7;
+    border-color: #d84315;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.category-label {
+    display: inline-block;
+    background-color: #f8f5ff;
+    color: #7F57F1;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.context-hint {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+/* Improve responsive design for exercises */
+@media (max-width: 480px) {
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .match-pairs {
+        grid-template-columns: 1fr;
+    }
+}
