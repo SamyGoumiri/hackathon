@@ -39,23 +39,26 @@ require_once '../../../database/connect.php';
         const totalQuestions = 10;
         let answered = false;
 
+        ///done
         let vocabQuestions = [
             { question: "What does this word mean in German?", word: "Train", image: "https://img.icons8.com/dusk/64/train.png", options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], answer: "Zug" },
             { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein","Ticket","Pass", "Karte"], answer: "Pass" },
             { question: "What does this word mean in German?", word: "Apple", image: "https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/external-apple-fruit-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png", options: ["Banane", "Apfel", "Traube", "Orange"], answer: "Apfel" },
             { question: "What does this word mean in German?", word: "Book", image: "https://img.icons8.com/stickers/100/book-1.png", options: ["Buch", "Heft", "Papier", "Stift"], answer: "Buch" },
-            { question: "What does this word mean in German?", word: "House", image: "https://img.icons8.com/plasticine/50/cottage.png", options: ["Tur", "Zimmer", "Flugzeug", "Haus"], answer: "Haus" }
+            { question: "What does this word mean in German?", word: "House", image: "https://img.icons8.com/plasticine/50/cottage.png", options: ["Tur", "Zimmer", "Flugzeug", "Haus"], answer: "Haus" },
+
 
 
         ];
 
 
+        ///done
         let fillQuestions = [
             { question: "Fill in the blank: Ich ___ müde.", answer: "bin" },
             { question: "Fill in the blank: Er ___ nach Hause.", answer: "geht" },
             { question: "Fill in the blank: Ich ___ Fußball.", answer: "spiele" },
             { question: "Fill in the blank: Sie ___ ein Buch.", answer: "liest" },
-            { question: "Du ___ sehr schnell.", answer: "laufst" }
+            { question: "Du ___ sehr schnell.", answer: "laufst" },
         ];
 
         function loadQuestion() {

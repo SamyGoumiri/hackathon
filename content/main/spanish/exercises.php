@@ -41,16 +41,22 @@ require_once '../../../database/connect.php';
         const totalQuestions = 10;
         let answered = false;
 
+        //spanish
+        
+
         let vocabQuestions = [
-            { question: "What does this word mean in German?", word: "Train", image: "https://img.icons8.com/dusk/64/train.png", options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], answer: "Zug" },
-            { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein","Ticket","Pass", "Karte"], answer: "Pass" }
+
+            {question: "What does 'Hola' mean?",word: "Hola",options: ["Hello", "Goodbye", "Thank you", "Please"],answer: "Hello",image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png"},//done
+            {question: "What is the Spanish word for 'I'?",word:"",options: ["Yo", "Tú", "Él", "Nosotros"],answer: "Yo",iamge: "https://img.icons8.com/ios/100/i-pronoun.png"},//done
+            {question: "How do you say 'apple' in Spanish?",word:"Apple",options: ["Manzana", "Plátano", "Naranja", "Uva"],answer: "Manzana",iamge: "https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/100/external-apple-fruit-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png"},
+            {question: "Translate to Spanish: 'How are you?'",word:"",options: ["¿Cómo estás?", "¿Dónde está la manzana?", "Eres un chico.", "Estoy cansado."],answer: "¿Cómo estás?",iamge: "https://img.icons8.com/ios/100/communication--v1.png"},//done
+            {question: "Which one means 'I am' in Spanish?",word:"I am",options: ["Yo soy", "Tú eres", "Él es", "Nosotros somos"],answer: "Yo soy",image: "https://img.icons8.com/ios/100/i-pronoun.png"},//done
         ];
 
         let fillQuestions = [
             { question: "Fill in the blank: Ich ___ müde.", answer: "bin" },
-            { question: "Fill in the blank: Er ___ nach Hause.", answer: "geht" }
+            { question: "Fill in the blank: Er ___ nach Hause.", answer: "geht" },
         ];
-
         function loadQuestion() {
             const questionArea = document.getElementById("questionArea");
             const counter = document.getElementById("questionCounter");
