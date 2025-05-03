@@ -95,8 +95,9 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px 5%;
-    max-width: 1400px;
+    max-width: 140px;
     margin: 0 auto;
+
 }
 
 .logo h1 {
