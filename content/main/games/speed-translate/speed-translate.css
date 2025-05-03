@@ -188,6 +188,19 @@
     font-size: 20px;
 }
 
+.high-score-message {
+    text-align: center;
+    margin-top: 15px;
+    min-height: 32px;
+}
+
+.high-score-message.new-high-score {
+    color: #ff9800;
+    font-size: 24px;
+    font-weight: 700;
+    animation: celebrate 2s infinite alternate;
+}
+
 /* Game Play Screen */
 .game-header {
     display: flex;

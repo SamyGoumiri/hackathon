@@ -161,8 +161,8 @@ $high_score = $high_score_data['score'] ?? 0;
             <div id="game-over" class="game-screen">
                 <h2>Game Over!</h2>
                 <div class="final-score">
-                    <p>Your Score: <span id="final-score">0</span> points</p>
-                    <p>High Score: <span id="high-score">0</span> points</p>
+                    <p>Your Score: <span id="final-score">0</span> Points!</p>
+                    <div id="high-score-message" class="high-score-message"></div>
                 </div>
                 
                 <div class="xp-reward">

@@ -125,7 +125,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (availableWords.length === 0) {
             usedWords = [];
-            currentWord = vocabulary[selectedLanguage][Math.floor(Math.random() * vocabulary[selectedLanguage].length)];
+            const lastWord = currentWord ? currentWord.word : null;
+            let newWord;
+            do {
+                newWord = vocabulary[selectedLanguage][Math.floor(Math.random() * vocabulary[selectedLanguage].length)];
+            } while (newWord.word === lastWord);
+            currentWord = newWord;
         } else {
             currentWord = availableWords[Math.floor(Math.random() * availableWords.length)];
         }
@@ -162,7 +167,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             feedbackDisplay.textContent = `✗ Incorrect! The correct answer is "${currentWord.translation}"`;
             feedbackDisplay.classList.add('incorrect');
-            consecutiveCorrect = 0; // Reset consecutive counter on wrong answer
         }
         
         setTimeout(showNextWord, 1000);
@@ -171,35 +175,37 @@ document.addEventListener('DOMContentLoaded', function() {
     function endGame() {
         clearInterval(timer);
         
-        if (currentScore > highScore) {
-            highScore = currentScore;
-            finalScoreDisplay.textContent = currentScore + " - NEW HIGH SCORE!";
-            finalScoreDisplay.classList.add("new-high-score");
-        } else {
-            finalScoreDisplay.textContent = currentScore;
-            finalScoreDisplay.classList.remove("new-high-score");
-        }
-        
-        highScoreDisplay.textContent = highScore;
+        finalScoreDisplay.textContent = currentScore;
         wordsAttemptedDisplay.textContent = wordsAttempted;
         correctAnswersDisplay.textContent = correctAnswers;
         
-        // Always save the score, but the server will determine if it's a high score
+        const highScoreMessage = document.getElementById('high-score-message');
+        if (currentScore > highScore) {
+            highScore = currentScore;
+            highScoreMessage.textContent = "NEW HIGH SCORE!";
+            highScoreMessage.classList.add("new-high-score");
+        } else {
+            highScoreMessage.textContent = "";
+            highScoreMessage.classList.remove("new-high-score");
+        }
+        
         saveHighScore();
         
         showScreen(gameOverScreen);
     }
     
     function saveHighScore() {
-        // Show saving indicator if needed
         console.log("Saving score:", currentScore);
+        
+        let fallbackXpMultiplier = currentScore > highScore ? 10 : 4;
+        let fallbackXpEarned = currentScore * fallbackXpMultiplier;
         
         fetch('save-score.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `user_id=${userId}&score=${currentScore}&test_id=0`
+            body: `user_id=${userId}&score=${currentScore}`
         })
         .then(response => {
             if (!response.ok) {
@@ -216,12 +222,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     userHighScoreDisplay.textContent = highScore;
                 }
                 
-                // Display XP earned
                 const xpEarnedElement = document.getElementById('xp-earned');
                 if (xpEarnedElement) {
                     xpEarnedElement.textContent = data.xp_earned;
                     
-                    // Add special styling for high score XP bonus
                     if (data.is_high_score) {
                         document.getElementById('xp-bonus').textContent = '(10x High Score Bonus!)';
                         document.getElementById('xp-bonus').classList.add('xp-bonus-active');
@@ -231,12 +235,45 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             } else {
-                console.error("Failed to save score:", data.message);
+                console.error("Failed to save score:", data.message, data.error);
+                displayFallbackXp(fallbackXpEarned, currentScore > highScore);
+                
+                // Show more helpful error message
+                let errorMsg = "Failed to save score: " + data.message;
+                if (data.error) {
+                    errorMsg += " (" + data.error + ")";
+                }
+                alert(errorMsg);
             }
         })
         .catch(error => {
             console.error('Error saving score:', error);
+            displayFallbackXp(fallbackXpEarned, currentScore > highScore);
+            
+            // Show a more specific error message
+            alert("Error connecting to server: " + error.message + "\n\nYour score will be displayed but may not be saved permanently.");
         });
+    }
+    
+    function displayFallbackXp(xpValue, isHighScore) {
+        const xpEarnedElement = document.getElementById('xp-earned');
+        
+        if (xpEarnedElement) {
+            xpEarnedElement.textContent = xpValue;
+            
+            if (isHighScore) {
+                document.getElementById('xp-bonus').textContent = '(10x High Score Bonus!)';
+                document.getElementById('xp-bonus').classList.add('xp-bonus-active');
+            } else {
+                document.getElementById('xp-bonus').textContent = '(4x Regular Bonus)';
+                document.getElementById('xp-bonus').classList.remove('xp-bonus-active');
+            }
+        }
+        
+        if (isHighScore && currentScore > highScore) {
+            highScore = currentScore;
+            userHighScoreDisplay.textContent = highScore;
+        }
     }
     
     function showScreen(screen) {
