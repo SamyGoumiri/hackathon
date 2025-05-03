@@ -112,6 +112,7 @@ function getUserLanguageProgress($conn, $user_id, $course_id) {
     <title>Esperanto - Dashboard</title>
 </head>
 
+
 <body>
     <header>
         <div class="header-container">

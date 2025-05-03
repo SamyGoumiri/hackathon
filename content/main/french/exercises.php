@@ -48,7 +48,7 @@ require_once '../../../database/connect.php';
 
             { question: "What does this word mean ?", word: "Bonjour", image: "https://img.icons8.com/ios-filled/100/man-raising-hand-icon.png", options: ["Hello", "Goodnight", "Thankyou", "please"], answer: "Hello" },
             { question: "what is the french word of 'I' ? ", word: "", image: "https://img.icons8.com/ios-filled/100/i-pronoun.png", options: ["Je", "Tu", "Il", "Nous"], answer: "Je" },
-            {question: "How do you say 'the boy' in French?",word:"Boy", image:"https://img.icons8.com/keek/100/boy.png", options: ["Le garçon", "La fille", "L’homme", "Le chien"],anwser: "Le garçon"},
+            {question: "How do you say 'the boy' in French?",word:"Boy", image:"https://img.icons8.com/keek/100/boy.png", options: ["Le garçon", "La fille", "L’homme", "Le chien"],answer: "Le garçon"},
             {question: "What is the French word for 'apple'?",word:"Apple", image:"https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/100/external-apple-fruit-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png", options: ["Orange", "Pomme", "Banane", "Fraise"], answer: "Pomme"},
             {question: "What does 'Merci' mean in English?",word:"Merci", image:"https://img.icons8.com/ios-filled/100/you-singular.png", options: ["Please", "Goodbye", "Thank you", "Hello"], answer: "Thank you"},
       
