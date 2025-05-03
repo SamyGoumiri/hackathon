@@ -40,6 +40,7 @@ require_once '../../../database/connect.php';
         const totalQuestions = 10;
         let answered = false;
 
+        ///done
         let vocabQuestions = [
         { question: "What does this word mean in Italian?", word: "Dog", image: "https://img.icons8.com/dusk/64/dog.png", options: ["Gatto", "Cane", "Uccello", "Pesce"], answer: "Cane" },
         { question: "What does this word mean in Italian?", word: "Sun", image: "https://img.icons8.com/dusk/64/sun.png", options: ["Luna", "Sole", "Stella", "Cielo"], answer: "Sole" },
@@ -48,6 +49,7 @@ require_once '../../../database/connect.php';
         { question: "What does this word mean in Italian?", word: "Water", image: "https://img.icons8.com/dusk/64/water.png", options: ["Acqua", "Latte", "Succo", "Vino"], answer: "Acqua" }
         ];
 
+        ///done
         let fillQuestions = [
         { question: "Fill in the blank: Io ___ italiano.", answer: "parlo" },
         { question: "Fill in the blank: Noi ___ a scuola.", answer: "andiamo" },
