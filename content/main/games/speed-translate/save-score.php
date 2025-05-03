@@ -1,6 +1,10 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+header('Content-Type: application/json');
+
+ob_start();
+
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
@@ -35,24 +39,24 @@ if ($_SESSION['user_id'] != $user_id) {
     exit();
 }
 
-$check_table_query = "CREATE TABLE IF NOT EXISTS `game_high_scores` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `user_id` int(11) NOT NULL,
-    `game_id` varchar(50) NOT NULL,
-    `score` int(11) NOT NULL,
-    `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-    `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `user_game` (`user_id`, `game_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
-
-if (!$conn->query($check_table_query)) {
-    error_log("Speed Translate: Failed to create game_high_scores table: " . $conn->error);
-    echo json_encode(['success' => false, 'message' => 'Failed to initialize game data']);
-    exit();
-}
+ob_clean();
 
 try {
+    $check_table_query = "CREATE TABLE IF NOT EXISTS `game_high_scores` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `user_id` int(11) NOT NULL,
+        `game_id` varchar(50) NOT NULL,
+        `score` int(11) NOT NULL,
+        `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+        `updated_at` datetime NOT NULL DEFAULT current_timestamp(),
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `user_game` (`user_id`, `game_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
+
+    if (!$conn->query($check_table_query)) {
+        throw new Exception("Failed to create game_high_scores table: " . $conn->error);
+    }
+
     $high_score_query = "SELECT score FROM game_high_scores WHERE user_id = ? AND game_id = ?";
     $stmt = $conn->prepare($high_score_query);
     if (!$stmt) {
@@ -106,49 +110,59 @@ try {
     $xp_multiplier = $is_high_score ? 10 : 4;
     $xp_earned = $score * $xp_multiplier;
 
-    $xp_check_query = "SELECT xp_points, level FROM user_experience WHERE user_id = ?";
-    $stmt = $conn->prepare($xp_check_query);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $xp_result = $stmt->get_result();
+    try {
+        $xp_check_query = "SELECT xp_points, level FROM user_experience WHERE user_id = ?";
+        $stmt = $conn->prepare($xp_check_query);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $xp_result = $stmt->get_result();
 
-    if ($xp_result->num_rows > 0) {
-        $xp_data = $xp_result->fetch_assoc();
-        $current_xp = $xp_data['xp_points'];
-        $new_xp = $current_xp + $xp_earned;
+        if ($xp_result->num_rows > 0) {
+            $xp_data = $xp_result->fetch_assoc();
+            $current_xp = $xp_data['xp_points'];
+            $new_xp = $current_xp + $xp_earned;
+            
+            $new_level = floor($new_xp / 100) + 1;
+            
+            $xp_update_query = "UPDATE user_experience SET xp_points = ?, level = ?, last_updated = NOW() WHERE user_id = ?";
+            $stmt = $conn->prepare($xp_update_query);
+            $stmt->bind_param("iii", $new_xp, $new_level, $user_id);
+            $xp_result = $stmt->execute();
+            
+            error_log("Speed Translate: Updated XP for user $user_id: +$xp_earned (total: $new_xp)");
+        } else {
+            $new_level = floor($xp_earned / 100) + 1;
+            
+            $xp_insert_query = "INSERT INTO user_experience (user_id, xp_points, level, last_updated) VALUES (?, ?, ?, NOW())";
+            $stmt = $conn->prepare($xp_insert_query);
+            $stmt->bind_param("iii", $user_id, $xp_earned, $new_level);
+            $xp_result = $stmt->execute();
+            
+            error_log("Speed Translate: Created XP record for user $user_id: $xp_earned");
+        }
         
-        $new_level = floor($new_xp / 100) + 1;
-        
-        $xp_update_query = "UPDATE user_experience SET xp_points = ?, level = ?, last_updated = NOW() WHERE user_id = ?";
-        $stmt = $conn->prepare($xp_update_query);
-        $stmt->bind_param("iii", $new_xp, $new_level, $user_id);
-        $xp_result = $stmt->execute();
-        
-        error_log("Speed Translate: Updated XP for user $user_id: +$xp_earned (total: $new_xp)");
-    } else {
-        $new_level = floor($xp_earned / 100) + 1;
-        
-        $xp_insert_query = "INSERT INTO user_experience (user_id, xp_points, level, last_updated) VALUES (?, ?, ?, NOW())";
-        $stmt = $conn->prepare($xp_insert_query);
-        $stmt->bind_param("iii", $user_id, $xp_earned, $new_level);
-        $xp_result = $stmt->execute();
-        
-        error_log("Speed Translate: Created XP record for user $user_id: $xp_earned");
+        try {
+            $activity_details = json_encode([
+                'game' => $game_id,
+                'score' => $score,
+                'is_high_score' => $is_high_score,
+                'xp_earned' => $xp_earned
+            ]);
+
+            $activity_query = "INSERT INTO user_activity (user_id, activity_type, activity_details) 
+                            VALUES (?, 'game_play', ?)";
+            $stmt = $conn->prepare($activity_query);
+            $stmt->bind_param("is", $user_id, $activity_details);
+            $activity_result = $stmt->execute();
+        } catch (Exception $e) {
+            error_log("Speed Translate: Failed to record activity: " . $e->getMessage());
+        }
+    } catch (Exception $e) {
+        error_log("Speed Translate: XP update failed: " . $e->getMessage());
     }
 
-    $activity_details = json_encode([
-        'game' => $game_id,
-        'score' => $score,
-        'is_high_score' => $is_high_score,
-        'xp_earned' => $xp_earned
-    ]);
-
-    $activity_query = "INSERT INTO user_activity (user_id, activity_type, activity_details) 
-                    VALUES (?, 'game_play', ?)";
-    $stmt = $conn->prepare($activity_query);
-    $stmt->bind_param("is", $user_id, $activity_details);
-    $activity_result = $stmt->execute();
-
+    ob_clean();
+    
     echo json_encode([
         'success' => true, 
         'is_high_score' => $is_high_score, 
@@ -158,13 +172,15 @@ try {
     ]);
 
 } catch (Exception $e) {
+    ob_clean();
+    
     error_log("Speed Translate Error: " . $e->getMessage());
     echo json_encode([
         'success' => false, 
         'message' => 'Error processing score', 
-        'error' => $e->getMessage(),
-        'line' => $e->getLine(),
-        'file' => $e->getFile()
+        'error' => $e->getMessage()
     ]);
 }
+
+ob_end_flush();
 ?>

@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch user details
 $user_query = "SELECT username, first_name, last_name, email, registration_date FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($user_query);
 $stmt->bind_param("i", $user_id);
@@ -17,16 +16,37 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-// Calculate user level based on completed lessons
+$exp_query = "SELECT xp_points, level FROM user_experience WHERE user_id = ?";
+$stmt = $conn->prepare($exp_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$exp_result = $stmt->get_result();
+if ($exp_row = $exp_result->fetch_assoc()) {
+    $total_xp = $exp_row['xp_points'];
+    $user_level = $exp_row['level'];
+} else {
+    $total_xp = 0;
+    $user_level = 1;
+}
+
+$streak_query = "SELECT current_streak, longest_streak FROM user_streaks WHERE user_id = ?";
+$stmt = $conn->prepare($streak_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$streak_result = $stmt->get_result();
+if ($streak_row = $streak_result->fetch_assoc()) {
+    $streak = $streak_row['current_streak'];
+} else {
+    $streak = 0;
+}
+
 $level_query = "SELECT COUNT(*) as completed_lessons FROM user_progress WHERE user_id = ? AND status = 'completed'";
 $stmt = $conn->prepare($level_query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $level_result = $stmt->get_result();
 $completed_lessons = $level_result->fetch_assoc()['completed_lessons'];
-$user_level = floor($completed_lessons / 10) + 1; // Every 10 lessons = 1 level
 
-// Get learning languages with progress
 $languages_query = "SELECT l.language_id, l.name, l.code, ul.proficiency_level, c.course_id
                    FROM user_languages ul 
                    JOIN languages l ON ul.language_id = l.language_id
@@ -42,30 +62,6 @@ while ($lang = $learning_result->fetch_assoc()) {
     $learning_languages[] = $lang;
 }
 
-// Get user streak (consecutive days with activity)
-$streak_query = "SELECT MAX(consecutive_days) as streak FROM (
-                SELECT 
-                    COUNT(*) as consecutive_days
-                FROM (
-                    SELECT 
-                        DATE(timestamp) as activity_date,
-                        DATE_SUB(DATE(timestamp), INTERVAL ROW_NUMBER() OVER (ORDER BY DATE(timestamp)) DAY) as grp
-                    FROM user_activity 
-                    WHERE user_id = ?
-                    GROUP BY activity_date
-                ) as t
-                GROUP BY grp
-            ) as streak_calc";
-$stmt = $conn->prepare($streak_query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$streak_result = $stmt->get_result();
-$streak = $streak_result->fetch_assoc()['streak'] ?? 0;
-
-// Get total XP
-$total_xp = $completed_lessons * 10; // 10 XP per completed lesson
-
-// Get achievements from database
 $achievements_query = "SELECT a.achievement_id, a.title, a.description, a.icon, a.criteria, a.criteria_value, 
                       CASE WHEN ua.user_achievement_id IS NOT NULL THEN 1 ELSE 0 END AS unlocked
                       FROM achievements a
@@ -78,7 +74,6 @@ $stmt->execute();
 $achievements_result = $stmt->get_result();
 $achievements = [];
 while ($achievement = $achievements_result->fetch_assoc()) {
-    // Check if achievement should be unlocked based on current stats
     if ($achievement['unlocked'] == 0) {
         switch ($achievement['criteria']) {
             case 'lessons':
@@ -95,7 +90,6 @@ while ($achievement = $achievements_result->fetch_assoc()) {
                 break;
         }
         
-        // If achievement has been unlocked during this session, add it to the database
         if ($achievement['unlocked'] == 1) {
             $unlock_query = "INSERT IGNORE INTO user_achievements (user_id, achievement_id) VALUES (?, ?)";
             $unlock_stmt = $conn->prepare($unlock_query);
@@ -107,10 +101,8 @@ while ($achievement = $achievements_result->fetch_assoc()) {
     $achievements[] = $achievement;
 }
 
-// Registration date in friendly format
 $join_date = date('F d, Y', strtotime($user['registration_date']));
 
-// Function to calculate progress
 function getUserLanguageProgress($conn, $user_id, $course_id) {
     if (!$course_id) {
         return ['completed_lessons' => 0, 'total_lessons' => 0, 'percentage' => 0];
