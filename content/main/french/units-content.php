@@ -206,7 +206,7 @@ $stmt->execute();
             <nav>
                 <ul>
                     <li><a href="../dashboard.php">Dashboard</a></li>
-                    <li><a href="../achievements.php">Achievements</a></li>
+                    <li><a href="../games.php">Games</a></li>
                     <li><a href="../chatbot/chatbot.php">ChatBot</a></li>
                 </ul>
             </nav>

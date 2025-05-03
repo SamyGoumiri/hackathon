@@ -62,8 +62,7 @@ foreach ($unit_progress as $unit_id => $progress) {
     }
 }
 
-// Modified: All units are unlocked now
-$unlocked_units = array(); // We'll fill this with all unit IDs
+$unlocked_units = array();
 
 // Get all unit IDs to unlock them
 $all_units_query = "SELECT unit_id FROM units WHERE course_id = ?";
@@ -106,7 +105,7 @@ if(isset($_GET['unit'])) {
             <nav>
                 <ul>
                     <li><a href="../dashboard.php">Dashboard</a></li>
-                    <li><a href="../achievements.php">Achievements</a></li>
+                    <li><a href="../games.php">Games</a></li>
                     <li><a href="../chatbot/chatbot.php">ChatBot</a></li>
                 </ul>
             </nav>
@@ -146,7 +145,6 @@ if(isset($_GET['unit'])) {
             
             if ($units_result->num_rows > 0) {
                 while($unit = $units_result->fetch_assoc()) {
-                    // All units are unlocked now
                     $is_locked = false;
                     
                     $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
@@ -160,13 +158,12 @@ if(isset($_GET['unit'])) {
                     $completed = isset($unit_progress[$unit['unit_id']]) ? $unit_progress[$unit['unit_id']]['completed'] : 0;
                     $total = isset($unit_progress[$unit['unit_id']]) ? $unit_progress[$unit['unit_id']]['total'] : $lesson_count;
                     
-                    // Determine class based on completion level with new color scheme
                     if ($completed == 0) {
-                        $progress_class = "beginner"; // Red for not started (0/5)
+                        $progress_class = "beginner";
                     } else if ($completed < $total) {
-                        $progress_class = "intermediate"; // Yellow for in progress (1/5 to 4/5)
+                        $progress_class = "intermediate";
                     } else {
-                        $progress_class = "advanced"; // Green for completed (5/5)
+                        $progress_class = "advanced";
                     }
             ?>
             <div class="course-item">
@@ -183,9 +180,6 @@ if(isset($_GET['unit'])) {
                     $stmt->bind_param("i", $unit['unit_id']);
                     $stmt->execute();
                     $topics_result = $stmt->get_result();
-                    
-                    // Note: French course lessons are already in English in the database,
-                    // but adding translations for consistency in case they get changed later
                     $translations = [
                         "Greetings and Introductions" => "Greetings and Introductions",
                         "Basic Pronunciation" => "Basic Pronunciation",
@@ -213,7 +207,6 @@ if(isset($_GET['unit'])) {
                     ?>
                     <ul class="course-topics">
                         <?php while ($topic = $topics_result->fetch_assoc()) { 
-                            // Display English translation if available, otherwise display original
                             $displayTitle = isset($translations[$topic['title']]) ? $translations[$topic['title']] : $topic['title'];
                         ?>
                         <li><i class='bx bx-check-circle'></i> <?php echo htmlspecialchars($displayTitle); ?></li>
