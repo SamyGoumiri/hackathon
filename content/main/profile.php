@@ -62,34 +62,50 @@ $stmt->execute();
 $streak_result = $stmt->get_result();
 $streak = $streak_result->fetch_assoc()['streak'] ?? 0;
 
-// Get achievements - removed 3 achievements as requested
-$achievements = [
-    [
-        'id' => 1,
-        'title' => 'First Steps',
-        'description' => 'Complete your first lesson',
-        'icon' => 'bx bx-walk',
-        'unlocked' => $completed_lessons >= 1
-    ],
-    [
-        'id' => 2,
-        'title' => 'Consistent Learner',
-        'description' => 'Reach a 7-day streak',
-        'icon' => 'bx bx-calendar-check',
-        'unlocked' => $streak >= 7
-    ],
-    [
-        'id' => 3,
-        'title' => 'Language Explorer',
-        'description' => 'Start learning 3 different languages',
-        'icon' => 'bx bx-world',
-        'unlocked' => count($learning_languages) >= 3
-    ]
-];
-
-// Calculate stats
+// Get total XP
 $total_xp = $completed_lessons * 10; // 10 XP per completed lesson
-$total_time_spent = $completed_lessons * 5; // Approximately 5 minutes per lesson
+
+// Get achievements from database
+$achievements_query = "SELECT a.achievement_id, a.title, a.description, a.icon, a.criteria, a.criteria_value, 
+                      CASE WHEN ua.user_achievement_id IS NOT NULL THEN 1 ELSE 0 END AS unlocked
+                      FROM achievements a
+                      LEFT JOIN user_achievements ua ON a.achievement_id = ua.achievement_id AND ua.user_id = ?
+                      WHERE a.is_active = 1
+                      ORDER BY a.criteria_value";
+$stmt = $conn->prepare($achievements_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$achievements_result = $stmt->get_result();
+$achievements = [];
+while ($achievement = $achievements_result->fetch_assoc()) {
+    // Check if achievement should be unlocked based on current stats
+    if ($achievement['unlocked'] == 0) {
+        switch ($achievement['criteria']) {
+            case 'lessons':
+                $achievement['unlocked'] = ($completed_lessons >= $achievement['criteria_value']) ? 1 : 0;
+                break;
+            case 'streak':
+                $achievement['unlocked'] = ($streak >= $achievement['criteria_value']) ? 1 : 0;
+                break;
+            case 'languages':
+                $achievement['unlocked'] = (count($learning_languages) >= $achievement['criteria_value']) ? 1 : 0;
+                break;
+            case 'xp':
+                $achievement['unlocked'] = ($total_xp >= $achievement['criteria_value']) ? 1 : 0;
+                break;
+        }
+        
+        // If achievement has been unlocked during this session, add it to the database
+        if ($achievement['unlocked'] == 1) {
+            $unlock_query = "INSERT IGNORE INTO user_achievements (user_id, achievement_id) VALUES (?, ?)";
+            $unlock_stmt = $conn->prepare($unlock_query);
+            $unlock_stmt->bind_param("ii", $user_id, $achievement['achievement_id']);
+            $unlock_stmt->execute();
+        }
+    }
+    
+    $achievements[] = $achievement;
+}
 
 // Registration date in friendly format
 $join_date = date('F d, Y', strtotime($user['registration_date']));
@@ -196,11 +212,6 @@ function getUserLanguageProgress($conn, $user_id, $course_id) {
                         <i class='bx bx-trophy'></i>
                         <div class="stat-value"><?php echo $total_xp; ?></div>
                         <div class="stat-label">Total XP</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class='bx bx-time'></i>
-                        <div class="stat-value"><?php echo $total_time_spent; ?>m</div>
-                        <div class="stat-label">Time Spent</div>
                     </div>
                     <div class="stat-card">
                         <i class='bx bx-book-open'></i>

@@ -437,6 +437,50 @@ INSERT INTO `user_progress` (`progress_id`, `user_id`, `lesson_id`, `status`, `c
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `user_experience`
+--
+
+CREATE TABLE `user_experience` (
+  `exp_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `xp_points` int(11) NOT NULL DEFAULT 0,
+  `level` int(11) NOT NULL DEFAULT 1,
+  `last_updated` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user_experience`
+--
+
+INSERT INTO `user_experience` (`exp_id`, `user_id`, `xp_points`, `level`, `last_updated`) VALUES
+(1, 1, 347, 4, '2025-05-02 18:45:20');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_streaks`
+--
+
+CREATE TABLE `user_streaks` (
+  `streak_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `current_streak` int(11) NOT NULL DEFAULT 0,
+  `longest_streak` int(11) NOT NULL DEFAULT 0,
+  `last_login_date` date DEFAULT NULL,
+  `streak_start_date` date DEFAULT NULL,
+  `last_updated` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user_streaks`
+--
+
+INSERT INTO `user_streaks` (`streak_id`, `user_id`, `current_streak`, `longest_streak`, `last_login_date`, `streak_start_date`, `last_updated`) VALUES
+(1, 1, 5, 8, '2025-05-02', '2025-04-28', '2025-05-02 18:45:20');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `unit_tests`
 --
 
@@ -481,6 +525,56 @@ CREATE TABLE `test_results` (
 INSERT INTO `test_results` (`result_id`, `user_id`, `test_id`, `score`, `passed`, `completion_date`) VALUES
 (1, 1, 1, 85, 1, '2025-05-02 16:00:00'),
 (2, 1, 2, 78, 1, '2025-05-02 17:30:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `achievements`
+--
+
+CREATE TABLE `achievements` (
+  `achievement_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `icon` varchar(50) NOT NULL,
+  `criteria` varchar(50) NOT NULL COMMENT 'Type of criteria (lessons, streak, languages)',
+  `criteria_value` int(11) NOT NULL COMMENT 'Value required to unlock',
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `achievements`
+--
+
+INSERT INTO `achievements` (`achievement_id`, `title`, `description`, `icon`, `criteria`, `criteria_value`, `is_active`, `created_at`) VALUES
+(1, 'First Steps', 'Complete your first lesson', 'bx bx-walk', 'lessons', 1, 1, '2025-05-02 13:47:07'),
+(2, 'Consistent Learner', 'Reach a 7-day streak', 'bx bx-calendar-check', 'streak', 7, 1, '2025-05-02 13:47:07'),
+(3, 'Language Explorer', 'Start learning 3 different languages', 'bx bx-world', 'languages', 3, 1, '2025-05-02 13:47:07'),
+(4, 'Dedicated Student', 'Complete 25 lessons', 'bx bx-book-reader', 'lessons', 25, 1, '2025-05-02 13:47:07'),
+(5, 'Vocabulary Master', 'Earn 500 XP points', 'bx bx-trophy', 'xp', 500, 1, '2025-05-02 13:47:07');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_achievements`
+--
+
+CREATE TABLE `user_achievements` (
+  `user_achievement_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `achievement_id` int(11) NOT NULL,
+  `unlocked_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `is_viewed` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user_achievements`
+--
+
+INSERT INTO `user_achievements` (`user_achievement_id`, `user_id`, `achievement_id`, `unlocked_date`, `is_viewed`) VALUES
+(1, 1, 1, '2025-04-28 11:30:00', 1),
+(2, 1, 3, '2025-05-02 17:52:00', 1);
 
 -- --------------------------------------------------------
 
@@ -555,6 +649,20 @@ ALTER TABLE `user_progress`
   ADD KEY `lesson_id` (`lesson_id`);
 
 --
+-- Index pour la table `user_experience`
+--
+ALTER TABLE `user_experience`
+  ADD PRIMARY KEY (`exp_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
+-- Index pour la table `user_streaks`
+--
+ALTER TABLE `user_streaks`
+  ADD PRIMARY KEY (`streak_id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
 -- Index pour la table `unit_tests`
 --
 ALTER TABLE `unit_tests`
@@ -568,6 +676,20 @@ ALTER TABLE `test_results`
   ADD PRIMARY KEY (`result_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `test_id` (`test_id`);
+
+--
+-- Index pour la table `achievements`
+--
+ALTER TABLE `achievements`
+  ADD PRIMARY KEY (`achievement_id`);
+
+--
+-- Index pour la table `user_achievements`
+--
+ALTER TABLE `user_achievements`
+  ADD PRIMARY KEY (`user_achievement_id`),
+  ADD UNIQUE KEY `user_achievement` (`user_id`,`achievement_id`),
+  ADD KEY `achievement_id` (`achievement_id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -628,6 +750,18 @@ ALTER TABLE `user_progress`
   MODIFY `progress_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- AUTO_INCREMENT pour la table `user_experience`
+--
+ALTER TABLE `user_experience`
+  MODIFY `exp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `user_streaks`
+--
+ALTER TABLE `user_streaks`
+  MODIFY `streak_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT pour la table `unit_tests`
 --
 ALTER TABLE `unit_tests`
@@ -638,6 +772,18 @@ ALTER TABLE `unit_tests`
 --
 ALTER TABLE `test_results`
   MODIFY `result_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `achievements`
+--
+ALTER TABLE `achievements`
+  MODIFY `achievement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `user_achievements`
+--
+ALTER TABLE `user_achievements`
+  MODIFY `user_achievement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
@@ -688,6 +834,18 @@ ALTER TABLE `user_progress`
   ADD CONSTRAINT `user_progress_ibfk_2` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`lesson_id`);
 
 --
+-- Contraintes pour la table `user_experience`
+--
+ALTER TABLE `user_experience`
+  ADD CONSTRAINT `user_experience_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `user_streaks`
+--
+ALTER TABLE `user_streaks`
+  ADD CONSTRAINT `user_streaks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+--
 -- Contraintes pour la table `unit_tests`
 --
 ALTER TABLE `unit_tests`
@@ -699,6 +857,13 @@ ALTER TABLE `unit_tests`
 ALTER TABLE `test_results`
   ADD CONSTRAINT `test_results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `test_results_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `unit_tests` (`test_id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `user_achievements`
+--
+ALTER TABLE `user_achievements`
+  ADD CONSTRAINT `user_achievements_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `user_achievements_ibfk_2` FOREIGN KEY (`achievement_id`) REFERENCES `achievements` (`achievement_id`) ON DELETE CASCADE;
 
 COMMIT;
 
