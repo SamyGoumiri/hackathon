@@ -463,8 +463,9 @@
     text-decoration: none;
     display: inline-block;
     border: 2px solid #7F57F1;
-    box-shadow: 0 4px 0 rgba(127, 87, 241, 0.2);
+    box-shadow: 0 6px 0 rgba(127, 87, 241, 0.2);
     padding: 16px 32px;
+    margin:  35px auto;
     font-weight: 700;
     text-align: center;
 }
@@ -472,7 +473,7 @@
 .btn-secondary:hover {
     background-color: #f0e8ff;
     transform: translateY(-3px);
-    box-shadow: 0 6px 0 rgba(127, 87, 241, 0.2);
+    box-shadow: 0 8px 0 rgba(127, 87, 241, 0.2);
 }
 
 .btn-secondary:active {
