@@ -235,19 +235,11 @@ $user = $result->fetch_assoc();
             { question: "What does this word mean in German?", word: "Train", image: "https://img.icons8.com/dusk/64/train.png", options: ["Auto", "Zug", "Flugzeug", "Fahrrad"], answer: "Zug" },
             { question: "What does this word mean in German?", word: "Passport", image: "https://img.icons8.com/dusk/64/passport.png", options: ["Führerschein", "Reisepass", "Ausweis", "Karte"], answer: "Reisepass" },
             { question: "What does this word mean in German?", word: "Apple", image: "https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/external-apple-fruit-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png", options: ["Banane", "Apfel", "Traube", "Orange"], answer: "Apfel" },
-<<<<<<< HEAD
             { question: "What does this word mean in German?", word: "Book", image: "https://img.icons8.com/stickers/100/book-1.png", options: ["Buch", "Heft", "Papier", "Stift"], answer: "Buch" },
             { question: "What does this word mean in German?", word: "House", image: "https://img.icons8.com/plasticine/50/cottage.png", options: ["Tür", "Zimmer", "Fenster", "Haus"], answer: "Haus" },
             { question: "What does this word mean in German?", word: "Water", image: "https://img.icons8.com/emoji/48/droplet-emoji.png", options: ["Wasser", "Kaffee", "Tee", "Milch"], answer: "Wasser" },
             { question: "What does this word mean in German?", word: "Car", image: "https://img.icons8.com/color/48/car--v1.png", options: ["Fahrrad", "Auto", "Bus", "Schiff"], answer: "Auto" },
-=======
-            { question: "What does this word mean in German?", word: "Book", image: "https://img.icons8.com/dusk/100/book.png", options: ["Buch", "Heft", "Papier", "Stift"], answer: "Buch" },
-            { question: "What does this word mean in German?", word: "House", image: "https://img.icons8.com/cute-clipart/64/home.png", options: ["Tur", "Zimmer", "Flugzeug", "Haus"], answer: "Haus" },
-
-
-
-
->>>>>>> c25d3ba194636ba6443d0305859bdca08b558f19
+            { question: "What does this word mean in German?", word: "Dog", image: "https://img.icons8.com/cute-clipart/64/dog.png", options: ["Hund", "Katze", "Maus", "Vogel"], answer: "Hund" }
         ];
 
         let fillQuestions = [
