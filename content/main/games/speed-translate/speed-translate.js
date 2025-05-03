@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let wordsAttempted = 0;
     let correctAnswers = 0;
     let highScore = parseInt(userHighScoreDisplay.textContent) || 0;
+    let consecutiveCorrect = 0;
+    let difficultyMultiplier = 1;
     
     languageOptions.forEach(option => {
         option.addEventListener('click', function() {
@@ -49,6 +51,14 @@ document.addEventListener('DOMContentLoaded', function() {
             difficultyOptions.forEach(opt => opt.classList.remove('selected'));
             this.classList.add('selected');
             selectedTime = parseInt(this.dataset.time);
+            
+            if (selectedTime === 10) {
+                difficultyMultiplier = 2;
+            } else if (selectedTime === 20) {
+                difficultyMultiplier = 1;
+            } else {
+                difficultyMultiplier = 0.8;
+            }
         });
     });
     
@@ -76,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
         usedWords = [];
         wordsAttempted = 0;
         correctAnswers = 0;
+        consecutiveCorrect = 0
         
         currentScoreDisplay.textContent = currentScore;
         timeRemaining.textContent = timeLeft;
@@ -130,14 +141,28 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const userAnswer = userAnswerInput.value.trim().toLowerCase();
         if (userAnswer === currentWord.translation) {
-            currentScore++;
+            let basePoints = 1 * difficultyMultiplier;
+            
+            let timeBonus = Math.ceil(timeLeft / selectedTime * 5) / 10;
+            
+            consecutiveCorrect++;
+            let comboBonus = consecutiveCorrect >= 3 ? Math.min(consecutiveCorrect / 10, 0.5) : 0;
+            
+            let pointsEarned = Math.ceil(basePoints * (1 + timeBonus + comboBonus));
+            
+            currentScore += pointsEarned;
             correctAnswers++;
             currentScoreDisplay.textContent = currentScore;
-            feedbackDisplay.textContent = '✓ Correct!';
+            
+            feedbackDisplay.textContent = `✓ Correct! +${pointsEarned} points`;
+            if (consecutiveCorrect >= 3) {
+                feedbackDisplay.textContent += ` (${consecutiveCorrect}x combo!)`;
+            }
             feedbackDisplay.classList.add('correct');
         } else {
             feedbackDisplay.textContent = `✗ Incorrect! The correct answer is "${currentWord.translation}"`;
             feedbackDisplay.classList.add('incorrect');
+            consecutiveCorrect = 0; // Reset consecutive counter on wrong answer
         }
         
         setTimeout(showNextWord, 1000);
@@ -149,9 +174,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentScore > highScore) {
             highScore = currentScore;
             saveHighScore();
+            finalScoreDisplay.textContent = currentScore + " - NEW HIGH SCORE!";
+            finalScoreDisplay.classList.add("new-high-score");
+        } else {
+            finalScoreDisplay.textContent = currentScore;
+            finalScoreDisplay.classList.remove("new-high-score");
+            saveHighScore();
         }
         
-        finalScoreDisplay.textContent = currentScore;
         highScoreDisplay.textContent = highScore;
         wordsAttemptedDisplay.textContent = wordsAttempted;
         correctAnswersDisplay.textContent = correctAnswers;
@@ -170,7 +200,9 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                userHighScoreDisplay.textContent = highScore;
+                if (data.is_high_score) {
+                    userHighScoreDisplay.textContent = highScore;
+                }
             }
         })
         .catch(error => console.error('Error saving score:', error));
