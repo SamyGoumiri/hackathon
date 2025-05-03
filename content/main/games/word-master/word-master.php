@@ -82,6 +82,7 @@ $high_score = $high_score_data['score'] ?? 0;
 
             <div id="setupScreen" class="game-screen">
                 <div class="setup-options">
+
                     <div class="option-group">
                         <h3>Select Language</h3>
                         <div class="language-selection">
@@ -137,6 +138,8 @@ $high_score = $high_score_data['score'] ?? 0;
                     <div class="translation-feedback" id="translationFeedback"></div>
                 </div>
             </div>
+
+
 
             <div id="resultsScreen" class="game-screen hidden">
                 <div class="results-header">
