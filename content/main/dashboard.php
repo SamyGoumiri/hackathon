@@ -109,7 +109,7 @@ function getUserLanguageProgress($conn, $user_id, $course_id) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="dashboard.css">
-    <title>Lango - Dashboard</title>
+    <title>Esperanto - Dashboard</title>
 </head>
 
 <body>
@@ -262,7 +262,7 @@ function getUserLanguageProgress($conn, $user_id, $course_id) {
 
     <footer>
         <div class="footer-container">
-            <p>&copy; <?php echo date('Y'); ?> Lango. All rights reserved.</p>
+            <p>&copy; <?php echo date('Y'); ?> Esperanto. All rights reserved.</p>
         </div>
     </footer>
 

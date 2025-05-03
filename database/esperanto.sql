@@ -44,10 +44,9 @@ CREATE TABLE `courses` (
 
 INSERT INTO `courses` (`course_id`, `language_id`, `title`, `description`, `difficulty`, `image_path`, `is_active`, `created_at`) VALUES
 (1, 3, 'French Fundamentals', 'Master the basics of French language with this comprehensive beginner course.', 'beginner', 'french_basic.jpg', 1, '2025-05-02 13:47:07'),
-(2, 3, 'Intermediate French', 'Take your French skills to the next level with more advanced concepts and vocabulary.', 'intermediate', 'french_intermediate.jpg', 1, '2025-05-02 13:47:07'),
-(3, 2, 'Spanish for Beginners', 'Learn essential Spanish vocabulary and grammar for everyday conversations.', 'beginner', 'spanish_basic.jpg', 1, '2025-05-02 13:47:07'),
-(4, 5, 'Italian Fundamentals', 'Master the basics of Italian language with this comprehensive beginner course.', 'beginner', 'italian_basic.jpg', 1, '2025-05-02 13:47:07'),
-(5, 4, 'German Fundamentals', 'Master the basics of German language with this comprehensive beginner course.', 'beginner', 'german_basic.jpg', 1, '2025-05-02 13:47:07');
+(2, 2, 'Spanish for Beginners', 'Learn essential Spanish vocabulary and grammar for everyday conversations.', 'beginner', 'spanish_basic.jpg', 1, '2025-05-02 13:47:07'),
+(3, 5, 'Italian Fundamentals', 'Master the basics of Italian language with this comprehensive beginner course.', 'beginner', 'italian_basic.jpg', 1, '2025-05-02 13:47:07'),
+(4, 4, 'German Fundamentals', 'Master the basics of German language with this comprehensive beginner course.', 'beginner', 'german_basic.jpg', 1, '2025-05-02 13:47:07');
 
 -- --------------------------------------------------------
 
@@ -203,18 +202,18 @@ INSERT INTO `units` (`unit_id`, `course_id`, `title`, `description`, `order_inde
 (2, 1, 'La Vie Quotidienne (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
 (3, 1, 'Faire des Courses (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in French-speaking countries.', 3, 1),
 (4, 1, 'Les Voyages (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
-(5, 4, 'Le Basi (The Basics)', 'Learn the foundation of Italian with basic greetings, introductions, and essential phrases.', 1, 1),
-(6, 4, 'La Vita Quotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
-(7, 4, 'Fare Acquisti (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Italian-speaking countries.', 3, 1),
-(8, 4, 'I Viaggi (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
-(9, 3, 'Los Fundamentos (The Basics)', 'Learn the foundation of Spanish with basic greetings, introductions, and essential phrases.', 1, 1),
-(10, 3, 'La Vida Cotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
-(11, 3, 'De Compras (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Spanish-speaking countries.', 3, 1),
-(12, 3, 'Los Viajes (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
-(13, 5, 'Die Grundlagen (The Basics)', 'Learn the foundation of German with basic greetings, introductions, and essential phrases.', 1, 1),
-(14, 5, 'Das tägliche Leben (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
-(15, 5, 'Einkaufen (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in German-speaking countries.', 3, 1),
-(16, 5, 'Das Reisen (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
+(5, 3, 'Le Basi (The Basics)', 'Learn the foundation of Italian with basic greetings, introductions, and essential phrases.', 1, 1),
+(6, 3, 'La Vita Quotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(7, 3, 'Fare Acquisti (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Italian-speaking countries.', 3, 1),
+(8, 3, 'I Viaggi (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
+(9, 2, 'Los Fundamentos (The Basics)', 'Learn the foundation of Spanish with basic greetings, introductions, and essential phrases.', 1, 1),
+(10, 2, 'La Vida Cotidiana (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(11, 2, 'De Compras (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in Spanish-speaking countries.', 3, 1),
+(12, 2, 'Los Viajes (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1),
+(13, 4, 'Die Grundlagen (The Basics)', 'Learn the foundation of German with basic greetings, introductions, and essential phrases.', 1, 1),
+(14, 4, 'Das tägliche Leben (Daily Life)', 'Practice everyday conversations and expand your vocabulary for daily activities.', 2, 1),
+(15, 4, 'Einkaufen (Shopping)', 'Learn vocabulary for shopping, dining, and handling money in German-speaking countries.', 3, 1),
+(16, 4, 'Das Reisen (Traveling)', 'Navigate travel situations with confidence using specialized vocabulary and phrases.', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -578,7 +577,7 @@ ALTER TABLE `test_results`
 -- AUTO_INCREMENT pour la table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `languages`
