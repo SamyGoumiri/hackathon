@@ -15,7 +15,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-// Get current high score
 $high_score_query = "SELECT score FROM game_high_scores WHERE user_id = ? AND game_id = 'word_master'";
 $stmt = $conn->prepare($high_score_query);
 $stmt->bind_param("i", $user_id);
@@ -23,16 +22,6 @@ $stmt->execute();
 $high_score_result = $stmt->get_result();
 $high_score_data = $high_score_result->fetch_assoc();
 $high_score = $high_score_data['score'] ?? 0;
-
-// Get user XP
-$xp_query = "SELECT xp_points, level FROM user_experience WHERE user_id = ?";
-$stmt = $conn->prepare($xp_query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$xp_result = $stmt->get_result();
-$xp_data = $xp_result->fetch_assoc();
-$xp_points = $xp_data['xp_points'] ?? 0;
-$level = $xp_data['level'] ?? 1;
 ?>
 
 <!DOCTYPE html>
@@ -89,17 +78,8 @@ $level = $xp_data['level'] ?? 1;
                     <div class="stat-label">High Score</div>
                     <div class="stat-value" id="highScore"><?php echo $high_score; ?></div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-label">XP Level</div>
-                    <div class="stat-value" id="userLevel"><?php echo $level; ?></div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">XP Points</div>
-                    <div class="stat-value" id="userXP"><?php echo $xp_points; ?></div>
-                </div>
             </div>
 
-            <!-- Setup Screen -->
             <div id="setupScreen" class="game-screen">
                 <div class="setup-options">
                     <div class="option-group">
@@ -130,7 +110,6 @@ $level = $xp_data['level'] ?? 1;
                 </div>
             </div>
 
-            <!-- Game Screen -->
             <div id="gameScreen" class="game-screen hidden">
                 <div class="game-header">
                     <div class="timer-container">
@@ -159,7 +138,6 @@ $level = $xp_data['level'] ?? 1;
                 </div>
             </div>
 
-            <!-- Results Screen -->
             <div id="resultsScreen" class="game-screen hidden">
                 <div class="results-header">
                     <h2>Game Over!</h2>
@@ -174,11 +152,6 @@ $level = $xp_data['level'] ?? 1;
                     <div class="result-item">
                         <div class="result-label">Words Translated</div>
                         <div id="wordsTranslated" class="result-value">0</div>
-                    </div>
-                    
-                    <div class="result-item">
-                        <div class="result-label">XP Earned</div>
-                        <div id="xpEarned" class="result-value">0</div>
                     </div>
 
                     <div id="newHighScore" class="new-high-score hidden">
