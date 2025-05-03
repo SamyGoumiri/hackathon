@@ -16,7 +16,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-// Fix the course query - update course title from "Spanish Fundamentals" to "Spanish for Beginners"
 $course_query = "SELECT c.* FROM courses c
                  JOIN languages l ON c.language_id = l.language_id
                  WHERE l.code = 'es' AND c.title = 'Spanish for Beginners'";
@@ -37,7 +36,6 @@ $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $units_result = $stmt->get_result();
 
-// Improved unit progress tracking
 $progress_query = "SELECT l.unit_id, COUNT(l.lesson_id) AS total_lessons, 
                    COUNT(up.lesson_id) AS completed_lessons
                    FROM lessons l
@@ -57,10 +55,8 @@ while ($row = $progress_result->fetch_assoc()) {
     ];
 }
 
-// Modified: All units are unlocked now
-$unlocked_units = array(); // We'll fill this with all unit IDs
+$unlocked_units = array();
 
-// Get all unit IDs to unlock them
 $all_units_query = "SELECT unit_id FROM units WHERE course_id = ?";
 $stmt = $conn->prepare($all_units_query);
 $stmt->bind_param("i", $course_id);
@@ -160,7 +156,6 @@ if(isset($_GET['unit'])) {
             
             if ($units_result->num_rows > 0) {
                 while($unit = $units_result->fetch_assoc()) {
-                    // All units are unlocked now
                     $is_locked = false;
                     
                     $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
@@ -170,18 +165,15 @@ if(isset($_GET['unit'])) {
                     $lessons_result = $stmt->get_result();
                     $lessons_data = $lessons_result->fetch_assoc();
                     $lesson_count = $lessons_data['lesson_count'];
-                    
-                    // Replace difficulty with progress tracking
                     $completed = isset($unit_progress[$unit['unit_id']]) ? $unit_progress[$unit['unit_id']]['completed'] : 0;
                     $total = isset($unit_progress[$unit['unit_id']]) ? $unit_progress[$unit['unit_id']]['total'] : $lesson_count;
                     
-                    // Determine class based on completion level with new color scheme
                     if ($completed == 0) {
-                        $progress_class = "beginner"; // Red for not started (0/5)
+                        $progress_class = "beginner";
                     } else if ($completed < $total) {
-                        $progress_class = "intermediate"; // Yellow for in progress (1/5 to 4/5)
+                        $progress_class = "intermediate";
                     } else {
-                        $progress_class = "advanced"; // Green for completed (5/5)
+                        $progress_class = "advanced";
                     }
             ?>
             <div class="course-item">
@@ -199,7 +191,6 @@ if(isset($_GET['unit'])) {
                     $stmt->execute();
                     $topics_result = $stmt->get_result();
                     
-                    // Define Spanish to English translations for lesson titles
                     $translations = [
                         "Saludos y Presentaciones" => "Greetings and Introductions",
                         "Pronunciación Básica" => "Basic Pronunciation",
@@ -227,7 +218,6 @@ if(isset($_GET['unit'])) {
                     ?>
                     <ul class="course-topics">
                         <?php while ($topic = $topics_result->fetch_assoc()) { 
-                            // Display English translation if available, otherwise display original
                             $displayTitle = isset($translations[$topic['title']]) ? $translations[$topic['title']] : $topic['title'];
                         ?>
                         <li><i class='bx bx-check-circle'></i> <?php echo htmlspecialchars($displayTitle); ?></li>
@@ -237,7 +227,6 @@ if(isset($_GET['unit'])) {
                     
                     <div class="course-actions">
                         <span class="lesson-count"><?php echo $lesson_count; ?> Lessons</span>
-                        <!-- All units now have the Start Unit button -->
                         <a href="units-content.php?unit=<?php echo $unit['unit_id']; ?>" class="btn btn-primary">Start Unit</a>
                     </div>
                 </div>
