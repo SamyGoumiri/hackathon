@@ -247,6 +247,7 @@ $user = $result->fetch_assoc();
         let answered = false;
 
         let vocabQuestions = [
+<<<<<<< HEAD
             { 
                 category: "Food & Dining",
                 question: "What does 'caffè' mean in Italian?", 
@@ -339,6 +340,17 @@ $user = $result->fetch_assoc();
             }
         ];
 
+=======
+        { question: "What does this word mean in Italian?", word: "Dog", image: "https://img.icons8.com/dusk/64/dog.png", options: ["Gatto", "Cane", "Uccello", "Pesce"], answer: "Cane" },
+        { question: "What does this word mean in Italian?", word: "Sun", image: "https://img.icons8.com/dusk/64/sun.png", options: ["Luna", "Sole", "Stella", "Cielo"], answer: "Sole" },
+        { question: "What does this word mean in Italian?", word: "Chair", image: "https://img.icons8.com/stickers/100/chair.png", options: ["Tavolo", "Letto", "Sedia", "Divano"], answer: "Sedia" },
+        { question: "What does this word mean in Italian?", word: "Window", image: "https://img.icons8.com/dusk/100/closed-window.png", options: ["Finestra", "Porta", "Specchio", "Muro"], answer: "Finestra" },
+        { question: "What does this word mean in Italian?", word: "Water", image: "https://img.icons8.com/dusk/64/water.png", options: ["Acqua", "Latte", "Succo", "Vino"], answer: "Acqua" },
+        ];
+
+
+        ///done
+>>>>>>> c25d3ba194636ba6443d0305859bdca08b558f19
         let fillQuestions = [
             { 
                 category: "Present Tense Verbs",
