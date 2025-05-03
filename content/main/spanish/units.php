@@ -36,11 +36,13 @@ $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $units_result = $stmt->get_result();
 
-$progress_query = "SELECT l.unit_id, COUNT(l.lesson_id) AS total_lessons, 
-                   COUNT(up.lesson_id) AS completed_lessons
+// Modified progress query to ensure we're getting complete progress data
+$progress_query = "SELECT l.unit_id, 
+                   COUNT(l.lesson_id) AS total_lessons, 
+                   SUM(CASE WHEN up.status = 'completed' THEN 1 ELSE 0 END) AS completed_lessons
                    FROM lessons l
-                   LEFT JOIN user_progress up ON l.lesson_id = up.lesson_id 
-                   AND up.user_id = ? AND up.status = 'completed'
+                   LEFT JOIN user_progress up ON l.lesson_id = up.lesson_id AND up.user_id = ? 
+                   WHERE l.is_active = 1
                    GROUP BY l.unit_id";
 $stmt = $conn->prepare($progress_query);
 $stmt->bind_param("i", $user_id);
@@ -55,8 +57,8 @@ while ($row = $progress_result->fetch_assoc()) {
     ];
 }
 
+// All units should be unlocked for better user experience
 $unlocked_units = array();
-
 $all_units_query = "SELECT unit_id FROM units WHERE course_id = ?";
 $stmt = $conn->prepare($all_units_query);
 $stmt->bind_param("i", $course_id);
@@ -156,20 +158,27 @@ if(isset($_GET['unit'])) {
             
             if ($units_result->num_rows > 0) {
                 while($unit = $units_result->fetch_assoc()) {
+                    // All units are unlocked now
                     $is_locked = false;
                     
-                    $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ?";
+                    $lessons_query = "SELECT COUNT(*) as lesson_count FROM lessons WHERE unit_id = ? AND is_active = 1";
                     $stmt = $conn->prepare($lessons_query);
                     $stmt->bind_param("i", $unit['unit_id']);
                     $stmt->execute();
                     $lessons_result = $stmt->get_result();
                     $lessons_data = $lessons_result->fetch_assoc();
                     $lesson_count = $lessons_data['lesson_count'];
-                    $completed = isset($unit_progress[$unit['unit_id']]) ? $unit_progress[$unit['unit_id']]['completed'] : 0;
-                    $total = isset($unit_progress[$unit['unit_id']]) ? $unit_progress[$unit['unit_id']]['total'] : $lesson_count;
                     
+                    // Safely get progress data, defaulting to 0 if not found
+                    $completed = isset($unit_progress[$unit['unit_id']]) ? intval($unit_progress[$unit['unit_id']]['completed']) : 0;
+                    $total = isset($unit_progress[$unit['unit_id']]) ? intval($unit_progress[$unit['unit_id']]['total']) : $lesson_count;
+                    
+                    // Validate to prevent division by zero or other issues
+                    if ($total <= 0) $total = $lesson_count > 0 ? $lesson_count : 1;
+                    
+                    // Determine class based on completion percentage
                     if ($completed == 0) {
-                        $progress_class = "beginner";
+                        $progress_class = "beginner"; 
                     } else if ($completed < $total) {
                         $progress_class = "intermediate";
                     } else {

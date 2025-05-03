@@ -300,61 +300,6 @@ main {
     border-radius: 10px;
 }
 
-/* Stats Section */
-.stats-section {
-    margin-bottom: 40px;
-}
-
-.stats-section h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
-
-.stat-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.stat-card {
-    background-color: white;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 10px 20px rgba(127, 87, 241, 0.1);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.stat-icon {
-    background-color: #f8f5ff;
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: #7F57F1;
-}
-
-.stat-content {
-    flex: 1;
-}
-
-.stat-value {
-    font-size: 24px;
-    font-weight: 700;
-    color: #333;
-}
-
-.stat-label {
-    font-size: 14px;
-    color: #666;
-}
-
 /* Footer */
 footer {
     background-color: #fff;

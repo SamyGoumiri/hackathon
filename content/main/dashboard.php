@@ -15,9 +15,10 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-$languages_query = "SELECT l.language_id, l.name, l.code, ul.proficiency_level 
+$languages_query = "SELECT l.language_id, l.name, l.code, ul.proficiency_level, c.course_id
                    FROM user_languages ul 
-                   JOIN languages l ON ul.language_id = l.language_id 
+                   JOIN languages l ON ul.language_id = l.language_id
+                   LEFT JOIN courses c ON l.language_id = c.language_id AND c.is_active = 1
                    WHERE ul.user_id = ? AND ul.is_learning = 1";
 $stmt = $conn->prepare($languages_query);
 $stmt->bind_param("i", $user_id);
@@ -25,7 +26,79 @@ $stmt->execute();
 $learning_result = $stmt->get_result();
 $learning_languages = [];
 while ($lang = $learning_result->fetch_assoc()) {
+    $lang['progress'] = getUserLanguageProgress($conn, $user_id, $lang['course_id']);
     $learning_languages[$lang['code']] = $lang;
+}
+
+function getUserLanguageProgress($conn, $user_id, $course_id) {
+    if (!$course_id) {
+        return ['completed_units' => 0, 'total_units' => 0, 'percentage' => 0];
+    }
+    
+    $units_query = "SELECT unit_id FROM units WHERE course_id = ? AND is_active = 1";
+    $stmt = $conn->prepare($units_query);
+    $stmt->bind_param("i", $course_id);
+    $stmt->execute();
+    $units_result = $stmt->get_result();
+    $total_units = $units_result->num_rows;
+    
+    $completed_units = 0;
+    $total_lessons = 0;
+    $completed_lessons = 0;
+    
+    while ($unit = $units_result->fetch_assoc()) {
+        $unit_id = $unit['unit_id'];
+        
+        $lessons_query = "SELECT lesson_id FROM lessons WHERE unit_id = ? AND is_active = 1";
+        $stmt = $conn->prepare($lessons_query);
+        $stmt->bind_param("i", $unit_id);
+        $stmt->execute();
+        $lessons_result = $stmt->get_result();
+        $unit_lesson_ids = [];
+        while ($lesson = $lessons_result->fetch_assoc()) {
+            $unit_lesson_ids[] = $lesson['lesson_id'];
+        }
+        
+        $unit_total_lessons = count($unit_lesson_ids);
+        if ($unit_total_lessons == 0) continue;
+        
+        $total_lessons += $unit_total_lessons;
+        
+        if (!empty($unit_lesson_ids)) {
+            $placeholders = str_repeat('?,', count($unit_lesson_ids) - 1) . '?';
+            $completed_lessons_query = "SELECT COUNT(*) as completed 
+                                       FROM user_progress 
+                                       WHERE user_id = ? 
+                                       AND lesson_id IN ($placeholders) 
+                                       AND status = 'completed'";
+            
+            $types = "i" . str_repeat("i", count($unit_lesson_ids));
+            $params = array_merge([$user_id], $unit_lesson_ids);
+            
+            $stmt = $conn->prepare($completed_lessons_query);
+            $stmt->bind_param($types, ...$params);
+            $stmt->execute();
+            $completed_result = $stmt->get_result();
+            $unit_completed_lessons = $completed_result->fetch_assoc()['completed'];
+            
+            $completed_lessons += $unit_completed_lessons;
+            
+            if ($unit_completed_lessons == $unit_total_lessons) {
+                $completed_units++;
+            }
+        }
+    }
+    
+    $lesson_percentage = ($total_lessons > 0) ? round(($completed_lessons / $total_lessons) * 100) : 0;
+    $unit_percentage = ($total_units > 0) ? round(($completed_units / $total_units) * 100) : 0;
+    
+    return [
+        'completed_units' => $completed_units,
+        'total_units' => $total_units,
+        'completed_lessons' => $completed_lessons,
+        'total_lessons' => $total_lessons,
+        'percentage' => $lesson_percentage
+    ];
 }
 ?>
 
@@ -91,10 +164,14 @@ while ($lang = $learning_result->fetch_assoc()) {
                         <?php if (isset($learning_languages['fr'])): ?>
                             <div class="progress-info">
                                 <div class="level">
-                                    <?php echo isset($learning_languages['fr']['proficiency_level']) ? ucfirst($learning_languages['fr']['proficiency_level']) : 'Beginner'; ?>
+                                    <?php 
+                                        $progress = $learning_languages['fr']['progress'];
+                                        echo $progress['completed_units'] . "/" . $progress['total_units'] . " Units";
+                                        echo ($progress['percentage'] == 100) ? " Completed!" : "";
+                                    ?>
                                 </div>
                                 <div class="progress-bar">
-                                    <div class="progress" style="width: <?php echo getLevelPercentage(isset($learning_languages['fr']['proficiency_level']) ? $learning_languages['fr']['proficiency_level'] : null); ?>%"></div>
+                                    <div class="progress" style="width: <?php echo $progress['percentage']; ?>%"></div>
                                 </div>
                             </div>
                             <a href="learn.php?lang=fr" class="btn btn-primary">Continue Learning</a>
@@ -112,10 +189,14 @@ while ($lang = $learning_result->fetch_assoc()) {
                         <?php if (isset($learning_languages['de'])): ?>
                             <div class="progress-info">
                                 <div class="level">
-                                    <?php echo isset($learning_languages['de']['proficiency_level']) ? ucfirst($learning_languages['de']['proficiency_level']) : 'Beginner'; ?>
+                                    <?php 
+                                        $progress = $learning_languages['de']['progress'];
+                                        echo $progress['completed_units'] . "/" . $progress['total_units'] . " Units";
+                                        echo ($progress['percentage'] == 100) ? " Completed!" : "";
+                                    ?>
                                 </div>
                                 <div class="progress-bar">
-                                    <div class="progress" style="width: <?php echo getLevelPercentage(isset($learning_languages['de']['proficiency_level']) ? $learning_languages['de']['proficiency_level'] : null); ?>%"></div>
+                                    <div class="progress" style="width: <?php echo $progress['percentage']; ?>%"></div>
                                 </div>
                             </div>
                             <a href="learn.php?lang=de" class="btn btn-primary">Continue Learning</a>
@@ -133,10 +214,14 @@ while ($lang = $learning_result->fetch_assoc()) {
                         <?php if (isset($learning_languages['es'])): ?>
                             <div class="progress-info">
                                 <div class="level">
-                                    <?php echo isset($learning_languages['es']['proficiency_level']) ? ucfirst($learning_languages['es']['proficiency_level']) : 'Beginner'; ?>
+                                    <?php 
+                                        $progress = $learning_languages['es']['progress'];
+                                        echo $progress['completed_units'] . "/" . $progress['total_units'] . " Units";
+                                        echo ($progress['percentage'] == 100) ? " Completed!" : "";
+                                    ?>
                                 </div>
                                 <div class="progress-bar">
-                                    <div class="progress" style="width: <?php echo getLevelPercentage(isset($learning_languages['es']['proficiency_level']) ? $learning_languages['es']['proficiency_level'] : null); ?>%"></div>
+                                    <div class="progress" style="width: <?php echo $progress['percentage']; ?>%"></div>
                                 </div>
                             </div>
                             <a href="learn.php?lang=es" class="btn btn-primary">Continue Learning</a>
@@ -154,10 +239,14 @@ while ($lang = $learning_result->fetch_assoc()) {
                         <?php if (isset($learning_languages['it'])): ?>
                             <div class="progress-info">
                                 <div class="level">
-                                    <?php echo isset($learning_languages['it']['proficiency_level']) ? ucfirst($learning_languages['it']['proficiency_level']) : 'Beginner'; ?>
+                                    <?php 
+                                        $progress = $learning_languages['it']['progress'];
+                                        echo $progress['completed_units'] . "/" . $progress['total_units'] . " Units";
+                                        echo ($progress['percentage'] == 100) ? " Completed!" : "";
+                                    ?>
                                 </div>
                                 <div class="progress-bar">
-                                    <div class="progress" style="width: <?php echo getLevelPercentage(isset($learning_languages['it']['proficiency_level']) ? $learning_languages['it']['proficiency_level'] : null); ?>%"></div>
+                                    <div class="progress" style="width: <?php echo $progress['percentage']; ?>%"></div>
                                 </div>
                             </div>
                             <a href="learn.php?lang=it" class="btn btn-primary">Continue Learning</a>
@@ -165,40 +254,6 @@ while ($lang = $learning_result->fetch_assoc()) {
                             <p>Dive into the language of art and cuisine</p>
                             <a href="start_language.php?lang=it" class="btn btn-primary">Start Learning</a>
                         <?php endif; ?>
-                    </div>
-                </div>
-            </section>
-
-            <section class="stats-section">
-                <h2>Your Learning Stats</h2>
-                <div class="stat-cards">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class='bx bx-calendar-check'></i></div>
-                        <div class="stat-content">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">Daily Streak</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class='bx bx-time'></i></div>
-                        <div class="stat-content">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">Minutes Learned</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class='bx bx-star'></i></div>
-                        <div class="stat-content">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">XP Points</div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class='bx bx-crown'></i></div>
-                        <div class="stat-content">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">Achievements</div>
-                        </div>
                     </div>
                 </div>
             </section>
@@ -218,15 +273,3 @@ while ($lang = $learning_result->fetch_assoc()) {
     </script>
 </body>
 </html>
-
-<?php
-function getLevelPercentage($level) {
-    switch ($level) {
-        case 'beginner': return 25;
-        case 'intermediate': return 50;
-        case 'advanced': return 75;
-        case 'fluent': return 100;
-        default: return 0; // Return 0% for null or invalid values
-    }
-}
-?>

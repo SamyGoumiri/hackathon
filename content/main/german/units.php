@@ -36,11 +36,13 @@ $stmt->bind_param("i", $course_id);
 $stmt->execute();
 $units_result = $stmt->get_result();
 
-$progress_query = "SELECT l.unit_id, COUNT(l.lesson_id) AS total_lessons, 
-                   COUNT(up.lesson_id) AS completed_lessons
+// Modified progress query to ensure we're getting complete progress data
+$progress_query = "SELECT l.unit_id, 
+                   COUNT(l.lesson_id) AS total_lessons, 
+                   SUM(CASE WHEN up.status = 'completed' THEN 1 ELSE 0 END) AS completed_lessons
                    FROM lessons l
-                   LEFT JOIN user_progress up ON l.lesson_id = up.lesson_id 
-                   AND up.user_id = ? AND up.status = 'completed'
+                   LEFT JOIN user_progress up ON l.lesson_id = up.lesson_id AND up.user_id = ? 
+                   WHERE l.is_active = 1
                    GROUP BY l.unit_id";
 $stmt = $conn->prepare($progress_query);
 $stmt->bind_param("i", $user_id);
