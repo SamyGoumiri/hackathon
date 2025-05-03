@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../../database/connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/hackathon/database/connect.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../../auth/login.php");
@@ -30,7 +30,7 @@ $high_score = $high_score_data['high_score'] ?? 0;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="games.css">
+    <link rel="stylesheet" href="../games.css">
     <link rel="stylesheet" href="speed-translate.css">
     <title>Speed Translate - Esperanto</title>
 </head>
@@ -43,9 +43,9 @@ $high_score = $high_score_data['high_score'] ?? 0;
             </div>
             <nav>
                 <ul>
-                    <li><a href="../dashboard.php">Dashboard</a></li>
-                    <li><a href="games.php" class="active">Games</a></li>
-                    <li><a href="../chatbot/chatbot.php">ChatBot</a></li>
+                    <li><a href="../../dashboard.php">Dashboard</a></li>
+                    <li><a href="../games.php" class="active">Games</a></li>
+                    <li><a href="../../chatbot/chatbot.php">ChatBot</a></li>
                 </ul>
             </nav>
             <div class="user-menu">
@@ -58,9 +58,9 @@ $high_score = $high_score_data['high_score'] ?? 0;
                     </div>
                 </div>
                 <div class="dropdown-menu">
-                    <a href="../profile.php"><i class='bx bx-user'></i> Profile</a>
-                    <a href="../settings.php"><i class='bx bx-cog'></i> Settings</a>
-                    <a href="../../auth/logout.php"><i class='bx bx-log-out'></i> Log Out</a>
+                    <a href="../../profile.php"><i class='bx bx-user'></i> Profile</a>
+                    <a href="../../settings.php"><i class='bx bx-cog'></i> Settings</a>
+                    <a href="../../../auth/logout.php"><i class='bx bx-log-out'></i> Log Out</a>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@ $high_score = $high_score_data['high_score'] ?? 0;
         <div class="game-container">
             <div id="game-setup" class="game-screen active">
                 <h2>Speed Translate</h2>
-                <p>Translate as many words as you can before time runs out!</p>
+                <p class="game-intro">Translate as many words as you can before time runs out!</p>
 
                 <div class="setup-options">
                     <div class="option-group">
@@ -113,7 +113,15 @@ $high_score = $high_score_data['high_score'] ?? 0;
                         <li>You'll see words in your selected language</li>
                         <li>Type the English translation in the text box</li>
                         <li>Press Enter or click Submit to check your answer</li>
-                        <li>Each correct answer gives you 1 point</li>
+                        <li>Scoring:
+                            <ul>
+                                <li>Hard (10s): 2 points per correct answer</li>
+                                <li>Medium (20s): 1 point per correct answer</li>
+                                <li>Easy (30s): 0.8 points per correct answer</li>
+                                <li>Get bonus points for answering quickly!</li>
+                                <li>Chain 3+ correct answers for combo bonus points!</li>
+                            </ul>
+                        </li>
                         <li>Try to get as many points as possible before time runs out!</li>
                     </ol>
                 </div>
@@ -167,7 +175,7 @@ $high_score = $high_score_data['high_score'] ?? 0;
                 
                 <div class="action-buttons">
                     <button id="play-again" class="btn btn-primary">Play Again</button>
-                    <a href="games.php" class="btn btn-secondary">Return to Games</a>
+                    <a href="../games.php" class="btn btn-secondary">Return to Games</a>
                 </div>
             </div>
         </div>
