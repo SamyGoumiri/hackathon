@@ -212,7 +212,7 @@ if (isset($_POST['q10']) && $_POST['q10'] === 'ich_bin') {
             <nav>
                 <ul>
                     <li><a href="../dashboard.php">Dashboard</a></li>
-                    <li><a href="../achievements.php">Achievements</a></li>
+                    <li><a href="../games/games.php">Games</a></li>
                     <li><a href="../chatbot/chatbot.php">ChatBot</a></li>
                 </ul>
             </nav>

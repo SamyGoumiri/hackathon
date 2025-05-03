@@ -11,7 +11,6 @@ $error_message = "";
 $success_message = "";
 $prefill_username = "";
 
-// Check if user just registered successfully
 if(isset($_GET['registered']) && $_GET['registered'] === 'success') {
     $success_message = "Registration successful! Please login with your new account.";
     if(isset($_GET['username'])) {
@@ -34,14 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
         
         if (password_verify($password, $user['password'])) {
-            // Set session
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['first_name'] = $user['first_name'];
             
             if ($remember) {
                 $token = bin2hex(random_bytes(32));
-                $expires = time() + (30 * 24 * 60 * 60); // 30 days
+                $expires = time() + (30 * 24 * 60 * 60);
                 
                 $sql = "UPDATE users SET remember_token = ? WHERE user_id = ?";
                 $stmt = $conn->prepare($sql);
@@ -53,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             
             $sql = "UPDATE users SET last_login = NOW() WHERE user_id = ?";
-            $stmt->prepare($sql);
+            $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $user['user_id']);
             $stmt->execute();
             

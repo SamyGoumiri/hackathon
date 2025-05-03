@@ -1,157 +1,97 @@
+<?php
+session_start();
+require_once '../../../database/connect.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../../auth/login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$user_query = "SELECT username, first_name, last_name FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($user_query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+?>
+
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Choix de l'IA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dashboard.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../dashboard.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <title>Esperanto - AI Assistant</title>
 </head>
 <body>
 
     <header>
         <div class="header-container">
             <div class="logo">
-                <h1>Esperanto AI</h1>
+                <h1>Esperanto</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../dashboard.php">Dashboard</a></li>
+                    <li><a href="games.php">Games</a></li>
+                    <li><a href="chatbot.php" class="active">ChatBot</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <div class="user-info">
+                    <span><?php echo htmlspecialchars(ucfirst($user['first_name']) . ' ' . ucfirst($user['last_name'])); ?></span>
+                    <div class="user-avatar">
+                        <span class="user-initials">
+                            <?php echo strtoupper(substr($user['first_name'], 0, 1) . substr($user['last_name'], 0, 1)); ?>
+                        </span>
+                    </div>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="../profile.php"><i class='bx bx-user'></i> Profile</a>
+                    <a href="../settings.php"><i class='bx bx-cog'></i> Settings</a>
+                    <a href="../../auth/logout.php"><i class='bx bx-log-out'></i> Log Out</a>
+                </div>
             </div>
         </div>
     </header>
 
-    <div class="selection-container">
-        <h1>Choisissez votre AI</h1>
-        <h2>Sélectionnez une intelligence artificielle pour commencer</h2>
+    <main>
+        <div class="selection-container">
+            <h1>Choose Your AI Assistant</h1>
+            <h2>Select an AI assistant to help with your language learning</h2>
 
-        <div class="options">
-            <a class="card" href="daccord.php">
-                <h3>Correction AI</h3>
-                <p>Corrige automatiquement les fautes de grammaire et d’orthographe.</p>
-            </a>
+            <div class="options">
+                <a class="card" href="tutor.php">
+                    <h3>Grammar Correction</h3>
+                    <p>Automatically corrects grammar and spelling mistakes.</p>
+                </a>
 
-            <a class="card" href="formidable.php">
-                <h3>Translation AI</h3>
-                <p>Traduit vos phrases avec précision en plusieurs langues.</p>
-            </a>
+                <a class="card" href="translator.php">
+                    <h3>Translation Assistant</h3>
+                    <p>Accurately translates your phrases into multiple languages.</p>
+                </a>
 
-            <a class="card" href="c_clair.php">
-                <h3>Conversation IA</h3>
-                <p>Discutez avec une IA pour pratiquer vos compétences linguistiques.</p>
-            </a>
+                <a class="card" href="Conversation.php">
+                    <h3>Conversation Partner</h3>
+                    <p>Chat with an AI to practice your language skills.</p>
+                </a>
+            </div>
         </div>
-    </div>
-    <style>
-    @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+    </main>
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Quicksand", sans-serif;
-    }
-    
-    body {
-        background-color: #f9f4ff;
-        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%237f57f1' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-        color: #333;
-        min-height: 100vh;
-    }
-    
-    header {
-        background-color: white;
-        box-shadow: 0 2px 10px rgba(127, 87, 241, 0.1);
-        position: sticky;
-        top: 0;
-        width: 100%;
-        z-index: 100;
-    }
-    
-    .header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 5%;
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-    
-    .logo h1 {
-        font-size: 28px;
-        color: #7F57F1;
-        letter-spacing: -0.5px;
-        margin: 0;
-    }
-    
-    .selection-container {
-        max-width: 900px;
-        margin: 80px auto;
-        padding: 40px;
-        text-align: center;
-        background-color: white;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(127, 87, 241, 0.1);
-    }
-    
-    .selection-container h1 {
-        color: #7F57F1;
-        margin-bottom: 10px;
-        font-size: 32px;
-    }
-    
-    .selection-container h2 {
-        color: #555;
-        margin-bottom: 30px;
-        font-size: 20px;
-        font-weight: 500;
-    }
-    
-    .options {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        flex-wrap: wrap;
-    }
-    
-    .card {
-        background-color: white;
-        border-radius: 20px;
-        padding: 30px;
-        width: 240px;
-        text-align: center;
-        text-decoration: none;
-        color: #333;
-        transition: all 0.3s ease;
-        border: 2px solid #f0f0f0;
-        box-shadow: 0 10px 20px rgba(127, 87, 241, 0.05);
-    }
-    
-    .card:hover {
-        transform: translateY(-10px);
-        border-color: #7F57F1;
-        box-shadow: 0 15px 30px rgba(127, 87, 241, 0.15);
-    }
-    
-    .card img {
-        margin-bottom: 20px;
-        width: 100px;
-        height: 100px;
-    }
-    
-    .card h3 {
-        font-size: 22px;
-        margin-bottom: 10px;
-        color: #7F57F1;
-    }
-    
-    .card p {
-        color: #666;
-        font-size: 14px;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-        .options {
-            flex-direction: column;
-            align-items: center;
-        }
-    }
-</style>    
+    <footer>
+        <div class="footer-container">
+            <p>&copy; <?php echo date('Y'); ?> Esperanto. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.user-info').addEventListener('click', function() {
+            document.querySelector('.dropdown-menu').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

@@ -67,7 +67,6 @@ require_once '../../../database/connect.php';
             counter.textContent = `Question ${currentQuestion} / ${totalQuestions}`;
             answered = false;
 
-            // Choose from vocab or fill, only if questions remain
             let q;
             if (vocabQuestions.length > 0 && fillQuestions.length > 0) {
                 if (Math.random() > 0.5) {

@@ -43,12 +43,12 @@ while ($lang = $learning_result->fetch_assoc()) {
     <header>
         <div class="header-container">
         <div class="logo">
-    <img src="../../image/Esperanto.png" alt="Logo" style="height: 50px;">
-</div>
+            <h1>Esperanto</h1>
+        </div>
             <nav>
                 <ul>
                     <li><a href="dashboard.php" class="active">Dashboard</a></li>
-                    <li><a href="achievements.php">Achievements</a></li>
+                    <li><a href="games/games.php">Games</a></li>
                     <li><a href="chatbot/chatbot.php">ChatBot</a></li>
                 </ul>
             </nav>
