@@ -15,7 +15,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
-// Get user's high score for Speed Translate game (if it exists)
 $high_score_query = "SELECT MAX(score) as high_score FROM test_results WHERE user_id = ? AND test_id = 0";
 $stmt = $conn->prepare($high_score_query);
 $stmt->bind_param("i", $user_id);
@@ -92,8 +91,6 @@ $high_score = $high_score_data['high_score'] ?? 0;
                         </div>
                         <a href="speed-translate.php" class="btn btn-primary">Play Now</a>
                     </div>
-
-                    <!-- More game cards can be added here in the future -->
                 </div>
             </section>
         </div>

@@ -48,7 +48,7 @@ while ($lang = $learning_result->fetch_assoc()) {
             <nav>
                 <ul>
                     <li><a href="dashboard.php" class="active">Dashboard</a></li>
-                    <li><a href="games.php">Games</a></li>
+                    <li><a href="games/games.php">Games</a></li>
                     <li><a href="chatbot/chatbot.php">ChatBot</a></li>
                 </ul>
             </nav>
