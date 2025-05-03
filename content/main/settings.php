@@ -174,8 +174,6 @@ if (isset($_POST['change_password'])) {
                         <button type="submit" name="update_profile" class="btn btn-primary">Save Changes</button>
                     </form>
                 </section>
-                
-                <!-- Password & Security Section -->
                 <section id="security-section" class="settings-section">
                     <h2>Password & Security</h2>
                     <form action="" method="POST" class="settings-form">
