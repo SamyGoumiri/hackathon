@@ -71,25 +71,25 @@ $high_score = $high_score_data['high_score'] ?? 0;
             <div id="game-setup" class="game-screen active">
                 <h2>Speed Translate</h2>
                 <p>Translate as many words as you can before time runs out!</p>
-                
+
                 <div class="setup-options">
                     <div class="option-group">
                         <h3>Choose Language</h3>
                         <div class="language-options">
                             <button class="language-option selected" data-language="fr" data-language-name="French">
-                                <img src="../../../assets/images/flags/fr-flag.png" alt="French Flag">
+                                <img src="https://flagcdn.com/w40/fr.png" alt="French Flag" class="flag-icon">
                                 <span>French</span>
                             </button>
                             <button class="language-option" data-language="es" data-language-name="Spanish">
-                                <img src="../../../assets/images/flags/es-flag.png" alt="Spanish Flag">
+                                <img src="https://flagcdn.com/w40/es.png" alt="French Flag" class="flag-icon">
                                 <span>Spanish</span>
                             </button>
                             <button class="language-option" data-language="de" data-language-name="German">
-                                <img src="../../../assets/images/flags/de-flag.png" alt="German Flag">
+                                <img src="https://flagcdn.com/w40/de.png" alt="French Flag" class="flag-icon">
                                 <span>German</span>
                             </button>
                             <button class="language-option" data-language="it" data-language-name="Italian">
-                                <img src="../../../assets/images/flags/it-flag.png" alt="Italian Flag">
+                                <img src="https://flagcdn.com/w40/it.png" alt="French Flag" class="flag-icon">
                                 <span>Italian</span>
                             </button>
                         </div>
